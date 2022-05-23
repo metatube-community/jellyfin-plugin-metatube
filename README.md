@@ -1,2 +1,3 @@
-# jellyfin-plugin-javtube
+# JavTube
+
 JavTube Plugin for Jellyfin/Emby.
