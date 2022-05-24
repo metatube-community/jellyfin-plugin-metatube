@@ -18,7 +18,7 @@ public abstract class BaseProvider
     protected BaseProvider(IHttpClient httpClient, ILogger logger)
     {
         _httpClient = httpClient;
-        Logger = logger;
+        _logger = logger;
     }
 #else
     private readonly IHttpClientFactory _httpClientFactory;
