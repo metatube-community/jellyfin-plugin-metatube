@@ -2,6 +2,7 @@
 using MediaBrowser.Common.Net;
 using MediaBrowser.Model.Logging;
 using HttpRequestOptions = MediaBrowser.Common.Net.HttpRequestOptions;
+
 #else
 using Microsoft.Extensions.Logging;
 #endif
@@ -14,7 +15,7 @@ public abstract class BaseProvider
 
 #if __EMBY__
     private readonly IHttpClient _httpClient;
-    protected BaseProvider(IHttpClient httpClient,ILogger logger)
+    protected BaseProvider(IHttpClient httpClient, ILogger logger)
     {
         _httpClient = httpClient;
         Logger = logger;
