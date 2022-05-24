@@ -163,8 +163,8 @@ public class ApiClient
         cancellationToken.ThrowIfCancellationRequested();
 
         var httpClient = new HttpClient();
-        // Set default timeout: 2 minutes.
-        httpClient.Timeout = TimeSpan.FromSeconds(120);
+        // Set default timeout: 5 minutes.
+        httpClient.Timeout = TimeSpan.FromSeconds(300);
         // Set Accept JSON header.
         httpClient.DefaultRequestHeaders.Add("Accept", "application/json");
         // Set User-Agent header.
