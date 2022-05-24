@@ -113,7 +113,8 @@ public class ApiClient
         return await GetDataFromApi<ActorMetadata>(url, cancellationToken);
     }
 
-    public static async Task<MovieMetadata> GetMovieMetadata(string id, string provider, CancellationToken cancellationToken)
+    public static async Task<MovieMetadata> GetMovieMetadata(string id, string provider,
+        CancellationToken cancellationToken)
     {
         return await GetMovieMetadata(id, provider, true, string.Empty, cancellationToken);
     }
@@ -131,26 +132,26 @@ public class ApiClient
         return await GetDataFromApi<MovieMetadata>(url, cancellationToken);
     }
 
-    public static async Task<List<ActorSearchResult>> SearchActor(string keyword, string provider,
+    public static async Task<IEnumerable<ActorSearchResult>> SearchActor(string keyword, string provider,
         CancellationToken cancellationToken)
     {
         return await SearchActor(keyword, provider, false, cancellationToken);
     }
 
-    public static async Task<List<ActorSearchResult>> SearchActor(string keyword, string provider, bool lazy,
+    public static async Task<IEnumerable<ActorSearchResult>> SearchActor(string keyword, string provider, bool lazy,
         CancellationToken cancellationToken)
     {
         var url = ComposeSearchApiUrl(ActorSearchApi, keyword, provider, lazy);
         return await GetDataFromApi<List<ActorSearchResult>>(url, cancellationToken);
     }
 
-    public static async Task<List<MovieSearchResult>> SearchMovie(string keyword, string provider,
+    public static async Task<IEnumerable<MovieSearchResult>> SearchMovie(string keyword, string provider,
         CancellationToken cancellationToken)
     {
         return await SearchMovie(keyword, provider, false, cancellationToken);
     }
 
-    public static async Task<List<MovieSearchResult>> SearchMovie(string keyword, string provider, bool lazy,
+    public static async Task<IEnumerable<MovieSearchResult>> SearchMovie(string keyword, string provider, bool lazy,
         CancellationToken cancellationToken)
     {
         var url = ComposeSearchApiUrl(MovieSearchApi, keyword, provider, lazy);
