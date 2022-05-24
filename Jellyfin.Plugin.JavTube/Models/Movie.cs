@@ -23,7 +23,7 @@ public class MovieSearchResult
     [JsonPropertyName("title")] public string Title;
 }
 
-public class MovieInfo : MovieSearchResult
+public class MovieMetadata : MovieSearchResult
 {
     [JsonPropertyName("actors")] public string[] Actors;
 

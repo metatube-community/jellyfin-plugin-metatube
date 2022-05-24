@@ -15,7 +15,7 @@ public class ActorSearchResult
     [JsonPropertyName("provider")] public string Provider;
 }
 
-public class ActorInfo : ActorSearchResult
+public class ActorMetadata : ActorSearchResult
 {
     [JsonPropertyName("aliases")] public string[] Aliases;
 
