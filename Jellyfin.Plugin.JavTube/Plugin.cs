@@ -21,11 +21,11 @@ public class Plugin : BasePlugin<PluginConfiguration>, IHasWebPages
         Instance = this;
     }
 
-    public override string Name => "JavTube";
+    public override string Name => Constant.JavTube;
 
-    public override string Description => "Just Another Video Tube";
+    public override string Description => Constant.Description;
 
-    public override Guid Id => Guid.Parse("df87283d-7224-4f9c-a448-3433d9cf278a");
+    public override Guid Id => Guid.Parse(Constant.Guid);
 
     public static Plugin Instance { get; private set; }
 
