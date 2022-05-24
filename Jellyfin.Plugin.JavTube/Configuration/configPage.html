@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>JavTube</title>
+</head>
+<body>
+<div class="page type-interior pluginConfigurationPage"
+     data-require="emby-input,emby-button,emby-select,emby-checkbox"
+     data-role="page"
+     id="JavTubeConfigurationPage">
+    <div data-role="content">
+        <div class="content-primary">
+            <h1>JavTube</h1>
+            <form id="JavTubeConfigForm">
+                <div class="inputContainer">
+                    <label class="inputeLabel inputLabelUnfocused" for="Server">Server</label>
+                    <input id="Server" is="emby-input" name="Server" required type="text"/>
+                    <div class="fieldDescription">URL of JavTube Server.</div>
+                </div>
+                <div class="inputContainer">
+                    <label class="inputeLabel inputLabelUnfocused" for="Token">Token</label>
+                    <input id="Token" is="emby-input" name="Token" type="password"/>
+                    <div class="fieldDescription">Access Token of JavTube Server.</div>
+                </div>
+                <div>
+                    <button class="raised button-submit block" is="emby-button" type="submit">
+                        <span>Save</span></button>
+                </div>
+            </form>
+        </div>
+    </div>
+    <script type="text/javascript">
+        var JavTubePluginConfig = {
+            uniquePluginId: "df87283d-7224-4f9c-a448-3433d9cf278a"
+        };
+
+        $('#JavTubeConfigurationPage').on('pageshow', function () {
+            Dashboard.showLoadingMsg();
+            ApiClient.getPluginConfiguration(JavTubePluginConfig.uniquePluginId).then(function (config) {
+                $('#Server').val(config.Server).change();
+                $('#Token').val(config.Token).change();
+                Dashboard.hideLoadingMsg();
+            });
+        });
+
+        $('#JavTubeConfigForm').on('submit', function () {
+            Dashboard.showLoadingMsg();
+            ApiClient.getPluginConfiguration(JavTubePluginConfig.uniquePluginId).then(function (config) {
+                config.Server = $('#Server').val();
+                config.Token = $('#Token').val();
+                ApiClient.updatePluginConfiguration(JavTubePluginConfig.uniquePluginId, config).then(
+                    Dashboard.processPluginConfigurationUpdateResult);
+            });
+            return false;
+        });
+    </script>
+</div>
+</body>
+</html>
