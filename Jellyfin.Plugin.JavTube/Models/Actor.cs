@@ -4,36 +4,36 @@ namespace Jellyfin.Plugin.JavTube.Models;
 
 public class ActorSearchResult
 {
-    [JsonPropertyName("homepage")] public string Homepage;
+    [JsonPropertyName("homepage")] public string Homepage { get; set; }
 
-    [JsonPropertyName("id")] public string Id;
+    [JsonPropertyName("id")] public string Id { get; set; }
 
-    [JsonPropertyName("images")] public string[] Images;
+    [JsonPropertyName("images")] public string[] Images { get; set; }
 
-    [JsonPropertyName("name")] public string Name;
+    [JsonPropertyName("name")] public string Name { get; set; }
 
-    [JsonPropertyName("provider")] public string Provider;
+    [JsonPropertyName("provider")] public string Provider { get; set; }
 }
 
 public class ActorMetadata : ActorSearchResult
 {
-    [JsonPropertyName("aliases")] public string[] Aliases;
+    [JsonPropertyName("aliases")] public string[] Aliases { get; set; }
 
-    [JsonPropertyName("birthday")] public DateTime? Birthday;
+    [JsonPropertyName("birthday")] public DateTime? Birthday { get; set; }
 
-    [JsonPropertyName("blood_type")] public string BloodType;
+    [JsonPropertyName("blood_type")] public string BloodType { get; set; }
 
-    [JsonPropertyName("cup_size")] public string CupSize;
+    [JsonPropertyName("cup_size")] public string CupSize { get; set; }
 
-    [JsonPropertyName("debut_date")] public DateTime? DebutDate;
+    [JsonPropertyName("debut_date")] public DateTime DebutDate { get; set; }
 
-    [JsonPropertyName("height")] public int Height;
+    [JsonPropertyName("height")] public int Height { get; set; }
 
-    [JsonPropertyName("hobby")] public string Hobby;
+    [JsonPropertyName("hobby")] public string Hobby { get; set; }
 
-    [JsonPropertyName("measurements")] public string Measurements;
+    [JsonPropertyName("measurements")] public string Measurements { get; set; }
 
-    [JsonPropertyName("nationality")] public string Nationality;
+    [JsonPropertyName("nationality")] public string Nationality { get; set; }
 
-    [JsonPropertyName("summary")] public string Summary;
+    [JsonPropertyName("summary")] public string Summary { get; set; }
 }
