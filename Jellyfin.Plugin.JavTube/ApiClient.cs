@@ -2,7 +2,6 @@ using System.Collections.Specialized;
 using System.Net.Http.Headers;
 using System.Text.Json;
 using System.Web;
-using Jellyfin.Plugin.JavTube.Configuration;
 using Jellyfin.Plugin.JavTube.Models;
 
 namespace Jellyfin.Plugin.JavTube;
@@ -17,15 +16,13 @@ public class ApiClient
     private const string ThumbImageApi = "/image/thumb";
     private const string BackdropImageApi = "/image/backdrop";
 
-    private static PluginConfiguration Config => Plugin.Instance?.Configuration ?? new PluginConfiguration();
-
     private static string ComposeUrl(string path, NameValueCollection nv)
     {
         var query = HttpUtility.ParseQueryString(string.Empty);
         foreach (string key in nv) query.Add(key, nv.Get(key));
 
         // Build URL
-        var uriBuilder = new UriBuilder(Config.Server)
+        var uriBuilder = new UriBuilder(Plugin.Instance.Configuration.Server)
         {
             Path = path,
             Query = query.ToString() ?? string.Empty
@@ -170,9 +167,9 @@ public class ApiClient
         // Set User-Agent header.
         httpClient.DefaultRequestHeaders.Add("User-Agent", Constant.UserAgent);
         // Set Authorization API Token.
-        if (!string.IsNullOrWhiteSpace(Config.Token))
+        if (!string.IsNullOrWhiteSpace(Plugin.Instance.Configuration.Token))
             httpClient.DefaultRequestHeaders.Authorization =
-                new AuthenticationHeaderValue("Bearer", Config.Token);
+                new AuthenticationHeaderValue("Bearer", Plugin.Instance.Configuration.Token);
 
         var response = await httpClient.GetAsync(url, cancellationToken).ConfigureAwait(false);
         response.EnsureSuccessStatusCode();
