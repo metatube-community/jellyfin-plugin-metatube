@@ -30,7 +30,7 @@ public class ApiClient
         return uriBuilder.ToString();
     }
 
-    private static string ComposeMetadataApiUrl(string path, string id, string url, string provider, string language,
+    private static string ComposeMetadataApiUrl(string path, string id,  string provider, string url,string language,
         bool lazy)
     {
         return ComposeUrl(path, new NameValueCollection
@@ -147,6 +147,11 @@ public class ApiClient
     {
         var apiUrl = ComposeSearchApiUrl(ActorSearchApi, keyword, provider, lazy);
         return await GetDataFromApi<List<ActorSearchResult>>(apiUrl, cancellationToken);
+    }
+    
+    public static async Task<IEnumerable<MovieSearchResult>> SearchMovie(string keyword, CancellationToken cancellationToken)
+    {
+        return await SearchMovie(keyword, string.Empty, false, cancellationToken);
     }
 
     public static async Task<IEnumerable<MovieSearchResult>> SearchMovie(string keyword, string provider,
