@@ -30,12 +30,14 @@ public class ApiClient
         return uriBuilder.ToString();
     }
 
-    private static string ComposeMetadataApiUrl(string path, string id, string provider, string language, bool lazy)
+    private static string ComposeMetadataApiUrl(string path, string id, string url, string provider, string language,
+        bool lazy)
     {
         return ComposeUrl(path, new NameValueCollection
         {
             { "id", id },
             { "provider", provider },
+            { "url", url },
             { "lang", language },
             { "lazy", lazy ? "1" : "0" }
         });
@@ -100,33 +102,38 @@ public class ApiClient
     public static async Task<ActorMetadata> GetActorMetadata(string id, string provider,
         CancellationToken cancellationToken)
     {
-        return await GetActorMetadata(id, provider, true, cancellationToken);
+        return await GetActorMetadata(id, provider, string.Empty, true, cancellationToken);
     }
 
-    public static async Task<ActorMetadata> GetActorMetadata(string id, string provider, bool lazy,
+    public static async Task<ActorMetadata> GetActorMetadata(string url,
         CancellationToken cancellationToken)
     {
-        var url = ComposeMetadataApiUrl(ActorMetadataApi, id, provider, string.Empty, lazy);
-        return await GetDataFromApi<ActorMetadata>(url, cancellationToken);
+        return await GetActorMetadata(string.Empty, string.Empty, url, true, cancellationToken);
     }
 
-    public static async Task<MovieMetadata> GetMovieMetadata(string id, string provider,
+    public static async Task<ActorMetadata> GetActorMetadata(string id, string provider, string url, bool lazy,
         CancellationToken cancellationToken)
     {
-        return await GetMovieMetadata(id, provider, true, string.Empty, cancellationToken);
+        var apiUrl = ComposeMetadataApiUrl(ActorMetadataApi, id, url, provider, string.Empty, lazy);
+        return await GetDataFromApi<ActorMetadata>(apiUrl, cancellationToken);
     }
 
-    public static async Task<MovieMetadata> GetMovieMetadata(string id, string provider, string language,
-        CancellationToken cancellationToken)
+    public static async Task<MovieMetadata> GetMovieMetadata(string url, CancellationToken cancellationToken)
     {
-        return await GetMovieMetadata(id, provider, true, language, cancellationToken);
+        return await GetMovieMetadata(string.Empty, string.Empty, url, true, string.Empty, cancellationToken);
     }
 
-    public static async Task<MovieMetadata> GetMovieMetadata(string id, string provider, bool lazy, string language,
+    public static async Task<MovieMetadata> GetMovieMetadata(string url, string language,
         CancellationToken cancellationToken)
     {
-        var url = ComposeMetadataApiUrl(MovieMetadataApi, id, provider, language, lazy);
-        return await GetDataFromApi<MovieMetadata>(url, cancellationToken);
+        return await GetMovieMetadata(string.Empty, string.Empty, url, true, language, cancellationToken);
+    }
+
+    public static async Task<MovieMetadata> GetMovieMetadata(string id, string provider, string url, bool lazy,
+        string language, CancellationToken cancellationToken)
+    {
+        var apiUrl = ComposeMetadataApiUrl(MovieMetadataApi, id, provider, url, language, lazy);
+        return await GetDataFromApi<MovieMetadata>(apiUrl, cancellationToken);
     }
 
     public static async Task<IEnumerable<ActorSearchResult>> SearchActor(string keyword, string provider,
@@ -138,8 +145,8 @@ public class ApiClient
     public static async Task<IEnumerable<ActorSearchResult>> SearchActor(string keyword, string provider, bool lazy,
         CancellationToken cancellationToken)
     {
-        var url = ComposeSearchApiUrl(ActorSearchApi, keyword, provider, lazy);
-        return await GetDataFromApi<List<ActorSearchResult>>(url, cancellationToken);
+        var apiUrl = ComposeSearchApiUrl(ActorSearchApi, keyword, provider, lazy);
+        return await GetDataFromApi<List<ActorSearchResult>>(apiUrl, cancellationToken);
     }
 
     public static async Task<IEnumerable<MovieSearchResult>> SearchMovie(string keyword, string provider,
@@ -151,8 +158,8 @@ public class ApiClient
     public static async Task<IEnumerable<MovieSearchResult>> SearchMovie(string keyword, string provider, bool lazy,
         CancellationToken cancellationToken)
     {
-        var url = ComposeSearchApiUrl(MovieSearchApi, keyword, provider, lazy);
-        return await GetDataFromApi<List<MovieSearchResult>>(url, cancellationToken);
+        var apiUrl = ComposeSearchApiUrl(MovieSearchApi, keyword, provider, lazy);
+        return await GetDataFromApi<List<MovieSearchResult>>(apiUrl, cancellationToken);
     }
 
     private static async Task<T> GetDataFromApi<T>(string url, CancellationToken cancellationToken)
