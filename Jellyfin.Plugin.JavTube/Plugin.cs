@@ -45,7 +45,7 @@ public class Plugin : BasePlugin<PluginConfiguration>, IHasWebPages
     public Stream GetThumbImage()
     {
         var type = GetType();
-        return type.Assembly.GetManifestResourceStream($"{GetType().Namespace}.thumb.png");
+        return type.Assembly.GetManifestResourceStream($"{type.Namespace}.thumb.png");
     }
 
     public ImageFormat ThumbImageFormat => ImageFormat.Png;
