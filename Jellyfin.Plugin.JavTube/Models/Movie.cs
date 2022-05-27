@@ -2,17 +2,11 @@ using System.Text.Json.Serialization;
 
 namespace Jellyfin.Plugin.JavTube.Models;
 
-public class MovieSearchResult
+public class MovieSearchResult : ProviderInfo
 {
     [JsonPropertyName("cover_url")] public string CoverUrl { get; set; }
 
-    [JsonPropertyName("homepage")] public string Homepage { get; set; }
-
-    [JsonPropertyName("id")] public string Id { get; set; }
-
     [JsonPropertyName("number")] public string Number { get; set; }
-
-    [JsonPropertyName("provider")] public string Provider { get; set; }
 
     [JsonPropertyName("release_date")] public DateTime ReleaseDate { get; set; }
 
