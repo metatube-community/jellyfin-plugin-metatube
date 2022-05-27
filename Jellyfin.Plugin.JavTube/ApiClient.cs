@@ -6,7 +6,7 @@ using Jellyfin.Plugin.JavTube.Models;
 
 namespace Jellyfin.Plugin.JavTube;
 
-public class ApiClient
+public static class ApiClient
 {
     private const string ActorMetadataApi = "/api/actor";
     private const string MovieMetadataApi = "/api/movie";
