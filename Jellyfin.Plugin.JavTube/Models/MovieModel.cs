@@ -2,7 +2,7 @@ using System.Text.Json.Serialization;
 
 namespace Jellyfin.Plugin.JavTube.Models;
 
-public class MovieSearchResult : ProviderInfo
+public class MovieSearchResultModel : ProviderModel
 {
     [JsonPropertyName("cover_url")] public string CoverUrl { get; set; }
 
@@ -17,7 +17,7 @@ public class MovieSearchResult : ProviderInfo
     [JsonPropertyName("title")] public string Title { get; set; }
 }
 
-public class MovieMetadata : MovieSearchResult
+public class MovieInfoModel : MovieSearchResultModel
 {
     [JsonPropertyName("actors")] public string[] Actors { get; set; }
 

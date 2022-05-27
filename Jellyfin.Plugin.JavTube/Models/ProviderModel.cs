@@ -2,7 +2,7 @@ using System.Text.Json.Serialization;
 
 namespace Jellyfin.Plugin.JavTube.Models;
 
-public class ProviderInfo
+public class ProviderModel
 {
     [JsonPropertyName("homepage")] public string Homepage { get; set; }
 

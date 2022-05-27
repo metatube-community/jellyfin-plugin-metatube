@@ -2,14 +2,14 @@ using System.Text.Json.Serialization;
 
 namespace Jellyfin.Plugin.JavTube.Models;
 
-public class ActorSearchResult : ProviderInfo
+public class ActorSearchResultModel : ProviderModel
 {
     [JsonPropertyName("images")] public string[] Images { get; set; }
 
     [JsonPropertyName("name")] public string Name { get; set; }
 }
 
-public class ActorMetadata : ActorSearchResult
+public class ActorInfoModel : ActorSearchResultModel
 {
     [JsonPropertyName("aliases")] public string[] Aliases { get; set; }
 
