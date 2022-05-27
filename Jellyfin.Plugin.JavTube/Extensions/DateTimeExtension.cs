@@ -2,8 +2,8 @@ namespace Jellyfin.Plugin.JavTube.Extensions;
 
 internal static class DateTimeExtension
 {
-    public static DateTime? ValidDateTime(this DateTime dateTime)
+    public static DateTime? ValidDateTime(this DateTime instance)
     {
-        return dateTime.Year > 1 ? dateTime : null;
+        return instance.Year > 1 ? instance : null;
     }
 }
