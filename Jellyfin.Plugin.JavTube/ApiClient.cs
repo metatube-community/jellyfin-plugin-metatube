@@ -8,8 +8,8 @@ namespace Jellyfin.Plugin.JavTube;
 
 public static class ApiClient
 {
-    private const string ActorMetadataApi = "/api/actor";
-    private const string MovieMetadataApi = "/api/movie";
+    private const string ActorInfoApi = "/api/actor";
+    private const string MovieInfoApi = "/api/movie";
     private const string ActorSearchApi = "/api/search/actor";
     private const string MovieSearchApi = "/api/search/movie";
     private const string PrimaryImageApi = "/image/primary";
@@ -30,7 +30,7 @@ public static class ApiClient
         return uriBuilder.ToString();
     }
 
-    private static string ComposeMetadataApiUrl(string path, string id, string provider, string url, string language,
+    private static string ComposeInfoApiUrl(string path, string id, string provider, string url, string language,
         bool lazy)
     {
         return ComposeUrl(path, new NameValueCollection
@@ -99,40 +99,40 @@ public static class ApiClient
         return ComposeImageApiUrl(BackdropImageApi, id, provider, url, position, auto);
     }
 
-    public static async Task<ActorInfoModel> GetActorMetadata(string id, string provider,
+    public static async Task<ActorInfoModel> GetActorInfo(string id, string provider,
         CancellationToken cancellationToken)
     {
-        return await GetActorMetadata(id, provider, string.Empty, true, cancellationToken);
+        return await GetActorInfo(id, provider, string.Empty, true, cancellationToken);
     }
 
-    public static async Task<ActorInfoModel> GetActorMetadata(string url,
+    public static async Task<ActorInfoModel> GetActorInfo(string url,
         CancellationToken cancellationToken)
     {
-        return await GetActorMetadata(string.Empty, string.Empty, url, true, cancellationToken);
+        return await GetActorInfo(string.Empty, string.Empty, url, true, cancellationToken);
     }
 
-    public static async Task<ActorInfoModel> GetActorMetadata(string id, string provider, string url, bool lazy,
+    public static async Task<ActorInfoModel> GetActorInfo(string id, string provider, string url, bool lazy,
         CancellationToken cancellationToken)
     {
-        var apiUrl = ComposeMetadataApiUrl(ActorMetadataApi, id, url, provider, string.Empty, lazy);
+        var apiUrl = ComposeInfoApiUrl(ActorInfoApi, id, url, provider, string.Empty, lazy);
         return await GetDataFromApi<ActorInfoModel>(apiUrl, cancellationToken);
     }
 
-    public static async Task<MovieInfoModel> GetMovieMetadata(string url, CancellationToken cancellationToken)
+    public static async Task<MovieInfoModel> GetMovieInfo(string url, CancellationToken cancellationToken)
     {
-        return await GetMovieMetadata(string.Empty, string.Empty, url, string.Empty, true, cancellationToken);
+        return await GetMovieInfo(string.Empty, string.Empty, url, string.Empty, true, cancellationToken);
     }
 
-    public static async Task<MovieInfoModel> GetMovieMetadata(string url, string language,
+    public static async Task<MovieInfoModel> GetMovieInfo(string url, string language,
         CancellationToken cancellationToken)
     {
-        return await GetMovieMetadata(string.Empty, string.Empty, url, language, true, cancellationToken);
+        return await GetMovieInfo(string.Empty, string.Empty, url, language, true, cancellationToken);
     }
 
-    public static async Task<MovieInfoModel> GetMovieMetadata(string id, string provider, string url, string language,
+    public static async Task<MovieInfoModel> GetMovieInfo(string id, string provider, string url, string language,
         bool lazy, CancellationToken cancellationToken)
     {
-        var apiUrl = ComposeMetadataApiUrl(MovieMetadataApi, id, provider, url, language, lazy);
+        var apiUrl = ComposeInfoApiUrl(MovieInfoApi, id, provider, url, language, lazy);
         return await GetDataFromApi<MovieInfoModel>(apiUrl, cancellationToken);
     }
 
