@@ -120,17 +120,17 @@ public static class ApiClient
 
     public static async Task<MovieMetadata> GetMovieMetadata(string url, CancellationToken cancellationToken)
     {
-        return await GetMovieMetadata(string.Empty, string.Empty, url, true, string.Empty, cancellationToken);
+        return await GetMovieMetadata(string.Empty, string.Empty, url, string.Empty, true, cancellationToken);
     }
 
     public static async Task<MovieMetadata> GetMovieMetadata(string url, string language,
         CancellationToken cancellationToken)
     {
-        return await GetMovieMetadata(string.Empty, string.Empty, url, true, language, cancellationToken);
+        return await GetMovieMetadata(string.Empty, string.Empty, url, language, true, cancellationToken);
     }
 
-    public static async Task<MovieMetadata> GetMovieMetadata(string id, string provider, string url, bool lazy,
-        string language, CancellationToken cancellationToken)
+    public static async Task<MovieMetadata> GetMovieMetadata(string id, string provider, string url, string language,
+        bool lazy, CancellationToken cancellationToken)
     {
         var apiUrl = ComposeMetadataApiUrl(MovieMetadataApi, id, provider, url, language, lazy);
         return await GetDataFromApi<MovieMetadata>(apiUrl, cancellationToken);
