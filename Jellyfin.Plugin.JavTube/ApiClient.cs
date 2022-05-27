@@ -53,7 +53,7 @@ public static class ApiClient
         });
     }
 
-    private static string ComposeImageApiUrl(string path, string id, string provider, string url, float position,
+    private static string ComposeImageApiUrl(string path, string id, string provider, string url, double position,
         bool auto)
     {
         return ComposeUrl(path, new NameValueCollection
@@ -66,12 +66,12 @@ public static class ApiClient
         });
     }
 
-    public static string GetPrimaryImageApiUrl(string id, string provider, float position = -1)
+    public static string GetPrimaryImageApiUrl(string id, string provider, double position = -1)
     {
         return ComposeImageApiUrl(PrimaryImageApi, id, provider, string.Empty, position, false);
     }
 
-    public static string GetPrimaryImageApiUrl(string id, string provider, string url, float position = -1,
+    public static string GetPrimaryImageApiUrl(string id, string provider, string url, double position = -1,
         bool auto = false)
     {
         return ComposeImageApiUrl(PrimaryImageApi, id, provider, url, position, auto);
@@ -82,7 +82,7 @@ public static class ApiClient
         return ComposeImageApiUrl(ThumbImageApi, id, provider, string.Empty, -1, false);
     }
 
-    public static string GetThumbImageApiUrl(string id, string provider, string url, float position = -1,
+    public static string GetThumbImageApiUrl(string id, string provider, string url, double position = -1,
         bool auto = false)
     {
         return ComposeImageApiUrl(ThumbImageApi, id, provider, url, position, auto);
@@ -93,7 +93,7 @@ public static class ApiClient
         return ComposeImageApiUrl(BackdropImageApi, id, provider, string.Empty, -1, false);
     }
 
-    public static string GetBackdropImageApiUrl(string id, string provider, string url, float position = -1,
+    public static string GetBackdropImageApiUrl(string id, string provider, string url, double position = -1,
         bool auto = false)
     {
         return ComposeImageApiUrl(BackdropImageApi, id, provider, url, position, auto);
