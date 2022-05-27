@@ -19,7 +19,7 @@ public class ExternalId : IExternalId
     public string UrlFormatString => "{0}";
 
 #if !__EMBY__
-        public ExternalIdMediaType? Type => ExternalIdMediaType.Movie;
+    public ExternalIdMediaType? Type => ExternalIdMediaType.Movie;
 #endif
 
     public bool Supports(IHasProviderIds item)
