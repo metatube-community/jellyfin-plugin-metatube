@@ -22,6 +22,13 @@
                     <input id="Token" is="emby-input" name="Token" type="password"/>
                     <div class="fieldDescription">Access Token of JavTube Server.</div>
                 </div>
+                <div class="checkboxContainer checkboxContainer-withDescripton">
+                    <label class="emby-checkbox-label">
+                        <input id="EnableAutoTranslate" is="emby-checkbox" name="EnableAutoTranslate"
+                               type="checkbox"/>
+                        <span>Enable Auto Translate</span>
+                    </label>
+                </div>
                 <div>
                     <button class="raised button-submit block" is="emby-button" type="submit">
                         <span>Save</span></button>
@@ -30,7 +37,7 @@
         </div>
     </div>
     <script type="text/javascript">
-        var JavTubePluginConfig = {
+        let JavTubePluginConfig = {
             uniquePluginId: "df87283d-7224-4f9c-a448-3433d9cf278a"
         };
 
@@ -39,6 +46,7 @@
             ApiClient.getPluginConfiguration(JavTubePluginConfig.uniquePluginId).then(function (config) {
                 $('#Server').val(config.Server).change();
                 $('#Token').val(config.Token).change();
+                $('#EnableAutoTranslate').prop('checked', config.EnableAutoTranslate);
                 Dashboard.hideLoadingMsg();
             });
         });
@@ -48,6 +56,7 @@
             ApiClient.getPluginConfiguration(JavTubePluginConfig.uniquePluginId).then(function (config) {
                 config.Server = $('#Server').val();
                 config.Token = $('#Token').val();
+                config.EnableAutoTranslate = $('#EnableAutoTranslate').prop('checked');
                 ApiClient.updatePluginConfiguration(JavTubePluginConfig.uniquePluginId, config).then(
                     Dashboard.processPluginConfigurationUpdateResult);
             });
