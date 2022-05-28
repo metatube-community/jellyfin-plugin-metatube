@@ -136,32 +136,32 @@ public static class ApiClient
         return await GetDataFromApi<MovieInfoModel>(apiUrl, cancellationToken);
     }
 
-    public static async Task<IEnumerable<ActorSearchResultModel>> SearchActor(string keyword, string provider,
+    public static async Task<List<ActorSearchResultModel>> SearchActor(string keyword, string provider,
         CancellationToken cancellationToken)
     {
         return await SearchActor(keyword, provider, false, cancellationToken);
     }
 
-    public static async Task<IEnumerable<ActorSearchResultModel>> SearchActor(string keyword, string provider,
+    public static async Task<List<ActorSearchResultModel>> SearchActor(string keyword, string provider,
         bool lazy, CancellationToken cancellationToken)
     {
         var apiUrl = ComposeSearchApiUrl(ActorSearchApi, keyword, provider, lazy);
         return await GetDataFromApi<List<ActorSearchResultModel>>(apiUrl, cancellationToken);
     }
 
-    public static async Task<IEnumerable<MovieSearchResultModel>> SearchMovie(string keyword,
+    public static async Task<List<MovieSearchResultModel>> SearchMovie(string keyword,
         CancellationToken cancellationToken)
     {
         return await SearchMovie(keyword, string.Empty, false, cancellationToken);
     }
 
-    public static async Task<IEnumerable<MovieSearchResultModel>> SearchMovie(string keyword, string provider,
+    public static async Task<List<MovieSearchResultModel>> SearchMovie(string keyword, string provider,
         CancellationToken cancellationToken)
     {
         return await SearchMovie(keyword, provider, false, cancellationToken);
     }
 
-    public static async Task<IEnumerable<MovieSearchResultModel>> SearchMovie(string keyword, string provider,
+    public static async Task<List<MovieSearchResultModel>> SearchMovie(string keyword, string provider,
         bool lazy, CancellationToken cancellationToken)
     {
         var apiUrl = ComposeSearchApiUrl(MovieSearchApi, keyword, provider, lazy);
