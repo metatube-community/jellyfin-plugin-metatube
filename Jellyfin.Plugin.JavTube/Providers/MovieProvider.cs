@@ -37,8 +37,7 @@ public class MovieProvider : BaseProvider, IRemoteMetadataProvider<Movie, MovieI
         if (string.IsNullOrWhiteSpace(pm.Id) || string.IsNullOrWhiteSpace(pm.Provider))
         {
             // Search movie and pick the first result.
-            var searchResults = (await GetSearchResults(info, cancellationToken)
-                .ConfigureAwait(false)).ToList();
+            var searchResults = (await GetSearchResults(info, cancellationToken)).ToList();
             if (searchResults.Any())
             {
                 var firstResult = searchResults.First();
@@ -89,8 +88,8 @@ public class MovieProvider : BaseProvider, IRemoteMetadataProvider<Movie, MovieI
             result.AddPerson(new PersonInfo
             {
                 Name = name,
-                Type = PersonType.Actor
-                // ImageUrl = ApiClient.GetPrimaryImageApiUrl()
+                Type = PersonType.Actor,
+                ImageUrl = await ApiClient.GetActorImageUrl(name, cancellationToken)
             });
 
         return result;

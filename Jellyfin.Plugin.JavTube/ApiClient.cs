@@ -99,6 +99,20 @@ public static class ApiClient
         return ComposeImageApiUrl(BackdropImageApi, id, provider, url, position, auto);
     }
 
+    public static async Task<string> GetActorImageUrl(string name, CancellationToken cancellationToken)
+    {
+        try
+        {
+            // Use GFriends as actor image provider.
+            return (await GetActorInfo(name, Constant.GFriends, cancellationToken)).Images[0];
+        }
+        catch (Exception)
+        {
+            // Ignore all exceptions and return empty url.
+            return string.Empty;
+        }
+    }
+
     public static async Task<ActorInfoModel> GetActorInfo(string id, string provider,
         CancellationToken cancellationToken)
     {
