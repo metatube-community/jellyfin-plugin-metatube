@@ -105,16 +105,10 @@ public static class ApiClient
         return await GetActorInfo(id, provider, string.Empty, true, cancellationToken);
     }
 
-    public static async Task<ActorInfoModel> GetActorInfo(string url,
-        CancellationToken cancellationToken)
-    {
-        return await GetActorInfo(string.Empty, string.Empty, url, true, cancellationToken);
-    }
-
     public static async Task<ActorInfoModel> GetActorInfo(string id, string provider, string url, bool lazy,
         CancellationToken cancellationToken)
     {
-        var apiUrl = ComposeInfoApiUrl(ActorInfoApi, id, url, provider, string.Empty, lazy);
+        var apiUrl = ComposeInfoApiUrl(ActorInfoApi, id,  provider, url,string.Empty, lazy);
         return await GetDataFromApi<ActorInfoModel>(apiUrl, cancellationToken);
     }
 
