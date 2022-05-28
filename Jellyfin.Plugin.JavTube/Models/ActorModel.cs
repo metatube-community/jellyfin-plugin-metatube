@@ -13,7 +13,7 @@ public class ActorInfoModel : ActorSearchResultModel
 {
     [JsonPropertyName("aliases")] public string[] Aliases { get; set; }
 
-    [JsonPropertyName("birthday")] public DateTime? Birthday { get; set; }
+    [JsonPropertyName("birthday")] public DateTime Birthday { get; set; }
 
     [JsonPropertyName("blood_type")] public string BloodType { get; set; }
 
