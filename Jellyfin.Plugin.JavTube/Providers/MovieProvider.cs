@@ -47,8 +47,8 @@ public class MovieProvider : BaseProvider, IRemoteMetadataProvider<Movie, MovieI
         }
 
         var m = Plugin.Instance.Configuration.EnableAutoTranslate
-            ? await ApiClient.GetMovieInfo(pm.Id, pm.Provider, "", info.MetadataLanguage, true, cancellationToken)
-            : await ApiClient.GetMovieInfo(pm.Id, pm.Provider, "", "", true, cancellationToken);
+            ? await ApiClient.GetMovieInfo(pm.Id, pm.Provider, info.MetadataLanguage, cancellationToken)
+            : await ApiClient.GetMovieInfo(pm.Id, pm.Provider, cancellationToken);
 
         var result = new MetadataResult<Movie>
         {
@@ -72,7 +72,9 @@ public class MovieProvider : BaseProvider, IRemoteMetadataProvider<Movie, MovieI
 
         result.Item.Studios = !string.IsNullOrWhiteSpace(m.Maker)
             ? new[] { m.Maker }
-            : !string.IsNullOrWhiteSpace(m.Publisher) ? new[] { m.Publisher } : null;
+            : !string.IsNullOrWhiteSpace(m.Publisher)
+                ? new[] { m.Publisher }
+                : null;
 
         // Add Director
         if (!string.IsNullOrWhiteSpace(m.Director))
