@@ -89,7 +89,7 @@ public class MovieProvider : BaseProvider, IRemoteMetadataProvider<Movie, MovieI
             {
                 Name = name,
                 Type = PersonType.Actor,
-                ImageUrl = await ApiClient.GetActorImageUrl(name, cancellationToken)
+                ImageUrl = await GetActorImageUrl(name, cancellationToken)
             });
 
         return result;
@@ -128,5 +128,19 @@ public class MovieProvider : BaseProvider, IRemoteMetadataProvider<Movie, MovieI
     private static string FormatName(MovieSearchResultModel m)
     {
         return $"{m.Number} {m.Title}";
+    }
+
+    private static async Task<string> GetActorImageUrl(string name, CancellationToken cancellationToken)
+    {
+        try
+        {
+            // Use GFriends as actor image provider.
+            return (await ApiClient.GetActorInfo(name, Constant.GFriends, cancellationToken)).Images[0];
+        }
+        catch (Exception)
+        {
+            // Ignore all exceptions and return empty url.
+            return string.Empty;
+        }
     }
 }
