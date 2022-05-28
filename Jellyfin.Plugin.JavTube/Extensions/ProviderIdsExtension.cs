@@ -3,7 +3,7 @@ using MediaBrowser.Model.Entities;
 
 namespace Jellyfin.Plugin.JavTube.Extensions;
 
-internal static class ProviderIdsExtensions
+internal static class ProviderIdsExtension
 {
     private const char Separator = '#';
 
