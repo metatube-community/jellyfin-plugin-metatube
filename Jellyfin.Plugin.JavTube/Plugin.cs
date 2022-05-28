@@ -29,8 +29,6 @@ public class Plugin : BasePlugin<PluginConfiguration>, IHasWebPages
 
     public static Plugin Instance { get; private set; }
 
-    public string Namespace => GetType().Namespace;
-
     public IEnumerable<PluginPageInfo> GetPages()
     {
         return new[]
@@ -38,7 +36,7 @@ public class Plugin : BasePlugin<PluginConfiguration>, IHasWebPages
             new PluginPageInfo
             {
                 Name = Name,
-                EmbeddedResourcePath = $"{Namespace}.Configuration.configPage.html"
+                EmbeddedResourcePath = $"{GetType().Namespace}.Configuration.configPage.html"
             }
         };
     }
@@ -46,7 +44,7 @@ public class Plugin : BasePlugin<PluginConfiguration>, IHasWebPages
 #if __EMBY__
     public Stream GetThumbImage()
     {
-        return GetType().Assembly.GetManifestResourceStream($"{Namespace}.thumb.png");
+        return GetType().Assembly.GetManifestResourceStream($"{GetType().Namespace}.thumb.png");
     }
 
     public ImageFormat ThumbImageFormat => ImageFormat.Png;
