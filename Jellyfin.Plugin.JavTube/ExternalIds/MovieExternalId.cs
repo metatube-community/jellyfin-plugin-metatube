@@ -7,20 +7,18 @@ using MediaBrowser.Model.Providers;
 
 namespace Jellyfin.Plugin.JavTube.ExternalIds;
 
-public class ExternalId : IExternalId
+public class MovieExternalId : IExternalId
 {
 #if __EMBY__
     public string Name => Constant.JavTube;
 #else
     public string ProviderName => Constant.JavTube;
+
+    public ExternalIdMediaType? Type => ExternalIdMediaType.Movie;
 #endif
     public string Key => Constant.JavTube;
 
     public string UrlFormatString => "{0}";
-
-#if !__EMBY__
-    public ExternalIdMediaType? Type => ExternalIdMediaType.Movie;
-#endif
 
     public bool Supports(IHasProviderIds item)
     {
