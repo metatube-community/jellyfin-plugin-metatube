@@ -105,9 +105,9 @@ public class MovieProvider : BaseProvider, IRemoteMetadataProvider<Movie, MovieI
         LogInfo("Search for movie: {0}", pm.Id);
 
         var results = new List<RemoteSearchResult>();
-        var movies = await ApiClient.SearchMovie(pm.Id, pm.Provider, cancellationToken);
+        var searchResults = await ApiClient.SearchMovie(pm.Id, pm.Provider, cancellationToken);
 
-        foreach (var m in movies)
+        foreach (var m in searchResults)
         {
             var result = new RemoteSearchResult
             {

@@ -1,11 +1,11 @@
 #if __EMBY__
-using Jellyfin.Plugin.JavTube.Extensions;
 using MediaBrowser.Common.Net;
 using MediaBrowser.Model.Configuration;
 using MediaBrowser.Model.Logging;
 #else
 using Microsoft.Extensions.Logging;
 #endif
+using Jellyfin.Plugin.JavTube.Extensions;
 using MediaBrowser.Controller.Entities;
 using MediaBrowser.Controller.Entities.Movies;
 using MediaBrowser.Controller.Providers;
