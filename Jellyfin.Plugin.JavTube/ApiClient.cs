@@ -39,7 +39,7 @@ public static class ApiClient
             { "provider", provider },
             { "url", url },
             { "lang", language },
-            { "lazy", lazy ? "1" : "0" }
+            { "lazy", lazy.ToString() }
         });
     }
 
@@ -49,7 +49,7 @@ public static class ApiClient
         {
             { "keyword", keyword },
             { "provider", provider },
-            { "lazy", lazy ? "1" : "0" }
+            { "lazy", lazy.ToString() }
         });
     }
 
@@ -62,7 +62,7 @@ public static class ApiClient
             { "provider", provider },
             { "url", url },
             { "pos", position.ToString("R") },
-            { "auto", auto ? "1" : "0" }
+            { "auto", auto.ToString() }
         });
     }
 
