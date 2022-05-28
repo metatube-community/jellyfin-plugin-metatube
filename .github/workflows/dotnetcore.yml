@@ -1,0 +1,45 @@
+name: Build Plugins
+
+on:
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          persist-credentials: false
+          fetch-depth: 0
+
+      - name: Setup Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: '3.x'
+
+      - name: Setup .NET Core
+        uses: actions/setup-dotnet@v1
+        with:
+          dotnet-version: 6.0.x
+
+      - name: Generate Version
+        id: shell
+        run: |
+          echo ::set-output name=version::$(date '+%Y.%m%d.%H%M')
+
+      - name: Build Plugins
+        run: |
+          dotnet build --configuration Release -p:Version=${{ steps.shell.outputs.version }}
+          dotnet build --configuration Release.Emby -p:Version=${{ steps.shell.outputs.version }}
+
+      - name: Upload Plugins
+        uses: softprops/action-gh-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          body: Auto Released by Actions
+          draft: false
+          tag_name: v${{ steps.shell.outputs.version }}
+          files: |
+            Jellyfin.Plugin.JavTube/bin/Jellyfin.JavTube@v${{ steps.shell.outputs.version }}.zip
+            Jellyfin.Plugin.JavTube/bin/Emby.JavTube@v${{ steps.shell.outputs.version }}.zip
