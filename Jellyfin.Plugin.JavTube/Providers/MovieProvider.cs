@@ -66,13 +66,15 @@ public class MovieProvider : BaseProvider, IRemoteMetadataProvider<Movie, MovieI
             },
             HasMetadata = true
         };
+
+        // Set ProviderIdModel.
         result.Item.SetProviderIdModel(Constant.JavTube, new ProviderIdModel
         {
             Provider = m.Provider,
             Id = m.Id
         });
 
-        // Set official score.
+        // Set movie rating.
         result.Item.CommunityRating = m.Score > 0 ? m.Score * 2 : null;
 
         // Set studios: maker > publisher.

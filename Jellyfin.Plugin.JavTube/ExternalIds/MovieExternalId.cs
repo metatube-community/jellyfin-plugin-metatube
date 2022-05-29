@@ -18,7 +18,7 @@ public class MovieExternalId : IExternalId
 #endif
     public string Key => Constant.JavTube;
 
-    public string UrlFormatString => "{0}";
+    public string UrlFormatString => Plugin.Instance.Configuration.Server+"/r/{0}";
 
     public bool Supports(IHasProviderIds item)
     {
