@@ -1,4 +1,4 @@
-![logo](wordmark.png)
+![logo](docs/wordmark.png)
 
 ![C#](https://img.shields.io/badge/c%23-%23239120.svg?logo=c-sharp&logoColor=white)
 ![License](https://img.shields.io/github/license/javtube/jellyfin-plugin-javtube)
