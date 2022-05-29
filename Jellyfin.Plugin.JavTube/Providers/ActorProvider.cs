@@ -33,7 +33,7 @@ public class ActorProvider : BaseProvider, IRemoteMetadataProvider<Person, Perso
     public async Task<MetadataResult<Person>> GetMetadata(PersonLookupInfo info,
         CancellationToken cancellationToken)
     {
-        var pm = info.GetProviderModel(Name);
+        var pm = info.GetProviderIdModel(Name);
         if (string.IsNullOrWhiteSpace(pm.Id) || string.IsNullOrWhiteSpace(pm.Provider))
         {
             var searchResults = (await GetSearchResults(info, cancellationToken)
@@ -41,7 +41,7 @@ public class ActorProvider : BaseProvider, IRemoteMetadataProvider<Person, Perso
             if (searchResults.Any())
             {
                 var firstResult = searchResults.First();
-                pm = firstResult.GetProviderModel(Name);
+                pm = firstResult.GetProviderIdModel(Name);
             }
         }
 
@@ -62,7 +62,7 @@ public class ActorProvider : BaseProvider, IRemoteMetadataProvider<Person, Perso
         if (!string.IsNullOrWhiteSpace(m.Nationality))
             result.Item.ProductionLocations = new[] { m.Nationality };
 
-        result.Item.SetProviderModel(Name, m);
+        result.Item.SetProviderIdModel(Name, m);
 
         return result;
     }
@@ -70,7 +70,7 @@ public class ActorProvider : BaseProvider, IRemoteMetadataProvider<Person, Perso
     public async Task<IEnumerable<RemoteSearchResult>> GetSearchResults(
         PersonLookupInfo info, CancellationToken cancellationToken)
     {
-        var pm = info.GetProviderModel(Name);
+        var pm = info.GetProviderIdModel(Name);
         if (string.IsNullOrWhiteSpace(pm.Id))
             pm.Id = info.Name;
 
@@ -86,7 +86,7 @@ public class ActorProvider : BaseProvider, IRemoteMetadataProvider<Person, Perso
             };
             if (m.Images.Length > 0)
                 result.ImageUrl = ApiClient.GetPrimaryImageApiUrl(m.Id, m.Provider, m.Images[0], auto: true);
-            result.SetProviderModel(Name, m);
+            result.SetProviderIdModel(Name, m);
             results.Add(result);
         }
 

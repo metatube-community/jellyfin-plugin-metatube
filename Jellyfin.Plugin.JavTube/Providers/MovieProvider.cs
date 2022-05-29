@@ -33,7 +33,7 @@ public class MovieProvider : BaseProvider, IRemoteMetadataProvider<Movie, MovieI
     public async Task<MetadataResult<Movie>> GetMetadata(MovieInfo info,
         CancellationToken cancellationToken)
     {
-        var pm = info.GetProviderModel(Name);
+        var pm = info.GetProviderIdModel(Name);
         if (string.IsNullOrWhiteSpace(pm.Id) || string.IsNullOrWhiteSpace(pm.Provider))
         {
             // Search movie and pick the first result.
@@ -41,7 +41,7 @@ public class MovieProvider : BaseProvider, IRemoteMetadataProvider<Movie, MovieI
             if (searchResults.Any())
             {
                 var firstResult = searchResults.First();
-                pm = firstResult.GetProviderModel(Name);
+                pm = firstResult.GetProviderIdModel(Name);
             }
         }
 
@@ -65,7 +65,7 @@ public class MovieProvider : BaseProvider, IRemoteMetadataProvider<Movie, MovieI
             },
             HasMetadata = true
         };
-        result.Item.SetProviderModel(Name, m);
+        result.Item.SetProviderIdModel(Name, m);
 
         result.Item.CommunityRating = m.Score > 0 ? m.Score * 2 : null;
 
@@ -98,7 +98,7 @@ public class MovieProvider : BaseProvider, IRemoteMetadataProvider<Movie, MovieI
     public async Task<IEnumerable<RemoteSearchResult>> GetSearchResults(MovieInfo info,
         CancellationToken cancellationToken)
     {
-        var pm = info.GetProviderModel(Name);
+        var pm = info.GetProviderIdModel(Name);
         if (string.IsNullOrWhiteSpace(pm.Id))
             // Search by movie name.
             pm.Id = info.Name;
@@ -118,7 +118,7 @@ public class MovieProvider : BaseProvider, IRemoteMetadataProvider<Movie, MovieI
                 ProductionYear = m.ReleaseDate.ValidDateTime()?.Year,
                 ImageUrl = ApiClient.GetPrimaryImageApiUrl(m.Id, m.Provider, m.ThumbUrl, 0.5)
             };
-            result.SetProviderModel(Name, m);
+            result.SetProviderIdModel(Name, m);
             results.Add(result);
         }
 

@@ -37,7 +37,7 @@ public class ActorImageProvider : BaseProvider, IRemoteImageProvider, IHasOrder
         public async Task<IEnumerable<RemoteImageInfo>> GetImages(BaseItem item, CancellationToken cancellationToken)
 #endif
     {
-        var pm = item.GetProviderModel(Name);
+        var pm = item.GetProviderIdModel(Name);
         if (string.IsNullOrWhiteSpace(pm.Id) || string.IsNullOrWhiteSpace(pm.Provider))
             return new List<RemoteImageInfo>();
 
