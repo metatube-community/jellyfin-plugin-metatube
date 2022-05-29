@@ -7,6 +7,7 @@ using MediaBrowser.Model.Providers;
 using MediaBrowser.Common.Net;
 using MediaBrowser.Model.Logging;
 using MediaBrowser.Model.Configuration;
+
 #else
 using Microsoft.Extensions.Logging;
 #endif
@@ -45,7 +46,7 @@ public class ActorImageProvider : BaseProvider, IRemoteImageProvider, IHasOrder
 
         return actorInfo.Images.Select(image => new RemoteImageInfo
         {
-            ProviderName = Name, 
+            ProviderName = Name,
             Type = ImageType.Primary,
             Url = ApiClient.GetPrimaryImageApiUrl(actorInfo.Id, actorInfo.Provider, image)
         }).ToList();

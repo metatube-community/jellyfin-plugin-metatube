@@ -1,9 +1,3 @@
-#if __EMBY__
-using MediaBrowser.Common.Net;
-using MediaBrowser.Model.Logging;
-#else
-using Microsoft.Extensions.Logging;
-#endif
 using Jellyfin.Plugin.JavTube.Extensions;
 using Jellyfin.Plugin.JavTube.Models;
 using MediaBrowser.Controller.Entities;
@@ -11,6 +5,13 @@ using MediaBrowser.Controller.Entities.Movies;
 using MediaBrowser.Controller.Providers;
 using MediaBrowser.Model.Entities;
 using MediaBrowser.Model.Providers;
+#if __EMBY__
+using MediaBrowser.Common.Net;
+using MediaBrowser.Model.Logging;
+
+#else
+using Microsoft.Extensions.Logging;
+#endif
 
 namespace Jellyfin.Plugin.JavTube.Providers;
 
@@ -102,10 +103,8 @@ public class MovieProvider : BaseProvider, IRemoteMetadataProvider<Movie, MovieI
     {
         var pid = info.GetProviderIdModel(Constant.JavTube);
         if (string.IsNullOrWhiteSpace(pid.Id))
-        {
             // Search movie by name.
             pid.Id = info.Name;
-        }
 
         LogInfo("Search for movie: {0}", pid.Id);
 
