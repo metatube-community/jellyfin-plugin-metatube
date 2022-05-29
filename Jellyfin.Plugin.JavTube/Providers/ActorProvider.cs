@@ -6,7 +6,6 @@ using MediaBrowser.Model.Providers;
 #if __EMBY__
 using MediaBrowser.Common.Net;
 using MediaBrowser.Model.Logging;
-
 #else
 using Microsoft.Extensions.Logging;
 #endif
@@ -20,8 +19,8 @@ public class ActorProvider : BaseProvider, IRemoteMetadataProvider<Person, Perso
         httpClient,
         logManager.CreateLogger<ActorProvider>())
 #else
-        public ActorProvider(IHttpClientFactory httpClientFactory, ILogger<ActorProvider> logger) : base(
-            httpClientFactory, logger)
+    public ActorProvider(IHttpClientFactory httpClientFactory, ILogger<ActorProvider> logger) : base(
+        httpClientFactory, logger)
 #endif
     {
         // Init

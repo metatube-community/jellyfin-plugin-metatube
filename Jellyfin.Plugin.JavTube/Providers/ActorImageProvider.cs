@@ -7,7 +7,6 @@ using MediaBrowser.Model.Providers;
 using MediaBrowser.Common.Net;
 using MediaBrowser.Model.Logging;
 using MediaBrowser.Model.Configuration;
-
 #else
 using Microsoft.Extensions.Logging;
 #endif
@@ -20,8 +19,8 @@ public class ActorImageProvider : BaseProvider, IRemoteImageProvider, IHasOrder
     public ActorImageProvider(IHttpClient httpClient, ILogManager logManager) :
         base(httpClient, logManager.CreateLogger<ActorImageProvider>())
 #else
-        public ActorImageProvider(IHttpClientFactory httpClientFactory, ILogger<ActorImageProvider> logger) : base(
-            httpClientFactory, logger)
+    public ActorImageProvider(IHttpClientFactory httpClientFactory, ILogger<ActorImageProvider> logger) : base(
+        httpClientFactory, logger)
 #endif
     {
         // Init
@@ -35,7 +34,7 @@ public class ActorImageProvider : BaseProvider, IRemoteImageProvider, IHasOrder
     public async Task<IEnumerable<RemoteImageInfo>> GetImages(BaseItem item, LibraryOptions libraryOptions,
         CancellationToken cancellationToken)
 #else
-        public async Task<IEnumerable<RemoteImageInfo>> GetImages(BaseItem item, CancellationToken cancellationToken)
+    public async Task<IEnumerable<RemoteImageInfo>> GetImages(BaseItem item, CancellationToken cancellationToken)
 #endif
     {
         var pid = item.GetProviderIdModel(Name);
