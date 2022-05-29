@@ -3,6 +3,7 @@
 ![C#](https://img.shields.io/badge/c%23-%23239120.svg?logo=c-sharp&logoColor=white)
 ![License](https://img.shields.io/github/license/javtube/jellyfin-plugin-javtube)
 ![Downloads](https://img.shields.io/github/downloads/javtube/jellyfin-plugin-javtube/total)
+![Releases](https://img.shields.io/github/v/release/javtube/jellyfin-plugin-javtube)
 
 ## Features
 
