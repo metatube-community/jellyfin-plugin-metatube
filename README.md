@@ -20,20 +20,6 @@
 |   Jellyfin   |        10.8.x         |
 |     Emby     |         4.7.x         |
 
-## Build from source
-
-### Jellyfin
-
-```shell
-dotnet build --configuration Release
-```
-
-### Emby
-
-```shell
-dotnet build --configuration Release.Emby
-```
-
 ## Stargazers over time
 
 [![Stargazers over time](https://starchart.cc/javtube/jellyfin-plugin-javtube.svg)](https://starchart.cc/javtube/jellyfin-plugin-javtube)
