@@ -63,6 +63,7 @@ public class MovieProvider : BaseProvider, IRemoteMetadataProvider<Movie, MovieI
                 Genres = m.Tags,
                 PremiereDate = m.ReleaseDate.ValidDateTime(),
                 ProductionYear = m.ReleaseDate.ValidDateTime()?.Year,
+                CommunityRating = m.Score > 0 ? m.Score * 2 : null,
                 OfficialRating = Constant.Rating
             },
             HasMetadata = true
@@ -74,9 +75,6 @@ public class MovieProvider : BaseProvider, IRemoteMetadataProvider<Movie, MovieI
             Provider = m.Provider,
             Id = m.Id
         });
-
-        // Set movie rating.
-        result.Item.CommunityRating = m.Score > 0 ? m.Score * 2 : null;
 
         // Set studios: maker > publisher.
         result.Item.Studios = !string.IsNullOrWhiteSpace(m.Maker)
