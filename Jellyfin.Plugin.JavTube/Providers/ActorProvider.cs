@@ -24,7 +24,7 @@ public class ActorProvider : BaseProvider, IRemoteMetadataProvider<Person, Perso
             httpClientFactory, logger)
 #endif
     {
-        // Nothing
+        // Init
     }
 
     public int Order => 1;
@@ -34,19 +34,18 @@ public class ActorProvider : BaseProvider, IRemoteMetadataProvider<Person, Perso
     public async Task<MetadataResult<Person>> GetMetadata(PersonLookupInfo info,
         CancellationToken cancellationToken)
     {
-        var pm = info.GetProviderIdModel(Name);
-        if (string.IsNullOrWhiteSpace(pm.Id) || string.IsNullOrWhiteSpace(pm.Provider))
+        var pid = info.GetProviderIdModel(Name);
+        if (string.IsNullOrWhiteSpace(pid.Id) || string.IsNullOrWhiteSpace(pid.Provider))
         {
-            var searchResults = (await GetSearchResults(info, cancellationToken)
-                .ConfigureAwait(false)).ToList();
+            var searchResults = (await GetSearchResults(info, cancellationToken)).ToList();
             if (searchResults.Any())
             {
                 var firstResult = searchResults.First();
-                pm = firstResult.GetProviderIdModel(Name);
+                pid = firstResult.GetProviderIdModel(Name);
             }
         }
 
-        var m = await ApiClient.GetActorInfo(pm.Id, pm.Provider, cancellationToken);
+        var m = await ApiClient.GetActorInfo(pid.Id, pid.Provider, cancellationToken);
 
         var result = new MetadataResult<Person>
         {
@@ -60,14 +59,16 @@ public class ActorProvider : BaseProvider, IRemoteMetadataProvider<Person, Perso
             HasMetadata = true
         };
 
-        if (!string.IsNullOrWhiteSpace(m.Nationality))
-            result.Item.ProductionLocations = new[] { m.Nationality };
-
+        // Set ProviderIdModel.
         result.Item.SetProviderIdModel(Name, new ProviderIdModel
         {
             Provider = m.Provider,
             Id = m.Id
         });
+
+        // Set actor nationality.
+        if (!string.IsNullOrWhiteSpace(m.Nationality))
+            result.Item.ProductionLocations = new[] { m.Nationality };
 
         return result;
     }
@@ -75,22 +76,34 @@ public class ActorProvider : BaseProvider, IRemoteMetadataProvider<Person, Perso
     public async Task<IEnumerable<RemoteSearchResult>> GetSearchResults(
         PersonLookupInfo info, CancellationToken cancellationToken)
     {
-        var pm = info.GetProviderIdModel(Name);
-        if (string.IsNullOrWhiteSpace(pm.Id))
-            pm.Id = info.Name;
+        var pid = info.GetProviderIdModel(Name);
+        if (string.IsNullOrWhiteSpace(pid.Id))
+        {
+            // Search actor by name.
+            pid.Id = info.Name;
+        }
 
-        var searchResults = await ApiClient.SearchActor(pm.Id, pm.Provider, cancellationToken);
+        LogInfo("Search for actor: {0}", pid.Id);
 
         var results = new List<RemoteSearchResult>();
+
+        var searchResults = await ApiClient.SearchActor(pid.Id, pid.Provider, cancellationToken);
+        if (!searchResults.Any())
+        {
+            LogInfo("Actor not found: {0}", pid.Id);
+            return results;
+        }
+
         foreach (var m in searchResults)
         {
             var result = new RemoteSearchResult
             {
                 Name = m.Name,
-                SearchProviderName = Name
+                SearchProviderName = Name,
+                ImageUrl = m.Images.Length > 0
+                    ? ApiClient.GetPrimaryImageApiUrl(m.Id, m.Provider, m.Images[0], 0.5, true)
+                    : string.Empty
             };
-            if (m.Images.Length > 0)
-                result.ImageUrl = ApiClient.GetPrimaryImageApiUrl(m.Id, m.Provider, m.Images[0], auto: true);
             result.SetProviderIdModel(Name, new ProviderIdModel
             {
                 Provider = m.Provider,
@@ -111,9 +124,10 @@ public class ActorProvider : BaseProvider, IRemoteMetadataProvider<Person, Perso
 
         var overview = string.Empty;
         overview += G("身高", $"{a.Height}cm");
-        overview += G("血型", $"{a.BloodType}");
-        overview += G("罩杯", $"{a.CupSize}");
-        overview += G("三围", $"{a.Measurements}");
+        overview += G("血型", a.BloodType);
+        overview += G("罩杯", a.CupSize);
+        overview += G("三围", a.Measurements);
+        overview += G("爱好", a.Hobby);
         return overview;
     }
 }
