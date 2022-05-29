@@ -24,9 +24,9 @@
                 </div>
                 <div class="checkboxContainer checkboxContainer-withDescripton">
                     <label class="emby-checkbox-label">
-                        <input id="EnableAutoTranslate" is="emby-checkbox" name="EnableAutoTranslate"
+                        <input id="EnableAutoTranslation" is="emby-checkbox" name="EnableAutoTranslation"
                                type="checkbox"/>
-                        <span>Enable Auto Translate</span>
+                        <span>Enable Auto Translation</span>
                     </label>
                 </div>
                 <div>
@@ -46,7 +46,7 @@
             ApiClient.getPluginConfiguration(JavTubePluginConfig.uniquePluginId).then(function (config) {
                 $('#Server').val(config.Server).change();
                 $('#Token').val(config.Token).change();
-                $('#EnableAutoTranslate').prop('checked', config.EnableAutoTranslate);
+                $('#EnableAutoTranslation').prop('checked', config.EnableAutoTranslation);
                 Dashboard.hideLoadingMsg();
             });
         });
@@ -56,7 +56,7 @@
             ApiClient.getPluginConfiguration(JavTubePluginConfig.uniquePluginId).then(function (config) {
                 config.Server = $('#Server').val();
                 config.Token = $('#Token').val();
-                config.EnableAutoTranslate = $('#EnableAutoTranslate').prop('checked');
+                config.EnableAutoTranslation = $('#EnableAutoTranslation').prop('checked');
                 ApiClient.updatePluginConfiguration(JavTubePluginConfig.uniquePluginId, config).then(
                     Dashboard.processPluginConfigurationUpdateResult);
             });

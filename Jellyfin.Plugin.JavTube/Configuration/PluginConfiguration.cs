@@ -8,7 +8,7 @@ public class PluginConfiguration : BasePluginConfiguration
     {
         Server = "http://javtube-server:8080";
         Token = string.Empty;
-        EnableAutoTranslate = false;
+        EnableAutoTranslation = false;
     }
 
     /// <summary>
@@ -24,5 +24,5 @@ public class PluginConfiguration : BasePluginConfiguration
     /// <summary>
     ///     Gets or sets the auto translate option.
     /// </summary>
-    public bool EnableAutoTranslate { get; set; }
+    public bool EnableAutoTranslation { get; set; }
 }
