@@ -24,7 +24,7 @@ public class ActorImageProvider : BaseProvider, IRemoteImageProvider, IHasOrder
             httpClientFactory, logger)
 #endif
     {
-        // Nothing
+        // Init
     }
 
     public int Order => 1;
@@ -38,17 +38,17 @@ public class ActorImageProvider : BaseProvider, IRemoteImageProvider, IHasOrder
         public async Task<IEnumerable<RemoteImageInfo>> GetImages(BaseItem item, CancellationToken cancellationToken)
 #endif
     {
-        var pm = item.GetProviderIdModel(Name);
-        if (string.IsNullOrWhiteSpace(pm.Id) || string.IsNullOrWhiteSpace(pm.Provider))
+        var pid = item.GetProviderIdModel(Name);
+        if (string.IsNullOrWhiteSpace(pid.Id) || string.IsNullOrWhiteSpace(pid.Provider))
             return new List<RemoteImageInfo>();
 
-        var actorInfo = await ApiClient.GetActorInfo(pm.Id, pm.Provider, cancellationToken);
+        var actorInfo = await ApiClient.GetActorInfo(pid.Id, pid.Provider, cancellationToken);
 
         return actorInfo.Images.Select(image => new RemoteImageInfo
         {
             ProviderName = Name,
             Type = ImageType.Primary,
-            Url = ApiClient.GetPrimaryImageApiUrl(actorInfo.Id, actorInfo.Provider, image)
+            Url = ApiClient.GetPrimaryImageApiUrl(actorInfo.Id, actorInfo.Provider, image, 0.5, true)
         }).ToList();
     }
 
