@@ -68,4 +68,14 @@ public abstract class BaseProvider
         _logger.LogInformation(message, args);
 #endif
     }
+
+    protected void LogError(string message, params object[] args)
+    {
+#if __EMBY__
+        _logger.Error(message, args);
+#else
+        // ReSharper disable once TemplateIsNotCompileTimeConstantProblem
+        _logger.LogError(message, args);
+#endif
+    }
 }

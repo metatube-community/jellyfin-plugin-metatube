@@ -3,8 +3,6 @@ namespace Jellyfin.Plugin.JavTube;
 public static class Constant
 {
     public const string JavTube = "JavTube";
-    
-    public const string GFriends = "GFriends";
 
     public const string Description = "Just Another Video Tube";
 
