@@ -13,18 +13,18 @@
             <h1>JavTube</h1>
             <form id="JavTubeConfigForm">
                 <div class="inputContainer">
-                    <label class="inputeLabel inputLabelUnfocused" for="Server">Server</label>
-                    <input id="Server" is="emby-input" name="Server" required type="text"/>
+                    <label class="inputeLabel inputLabelUnfocused" for="txtServer">Server</label>
+                    <input id="txtServer" name="txtServer" is="emby-input" required type="text"/>
                     <div class="fieldDescription">URL of JavTube Server.</div>
                 </div>
                 <div class="inputContainer">
-                    <label class="inputeLabel inputLabelUnfocused" for="Token">Token</label>
-                    <input id="Token" is="emby-input" name="Token" type="text"/>
+                    <label class="inputeLabel inputLabelUnfocused" for="txtToken">Token</label>
+                    <input id="txtToken" name="txtToken" is="emby-input" type="text"/>
                     <div class="fieldDescription">Access Token of JavTube Server.</div>
                 </div>
                 <div class="checkboxContainer checkboxContainer-withDescripton">
                     <label class="emby-checkbox-label">
-                        <input id="EnableAutoTranslation" is="emby-checkbox" name="EnableAutoTranslation"
+                        <input id="chkTranslation" name="chkTranslation" is="emby-checkbox"
                                type="checkbox"/>
                         <span>Enable Auto Translation</span>
                     </label>
@@ -44,9 +44,9 @@
         $('#JavTubeConfigurationPage').on('pageshow', function () {
             Dashboard.showLoadingMsg();
             ApiClient.getPluginConfiguration(JavTubePluginConfig.uniquePluginId).then(function (config) {
-                $('#Server').val(config.Server).change();
-                $('#Token').val(config.Token).change();
-                $('#EnableAutoTranslation').prop('checked', config.EnableAutoTranslation);
+                $('#txtServer').val(config.Server).change();
+                $('#txtToken').val(config.Token).change();
+                $('#chkTranslation').prop('checked', config.EnableAutoTranslation);
                 Dashboard.hideLoadingMsg();
             });
         });
@@ -54,9 +54,9 @@
         $('#JavTubeConfigForm').on('submit', function () {
             Dashboard.showLoadingMsg();
             ApiClient.getPluginConfiguration(JavTubePluginConfig.uniquePluginId).then(function (config) {
-                config.Server = $('#Server').val();
-                config.Token = $('#Token').val();
-                config.EnableAutoTranslation = $('#EnableAutoTranslation').prop('checked');
+                config.Server = $('#txtServer').val();
+                config.Token = $('#txtToken').val();
+                config.EnableAutoTranslation = $('#chkTranslation').prop('checked');
                 ApiClient.updatePluginConfiguration(JavTubePluginConfig.uniquePluginId, config).then(
                     Dashboard.processPluginConfigurationUpdateResult);
             });
