@@ -23,9 +23,9 @@ public class Plugin : BasePlugin<PluginConfiguration>, IHasWebPages
 
     public override string Name => Constant.JavTube;
 
-    public override string Description => Constant.Description;
+    public override string Description => "JavTube Plugin for Jellyfin/Emby";
 
-    public override Guid Id => Guid.Parse(Constant.Guid);
+    public override Guid Id => Guid.Parse("df87283d-7224-4f9c-a448-3433d9cf278a");
 
     public static Plugin Instance { get; private set; }
 
