@@ -42,7 +42,7 @@ public class ImageProvider : BaseProvider, IRemoteImageProvider, IHasOrder
         if (string.IsNullOrWhiteSpace(pm.Id) || string.IsNullOrWhiteSpace(pm.Provider))
             return new List<RemoteImageInfo>();
 
-        var m = await ApiClient.GetMovieInfo(pm.Id, pm.Provider, "", "", true, cancellationToken);
+        var m = await ApiClient.GetMovieInfo(pm.Id, pm.Provider, cancellationToken);
         var images = new List<RemoteImageInfo>
         {
             new()
