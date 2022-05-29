@@ -66,7 +66,11 @@ public class MovieProvider : BaseProvider, IRemoteMetadataProvider<Movie, MovieI
             },
             HasMetadata = true
         };
-        result.Item.SetProviderIdModel(Constant.JavTube, m);
+        result.Item.SetProviderIdModel(Constant.JavTube, new ProviderIdModel
+        {
+            Provider = m.Provider,
+            Id = m.Id
+        });
 
         // Set official score.
         result.Item.CommunityRating = m.Score > 0 ? m.Score * 2 : null;
@@ -127,7 +131,11 @@ public class MovieProvider : BaseProvider, IRemoteMetadataProvider<Movie, MovieI
                 ProductionYear = m.ReleaseDate.ValidDateTime()?.Year,
                 ImageUrl = ApiClient.GetPrimaryImageApiUrl(m.Id, m.Provider, m.ThumbUrl, 0.5)
             };
-            result.SetProviderIdModel(Constant.JavTube, m);
+            result.SetProviderIdModel(Constant.JavTube, new ProviderIdModel
+            {
+                Provider = m.Provider,
+                Id = m.Id
+            });
             results.Add(result);
         }
 

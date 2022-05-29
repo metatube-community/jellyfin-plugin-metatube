@@ -63,7 +63,11 @@ public class ActorProvider : BaseProvider, IRemoteMetadataProvider<Person, Perso
         if (!string.IsNullOrWhiteSpace(m.Nationality))
             result.Item.ProductionLocations = new[] { m.Nationality };
 
-        result.Item.SetProviderIdModel(Name, m);
+        result.Item.SetProviderIdModel(Name, new ProviderIdModel
+        {
+            Provider = m.Provider,
+            Id = m.Id
+        });
 
         return result;
     }
@@ -87,7 +91,11 @@ public class ActorProvider : BaseProvider, IRemoteMetadataProvider<Person, Perso
             };
             if (m.Images.Length > 0)
                 result.ImageUrl = ApiClient.GetPrimaryImageApiUrl(m.Id, m.Provider, m.Images[0], auto: true);
-            result.SetProviderIdModel(Name, m);
+            result.SetProviderIdModel(Name, new ProviderIdModel
+            {
+                Provider = m.Provider,
+                Id = m.Id
+            });
             results.Add(result);
         }
 
