@@ -24,30 +24,31 @@ public class MovieProvider : BaseProvider, IRemoteMetadataProvider<Movie, MovieI
         httpClientFactory, logger)
 #endif
     {
-        // Nothing
+        // Init
     }
 
     public int Order => 1;
+
     public string Name => Constant.JavTube;
 
     public async Task<MetadataResult<Movie>> GetMetadata(MovieInfo info,
         CancellationToken cancellationToken)
     {
-        var pm = info.GetProviderIdModel(Name);
-        if (string.IsNullOrWhiteSpace(pm.Id) || string.IsNullOrWhiteSpace(pm.Provider))
+        var pid = info.GetProviderIdModel(Constant.JavTube);
+        if (string.IsNullOrWhiteSpace(pid.Id) || string.IsNullOrWhiteSpace(pid.Provider))
         {
             // Search movie and pick the first result.
             var searchResults = (await GetSearchResults(info, cancellationToken)).ToList();
             if (searchResults.Any())
             {
                 var firstResult = searchResults.First();
-                pm = firstResult.GetProviderIdModel(Name);
+                pid = firstResult.GetProviderIdModel(Constant.JavTube);
             }
         }
 
         var m = Plugin.Instance.Configuration.EnableAutoTranslate
-            ? await ApiClient.GetMovieInfo(pm.Id, pm.Provider, info.MetadataLanguage, cancellationToken)
-            : await ApiClient.GetMovieInfo(pm.Id, pm.Provider, cancellationToken);
+            ? await ApiClient.GetMovieInfo(pid.Id, pid.Provider, info.MetadataLanguage, cancellationToken)
+            : await ApiClient.GetMovieInfo(pid.Id, pid.Provider, cancellationToken);
 
         var result = new MetadataResult<Movie>
         {
@@ -61,21 +62,22 @@ public class MovieProvider : BaseProvider, IRemoteMetadataProvider<Movie, MovieI
                 PremiereDate = m.ReleaseDate.ValidDateTime(),
                 ProductionYear = m.ReleaseDate.ValidDateTime()?.Year,
                 OfficialRating = Constant.Rating
-                // Studios = metadata.Maker,
             },
             HasMetadata = true
         };
-        result.Item.SetProviderIdModel(Name, m);
+        result.Item.SetProviderIdModel(Constant.JavTube, m);
 
+        // Set official score.
         result.Item.CommunityRating = m.Score > 0 ? m.Score * 2 : null;
 
+        // Set studios: maker > publisher.
         result.Item.Studios = !string.IsNullOrWhiteSpace(m.Maker)
             ? new[] { m.Maker }
             : !string.IsNullOrWhiteSpace(m.Publisher)
                 ? new[] { m.Publisher }
                 : null;
 
-        // Add Director
+        // Add director.
         if (!string.IsNullOrWhiteSpace(m.Director))
             result.AddPerson(new PersonInfo
             {
@@ -83,7 +85,7 @@ public class MovieProvider : BaseProvider, IRemoteMetadataProvider<Movie, MovieI
                 Type = PersonType.Director
             });
 
-        // Add Actors
+        // Add actors.
         foreach (var name in m.Actors)
             result.AddPerson(new PersonInfo
             {
@@ -98,15 +100,23 @@ public class MovieProvider : BaseProvider, IRemoteMetadataProvider<Movie, MovieI
     public async Task<IEnumerable<RemoteSearchResult>> GetSearchResults(MovieInfo info,
         CancellationToken cancellationToken)
     {
-        var pm = info.GetProviderIdModel(Name);
-        if (string.IsNullOrWhiteSpace(pm.Id))
-            // Search by movie name.
-            pm.Id = info.Name;
+        var pid = info.GetProviderIdModel(Constant.JavTube);
+        if (string.IsNullOrWhiteSpace(pid.Id))
+        {
+            // Search movie by name.
+            pid.Id = info.Name;
+        }
 
-        LogInfo("Search for movie: {0}", pm.Id);
+        LogInfo("Search for movie: {0}", pid.Id);
 
         var results = new List<RemoteSearchResult>();
-        var searchResults = await ApiClient.SearchMovie(pm.Id, pm.Provider, cancellationToken);
+
+        var searchResults = await ApiClient.SearchMovie(pid.Id, pid.Provider, cancellationToken);
+        if (!searchResults.Any())
+        {
+            LogInfo("Movie not found: {0}", pid.Id);
+            return results;
+        }
 
         foreach (var m in searchResults)
         {
@@ -118,7 +128,7 @@ public class MovieProvider : BaseProvider, IRemoteMetadataProvider<Movie, MovieI
                 ProductionYear = m.ReleaseDate.ValidDateTime()?.Year,
                 ImageUrl = ApiClient.GetPrimaryImageApiUrl(m.Id, m.Provider, m.ThumbUrl, 0.5)
             };
-            result.SetProviderIdModel(Name, m);
+            result.SetProviderIdModel(Constant.JavTube, m);
             results.Add(result);
         }
 
