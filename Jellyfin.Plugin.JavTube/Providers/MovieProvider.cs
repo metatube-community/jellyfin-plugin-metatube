@@ -55,7 +55,7 @@ public class MovieProvider : BaseProvider, IRemoteMetadataProvider<Movie, MovieI
         {
             Item = new Movie
             {
-                Name = FormatName(m),
+                Name = $"{m.Number} {m.Title}",
                 OriginalTitle = m.Title,
                 Overview = m.Summary,
                 Tagline = m.Series,
@@ -125,11 +125,11 @@ public class MovieProvider : BaseProvider, IRemoteMetadataProvider<Movie, MovieI
         {
             var result = new RemoteSearchResult
             {
-                Name = FormatName(m),
+                Name = $"[{m.Provider}] {m.Number} {m.Title}",
                 SearchProviderName = Name,
                 PremiereDate = m.ReleaseDate.ValidDateTime(),
                 ProductionYear = m.ReleaseDate.ValidDateTime()?.Year,
-                ImageUrl = ApiClient.GetPrimaryImageApiUrl(m.Id, m.Provider, m.ThumbUrl, 0.5)
+                ImageUrl = ApiClient.GetPrimaryImageApiUrl(m.Id, m.Provider, m.ThumbUrl, 1.0, true)
             };
             result.SetProviderIdModel(Constant.JavTube, new ProviderIdModel
             {
@@ -140,11 +140,6 @@ public class MovieProvider : BaseProvider, IRemoteMetadataProvider<Movie, MovieI
         }
 
         return results;
-    }
-
-    private static string FormatName(MovieSearchResultModel m)
-    {
-        return $"{m.Number} {m.Title}";
     }
 
     private async Task<string> GetActorImageUrl(string name, CancellationToken cancellationToken)
