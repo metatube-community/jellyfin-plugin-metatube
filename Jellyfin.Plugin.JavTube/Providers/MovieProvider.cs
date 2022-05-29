@@ -141,7 +141,6 @@ public class MovieProvider : BaseProvider, IRemoteMetadataProvider<Movie, MovieI
         catch (Exception e)
         {
             LogError("Get Actor Image Error: {0}: {1}", name, e.Message);
-            // Ignore all exceptions and return empty url.
             return string.Empty;
         }
     }
