@@ -45,6 +45,8 @@ public class ActorProvider : BaseProvider, IRemoteMetadataProvider<Person, Perso
             }
         }
 
+        LogInfo("Get actor info: {0}", pid.Id);
+
         var m = await ApiClient.GetActorInfo(pid.Id, pid.Provider, cancellationToken);
 
         var result = new MetadataResult<Person>
