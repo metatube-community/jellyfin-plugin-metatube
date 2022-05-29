@@ -125,11 +125,11 @@ public class ActorProvider : BaseProvider, IRemoteMetadataProvider<Person, Perso
         }
 
         var overview = string.Empty;
-        overview += G("身高", $"{a.Height}cm");
-        overview += G("血型", a.BloodType);
-        overview += G("罩杯", a.CupSize);
-        overview += G("三围", a.Measurements);
-        overview += G("爱好", a.Hobby);
+        overview += G("身長", $"{a.Height}cm");
+        overview += G("血液型", a.BloodType);
+        overview += G("ブラのサイズ", a.CupSize);
+        overview += G("スリーサイズ", a.Measurements);
+        overview += G("趣味", a.Hobby);
         return overview;
     }
 }
