@@ -7,21 +7,21 @@ internal static class ProviderIdsExtension
 {
     private const char Separator = '#';
 
-    public static ProviderModel GetProviderModel(this IHasProviderIds instance, string id)
+    public static ProviderModel GetProviderModel(this IHasProviderIds instance, string name)
     {
-        var pm = new ProviderModel();
         if (!instance.ProviderIds.Any())
-            return pm;
-        var v = instance.GetProviderId(id)?.Split(Separator);
-        if (v?.Length > 0)
-            pm.Provider = v[0];
-        if (v?.Length > 1)
-            pm.Id = v[1];
-        return pm;
+            return new ProviderModel();
+
+        var providerIds = instance.GetProviderId(name)?.Split(Separator);
+        return new ProviderModel
+        {
+            Provider = providerIds?.Length > 1 ? providerIds[0] : string.Empty,
+            Id = providerIds?.Length > 1 ? providerIds[1] : string.Empty
+        };
     }
 
-    public static void SetProviderModel(this IHasProviderIds instance, string id, ProviderModel pm)
+    public static void SetProviderModel(this IHasProviderIds instance, string name, ProviderModel pm)
     {
-        instance.SetProviderId(id, $"{pm.Provider}{Separator}{pm.Id}");
+        instance.SetProviderId(name, string.Join(Separator, pm.Provider, pm.Id));
     }
 }
