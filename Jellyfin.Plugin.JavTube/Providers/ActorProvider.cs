@@ -80,10 +80,8 @@ public class ActorProvider : BaseProvider, IRemoteMetadataProvider<Person, Perso
     {
         var pid = info.GetProviderIdModel(Name);
         if (string.IsNullOrWhiteSpace(pid.Id))
-        {
             // Search actor by name.
             pid.Id = info.Name;
-        }
 
         LogInfo("Search for actor: {0}", pid.Id);
 
