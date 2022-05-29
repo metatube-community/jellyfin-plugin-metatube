@@ -26,10 +26,11 @@ public class ImageProvider : BaseProvider, IRemoteImageProvider, IHasOrder
         httpClientFactory, logger)
 #endif
     {
-        // Nothing
+        // Init
     }
 
     public int Order => 1;
+
     public string Name => Constant.JavTube;
 
 #if __EMBY__
@@ -39,11 +40,11 @@ public class ImageProvider : BaseProvider, IRemoteImageProvider, IHasOrder
     public async Task<IEnumerable<RemoteImageInfo>> GetImages(BaseItem item, CancellationToken cancellationToken)
 #endif
     {
-        var pm = item.GetProviderIdModel(Name);
-        if (string.IsNullOrWhiteSpace(pm.Id) || string.IsNullOrWhiteSpace(pm.Provider))
+        var pid = item.GetProviderIdModel(Constant.JavTube);
+        if (string.IsNullOrWhiteSpace(pid.Id) || string.IsNullOrWhiteSpace(pid.Provider))
             return new List<RemoteImageInfo>();
 
-        var m = await ApiClient.GetMovieInfo(pm.Id, pm.Provider, cancellationToken);
+        var m = await ApiClient.GetMovieInfo(pid.Id, pid.Provider, cancellationToken);
         var images = new List<RemoteImageInfo>
         {
             new()
