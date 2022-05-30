@@ -63,7 +63,7 @@ public class UpdatePluginTask : IScheduledTask
             {
                 Url = "https://api.github.com/repos/javtube/jellyfin-plugin-javtube/releases/latest",
                 CancellationToken = cancellationToken,
-                EnableDefaultUserAgent = true
+                UserAgent = Constant.UserAgent
             });
 
             if (response.StatusCode != HttpStatusCode.OK)
@@ -89,7 +89,7 @@ public class UpdatePluginTask : IScheduledTask
                 {
                     Url = url,
                     CancellationToken = cancellationToken,
-                    EnableDefaultUserAgent = true,
+                    UserAgent = Constant.UserAgent,
                     Progress = progress
                 });
 

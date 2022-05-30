@@ -16,9 +16,6 @@ public static class ApiClient
     private const string ThumbImageApi = "/image/thumb";
     private const string BackdropImageApi = "/image/backdrop";
 
-    // User-Agent
-    public static readonly string UserAgent = $"{typeof(Plugin).Namespace}/{Plugin.Instance.Version}";
-
     private static string ComposeUrl(string path, NameValueCollection nv)
     {
         var query = HttpUtility.ParseQueryString(string.Empty);
@@ -182,7 +179,7 @@ public static class ApiClient
         // Set Accept JSON header.
         httpClient.DefaultRequestHeaders.Add("Accept", "application/json");
         // Set User-Agent header.
-        httpClient.DefaultRequestHeaders.Add("User-Agent", UserAgent);
+        httpClient.DefaultRequestHeaders.Add("User-Agent", Constant.UserAgent);
         // Set Authorization API Token.
         if (!string.IsNullOrWhiteSpace(Plugin.Instance.Configuration.Token))
             httpClient.DefaultRequestHeaders.Authorization =
