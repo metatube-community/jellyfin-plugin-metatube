@@ -7,7 +7,7 @@
         <Platforms>AnyCPU</Platforms>
         <AssemblyName>JavTube</AssemblyName>
         <Authors>JavTube</Authors>
-        <Description>JavTube Plugin for Jellyfin/Emby</Description>
+        <Description>Just Another Video Tube Plugin for Jellyfin/Emby</Description>
         <Version>$([System.DateTime]::UtcNow.ToString(yyyy.MMdd.HHmm))</Version>
         <Copyright>Copyright © $([System.DateTime]::UtcNow.Year) JavTube</Copyright>
         <RepositoryType>Git</RepositoryType>
@@ -22,39 +22,39 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <PackageReference Include="System.Memory" Version="4.5.4"/>
+        <PackageReference Include="System.Memory" Version="4.5.4" />
     </ItemGroup>
 
     <ItemGroup Condition="'$(Configuration)'=='Debug' or '$(Configuration)'=='Release'">
-        <PackageReference Include="Jellyfin.Controller" Version="10.8.0-beta3"/>
-        <PackageReference Include="Jellyfin.Model" Version="10.8.0-beta3"/>
+        <PackageReference Include="Jellyfin.Controller" Version="10.8.0-beta3" />
+        <PackageReference Include="Jellyfin.Model" Version="10.8.0-beta3" />
     </ItemGroup>
 
     <ItemGroup Condition="'$(Configuration)'=='Debug.Emby' or '$(Configuration)'=='Release.Emby'">
-        <PackageReference Include="MediaBrowser.Server.Core" Version="4.7.1"/>
+        <PackageReference Include="MediaBrowser.Server.Core" Version="4.7.1" />
     </ItemGroup>
 
     <ItemGroup>
-        <None Remove="Configuration\configPage.html"/>
-        <EmbeddedResource Include="Configuration\configPage.html"/>
+        <None Remove="Configuration\configPage.html" />
+        <EmbeddedResource Include="Configuration\configPage.html" />
     </ItemGroup>
 
     <ItemGroup Condition="'$(Configuration)'=='Debug.Emby' or '$(Configuration)'=='Release.Emby'">
-        <None Remove="thumb.png"/>
-        <EmbeddedResource Include="thumb.png"/>
+        <None Remove="thumb.png" />
+        <EmbeddedResource Include="thumb.png" />
     </ItemGroup>
 
     <Target Name="Zip" AfterTargets="PostBuildEvent" Condition="'$(Configuration)'=='Release' or '$(Configuration)'=='Release.Emby'">
         <ItemGroup>
-            <FilesToDelete Include="$(BaseOutputPath)Jellyfin.JavTube*.zip" Condition="'$(Configuration)'=='Release'"/>
-            <FilesToDelete Include="$(BaseOutputPath)Emby.JavTube*.zip" Condition="'$(Configuration)'=='Release.Emby'"/>
-            <TempZipDirectory Include="$(OutputPath)output"/>
+            <FilesToDelete Include="$(BaseOutputPath)Jellyfin.JavTube*.zip" Condition="'$(Configuration)'=='Release'" />
+            <FilesToDelete Include="$(BaseOutputPath)Emby.JavTube*.zip" Condition="'$(Configuration)'=='Release.Emby'" />
+            <TempZipDirectory Include="$(OutputPath)output" />
         </ItemGroup>
-        <Delete Files="@(FilesToDelete)"/>
-        <Copy SourceFiles="$(OutputPath)$(AssemblyName).dll" DestinationFolder="@(TempZipDirectory)"/>
-        <ZipDirectory SourceDirectory="@(TempZipDirectory)" DestinationFile="$(BaseOutputPath)Jellyfin.JavTube@v$(Version).zip" Condition="'$(Configuration)'=='Release'"/>
-        <ZipDirectory SourceDirectory="@(TempZipDirectory)" DestinationFile="$(BaseOutputPath)Emby.JavTube@v$(Version).zip" Condition="'$(Configuration)'=='Release.Emby'"/>
-        <RemoveDir Directories="@(TempZipDirectory)"/>
+        <Delete Files="@(FilesToDelete)" />
+        <Copy SourceFiles="$(OutputPath)$(AssemblyName).dll" DestinationFolder="@(TempZipDirectory)" />
+        <ZipDirectory SourceDirectory="@(TempZipDirectory)" DestinationFile="$(BaseOutputPath)Jellyfin.JavTube@v$(Version).zip" Condition="'$(Configuration)'=='Release'" />
+        <ZipDirectory SourceDirectory="@(TempZipDirectory)" DestinationFile="$(BaseOutputPath)Emby.JavTube@v$(Version).zip" Condition="'$(Configuration)'=='Release.Emby'" />
+        <RemoveDir Directories="@(TempZipDirectory)" />
     </Target>
 
 </Project>

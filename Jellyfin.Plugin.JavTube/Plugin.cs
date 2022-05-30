@@ -23,7 +23,7 @@ public class Plugin : BasePlugin<PluginConfiguration>, IHasWebPages
 
     public override string Name => "JavTube";
 
-    public override string Description => "JavTube Plugin for Jellyfin/Emby";
+    public override string Description => "Just Another Video Tube Plugin for Jellyfin/Emby";
 
     public override Guid Id => Guid.Parse("01cc53ec-c415-4108-bbd4-a684a9801a32");
 
