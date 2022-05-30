@@ -11,7 +11,7 @@
 - Full Search: Support searching for movies and actors across various providers.
 - Scheduled Task: Automatically organize metadata genres and update plugin.
 - Face Detection: Cut primary image with face centered by face detection engine.
-- Auto Translation: Support translate title and overview to preferred language.
+- Auto Translation: Support translate certain metadata to preferred language.
 
 ## Installation
 
