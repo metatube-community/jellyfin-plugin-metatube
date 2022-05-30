@@ -46,7 +46,7 @@ public class MovieProvider : BaseProvider, IRemoteMetadataProvider<Movie, MovieI
             }
         }
 
-        LogInfo("Get movie info: {0}", pid.Id);
+        LogInfo("Get movie info: {0}#{1}", pid.Provider, pid.Id);
 
         var m = Plugin.Instance.Configuration.EnableAutoTranslation
             ? await ApiClient.GetMovieInfo(pid.Id, pid.Provider, info.MetadataLanguage, cancellationToken)
