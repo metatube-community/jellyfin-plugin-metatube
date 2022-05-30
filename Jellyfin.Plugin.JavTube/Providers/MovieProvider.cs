@@ -73,7 +73,8 @@ public class MovieProvider : BaseProvider, IRemoteMetadataProvider<Movie, MovieI
         result.Item.SetProviderIdModel(Name, new ProviderIdModel
         {
             Provider = m.Provider,
-            Id = m.Id
+            Id = m.Id,
+            Position = pid.Position
         });
 
         // Set studios: maker > publisher.
@@ -135,7 +136,8 @@ public class MovieProvider : BaseProvider, IRemoteMetadataProvider<Movie, MovieI
             result.SetProviderIdModel(Name, new ProviderIdModel
             {
                 Provider = m.Provider,
-                Id = m.Id
+                Id = m.Id,
+                Position = pid.Position
             });
             results.Add(result);
         }

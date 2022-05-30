@@ -16,4 +16,7 @@ public class ProviderInfoModel : ProviderModel
 
 public class ProviderIdModel : ProviderModel
 {
+    [JsonIgnore] public double? Position { get; set; }
+
+    [JsonIgnore] public bool? UpdateInfo { get; set; }
 }

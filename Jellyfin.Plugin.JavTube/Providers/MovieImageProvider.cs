@@ -47,7 +47,7 @@ public class ImageProvider : BaseProvider, IRemoteImageProvider, IHasOrder
             {
                 ProviderName = Name,
                 Type = ImageType.Primary,
-                Url = ApiClient.GetPrimaryImageApiUrl(m.Id, m.Provider)
+                Url = ApiClient.GetPrimaryImageApiUrl(m.Id, m.Provider, pid.Position ?? -1)
             },
             new()
             {
