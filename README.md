@@ -25,7 +25,7 @@ _NOTE: This project will only support stable versions._
 
 ## Documentation
 
-Full documentation and technical guides can be found at [Wiki](https://github.com/javtube/jellyfin-plugin-javtube/wiki).
+Full documentation and examples can be found at [Wiki](https://github.com/javtube/jellyfin-plugin-javtube/wiki).
 
 ## Community
 
