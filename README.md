@@ -1,8 +1,10 @@
-![logo](docs/wordmark.png)
+<h1 align="center">Jellyfin Plugin JavTube</h1>
+<h3 align="center">English | <a href="#">简体中文</a></h3>
 
-Just Another Video Tube Plugin for Jellyfin/Emby.
-
----
+<p align="center">
+<img alt="Plugin Banner" src="docs/wordmark.png"/>
+<br/>
+<br/>
 
 [![GitHub Workflow](https://img.shields.io/github/workflow/status/javtube/jellyfin-plugin-javtube/.NET?logo=github)](https://github.com/javtube/jellyfin-plugin-javtube/actions)
 [![C#](https://img.shields.io/badge/c%23-%23239120.svg?logo=c-sharp&logoColor=white)](https://github.com/javtube/jellyfin-plugin-javtube/blob/main/jellyfin-plugin-javtube.sln)
@@ -11,6 +13,10 @@ Just Another Video Tube Plugin for Jellyfin/Emby.
 [![Telegram Group](https://img.shields.io/badge/Telegram-2CA5E0?logo=telegram&logoColor=white)](https://t.me/JavTubePlugin)
 [![Downloads](https://img.shields.io/github/downloads/javtube/jellyfin-plugin-javtube/total)](https://github.com/javtube/jellyfin-plugin-javtube)
 [![Releases](https://img.shields.io/github/v/release/javtube/jellyfin-plugin-javtube)](https://github.com/javtube/jellyfin-plugin-javtube/releases)
+
+## About
+
+Just Another Video Tube Plugin for Jellyfin/Emby.
 
 ## Features
 
@@ -36,6 +42,10 @@ Full documentation and examples can be found at [Wiki](https://github.com/javtub
 ## Community
 
 Welcome and feel free to ask any questions at [Discussions](https://github.com/javtube/jellyfin-plugin-javtube/discussions).
+
+## Licence
+
+This plugins code and packages are distributed under the MIT License. See [LICENSE](https://github.com/javtube/jellyfin-plugin-javtube/blob/main/LICENSE) for more information.
 
 ## Stargazers over time
 
