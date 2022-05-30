@@ -16,6 +16,9 @@ namespace Jellyfin.Plugin.JavTube.Providers;
 
 public class MovieProvider : BaseProvider, IRemoteMetadataProvider<Movie, MovieInfo>, IHasOrder
 {
+    private const string GFriends = "GFriends";
+    private const string Rating = "JP-18+";
+
 #if __EMBY__
     public MovieProvider(IHttpClient httpClient, ILogManager logManager) : base(
         httpClient, logManager.CreateLogger<MovieProvider>())
@@ -57,10 +60,10 @@ public class MovieProvider : BaseProvider, IRemoteMetadataProvider<Movie, MovieI
                 Overview = m.Summary,
                 Tagline = m.Series,
                 Genres = m.Tags,
+                OfficialRating = Rating,
                 PremiereDate = m.ReleaseDate.ValidDateTime(),
                 ProductionYear = m.ReleaseDate.ValidDateTime()?.Year,
-                CommunityRating = m.Score > 0 ? m.Score * 2 : null,
-                OfficialRating = Constant.Rating
+                CommunityRating = m.Score > 0 ? m.Score * 2 : null
             },
             HasMetadata = true
         };
@@ -144,8 +147,7 @@ public class MovieProvider : BaseProvider, IRemoteMetadataProvider<Movie, MovieI
         try
         {
             // Use GFriends as actor image provider.
-            const string gFriends = "GFriends";
-            return (await ApiClient.GetActorInfo(name, gFriends, cancellationToken)).Images[0];
+            return (await ApiClient.GetActorInfo(name, GFriends, cancellationToken)).Images[0];
         }
         catch (Exception e)
         {
