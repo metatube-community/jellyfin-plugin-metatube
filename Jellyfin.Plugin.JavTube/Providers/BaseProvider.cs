@@ -28,7 +28,7 @@ public abstract class BaseProvider
         _logger = logger;
     }
 #endif
-    
+
     public int Order => 1;
 
     public string Name => Plugin.Instance.Name;
