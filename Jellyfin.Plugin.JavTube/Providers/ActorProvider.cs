@@ -26,10 +26,6 @@ public class ActorProvider : BaseProvider, IRemoteMetadataProvider<Person, Perso
         // Init
     }
 
-    public int Order => 1;
-
-    public string Name => Constant.JavTube;
-
     public async Task<MetadataResult<Person>> GetMetadata(PersonLookupInfo info,
         CancellationToken cancellationToken)
     {

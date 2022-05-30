@@ -21,7 +21,7 @@ public class Plugin : BasePlugin<PluginConfiguration>, IHasWebPages
         Instance = this;
     }
 
-    public override string Name => Constant.JavTube;
+    public override string Name => "JavTube";
 
     public override string Description => "JavTube Plugin for Jellyfin/Emby";
 

@@ -26,10 +26,6 @@ public class ActorImageProvider : BaseProvider, IRemoteImageProvider, IHasOrder
         // Init
     }
 
-    public int Order => 1;
-
-    public string Name => Constant.JavTube;
-
 #if __EMBY__
     public async Task<IEnumerable<RemoteImageInfo>> GetImages(BaseItem item, LibraryOptions libraryOptions,
         CancellationToken cancellationToken)

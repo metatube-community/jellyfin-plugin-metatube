@@ -27,14 +27,10 @@ public class MovieProvider : BaseProvider, IRemoteMetadataProvider<Movie, MovieI
         // Init
     }
 
-    public int Order => 1;
-
-    public string Name => Constant.JavTube;
-
     public async Task<MetadataResult<Movie>> GetMetadata(MovieInfo info,
         CancellationToken cancellationToken)
     {
-        var pid = info.GetProviderIdModel(Constant.JavTube);
+        var pid = info.GetProviderIdModel(Name);
         if (string.IsNullOrWhiteSpace(pid.Id) || string.IsNullOrWhiteSpace(pid.Provider))
         {
             // Search movie and pick the first result.
@@ -42,7 +38,7 @@ public class MovieProvider : BaseProvider, IRemoteMetadataProvider<Movie, MovieI
             if (searchResults.Any())
             {
                 var firstResult = searchResults.First();
-                pid = firstResult.GetProviderIdModel(Constant.JavTube);
+                pid = firstResult.GetProviderIdModel(Name);
             }
         }
 
@@ -70,7 +66,7 @@ public class MovieProvider : BaseProvider, IRemoteMetadataProvider<Movie, MovieI
         };
 
         // Set ProviderIdModel.
-        result.Item.SetProviderIdModel(Constant.JavTube, new ProviderIdModel
+        result.Item.SetProviderIdModel(Name, new ProviderIdModel
         {
             Provider = m.Provider,
             Id = m.Id
@@ -106,7 +102,7 @@ public class MovieProvider : BaseProvider, IRemoteMetadataProvider<Movie, MovieI
     public async Task<IEnumerable<RemoteSearchResult>> GetSearchResults(MovieInfo info,
         CancellationToken cancellationToken)
     {
-        var pid = info.GetProviderIdModel(Constant.JavTube);
+        var pid = info.GetProviderIdModel(Name);
         if (string.IsNullOrWhiteSpace(pid.Id))
             // Search movie by name.
             pid.Id = info.Name;
@@ -132,7 +128,7 @@ public class MovieProvider : BaseProvider, IRemoteMetadataProvider<Movie, MovieI
                 ProductionYear = m.ReleaseDate.ValidDateTime()?.Year,
                 ImageUrl = ApiClient.GetPrimaryImageApiUrl(m.Id, m.Provider, m.ThumbUrl, 1.0, true)
             };
-            result.SetProviderIdModel(Constant.JavTube, new ProviderIdModel
+            result.SetProviderIdModel(Name, new ProviderIdModel
             {
                 Provider = m.Provider,
                 Id = m.Id

@@ -2,7 +2,7 @@ namespace Jellyfin.Plugin.JavTube;
 
 public static class Constant
 {
-    public const string JavTube = "JavTube";
+    // public const string JavTube = "JavTube";
 
     public const string Rating = "JP-18+";
 

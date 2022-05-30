@@ -34,13 +34,13 @@ public class OrganizeGenresTask : IScheduledTask
     }
 #endif
 
-    public string Key => $"{Constant.JavTube}OrganizeGenres";
+    public string Key => $"{Plugin.Instance.Name}OrganizeGenres";
 
     public string Name => "Organize Genres";
 
-    public string Description => $"Organize metadata genres provided by {Constant.JavTube} in library.";
+    public string Description => $"Organize metadata genres provided by {Plugin.Instance.Name} in library.";
 
-    public string Category => Constant.JavTube;
+    public string Category => Plugin.Instance.Name;
 
     public IEnumerable<TaskTriggerInfo> GetDefaultTriggers()
     {
@@ -66,10 +66,10 @@ public class OrganizeGenresTask : IScheduledTask
         {
             MediaTypes = new[] { MediaType.Video },
 #if __EMBY__
-            HasAnyProviderId = new[] { Constant.JavTube },
+            HasAnyProviderId = new[] { Plugin.Instance.Name },
             IncludeItemTypes = new[] { nameof(Movie) },
 #else
-            HasAnyProviderId = new Dictionary<string, string> { { Constant.JavTube, string.Empty } },
+            HasAnyProviderId = new Dictionary<string, string> { { Plugin.Instance.Name, string.Empty } },
             IncludeItemTypes = new[] { BaseItemKind.Movie }
 #endif
         }).ToList();

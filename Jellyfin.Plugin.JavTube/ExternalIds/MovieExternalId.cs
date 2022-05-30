@@ -10,13 +10,13 @@ namespace Jellyfin.Plugin.JavTube.ExternalIds;
 public class MovieExternalId : IExternalId
 {
 #if __EMBY__
-    public string Name => Constant.JavTube;
+    public string Name => Plugin.Instance.Name;
 #else
-    public string ProviderName => Constant.JavTube;
+    public string ProviderName => Plugin.Instance.Name;
 
     public ExternalIdMediaType? Type => ExternalIdMediaType.Movie;
 #endif
-    public string Key => Constant.JavTube;
+    public string Key => Plugin.Instance.Name;
 
     public string UrlFormatString => Plugin.Instance.Configuration.Server + "/r/{0}";
 
