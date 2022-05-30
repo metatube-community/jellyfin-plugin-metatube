@@ -16,6 +16,11 @@ jobs:
         with:
           dotnet-version: 6.0.x
 
+      - name: Setup Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: '3.x'
+
       - name: Generate Version
         id: shell
         run: |
@@ -25,6 +30,22 @@ jobs:
         run: |
           dotnet build --configuration Release -p:Version=${{ steps.shell.outputs.version }}
           dotnet build --configuration Release.Emby -p:Version=${{ steps.shell.outputs.version }}
+
+      - name: Generate Manifest
+        run: |
+          python3 manifest.py Jellyfin.Plugin.JavTube/bin/Jellyfin.JavTube@v${{ steps.shell.outputs.version }}.zip
+
+      - name: Publish Manifest
+        run: |
+          git config --global user.name  'github-actions[bot]'
+          git config --global user.email 'github-actions[bot]@users.noreply.github.com'
+          git remote set-url origin https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${GITHUB_REPOSITORY}
+
+          git checkout --orphan dist
+          git rm -rf .
+          git add manifest.json
+          git commit -m "Auto Updated by Actions"
+          git push -f -u origin dist
 
       - name: Upload Plugins
         uses: softprops/action-gh-release@v1
