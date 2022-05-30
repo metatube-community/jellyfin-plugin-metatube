@@ -18,7 +18,7 @@ public class ActorExternalId : IExternalId
 #endif
     public string Key => Plugin.Instance.Name;
 
-    public string UrlFormatString => Plugin.Instance.Configuration.Server + "/r/{0}";
+    public string UrlFormatString => Plugin.Instance.Configuration.Server + "/#{0}";
 
     public bool Supports(IHasProviderIds item)
     {
