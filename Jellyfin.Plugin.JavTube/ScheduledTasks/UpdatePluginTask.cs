@@ -4,6 +4,7 @@ using System.Reflection;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using Jellyfin.Plugin.JavTube.Extensions;
+using MediaBrowser.Common;
 using MediaBrowser.Common.Configuration;
 using MediaBrowser.Common.Net;
 using MediaBrowser.Model.IO;
@@ -15,14 +16,17 @@ namespace Jellyfin.Plugin.JavTube.ScheduledTasks;
 
 public class UpdatePluginTask : IScheduledTask
 {
+    private readonly IApplicationHost _applicationHost;
     private readonly IApplicationPaths _applicationPaths;
     private readonly IHttpClient _httpClient;
     private readonly ILogger _logger;
     private readonly IZipClient _zipClient;
 
-    public UpdatePluginTask(IApplicationPaths applicationPaths, IHttpClient httpClient, ILogManager logManager,
+    public UpdatePluginTask(IApplicationHost applicationHost, IApplicationPaths applicationPaths,
+        IHttpClient httpClient, ILogManager logManager,
         IZipClient zipClient)
     {
+        _applicationHost = applicationHost;
         _applicationPaths = applicationPaths;
         _httpClient = httpClient;
         _logger = logManager.CreateLogger<UpdatePluginTask>();
@@ -92,6 +96,8 @@ public class UpdatePluginTask : IScheduledTask
                 _zipClient.ExtractAllFromZip(zipResp.Content, _applicationPaths.PluginsPath, true);
 
                 _logger.Info("Plugin update is complete");
+
+                _applicationHost.NotifyPendingRestart();
             }
             else
             {
