@@ -1,4 +1,4 @@
-name: Build Plugins
+name: .NET
 
 on:
   workflow_dispatch:
