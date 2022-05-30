@@ -15,7 +15,7 @@ internal static class ProviderIdsExtension
         var providerIds = instance.GetProviderId(name)?.Split(Separator);
         return new ProviderIdModel
         {
-            Provider = providerIds?.Length > 1 ? providerIds[0] : string.Empty,
+            Provider = providerIds?.Length > 0 ? providerIds[0] : string.Empty,
             Id = providerIds?.Length > 1 ? providerIds[1] : string.Empty,
             Position = providerIds?.Length > 2 ? ParseDouble(providerIds[2]) : null,
             UpdateInfo = providerIds?.Length > 3 ? ParseBool(providerIds[3]) : null
