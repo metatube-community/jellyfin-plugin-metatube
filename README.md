@@ -1,5 +1,9 @@
 ![logo](docs/wordmark.png)
 
+Just Another Video Tube Plugin for Jellyfin/Emby.
+
+---
+
 [![C#](https://img.shields.io/badge/c%23-%23239120.svg?logo=c-sharp&logoColor=white)](https://github.com/javtube/jellyfin-plugin-javtube/blob/main/jellyfin-plugin-javtube.sln)
 [![License](https://img.shields.io/github/license/javtube/jellyfin-plugin-javtube)](https://github.com/javtube/jellyfin-plugin-javtube/blob/main/LICENSE)
 [![Ask Me Anything !](https://img.shields.io/badge/Ask%20me-anything-1abc9c.svg)](https://github.com/javtube/jellyfin-plugin-javtube/discussions)
