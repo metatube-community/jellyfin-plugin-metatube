@@ -115,8 +115,13 @@ public class MovieProvider : BaseProvider, IRemoteMetadataProvider<Movie, MovieI
         LogInfo("Search for movie: {0}", pid.Id);
 
         var results = new List<RemoteSearchResult>();
+        var searchResults = new List<MovieSearchResultModel>();
 
-        var searchResults = await ApiClient.SearchMovie(pid.Id, pid.Provider, cancellationToken);
+        if (pid.UpdateInfo == true)
+            searchResults.Add(await ApiClient.GetMovieInfo(pid.Id, pid.Provider, false, cancellationToken));
+        else
+            searchResults.AddRange(await ApiClient.SearchMovie(pid.Id, pid.Provider, cancellationToken));
+
         if (!searchResults.Any())
         {
             LogInfo("Movie not found: {0}", pid.Id);

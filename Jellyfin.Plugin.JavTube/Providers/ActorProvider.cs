@@ -82,8 +82,13 @@ public class ActorProvider : BaseProvider, IRemoteMetadataProvider<Person, Perso
         LogInfo("Search for actor: {0}", pid.Id);
 
         var results = new List<RemoteSearchResult>();
+        var searchResults = new List<ActorSearchResultModel>();
 
-        var searchResults = await ApiClient.SearchActor(pid.Id, pid.Provider, cancellationToken);
+        if (pid.UpdateInfo == true)
+            searchResults.Add(await ApiClient.GetActorInfo(pid.Id, pid.Provider, false, cancellationToken));
+        else
+            searchResults.AddRange(await ApiClient.SearchActor(pid.Id, pid.Provider, cancellationToken));
+
         if (!searchResults.Any())
         {
             LogInfo("Actor not found: {0}", pid.Id);

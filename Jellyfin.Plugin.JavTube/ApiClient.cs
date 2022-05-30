@@ -105,6 +105,12 @@ public static class ApiClient
         return await GetActorInfo(id, provider, string.Empty, true, cancellationToken);
     }
 
+    public static async Task<ActorInfoModel> GetActorInfo(string id, string provider, bool lazy,
+        CancellationToken cancellationToken)
+    {
+        return await GetActorInfo(id, provider, string.Empty, lazy, cancellationToken);
+    }
+
     public static async Task<ActorInfoModel> GetActorInfo(string id, string provider, string url, bool lazy,
         CancellationToken cancellationToken)
     {
@@ -122,6 +128,12 @@ public static class ApiClient
         CancellationToken cancellationToken)
     {
         return await GetMovieInfo(id, provider, string.Empty, language, true, cancellationToken);
+    }
+
+    public static async Task<MovieInfoModel> GetMovieInfo(string id, string provider, bool lazy,
+        CancellationToken cancellationToken)
+    {
+        return await GetMovieInfo(id, provider, string.Empty, string.Empty, lazy, cancellationToken);
     }
 
     public static async Task<MovieInfoModel> GetMovieInfo(string id, string provider, string url, string language,
