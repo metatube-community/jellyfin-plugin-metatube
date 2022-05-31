@@ -56,7 +56,7 @@ Welcome and feel free to ask any questions at [Discussions](https://github.com/j
 
 ## Licence
 
-This plugin's code and packages are distributed under the MIT License. See [LICENSE](https://github.com/javtube/jellyfin-plugin-javtube/blob/main/LICENSE) for more information.
+This plugin is released under the [MIT](https://github.com/javtube/jellyfin-plugin-javtube/blob/main/LICENSE) License.
 
 ## Stargazers over time
 
