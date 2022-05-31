@@ -6,7 +6,6 @@ using MediaBrowser.Model.Providers;
 #if __EMBY__
 using MediaBrowser.Common.Net;
 using MediaBrowser.Model.Logging;
-
 #else
 using Microsoft.Extensions.Logging;
 #endif
@@ -41,7 +40,7 @@ public class ActorProvider : BaseProvider, IRemoteMetadataProvider<Person, Perso
             }
         }
 
-        LogInfo("Get actor info: {0}#{1}", pid.Provider, pid.Id);
+        LogInfo("Get actor info: {0}", pid.Serialize());
 
         var m = await ApiClient.GetActorInfo(pid.Id, pid.Provider, cancellationToken);
 
@@ -75,20 +74,23 @@ public class ActorProvider : BaseProvider, IRemoteMetadataProvider<Person, Perso
         PersonLookupInfo info, CancellationToken cancellationToken)
     {
         var pid = info.GetProviderIdModel(Name);
-        if (string.IsNullOrWhiteSpace(pid.Id))
-            // Search actor by name.
-            pid.Id = info.Name;
 
-        LogInfo("Search for actor: {0}", pid.Id);
+        var searchResults = new List<ActorSearchResultModel>();
+        if (string.IsNullOrWhiteSpace(pid.Id))
+        {
+            // Search actor by name.
+            LogInfo("Search for actor: {0}", info.Name);
+            searchResults.AddRange(await ApiClient.SearchActor(info.Name, pid.Provider, cancellationToken));
+        }
+        else
+        {
+            // Exact search.
+            LogInfo("Search for actor: {0}", pid.Serialize());
+            searchResults.Add(await ApiClient.GetActorInfo(pid.Id, pid.Provider, pid.UpdateInfo != true,
+                cancellationToken));
+        }
 
         var results = new List<RemoteSearchResult>();
-        var searchResults = new List<ActorSearchResultModel>();
-
-        if (pid.UpdateInfo == true)
-            searchResults.Add(await ApiClient.GetActorInfo(pid.Id, pid.Provider, false, cancellationToken));
-        else
-            searchResults.AddRange(await ApiClient.SearchActor(pid.Id, pid.Provider, cancellationToken));
-
         if (!searchResults.Any())
         {
             LogInfo("Actor not found: {0}", pid.Id);
