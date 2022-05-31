@@ -8,7 +8,6 @@ using MediaBrowser.Model.Providers;
 #if __EMBY__
 using MediaBrowser.Common.Net;
 using MediaBrowser.Model.Logging;
-
 #else
 using Microsoft.Extensions.Logging;
 #endif
@@ -46,7 +45,7 @@ public class MovieProvider : BaseProvider, IRemoteMetadataProvider<Movie, MovieI
             }
         }
 
-        LogInfo("Get movie info: {0}#{1}", pid.Provider, pid.Id);
+        LogInfo("Get movie info: {0}", pid.Serialize());
 
         var m = Plugin.Instance.Configuration.EnableAutoTranslation
             ? await ApiClient.GetMovieInfo(pid.Id, pid.Provider, info.MetadataLanguage, cancellationToken)
@@ -108,20 +107,23 @@ public class MovieProvider : BaseProvider, IRemoteMetadataProvider<Movie, MovieI
         CancellationToken cancellationToken)
     {
         var pid = info.GetProviderIdModel(Name);
-        if (string.IsNullOrWhiteSpace(pid.Id))
-            // Search movie by name.
-            pid.Id = info.Name;
 
-        LogInfo("Search for movie: {0}", pid.Id);
+        var searchResults = new List<MovieSearchResultModel>();
+        if (string.IsNullOrWhiteSpace(pid.Id) || string.IsNullOrWhiteSpace(pid.Provider))
+        {
+            // Search movie by name.
+            LogInfo("Search for movie: {0}", info.Name);
+            searchResults.AddRange(await ApiClient.SearchMovie(info.Name, pid.Provider, cancellationToken));
+        }
+        else
+        {
+            // Exact search.
+            LogInfo("Search for movie: {0}", pid.Serialize());
+            searchResults.Add(await ApiClient.GetMovieInfo(pid.Id, pid.Provider, pid.UpdateInfo != true,
+                cancellationToken));
+        }
 
         var results = new List<RemoteSearchResult>();
-        var searchResults = new List<MovieSearchResultModel>();
-
-        if (pid.UpdateInfo == true)
-            searchResults.Add(await ApiClient.GetMovieInfo(pid.Id, pid.Provider, false, cancellationToken));
-        else
-            searchResults.AddRange(await ApiClient.SearchMovie(pid.Id, pid.Provider, cancellationToken));
-
         if (!searchResults.Any())
         {
             LogInfo("Movie not found: {0}", pid.Id);
