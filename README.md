@@ -1,8 +1,8 @@
 <h1 align="center">Jellyfin Plugin JavTube</h1>
-<h3 align="center">English | <a href="#">简体中文</a></h3>
+<h5 align="center">English | <a href="#">简体中文</a></h5>
 
 <p align="center">
-<img alt="Plugin Banner" src="docs/wordmark.png"/>
+<img alt="Plugin Banner" src="docs/banner.png"/>
 <br/>
 <br/>
 
@@ -56,7 +56,7 @@ Welcome and feel free to ask any questions at [Discussions](https://github.com/j
 
 ## Licence
 
-This plugins code and packages are distributed under the MIT License. See [LICENSE](https://github.com/javtube/jellyfin-plugin-javtube/blob/main/LICENSE) for more information.
+This plugin's code and packages are distributed under the MIT License. See [LICENSE](https://github.com/javtube/jellyfin-plugin-javtube/blob/main/LICENSE) for more information.
 
 ## Stargazers over time
 
