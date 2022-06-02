@@ -44,7 +44,7 @@ public class ProviderIdModel : ProviderModel
         };
     }
 
-    private const char Separator = '#';
+    private const char Separator = ':';
 
     private static double? ParseDouble(string s)
     {
