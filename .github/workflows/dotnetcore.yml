@@ -37,8 +37,8 @@ jobs:
 
       - name: Publish Manifest
         run: |
-          git config --global user.name  'github-actions[bot]'
-          git config --global user.email 'github-actions[bot]@users.noreply.github.com'
+          git config --global user.name  'javtube-bot'
+          git config --global user.email 'javtube-bot@users.noreply.github.com'
           git remote set-url origin https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${GITHUB_REPOSITORY}
 
           git checkout --orphan dist
