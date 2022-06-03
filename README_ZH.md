@@ -27,7 +27,7 @@
 
 ## 关于
 
-可能是迄今为止为 Jellyfin/Emby 开发的最好用的 JAV 插件。
+另一个为 Jellyfin/Emby 开发的超级好用的 JAV 插件。
 
 ## 特性
 
