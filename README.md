@@ -22,7 +22,7 @@
 <img alt="Downloads" src="https://img.shields.io/github/downloads/javtube/jellyfin-plugin-javtube/total">
 </a>
 <a href="https://github.com/javtube/jellyfin-plugin-javtube/releases">
-<img alt="Releases" src="https://img.shields.io/github/v/release/javtube/jellyfin-plugin-javtube">
+<img alt="Releases" src="https://img.shields.io/github/v/release/javtube/jellyfin-plugin-javtube&include_prereleases">
 </a>
 
 ## About
