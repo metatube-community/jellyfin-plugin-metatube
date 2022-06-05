@@ -8,21 +8,20 @@ using MediaBrowser.Model.Providers;
 using MediaBrowser.Common.Net;
 using MediaBrowser.Model.Configuration;
 using MediaBrowser.Model.Logging;
-
 #else
 using Microsoft.Extensions.Logging;
 #endif
 
 namespace Jellyfin.Plugin.JavTube.Providers;
 
-public class ImageProvider : BaseProvider, IRemoteImageProvider, IHasOrder
+public class MovieImageProvider : BaseProvider, IRemoteImageProvider, IHasOrder
 {
 #if __EMBY__
-    public ImageProvider(IHttpClient httpClient, ILogManager logManager) : base(
+    public MovieImageProvider(IHttpClient httpClient, ILogManager logManager) : base(
         httpClient,
-        logManager.CreateLogger<ImageProvider>())
+        logManager.CreateLogger<MovieImageProvider>())
 #else
-    public ImageProvider(IHttpClientFactory httpClientFactory, ILogger<ImageProvider> logger) : base(
+    public MovieImageProvider(IHttpClientFactory httpClientFactory, ILogger<MovieImageProvider> logger) : base(
         httpClientFactory, logger)
 #endif
     {
