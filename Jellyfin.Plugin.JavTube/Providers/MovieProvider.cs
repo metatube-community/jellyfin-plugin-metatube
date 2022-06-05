@@ -8,6 +8,7 @@ using MediaBrowser.Model.Providers;
 #if __EMBY__
 using MediaBrowser.Common.Net;
 using MediaBrowser.Model.Logging;
+
 #else
 using Microsoft.Extensions.Logging;
 #endif
@@ -47,9 +48,11 @@ public class MovieProvider : BaseProvider, IRemoteMetadataProvider<Movie, MovieI
 
         LogInfo("Get movie info: {0}", pid.Serialize());
 
-        var m = Plugin.Instance.Configuration.EnableAutoTranslation
-            ? await ApiClient.GetMovieInfo(pid.Id, pid.Provider, info.MetadataLanguage, cancellationToken)
-            : await ApiClient.GetMovieInfo(pid.Id, pid.Provider, cancellationToken);
+        // var m = Plugin.Instance.Configuration.EnableAutoTranslation
+        //     ? await ApiClient.GetMovieInfo(pid.Id, pid.Provider, info.MetadataLanguage, cancellationToken)
+        //     : await ApiClient.GetMovieInfo(pid.Id, pid.Provider, cancellationToken);
+
+        var m = await ApiClient.GetMovieInfo(pid.Id, pid.Provider, cancellationToken);
 
         var result = new MetadataResult<Movie>
         {

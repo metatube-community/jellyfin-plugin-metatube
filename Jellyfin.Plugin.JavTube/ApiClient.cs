@@ -43,15 +43,13 @@ public static class ApiClient
         });
     }
 
-    private static string ComposeInfoApiUrl(string path, string id, string provider, string url, string language,
-        bool lazy)
+    private static string ComposeInfoApiUrl(string path, string id, string provider, string url, bool lazy)
     {
         return ComposeUrl(path, new NameValueCollection
         {
             { "id", id },
             { "provider", provider },
             { "url", url },
-            { "lang", language },
             { "lazy", lazy.ToString() }
         });
     }
@@ -114,32 +112,26 @@ public static class ApiClient
     public static async Task<ActorInfoModel> GetActorInfo(string id, string provider, string url, bool lazy,
         CancellationToken cancellationToken)
     {
-        var apiUrl = ComposeInfoApiUrl(ActorInfoApi, id, provider, url, string.Empty, lazy);
+        var apiUrl = ComposeInfoApiUrl(ActorInfoApi, id, provider, url, lazy);
         return await GetDataFromApi<ActorInfoModel>(apiUrl, cancellationToken);
     }
 
     public static async Task<MovieInfoModel> GetMovieInfo(string id, string provider,
         CancellationToken cancellationToken)
     {
-        return await GetMovieInfo(id, provider, string.Empty, string.Empty, true, cancellationToken);
-    }
-
-    public static async Task<MovieInfoModel> GetMovieInfo(string id, string provider, string language,
-        CancellationToken cancellationToken)
-    {
-        return await GetMovieInfo(id, provider, string.Empty, language, true, cancellationToken);
+        return await GetMovieInfo(id, provider, string.Empty, true, cancellationToken);
     }
 
     public static async Task<MovieInfoModel> GetMovieInfo(string id, string provider, bool lazy,
         CancellationToken cancellationToken)
     {
-        return await GetMovieInfo(id, provider, string.Empty, string.Empty, lazy, cancellationToken);
+        return await GetMovieInfo(id, provider, string.Empty, lazy, cancellationToken);
     }
 
-    public static async Task<MovieInfoModel> GetMovieInfo(string id, string provider, string url, string language,
-        bool lazy, CancellationToken cancellationToken)
+    public static async Task<MovieInfoModel> GetMovieInfo(string id, string provider, string url, bool lazy,
+        CancellationToken cancellationToken)
     {
-        var apiUrl = ComposeInfoApiUrl(MovieInfoApi, id, provider, url, language, lazy);
+        var apiUrl = ComposeInfoApiUrl(MovieInfoApi, id, provider, url, lazy);
         return await GetDataFromApi<MovieInfoModel>(apiUrl, cancellationToken);
     }
 
