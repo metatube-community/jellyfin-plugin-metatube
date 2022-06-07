@@ -135,8 +135,7 @@ public static class ApiClient
         return await GetDataFromApi<MovieInfoModel>(apiUrl, cancellationToken);
     }
 
-    public static async Task<List<ActorSearchResultModel>> SearchActor(string q,
-        CancellationToken cancellationToken)
+    public static async Task<List<ActorSearchResultModel>> SearchActor(string q, CancellationToken cancellationToken)
     {
         return await SearchActor(q, string.Empty, false, cancellationToken);
     }
@@ -154,8 +153,7 @@ public static class ApiClient
         return await GetDataFromApi<List<ActorSearchResultModel>>(apiUrl, cancellationToken);
     }
 
-    public static async Task<List<MovieSearchResultModel>> SearchMovie(string q,
-        CancellationToken cancellationToken)
+    public static async Task<List<MovieSearchResultModel>> SearchMovie(string q, CancellationToken cancellationToken)
     {
         return await SearchMovie(q, string.Empty, false, cancellationToken);
     }
