@@ -8,13 +8,13 @@ namespace Jellyfin.Plugin.JavTube;
 
 public static class ApiClient
 {
-    private const string ActorInfoApi = "/api/actor";
-    private const string MovieInfoApi = "/api/movie";
-    private const string ActorSearchApi = "/api/search/actor";
-    private const string MovieSearchApi = "/api/search/movie";
-    private const string PrimaryImageApi = "/image/primary";
-    private const string ThumbImageApi = "/image/thumb";
-    private const string BackdropImageApi = "/image/backdrop";
+    private const string ActorInfoApi = "/api/actors";
+    private const string MovieInfoApi = "/api/movies";
+    private const string ActorSearchApi = "/api/actors/search";
+    private const string MovieSearchApi = "/api/movies/search";
+    private const string PrimaryImageApi = "/images/primary";
+    private const string ThumbImageApi = "/images/thumb";
+    private const string BackdropImageApi = "/images/backdrop";
 
     private static string ComposeUrl(string path, NameValueCollection nv)
     {
