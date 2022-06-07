@@ -8,10 +8,10 @@ namespace Jellyfin.Plugin.JavTube;
 
 public static class ApiClient
 {
-    private const string ActorInfoApi = "/api/actors";
-    private const string MovieInfoApi = "/api/movies";
-    private const string ActorSearchApi = "/api/actors/search";
-    private const string MovieSearchApi = "/api/movies/search";
+    private const string ActorInfoApi = "/v1/actors";
+    private const string MovieInfoApi = "/v1/movies";
+    private const string ActorSearchApi = "/v1/actors/search";
+    private const string MovieSearchApi = "/v1/movies/search";
     private const string PrimaryImageApi = "/images/primary";
     private const string ThumbImageApi = "/images/thumb";
     private const string BackdropImageApi = "/images/backdrop";
@@ -30,26 +30,21 @@ public static class ApiClient
         return uriBuilder.ToString();
     }
 
-    private static string ComposeImageApiUrl(string path, string id, string provider, string url, double position,
+    private static string ComposeImageApiUrl(string path, string provider, string id, string url, double position,
         bool auto)
     {
-        return ComposeUrl(path, new NameValueCollection
+        return ComposeUrl(Path.Combine(path, provider, id), new NameValueCollection
         {
-            { "id", id },
-            { "provider", provider },
             { "url", url },
             { "pos", position.ToString("R") },
             { "auto", auto.ToString() }
         });
     }
 
-    private static string ComposeInfoApiUrl(string path, string id, string provider, string url, bool lazy)
+    private static string ComposeInfoApiUrl(string path, string provider, string id, bool lazy)
     {
-        return ComposeUrl(path, new NameValueCollection
+        return ComposeUrl(Path.Combine(path, provider, id), new NameValueCollection
         {
-            { "id", id },
-            { "provider", provider },
-            { "url", url },
             { "lazy", lazy.ToString() }
         });
     }
@@ -64,74 +59,62 @@ public static class ApiClient
         });
     }
 
-    public static string GetPrimaryImageApiUrl(string id, string provider, double position = -1)
+    public static string GetPrimaryImageApiUrl(string provider, string id, double position = -1)
     {
-        return ComposeImageApiUrl(PrimaryImageApi, id, provider, string.Empty, position, false);
+        return ComposeImageApiUrl(PrimaryImageApi, provider, id, string.Empty, position, false);
     }
 
-    public static string GetPrimaryImageApiUrl(string id, string provider, string url, double position = -1,
+    public static string GetPrimaryImageApiUrl(string provider, string id, string url, double position = -1,
         bool auto = false)
     {
-        return ComposeImageApiUrl(PrimaryImageApi, id, provider, url, position, auto);
+        return ComposeImageApiUrl(PrimaryImageApi, provider, id, url, position, auto);
     }
 
-    public static string GetThumbImageApiUrl(string id, string provider)
+    public static string GetThumbImageApiUrl(string provider, string id)
     {
-        return ComposeImageApiUrl(ThumbImageApi, id, provider, string.Empty, -1, false);
+        return ComposeImageApiUrl(ThumbImageApi, provider, id, string.Empty, -1, false);
     }
 
-    public static string GetThumbImageApiUrl(string id, string provider, string url, double position = -1,
+    public static string GetThumbImageApiUrl(string provider, string id, string url, double position = -1,
         bool auto = false)
     {
-        return ComposeImageApiUrl(ThumbImageApi, id, provider, url, position, auto);
+        return ComposeImageApiUrl(ThumbImageApi, provider, id, url, position, auto);
     }
 
-    public static string GetBackdropImageApiUrl(string id, string provider)
+    public static string GetBackdropImageApiUrl(string provider, string id)
     {
-        return ComposeImageApiUrl(BackdropImageApi, id, provider, string.Empty, -1, false);
+        return ComposeImageApiUrl(BackdropImageApi, provider, id, string.Empty, -1, false);
     }
 
-    public static string GetBackdropImageApiUrl(string id, string provider, string url, double position = -1,
+    public static string GetBackdropImageApiUrl(string provider, string id, string url, double position = -1,
         bool auto = false)
     {
-        return ComposeImageApiUrl(BackdropImageApi, id, provider, url, position, auto);
+        return ComposeImageApiUrl(BackdropImageApi, provider, id, url, position, auto);
     }
 
-    public static async Task<ActorInfoModel> GetActorInfo(string id, string provider,
+    public static async Task<ActorInfoModel> GetActorInfo(string provider, string id,
         CancellationToken cancellationToken)
     {
-        return await GetActorInfo(id, provider, string.Empty, true, cancellationToken);
+        return await GetActorInfo(provider, id, true, cancellationToken);
     }
 
-    public static async Task<ActorInfoModel> GetActorInfo(string id, string provider, bool lazy,
+    public static async Task<ActorInfoModel> GetActorInfo(string provider, string id, bool lazy,
         CancellationToken cancellationToken)
     {
-        return await GetActorInfo(id, provider, string.Empty, lazy, cancellationToken);
-    }
-
-    public static async Task<ActorInfoModel> GetActorInfo(string id, string provider, string url, bool lazy,
-        CancellationToken cancellationToken)
-    {
-        var apiUrl = ComposeInfoApiUrl(ActorInfoApi, id, provider, url, lazy);
+        var apiUrl = ComposeInfoApiUrl(ActorInfoApi, provider, id, lazy);
         return await GetDataFromApi<ActorInfoModel>(apiUrl, cancellationToken);
     }
 
-    public static async Task<MovieInfoModel> GetMovieInfo(string id, string provider,
+    public static async Task<MovieInfoModel> GetMovieInfo(string provider, string id,
         CancellationToken cancellationToken)
     {
-        return await GetMovieInfo(id, provider, string.Empty, true, cancellationToken);
+        return await GetMovieInfo(provider, id, true, cancellationToken);
     }
 
-    public static async Task<MovieInfoModel> GetMovieInfo(string id, string provider, bool lazy,
+    public static async Task<MovieInfoModel> GetMovieInfo(string provider, string id, bool lazy,
         CancellationToken cancellationToken)
     {
-        return await GetMovieInfo(id, provider, string.Empty, lazy, cancellationToken);
-    }
-
-    public static async Task<MovieInfoModel> GetMovieInfo(string id, string provider, string url, bool lazy,
-        CancellationToken cancellationToken)
-    {
-        var apiUrl = ComposeInfoApiUrl(MovieInfoApi, id, provider, url, lazy);
+        var apiUrl = ComposeInfoApiUrl(MovieInfoApi, provider, id, lazy);
         return await GetDataFromApi<MovieInfoModel>(apiUrl, cancellationToken);
     }
 

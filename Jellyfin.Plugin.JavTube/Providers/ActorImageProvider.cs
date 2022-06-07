@@ -38,13 +38,13 @@ public class ActorImageProvider : BaseProvider, IRemoteImageProvider, IHasOrder
         if (string.IsNullOrWhiteSpace(pid.Id) || string.IsNullOrWhiteSpace(pid.Provider))
             return new List<RemoteImageInfo>();
 
-        var actorInfo = await ApiClient.GetActorInfo(pid.Id, pid.Provider, cancellationToken);
+        var actorInfo = await ApiClient.GetActorInfo(pid.Provider, pid.Id, cancellationToken);
 
         return actorInfo.Images.Select(image => new RemoteImageInfo
         {
             ProviderName = Name,
             Type = ImageType.Primary,
-            Url = ApiClient.GetPrimaryImageApiUrl(actorInfo.Id, actorInfo.Provider, image, 0.5, true)
+            Url = ApiClient.GetPrimaryImageApiUrl(actorInfo.Provider, actorInfo.Id, image, 0.5, true)
         }).ToList();
     }
 

@@ -39,26 +39,26 @@ public class MovieImageProvider : BaseProvider, IRemoteImageProvider, IHasOrder
         if (string.IsNullOrWhiteSpace(pid.Id) || string.IsNullOrWhiteSpace(pid.Provider))
             return new List<RemoteImageInfo>();
 
-        var m = await ApiClient.GetMovieInfo(pid.Id, pid.Provider, cancellationToken);
+        var m = await ApiClient.GetMovieInfo(pid.Provider, pid.Id, cancellationToken);
         var images = new List<RemoteImageInfo>
         {
             new()
             {
                 ProviderName = Name,
                 Type = ImageType.Primary,
-                Url = ApiClient.GetPrimaryImageApiUrl(m.Id, m.Provider, pid.Position ?? -1)
+                Url = ApiClient.GetPrimaryImageApiUrl(m.Provider, m.Id, pid.Position ?? -1)
             },
             new()
             {
                 ProviderName = Name,
                 Type = ImageType.Thumb,
-                Url = ApiClient.GetThumbImageApiUrl(m.Id, m.Provider)
+                Url = ApiClient.GetThumbImageApiUrl(m.Provider, m.Id)
             },
             new()
             {
                 ProviderName = Name,
                 Type = ImageType.Backdrop,
-                Url = ApiClient.GetBackdropImageApiUrl(m.Id, m.Provider)
+                Url = ApiClient.GetBackdropImageApiUrl(m.Provider, m.Id)
             }
         };
 
@@ -68,21 +68,21 @@ public class MovieImageProvider : BaseProvider, IRemoteImageProvider, IHasOrder
             {
                 ProviderName = Name,
                 Type = ImageType.Primary,
-                Url = ApiClient.GetPrimaryImageApiUrl(m.Id, m.Provider, imageUrl)
+                Url = ApiClient.GetPrimaryImageApiUrl(m.Provider, m.Id, imageUrl)
             });
 
             images.Add(new RemoteImageInfo
             {
                 ProviderName = Name,
                 Type = ImageType.Thumb,
-                Url = ApiClient.GetThumbImageApiUrl(m.Id, m.Provider, imageUrl)
+                Url = ApiClient.GetThumbImageApiUrl(m.Provider, m.Id, imageUrl)
             });
 
             images.Add(new RemoteImageInfo
             {
                 ProviderName = Name,
                 Type = ImageType.Backdrop,
-                Url = ApiClient.GetBackdropImageApiUrl(m.Id, m.Provider, imageUrl)
+                Url = ApiClient.GetBackdropImageApiUrl(m.Provider, m.Id, imageUrl)
             });
         }
 

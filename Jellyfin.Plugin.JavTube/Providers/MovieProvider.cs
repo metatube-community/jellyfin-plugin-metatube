@@ -52,7 +52,7 @@ public class MovieProvider : BaseProvider, IRemoteMetadataProvider<Movie, MovieI
         //     ? await ApiClient.GetMovieInfo(pid.Id, pid.Provider, info.MetadataLanguage, cancellationToken)
         //     : await ApiClient.GetMovieInfo(pid.Id, pid.Provider, cancellationToken);
 
-        var m = await ApiClient.GetMovieInfo(pid.Id, pid.Provider, cancellationToken);
+        var m = await ApiClient.GetMovieInfo(pid.Provider, pid.Id, cancellationToken);
 
         var result = new MetadataResult<Movie>
         {
@@ -141,7 +141,7 @@ public class MovieProvider : BaseProvider, IRemoteMetadataProvider<Movie, MovieI
                 SearchProviderName = Name,
                 PremiereDate = m.ReleaseDate.ValidDateTime(),
                 ProductionYear = m.ReleaseDate.ValidDateTime()?.Year,
-                ImageUrl = ApiClient.GetPrimaryImageApiUrl(m.Id, m.Provider, m.ThumbUrl, 1.0, true)
+                ImageUrl = ApiClient.GetPrimaryImageApiUrl(m.Provider, m.Id, m.ThumbUrl, 1.0, true)
             };
             result.SetProviderIdModel(Name, new ProviderIdModel
             {
@@ -160,7 +160,7 @@ public class MovieProvider : BaseProvider, IRemoteMetadataProvider<Movie, MovieI
         try
         {
             // Use GFriends as actor image provider.
-            return (await ApiClient.GetActorInfo(name, GFriends, cancellationToken)).Images[0];
+            return (await ApiClient.GetActorInfo(GFriends, name, cancellationToken)).Images[0];
         }
         catch (Exception e)
         {

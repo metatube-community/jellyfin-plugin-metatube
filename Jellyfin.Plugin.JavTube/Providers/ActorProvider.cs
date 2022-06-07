@@ -42,7 +42,7 @@ public class ActorProvider : BaseProvider, IRemoteMetadataProvider<Person, Perso
 
         LogInfo("Get actor info: {0}", pid.Serialize());
 
-        var m = await ApiClient.GetActorInfo(pid.Id, pid.Provider, cancellationToken);
+        var m = await ApiClient.GetActorInfo(pid.Provider, pid.Id, cancellationToken);
 
         var result = new MetadataResult<Person>
         {
@@ -86,8 +86,8 @@ public class ActorProvider : BaseProvider, IRemoteMetadataProvider<Person, Perso
         {
             // Exact search.
             LogInfo("Search for actor: {0}", pid.Serialize());
-            searchResults.Add(await ApiClient.GetActorInfo(pid.Id, pid.Provider, pid.UpdateInfo != true,
-                cancellationToken));
+            searchResults.Add(await ApiClient.GetActorInfo(pid.Provider, pid.Id,
+                pid.UpdateInfo != true, cancellationToken));
         }
 
         var results = new List<RemoteSearchResult>();
@@ -104,7 +104,7 @@ public class ActorProvider : BaseProvider, IRemoteMetadataProvider<Person, Perso
                 Name = m.Name,
                 SearchProviderName = Name,
                 ImageUrl = m.Images.Length > 0
-                    ? ApiClient.GetPrimaryImageApiUrl(m.Id, m.Provider, m.Images[0], 0.5, true)
+                    ? ApiClient.GetPrimaryImageApiUrl(m.Provider, m.Id, m.Images[0], 0.5, true)
                     : string.Empty
             };
             result.SetProviderIdModel(Name, new ProviderIdModel
