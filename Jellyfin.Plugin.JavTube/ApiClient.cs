@@ -177,6 +177,7 @@ public static class ApiClient
                 new AuthenticationHeaderValue("Bearer", Plugin.Instance.Configuration.Token);
 
         var response = await httpClient.GetAsync(url, cancellationToken).ConfigureAwait(false);
+
         // EnsureSuccessStatusCode ignoring reason:
         // When the status is unsuccessful, the API response contains error details.
         var model = await response.Content!
