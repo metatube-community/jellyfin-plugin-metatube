@@ -9,6 +9,9 @@ using MediaBrowser.Model.IO;
 using MediaBrowser.Model.Logging;
 using MediaBrowser.Model.Tasks;
 
+// ReSharper disable ClassNeverInstantiated.Global
+// ReSharper disable UnusedAutoPropertyAccessor.Global
+
 namespace Jellyfin.Plugin.JavTube.ScheduledTasks;
 
 public class UpdatePluginTask : IScheduledTask
