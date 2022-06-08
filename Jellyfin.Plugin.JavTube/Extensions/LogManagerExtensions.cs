@@ -3,7 +3,7 @@ using MediaBrowser.Model.Logging;
 
 namespace Jellyfin.Plugin.JavTube.Extensions;
 
-internal static class LogManagerExtension
+internal static class LogManagerExtensions
 {
     public static ILogger CreateLogger<T>(this ILogManager logManager)
     {
