@@ -8,21 +8,26 @@ public class PluginConfiguration : BasePluginConfiguration
     {
         Server = "http://javtube-server:8080";
         Token = string.Empty;
-        EnableAutoTranslation = false;
+
+        // Translation options
+        TranslationMode = 0;
+        TranslationEngine = "Baidu";
+        BaiduAppId = string.Empty;
+        BaiduAppKey = string.Empty;
+        GoogleApiKey = string.Empty;
     }
 
-    /// <summary>
-    ///     Gets or sets the JavTube server URL.
-    /// </summary>
     public string Server { get; set; }
 
-    /// <summary>
-    ///     Gets or sets the JavTube server API token.
-    /// </summary>
     public string Token { get; set; }
 
-    /// <summary>
-    ///     Gets or sets the auto translate option.
-    /// </summary>
-    public bool EnableAutoTranslation { get; set; }
+    public string TranslationEngine { get; set; }
+
+    public int TranslationMode { get; set; }
+
+    public string BaiduAppId { get; set; }
+
+    public string BaiduAppKey { get; set; }
+
+    public string GoogleApiKey { get; set; }
 }
