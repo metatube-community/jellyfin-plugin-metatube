@@ -176,20 +176,22 @@ public static class ApiClient
             httpClient.DefaultRequestHeaders.Authorization =
                 new AuthenticationHeaderValue("Bearer", Plugin.Instance.Configuration.Token);
 
-        using (var response = await httpClient.GetAsync(url, cancellationToken).ConfigureAwait(false))
-        {
-            // EnsureSuccessStatusCode should be ignored.
-            var model = await response.Content!
-                .ReadFromJsonAsync<ResponseModel<T>>(cancellationToken: cancellationToken).ConfigureAwait(false);
+        var response = await httpClient.GetAsync(url, cancellationToken).ConfigureAwait(false);
+        // EnsureSuccessStatusCode ignoring reason:
+        // When the status is unsuccessful, the API response contains error details.
+        var model = await response.Content!
+            .ReadFromJsonAsync<ResponseModel<T>>(cancellationToken: cancellationToken).ConfigureAwait(false);
 
-            // Nullable forgiving reason:
-            // ReadFromJsonAsync will usually return T as non-null.
-            // If T happens to be null, an exception is expected to
-            // be thrown either way.
-            if (!response.IsSuccessStatusCode && model!.Error != null)
-                throw new Exception($"{model.Error.Code}: {model.Error.Message}");
+        // Nullable forgiving reason:
+        // ReadFromJsonAsync will usually return T as non-null.
+        // If T happens to be null, an exception is planed to be thrown either way.
+        if (!response.IsSuccessStatusCode && model!.Error != null)
+            throw new Exception($"API request error: {model.Error.Code} ({model.Error.Message})");
 
-            return model!.Data;
-        }
+        // Note: data field must not be null if there are no errors.
+        if (model!.Data == null)
+            throw new Exception("Response data field is null");
+
+        return model.Data;
     }
 }
