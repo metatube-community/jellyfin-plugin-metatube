@@ -56,7 +56,10 @@ public class UpdatePluginTask : IScheduledTask
 
         try
         {
-            var apiResult = await new HttpClient().GetFromJsonAsync<GithubApiResult>(
+            var httpClient = new HttpClient();
+            httpClient.DefaultRequestHeaders.Add("User-Agent", Constant.UserAgent);
+
+            var apiResult = await httpClient.GetFromJsonAsync<GithubApiResult>(
                 "https://api.github.com/repos/javtube/jellyfin-plugin-javtube/releases/latest",
                 cancellationToken).ConfigureAwait(false);
 
@@ -74,7 +77,7 @@ public class UpdatePluginTask : IScheduledTask
                 if (!Uri.IsWellFormedUriString(url, UriKind.Absolute))
                     throw new Exception("Invalid download url");
 
-                var zipStream = await new HttpClient().GetStreamAsync(url, cancellationToken).ConfigureAwait(false);
+                var zipStream = await httpClient.GetStreamAsync(url, cancellationToken).ConfigureAwait(false);
 
                 _zipClient.ExtractAllFromZip(zipStream, _applicationPaths.PluginsPath, true);
 
