@@ -8,7 +8,6 @@ using MediaBrowser.Model.Providers;
 #if __EMBY__
 using MediaBrowser.Common.Net;
 using MediaBrowser.Model.Logging;
-
 #else
 using Microsoft.Extensions.Logging;
 #endif
@@ -122,8 +121,8 @@ public class MovieProvider : BaseProvider, IRemoteMetadataProvider<Movie, MovieI
         {
             // Exact search.
             LogInfo("Search for movie: {0}", pid.Serialize());
-            searchResults.Add(await ApiClient.GetMovieInfo(pid.Id, pid.Provider, pid.UpdateInfo != true,
-                cancellationToken));
+            searchResults.Add(await ApiClient.GetMovieInfo(pid.Provider, pid.Id,
+                pid.UpdateInfo != true, cancellationToken));
         }
 
         var results = new List<RemoteSearchResult>();
