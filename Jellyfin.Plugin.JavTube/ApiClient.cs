@@ -178,19 +178,19 @@ public static class ApiClient
 
         var response = await httpClient.GetAsync(url, cancellationToken).ConfigureAwait(false);
 
+        // Nullable forgiving reason:
+        // Response is unlikely to be null.
+        // If it happens to be null, an exception is planed to be thrown either way.
+        var model = (await response.Content!
+            .ReadFromJsonAsync<ResponseModel<T>>(cancellationToken: cancellationToken).ConfigureAwait(false))!;
+
         // EnsureSuccessStatusCode ignoring reason:
         // When the status is unsuccessful, the API response contains error details.
-        var model = await response.Content!
-            .ReadFromJsonAsync<ResponseModel<T>>(cancellationToken: cancellationToken).ConfigureAwait(false);
-
-        // Nullable forgiving reason:
-        // ReadFromJsonAsync will usually return T as non-null.
-        // If T happens to be null, an exception is planed to be thrown either way.
-        if (!response.IsSuccessStatusCode && model!.Error != null)
+        if (!response.IsSuccessStatusCode && model.Error != null)
             throw new Exception($"API request error: {model.Error.Code} ({model.Error.Message})");
 
         // Note: data field must not be null if there are no errors.
-        if (model!.Data == null)
+        if (model.Data == null)
             throw new Exception("Response data field is null");
 
         return model.Data;
