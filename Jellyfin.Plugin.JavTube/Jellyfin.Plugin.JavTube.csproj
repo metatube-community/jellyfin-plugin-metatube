@@ -8,7 +8,7 @@
         <AssemblyName>JavTube</AssemblyName>
         <Authors>JavTube</Authors>
         <Description>Just Another Video Tube Plugin for Jellyfin/Emby</Description>
-        <Version>$([System.DateTime]::UtcNow.ToString(yyyy.MMdd.HHmm))</Version>
+        <Version>1.$([System.DateTime]::UtcNow.ToString(yyyy.MMdd.HHmm))</Version>
         <Copyright>Copyright © $([System.DateTime]::UtcNow.Year) JavTube</Copyright>
         <RepositoryType>Git</RepositoryType>
         <RepositoryUrl>https://github.com/javtube/jellyfin-plugin-javtube.git</RepositoryUrl>
