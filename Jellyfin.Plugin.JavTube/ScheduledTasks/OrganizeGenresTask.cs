@@ -28,7 +28,7 @@ public class OrganizeGenresTask : IScheduledTask
         _libraryManager = libraryManager;
     }
 #else
-    public OrganizeGenresTask(ILogger<OrganizeGenresTask> logger, ILibraryManager libraryManager)
+    public OrganizeGenresTask(ILogger logger, ILibraryManager libraryManager)
     {
         _logger = logger;
         _libraryManager = libraryManager;

@@ -23,7 +23,7 @@ public class MovieProvider : BaseProvider, IRemoteMetadataProvider<Movie, MovieI
     public MovieProvider(IHttpClient httpClient, ILogManager logManager) : base(
         httpClient, logManager.CreateLogger<MovieProvider>())
 #else
-    public MovieProvider(IHttpClientFactory httpClientFactory, ILogger<MovieProvider> logger) : base(
+    public MovieProvider(IHttpClientFactory httpClientFactory, ILogger logger) : base(
         httpClientFactory, logger)
 #endif
     {

@@ -20,7 +20,7 @@ public class ActorImageProvider : BaseProvider, IRemoteImageProvider, IHasOrder
     public ActorImageProvider(IHttpClient httpClient, ILogManager logManager) :
         base(httpClient, logManager.CreateLogger<ActorImageProvider>())
 #else
-    public ActorImageProvider(IHttpClientFactory httpClientFactory, ILogger<ActorImageProvider> logger) : base(
+    public ActorImageProvider(IHttpClientFactory httpClientFactory, ILogger logger) : base(
         httpClientFactory, logger)
 #endif
     {

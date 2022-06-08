@@ -21,7 +21,7 @@ public class MovieImageProvider : BaseProvider, IRemoteImageProvider, IHasOrder
         httpClient,
         logManager.CreateLogger<MovieImageProvider>())
 #else
-    public MovieImageProvider(IHttpClientFactory httpClientFactory, ILogger<MovieImageProvider> logger) : base(
+    public MovieImageProvider(IHttpClientFactory httpClientFactory, ILogger logger) : base(
         httpClientFactory, logger)
 #endif
     {
