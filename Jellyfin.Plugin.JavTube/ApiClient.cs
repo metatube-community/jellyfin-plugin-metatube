@@ -1,6 +1,6 @@
 using System.Collections.Specialized;
 using System.Net.Http.Headers;
-using System.Text.Json;
+using System.Net.Http.Json;
 using System.Web;
 using Jellyfin.Plugin.JavTube.Models;
 
@@ -158,21 +158,38 @@ public static class ApiClient
     {
         cancellationToken.ThrowIfCancellationRequested();
 
-        var httpClient = new HttpClient();
-        // Set default timeout: 5 minutes.
-        httpClient.Timeout = TimeSpan.FromSeconds(300);
-        // Set Accept JSON header.
-        httpClient.DefaultRequestHeaders.Add("Accept", "application/json");
-        // Set User-Agent header.
-        httpClient.DefaultRequestHeaders.Add("User-Agent", Constant.UserAgent);
-        // Set Authorization API Token.
+        var httpClient = new HttpClient
+        {
+            // Set default timeout: 5 minutes.
+            Timeout = TimeSpan.FromSeconds(300),
+
+            // Set corresponding headers.
+            DefaultRequestHeaders =
+            {
+                { "Accept", "application/json" },
+                { "User-Agent", Constant.UserAgent },
+            }
+        };
+
+        // Set API Authorization Token.
         if (!string.IsNullOrWhiteSpace(Plugin.Instance.Configuration.Token))
             httpClient.DefaultRequestHeaders.Authorization =
                 new AuthenticationHeaderValue("Bearer", Plugin.Instance.Configuration.Token);
 
-        var response = await httpClient.GetAsync(url, cancellationToken).ConfigureAwait(false);
-        response.EnsureSuccessStatusCode();
+        using (var response = await httpClient.GetAsync(url, cancellationToken).ConfigureAwait(false))
+        {
+            // EnsureSuccessStatusCode should be ignored.
+            var model = await response.Content!
+                .ReadFromJsonAsync<ResponseModel<T>>(cancellationToken: cancellationToken).ConfigureAwait(false);
 
-        return JsonSerializer.Deserialize<T>(await response.Content.ReadAsStreamAsync(cancellationToken));
+            // Nullable forgiving reason:
+            // ReadFromJsonAsync will usually return T as non-null.
+            // If T happens to be null, an exception is expected to
+            // be thrown either way.
+            if (!response.IsSuccessStatusCode && model!.Error != null)
+                throw new Exception($"{model.Error.Code}: {model.Error.Message}");
+
+            return model!.Data;
+        }
     }
 }
