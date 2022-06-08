@@ -3,7 +3,7 @@ using MediaBrowser.Model.Entities;
 
 namespace Jellyfin.Plugin.JavTube.Extensions;
 
-internal static class ProviderIdsExtension
+internal static class ProviderIdsExtensions
 {
     public static ProviderIdModel GetProviderIdModel(this IHasProviderIds instance, string name)
     {
