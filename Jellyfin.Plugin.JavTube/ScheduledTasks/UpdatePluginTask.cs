@@ -1,16 +1,13 @@
 #if __EMBY__
-using System.Net;
+using System.Net.Http.Json;
 using System.Reflection;
-using System.Text.Json;
 using System.Text.Json.Serialization;
 using Jellyfin.Plugin.JavTube.Extensions;
 using MediaBrowser.Common;
 using MediaBrowser.Common.Configuration;
-using MediaBrowser.Common.Net;
 using MediaBrowser.Model.IO;
 using MediaBrowser.Model.Logging;
 using MediaBrowser.Model.Tasks;
-using HttpRequestOptions = MediaBrowser.Common.Net.HttpRequestOptions;
 
 namespace Jellyfin.Plugin.JavTube.ScheduledTasks;
 
@@ -18,17 +15,14 @@ public class UpdatePluginTask : IScheduledTask
 {
     private readonly IApplicationHost _applicationHost;
     private readonly IApplicationPaths _applicationPaths;
-    private readonly IHttpClient _httpClient;
     private readonly ILogger _logger;
     private readonly IZipClient _zipClient;
 
     public UpdatePluginTask(IApplicationHost applicationHost, IApplicationPaths applicationPaths,
-        IHttpClient httpClient, ILogManager logManager,
-        IZipClient zipClient)
+        ILogManager logManager, IZipClient zipClient)
     {
         _applicationHost = applicationHost;
         _applicationPaths = applicationPaths;
-        _httpClient = httpClient;
         _logger = logManager.CreateLogger<UpdatePluginTask>();
         _zipClient = zipClient;
     }
@@ -59,17 +53,9 @@ public class UpdatePluginTask : IScheduledTask
 
         try
         {
-            var response = await _httpClient.GetResponse(new HttpRequestOptions
-            {
-                Url = "https://api.github.com/repos/javtube/jellyfin-plugin-javtube/releases/latest",
-                CancellationToken = cancellationToken,
-                UserAgent = Constant.UserAgent
-            });
-
-            if (response.StatusCode != HttpStatusCode.OK)
-                throw new Exception($"api status code: {response.StatusCode}");
-
-            var apiResult = JsonSerializer.Deserialize<GithubApiResult>(response.Content);
+            var apiResult = await new HttpClient().GetFromJsonAsync<GithubApiResult>(
+                requestUri: "https://api.github.com/repos/javtube/jellyfin-plugin-javtube/releases/latest",
+                cancellationToken: cancellationToken).ConfigureAwait(false);
 
             var currentVersion = ParseVersion(CurrentVersion);
             var remoteVersion = ParseVersion(apiResult?.TagName);
@@ -82,18 +68,12 @@ public class UpdatePluginTask : IScheduledTask
                     .Where(asset => asset.Name.StartsWith("Emby") && asset.Name.EndsWith(".zip")).ToArray()
                     .FirstOrDefault()
                     ?.BrowserDownloadUrl;
-                if (string.IsNullOrEmpty(url))
-                    throw new Exception("download url is empty");
+                if (!Uri.IsWellFormedUriString(url, UriKind.Absolute))
+                    throw new Exception("Invalid download url");
 
-                var zipResp = await _httpClient.GetResponse(new HttpRequestOptions
-                {
-                    Url = url,
-                    CancellationToken = cancellationToken,
-                    UserAgent = Constant.UserAgent,
-                    Progress = progress
-                });
+                var zipStream = await new HttpClient().GetStreamAsync(url, cancellationToken).ConfigureAwait(false);
 
-                _zipClient.ExtractAllFromZip(zipResp.Content, _applicationPaths.PluginsPath, true);
+                _zipClient.ExtractAllFromZip(zipStream, _applicationPaths.PluginsPath, true);
 
                 _logger.Info("Plugin update is complete");
 
