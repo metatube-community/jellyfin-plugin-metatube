@@ -54,8 +54,8 @@ public class UpdatePluginTask : IScheduledTask
         try
         {
             var apiResult = await new HttpClient().GetFromJsonAsync<GithubApiResult>(
-                requestUri: "https://api.github.com/repos/javtube/jellyfin-plugin-javtube/releases/latest",
-                cancellationToken: cancellationToken).ConfigureAwait(false);
+                "https://api.github.com/repos/javtube/jellyfin-plugin-javtube/releases/latest",
+                cancellationToken).ConfigureAwait(false);
 
             var currentVersion = ParseVersion(CurrentVersion);
             var remoteVersion = ParseVersion(apiResult?.TagName);
