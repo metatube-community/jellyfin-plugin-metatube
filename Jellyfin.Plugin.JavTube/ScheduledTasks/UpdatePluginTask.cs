@@ -74,6 +74,8 @@ public class UpdatePluginTask : IScheduledTask
                 if (!Uri.IsWellFormedUriString(url, UriKind.Absolute))
                     throw new Exception("Invalid download url");
 
+                // HttpClient doesn't support progress reporting, see this issue:
+                // https://github.com/dotnet/runtime/issues/16681
                 var zipStream = await httpClient.GetStreamAsync(url, cancellationToken).ConfigureAwait(false);
 
                 _zipClient.ExtractAllFromZip(zipStream, _applicationPaths.PluginsPath, true);
