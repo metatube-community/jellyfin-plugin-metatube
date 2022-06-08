@@ -102,7 +102,7 @@ public static class ApiClient
         CancellationToken cancellationToken)
     {
         var apiUrl = ComposeInfoApiUrl(ActorInfoApi, provider, id, lazy);
-        return await GetDataFromApi<ActorInfoModel>(apiUrl, cancellationToken);
+        return await GetDataFromApi<ActorInfoModel>(apiUrl, true, cancellationToken);
     }
 
     public static async Task<MovieInfoModel> GetMovieInfo(string provider, string id,
@@ -115,7 +115,7 @@ public static class ApiClient
         CancellationToken cancellationToken)
     {
         var apiUrl = ComposeInfoApiUrl(MovieInfoApi, provider, id, lazy);
-        return await GetDataFromApi<MovieInfoModel>(apiUrl, cancellationToken);
+        return await GetDataFromApi<MovieInfoModel>(apiUrl, true, cancellationToken);
     }
 
     public static async Task<List<ActorSearchResultModel>> SearchActor(string q, CancellationToken cancellationToken)
@@ -133,7 +133,7 @@ public static class ApiClient
         bool lazy, CancellationToken cancellationToken)
     {
         var apiUrl = ComposeSearchApiUrl(ActorSearchApi, q, provider, lazy);
-        return await GetDataFromApi<List<ActorSearchResultModel>>(apiUrl, cancellationToken);
+        return await GetDataFromApi<List<ActorSearchResultModel>>(apiUrl, true, cancellationToken);
     }
 
     public static async Task<List<MovieSearchResultModel>> SearchMovie(string q, CancellationToken cancellationToken)
@@ -151,10 +151,10 @@ public static class ApiClient
         bool lazy, CancellationToken cancellationToken)
     {
         var apiUrl = ComposeSearchApiUrl(MovieSearchApi, q, provider, lazy);
-        return await GetDataFromApi<List<MovieSearchResultModel>>(apiUrl, cancellationToken);
+        return await GetDataFromApi<List<MovieSearchResultModel>>(apiUrl, true, cancellationToken);
     }
 
-    private static async Task<T> GetDataFromApi<T>(string url, CancellationToken cancellationToken)
+    private static async Task<T> GetDataFromApi<T>(string url, bool requireAuth, CancellationToken cancellationToken)
     {
         cancellationToken.ThrowIfCancellationRequested();
 
@@ -172,7 +172,7 @@ public static class ApiClient
         };
 
         // Set API Authorization Token.
-        if (!string.IsNullOrWhiteSpace(Plugin.Instance.Configuration.Token))
+        if (requireAuth && !string.IsNullOrWhiteSpace(Plugin.Instance.Configuration.Token))
             httpClient.DefaultRequestHeaders.Authorization =
                 new AuthenticationHeaderValue("Bearer", Plugin.Instance.Configuration.Token);
 
