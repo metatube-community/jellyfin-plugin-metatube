@@ -12,9 +12,9 @@ public static class ApiClient
     private const string MovieInfoApi = "/v1/movies";
     private const string ActorSearchApi = "/v1/actors/search";
     private const string MovieSearchApi = "/v1/movies/search";
-    private const string PrimaryImageApi = "/images/primary";
-    private const string ThumbImageApi = "/images/thumb";
-    private const string BackdropImageApi = "/images/backdrop";
+    private const string PrimaryImageApi = "/v1/images/primary";
+    private const string ThumbImageApi = "/v1/images/thumb";
+    private const string BackdropImageApi = "/v1/images/backdrop";
 
     private static string ComposeUrl(string path, NameValueCollection nv)
     {
