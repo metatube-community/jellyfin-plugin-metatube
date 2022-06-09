@@ -40,7 +40,7 @@ public abstract class BaseProvider
     public Task<HttpResponseMessage> GetImageResponse(string url, CancellationToken cancellationToken)
 #endif
     {
-        Logger.Info("GetImageResponse for url: {0}", url);
+        Logger.Debug("GetImageResponse for url: {0}", url);
         return GetAsync(url, cancellationToken);
     }
 
@@ -58,8 +58,9 @@ public abstract class BaseProvider
 #else
     private async Task<HttpResponseMessage> GetAsync(string url, CancellationToken cancellationToken)
     {
-        var httpClient = _httpClientFactory.CreateClient();
-        httpClient.DefaultRequestHeaders.Add("User-Agent", Constant.UserAgent);
+        var httpClient = _httpClientFactory.CreateClient(Name);
+        httpClient.DefaultRequestHeaders
+            .Add("User-Agent", Constant.UserAgent);
         return await httpClient.GetAsync(url, cancellationToken).ConfigureAwait(false);
     }
 #endif
