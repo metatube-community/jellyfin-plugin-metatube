@@ -8,8 +8,6 @@ public class PluginConfiguration : BasePluginConfiguration
     {
         Server = "https://api.javtube.internal";
         Token = string.Empty;
-
-        // Translation options
         TranslationMode = 0;
         TranslationEngine = "Baidu";
         BaiduAppId = string.Empty;
