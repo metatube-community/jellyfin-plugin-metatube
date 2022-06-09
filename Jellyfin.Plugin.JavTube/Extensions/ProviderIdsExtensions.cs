@@ -9,7 +9,7 @@ internal static class ProviderIdsExtensions
     {
         return !instance.ProviderIds.Any()
             ? new ProviderIdModel()
-            : ProviderIdModel.Deserialize(instance.GetProviderId(name));
+            : ProviderIdModelExtensions.Deserialize(instance.GetProviderId(name));
     }
 
     public static void SetProviderIdModel(this IHasProviderIds instance, string name, ProviderIdModel pid)
