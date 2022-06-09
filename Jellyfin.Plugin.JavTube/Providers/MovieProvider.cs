@@ -53,7 +53,7 @@ public class MovieProvider : BaseProvider, IRemoteMetadataProvider<Movie, MovieI
         // Translate movie info.
         if (Plugin.Instance.Configuration.TranslationMode != (int)TranslationHelper.Mode.None)
         {
-            TranslateMovieInfo(m, info.MetadataLanguage, cancellationToken);
+            await TranslateMovieInfo(m, info.MetadataLanguage, cancellationToken);
         }
 
         var result = new MetadataResult<Movie>
@@ -171,12 +171,12 @@ public class MovieProvider : BaseProvider, IRemoteMetadataProvider<Movie, MovieI
         }
     }
 
-    private void TranslateMovieInfo(MovieInfoModel m, string language, CancellationToken cancellationToken)
+    private async Task TranslateMovieInfo(MovieInfoModel m, string language, CancellationToken cancellationToken)
     {
         try
         {
             Logger.Info("Translate movie info language: {0} => {1}", m.Number, language);
-            TranslationHelper.Translate(m, language, cancellationToken);
+            await TranslationHelper.Translate(m, language, cancellationToken);
         }
         catch (Exception e)
         {

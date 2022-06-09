@@ -68,7 +68,7 @@ public static class TranslationHelper
         return (await ApiClient.GetTranslate(q, from, to, engine, nv, cancellationToken)).TranslatedText;
     }
 
-    public static async void Translate(MovieInfoModel m, string to, CancellationToken cancellationToken)
+    public static async Task Translate(MovieInfoModel m, string to, CancellationToken cancellationToken)
     {
         var mode = (Mode)Plugin.Instance.Configuration.TranslationMode;
 
