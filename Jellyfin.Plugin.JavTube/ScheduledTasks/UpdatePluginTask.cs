@@ -11,7 +11,6 @@ using MediaBrowser.Model.Logging;
 using MediaBrowser.Model.Tasks;
 using HttpRequestOptions = MediaBrowser.Common.Net.HttpRequestOptions;
 
-
 namespace Jellyfin.Plugin.JavTube.ScheduledTasks;
 
 public class UpdatePluginTask : IScheduledTask
@@ -58,7 +57,7 @@ public class UpdatePluginTask : IScheduledTask
 
         try
         {
-            var apiResult = JsonSerializer.Deserialize<GithubApiResult>(await _httpClient.Get(new HttpRequestOptions
+            var apiResult = JsonSerializer.Deserialize<ApiResult>(await _httpClient.Get(new HttpRequestOptions
             {
                 Url = "https://api.github.com/repos/javtube/jellyfin-plugin-javtube/releases/latest",
                 CancellationToken = cancellationToken,
@@ -112,13 +111,13 @@ public class UpdatePluginTask : IScheduledTask
         return new Version(v.StartsWith("v") ? v[1..] : v);
     }
 
-    public class GithubApiResult
+    public class ApiResult
     {
         [JsonPropertyName("tag_name")] public string TagName { get; set; }
-        [JsonPropertyName("assets")] public GithubApiAsset[] Assets { get; set; }
+        [JsonPropertyName("assets")] public ApiAsset[] Assets { get; set; }
     }
 
-    public class GithubApiAsset
+    public class ApiAsset
     {
         [JsonPropertyName("name")] public string Name { get; set; }
 
