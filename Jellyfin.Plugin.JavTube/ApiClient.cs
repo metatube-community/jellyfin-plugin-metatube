@@ -161,7 +161,7 @@ public static class ApiClient
         var httpClient = new HttpClient
         {
             // Set default timeout: 5 minutes.
-            Timeout = TimeSpan.FromSeconds(300),
+            Timeout = TimeSpan.FromMinutes(5),
 
             // Set corresponding headers.
             DefaultRequestHeaders =
