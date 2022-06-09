@@ -6,7 +6,7 @@ public class PluginConfiguration : BasePluginConfiguration
 {
     public PluginConfiguration()
     {
-        Server = "http://javtube-server:8080";
+        Server = "https://api.javtube.internal";
         Token = string.Empty;
 
         // Translation options
