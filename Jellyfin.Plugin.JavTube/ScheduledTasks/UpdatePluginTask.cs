@@ -70,7 +70,7 @@ public class UpdatePluginTask : IScheduledTask
 
             if (currentVersion.CompareTo(remoteVersion) < 0)
             {
-                _logger.Info("New plugin version found: {0}", remoteVersion);
+                _logger.Info("Found new plugin version: {0}", remoteVersion);
 
                 var url = apiResult?.Assets
                     .Where(asset => asset.Name.StartsWith("Emby") && asset.Name.EndsWith(".zip")).ToArray()
@@ -89,7 +89,7 @@ public class UpdatePluginTask : IScheduledTask
 
                 _zipClient.ExtractAllFromZip(zipStream, _applicationPaths.PluginsPath, true);
 
-                _logger.Info("Plugin update is complete");
+                _logger.Info("Plugin update complete");
 
                 _applicationHost.NotifyPendingRestart();
             }
@@ -111,13 +111,13 @@ public class UpdatePluginTask : IScheduledTask
         return new Version(v.StartsWith("v") ? v[1..] : v);
     }
 
-    public class ApiResult
+    private class ApiResult
     {
         [JsonPropertyName("tag_name")] public string TagName { get; set; }
         [JsonPropertyName("assets")] public ApiAsset[] Assets { get; set; }
     }
 
-    public class ApiAsset
+    private class ApiAsset
     {
         [JsonPropertyName("name")] public string Name { get; set; }
 
