@@ -15,6 +15,7 @@ public static class ApiClient
     private const string PrimaryImageApi = "/v1/images/primary";
     private const string ThumbImageApi = "/v1/images/thumb";
     private const string BackdropImageApi = "/v1/images/backdrop";
+    private const string TranslateApi = "/v1/translate";
 
     private static string ComposeUrl(string path, NameValueCollection nv)
     {
@@ -56,6 +57,19 @@ public static class ApiClient
             { "q", q },
             { "provider", provider },
             { "lazy", lazy.ToString() }
+        });
+    }
+
+    private static string ComposeTranslateApiUrl(string path, string q, string from, string to, string engine,
+        NameValueCollection nv = null)
+    {
+        return ComposeUrl(path, new NameValueCollection
+        {
+            { "q", q },
+            { "from", from },
+            { "to", to },
+            { "engine", engine },
+            nv ?? new NameValueCollection()
         });
     }
 
@@ -152,6 +166,13 @@ public static class ApiClient
     {
         var apiUrl = ComposeSearchApiUrl(MovieSearchApi, q, provider, lazy);
         return await GetDataFromApi<List<MovieSearchResultModel>>(apiUrl, true, cancellationToken);
+    }
+
+    public static async Task<TranslateModel> GetTranslate(string q, string from, string to, string engine,
+        NameValueCollection nv, CancellationToken cancellationToken)
+    {
+        var apiUrl = ComposeTranslateApiUrl(TranslateApi, q, from, to, engine, nv);
+        return await GetDataFromApi<TranslateModel>(apiUrl, false, cancellationToken);
     }
 
     private static async Task<T> GetDataFromApi<T>(string url, bool requireAuth, CancellationToken cancellationToken)
