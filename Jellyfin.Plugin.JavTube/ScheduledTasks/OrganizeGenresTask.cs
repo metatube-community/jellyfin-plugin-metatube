@@ -81,19 +81,19 @@ public class OrganizeGenresTask : IScheduledTask
 
             var genres = item.Genres?.ToList() ?? new List<string>();
 
-            // Replace Genres
+            // Replace Genres.
             foreach (var genre in genres.Where(genre => Genres.Substitution.ContainsKey(genre)).ToArray())
             {
                 var value = Genres.Substitution[genre];
                 if (string.IsNullOrEmpty(value))
-                    genres.Remove(genre); // should just be removed
+                    genres.Remove(genre); // should just be removed.
                 else
-                    genres[genres.IndexOf(genre)] = value; // replace
+                    genres[genres.IndexOf(genre)] = value; // replace.
             }
 
             try
             {
-                // Add or Remove `ChineseSubtitle` Genre
+                // Add or Remove `ChineseSubtitle` Genre.
                 if (Genres.HasChineseSubtitle(item.FileNameWithoutExtension) ||
                     Genres.HasExternalChineseSubtitle(item.Path))
                     genres.Add(Genres.ChineseSubtitle);
@@ -105,10 +105,10 @@ public class OrganizeGenresTask : IScheduledTask
                 _logger.Error("Chinese subtitle for video {0}: {1}", item.Name, e.Message);
             }
 
-            // Remove Duplicates
+            // Remove Duplicates.
             var orderedGenres = genres.Distinct().OrderByString(g => g).ToList();
 
-            // Skip updating item if equal
+            // Skip updating item if equal.
             if (!orderedGenres.Any() ||
                 (item.Genres?.SequenceEqual(orderedGenres, StringComparer.Ordinal)).GetValueOrDefault(false))
                 continue;
