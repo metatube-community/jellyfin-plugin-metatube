@@ -5,27 +5,28 @@ using HttpRequestOptions = MediaBrowser.Common.Net.HttpRequestOptions;
 
 #else
 using Microsoft.Extensions.Logging;
+using Jellyfin.Plugin.JavTube.Extensions;
 #endif
 
 namespace Jellyfin.Plugin.JavTube.Providers;
 
 public abstract class BaseProvider
 {
-    private readonly ILogger _logger;
+    protected readonly ILogger Logger;
 
 #if __EMBY__
     private readonly IHttpClient _httpClient;
     protected BaseProvider(IHttpClient httpClient, ILogger logger)
     {
         _httpClient = httpClient;
-        _logger = logger;
+        Logger = logger;
     }
 #else
     private readonly IHttpClientFactory _httpClientFactory;
     protected BaseProvider(IHttpClientFactory httpClientFactory, ILogger logger)
     {
         _httpClientFactory = httpClientFactory;
-        _logger = logger;
+        Logger = logger;
     }
 #endif
 
@@ -39,7 +40,7 @@ public abstract class BaseProvider
     public Task<HttpResponseMessage> GetImageResponse(string url, CancellationToken cancellationToken)
 #endif
     {
-        LogInfo("GetImageResponse for url: {0}", url);
+        Logger.Info ("GetImageResponse for url: {0}", url);
         return GetAsync(url, cancellationToken);
     }
 
@@ -62,24 +63,4 @@ public abstract class BaseProvider
         return await httpClient.GetAsync(url, cancellationToken).ConfigureAwait(false);
     }
 #endif
-
-    protected void LogInfo(string message, params object[] args)
-    {
-#if __EMBY__
-        _logger.Info(message, args);
-#else
-        // ReSharper disable once TemplateIsNotCompileTimeConstantProblem
-        _logger.LogInformation(message, args);
-#endif
-    }
-
-    protected void LogError(string message, params object[] args)
-    {
-#if __EMBY__
-        _logger.Error(message, args);
-#else
-        // ReSharper disable once TemplateIsNotCompileTimeConstantProblem
-        _logger.LogError(message, args);
-#endif
-    }
 }

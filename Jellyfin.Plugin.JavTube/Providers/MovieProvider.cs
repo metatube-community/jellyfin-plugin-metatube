@@ -27,7 +27,6 @@ public class MovieProvider : BaseProvider, IRemoteMetadataProvider<Movie, MovieI
         httpClientFactory, logger)
 #endif
     {
-        // Init
     }
 
     public async Task<MetadataResult<Movie>> GetMetadata(MovieInfo info,
@@ -45,7 +44,7 @@ public class MovieProvider : BaseProvider, IRemoteMetadataProvider<Movie, MovieI
             }
         }
 
-        LogInfo("Get movie info: {0}", pid.Serialize());
+        Logger.Info("Get movie info: {0}", pid.Serialize());
 
         // var m = Plugin.Instance.Configuration.EnableAutoTranslation
         //     ? await ApiClient.GetMovieInfo(pid.Id, pid.Provider, info.MetadataLanguage, cancellationToken)
@@ -114,13 +113,13 @@ public class MovieProvider : BaseProvider, IRemoteMetadataProvider<Movie, MovieI
         if (string.IsNullOrWhiteSpace(pid.Id) || string.IsNullOrWhiteSpace(pid.Provider))
         {
             // Search movie by name.
-            LogInfo("Search for movie: {0}", info.Name);
+            Logger.Info("Search for movie: {0}", info.Name);
             searchResults.AddRange(await ApiClient.SearchMovie(info.Name, pid.Provider, cancellationToken));
         }
         else
         {
             // Exact search.
-            LogInfo("Search for movie: {0}", pid.Serialize());
+            Logger.Info("Search for movie: {0}", pid.Serialize());
             searchResults.Add(await ApiClient.GetMovieInfo(pid.Provider, pid.Id,
                 pid.UpdateInfo != true, cancellationToken));
         }
@@ -128,7 +127,7 @@ public class MovieProvider : BaseProvider, IRemoteMetadataProvider<Movie, MovieI
         var results = new List<RemoteSearchResult>();
         if (!searchResults.Any())
         {
-            LogInfo("Movie not found: {0}", pid.Id);
+            Logger.Warn("Movie not found: {0}", pid.Id);
             return results;
         }
 
@@ -163,7 +162,7 @@ public class MovieProvider : BaseProvider, IRemoteMetadataProvider<Movie, MovieI
         }
         catch (Exception e)
         {
-            LogError("Get Actor Image Error: {0}: {1}", name, e.Message);
+            Logger.Error("Get actor image error: {0} ({1})", name, e.Message);
             return string.Empty;
         }
     }

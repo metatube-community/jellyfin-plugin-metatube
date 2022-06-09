@@ -25,7 +25,6 @@ public class MovieImageProvider : BaseProvider, IRemoteImageProvider, IHasOrder
         httpClientFactory, logger)
 #endif
     {
-        // Init
     }
 
 #if __EMBY__

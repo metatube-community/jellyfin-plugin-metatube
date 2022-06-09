@@ -23,7 +23,6 @@ public class ActorProvider : BaseProvider, IRemoteMetadataProvider<Person, Perso
         httpClientFactory, logger)
 #endif
     {
-        // Init
     }
 
     public async Task<MetadataResult<Person>> GetMetadata(PersonLookupInfo info,
@@ -40,7 +39,7 @@ public class ActorProvider : BaseProvider, IRemoteMetadataProvider<Person, Perso
             }
         }
 
-        LogInfo("Get actor info: {0}", pid.Serialize());
+        Logger.Info("Get actor info: {0}", pid.Serialize());
 
         var m = await ApiClient.GetActorInfo(pid.Provider, pid.Id, cancellationToken);
 
@@ -79,13 +78,13 @@ public class ActorProvider : BaseProvider, IRemoteMetadataProvider<Person, Perso
         if (string.IsNullOrWhiteSpace(pid.Id))
         {
             // Search actor by name.
-            LogInfo("Search for actor: {0}", info.Name);
+            Logger.Info("Search for actor: {0}", info.Name);
             searchResults.AddRange(await ApiClient.SearchActor(info.Name, pid.Provider, cancellationToken));
         }
         else
         {
             // Exact search.
-            LogInfo("Search for actor: {0}", pid.Serialize());
+            Logger.Info("Search for actor: {0}", pid.Serialize());
             searchResults.Add(await ApiClient.GetActorInfo(pid.Provider, pid.Id,
                 pid.UpdateInfo != true, cancellationToken));
         }
@@ -93,7 +92,7 @@ public class ActorProvider : BaseProvider, IRemoteMetadataProvider<Person, Perso
         var results = new List<RemoteSearchResult>();
         if (!searchResults.Any())
         {
-            LogInfo("Actor not found: {0}", pid.Id);
+            Logger.Warn("Actor not found: {0}", pid.Id);
             return results;
         }
 
