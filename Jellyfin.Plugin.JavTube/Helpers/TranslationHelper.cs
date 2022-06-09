@@ -1,9 +1,6 @@
 using System.Collections.Specialized;
 using Jellyfin.Plugin.JavTube.Models;
 
-// ReSharper disable UnusedMember.Local
-// ReSharper disable ConvertToConstant.Local
-
 namespace Jellyfin.Plugin.JavTube.Helpers;
 
 public static class TranslationHelper
@@ -11,7 +8,7 @@ public static class TranslationHelper
     private const string AutoLanguage = "auto";
 
     [Flags]
-    private enum Mode
+    public enum Mode
     {
         None,
         Title,
@@ -25,6 +22,8 @@ public static class TranslationHelper
 
     private static class Engine
     {
+        // ReSharper disable ConvertToConstant.Local
+        //
         // We are intentionally using 'static readonly' here instead of 'const'.
         // 'const' values would be embedded into each assembly that used them and
         // each consuming assembly would have a different 'string' instance. Using

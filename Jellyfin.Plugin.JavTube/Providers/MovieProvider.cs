@@ -1,4 +1,5 @@
 using Jellyfin.Plugin.JavTube.Extensions;
+using Jellyfin.Plugin.JavTube.Helpers;
 using Jellyfin.Plugin.JavTube.Models;
 using MediaBrowser.Controller.Entities;
 using MediaBrowser.Controller.Entities.Movies;
@@ -47,11 +48,13 @@ public class MovieProvider : BaseProvider, IRemoteMetadataProvider<Movie, MovieI
 
         Logger.Info("Get movie info: {0}", pid.Serialize());
 
-        // var m = Plugin.Instance.Configuration.EnableAutoTranslation
-        //     ? await ApiClient.GetMovieInfo(pid.Id, pid.Provider, info.MetadataLanguage, cancellationToken)
-        //     : await ApiClient.GetMovieInfo(pid.Id, pid.Provider, cancellationToken);
-
         var m = await ApiClient.GetMovieInfo(pid.Provider, pid.Id, cancellationToken);
+
+        // Translate movie info.
+        if (Plugin.Instance.Configuration.TranslationMode != (int)TranslationHelper.Mode.None)
+        {
+            TranslateMovieInfo(m, info.MetadataLanguage, cancellationToken);
+        }
 
         var result = new MetadataResult<Movie>
         {
@@ -165,6 +168,19 @@ public class MovieProvider : BaseProvider, IRemoteMetadataProvider<Movie, MovieI
         {
             Logger.Error("Get actor image error: {0} ({1})", name, e.Message);
             return string.Empty;
+        }
+    }
+
+    private void TranslateMovieInfo(MovieInfoModel m, string language, CancellationToken cancellationToken)
+    {
+        try
+        {
+            Logger.Info("Translate movie info language: {0} => {1}", m.Number, language);
+            TranslationHelper.Translate(m, language, cancellationToken);
+        }
+        catch (Exception e)
+        {
+            Logger.Error("Translate error: {0}", e.Message);
         }
     }
 }
