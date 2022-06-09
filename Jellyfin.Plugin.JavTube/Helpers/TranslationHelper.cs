@@ -27,7 +27,7 @@ public static class TranslationHelper
         // We are intentionally using 'static readonly' here instead of 'const'.
         // 'const' values would be embedded into each assembly that used them and
         // each consuming assembly would have a different 'string' instance. Using
-        // .'static readonly' means that all consumers get these exact same 'string'
+        // 'static readonly' means that all consumers get these exact same 'string'
         // instance, which means the 'ReferenceEquals' checks below work and allow
         // us to optimize comparisons when these constants are used.
         public static readonly string Baidu = "Baidu";
