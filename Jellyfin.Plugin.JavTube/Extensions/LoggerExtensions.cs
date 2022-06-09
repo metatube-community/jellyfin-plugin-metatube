@@ -1,5 +1,6 @@
 #if !__EMBY__
 #pragma warning disable CA2254
+
 using Microsoft.Extensions.Logging;
 
 namespace Jellyfin.Plugin.JavTube.Extensions;
