@@ -1,6 +1,16 @@
 using System.Collections.Specialized;
 using Jellyfin.Plugin.JavTube.Models;
 
+// ReSharper disable ConvertToConstant.Global
+//
+// Disabling reason:
+// We are intentionally using 'static readonly' here instead of 'const'.
+// 'const' values would be embedded into each assembly that used them and
+// each consuming assembly would have a different 'string' instance. Using
+// .'static readonly' means that all consumers get these exact same 'string'
+// instance, which means the 'ReferenceEquals' checks below work and allow
+// us to optimize comparisons when these constants are used.
+
 namespace Jellyfin.Plugin.JavTube.Helpers;
 
 public static class TranslationHelper
@@ -18,8 +28,8 @@ public static class TranslationHelper
 
     public static class Engine
     {
-        public const string Baidu = "Baidu";
-        public const string Google = "Google";
+        public static readonly string Baidu = "Baidu";
+        public static readonly string Google = "Google";
     }
 
     private static async Task<string> Translate(string q, string from, string to, CancellationToken cancellationToken)
