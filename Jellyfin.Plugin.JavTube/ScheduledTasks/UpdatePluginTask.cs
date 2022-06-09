@@ -1,13 +1,16 @@
 #if __EMBY__
-using System.Net.Http.Json;
 using System.Reflection;
+using System.Text.Json;
 using System.Text.Json.Serialization;
 using Jellyfin.Plugin.JavTube.Extensions;
 using MediaBrowser.Common;
 using MediaBrowser.Common.Configuration;
+using MediaBrowser.Common.Net;
 using MediaBrowser.Model.IO;
 using MediaBrowser.Model.Logging;
 using MediaBrowser.Model.Tasks;
+using HttpRequestOptions = MediaBrowser.Common.Net.HttpRequestOptions;
+
 
 namespace Jellyfin.Plugin.JavTube.ScheduledTasks;
 
@@ -15,14 +18,16 @@ public class UpdatePluginTask : IScheduledTask
 {
     private readonly IApplicationHost _applicationHost;
     private readonly IApplicationPaths _applicationPaths;
+    private readonly IHttpClient _httpClient;
     private readonly ILogger _logger;
     private readonly IZipClient _zipClient;
 
     public UpdatePluginTask(IApplicationHost applicationHost, IApplicationPaths applicationPaths,
-        ILogManager logManager, IZipClient zipClient)
+        IHttpClient httpClient, ILogManager logManager, IZipClient zipClient)
     {
         _applicationHost = applicationHost;
         _applicationPaths = applicationPaths;
+        _httpClient = httpClient;
         _logger = logManager.CreateLogger<UpdatePluginTask>();
         _zipClient = zipClient;
     }
@@ -53,12 +58,13 @@ public class UpdatePluginTask : IScheduledTask
 
         try
         {
-            var httpClient = new HttpClient();
-            httpClient.DefaultRequestHeaders.Add("User-Agent", Constant.UserAgent);
-
-            var apiResult = await httpClient.GetFromJsonAsync<GithubApiResult>(
-                "https://api.github.com/repos/javtube/jellyfin-plugin-javtube/releases/latest",
-                cancellationToken).ConfigureAwait(false);
+            var apiResult = JsonSerializer.Deserialize<GithubApiResult>(await _httpClient.Get(new HttpRequestOptions
+            {
+                Url = "https://api.github.com/repos/javtube/jellyfin-plugin-javtube/releases/latest",
+                CancellationToken = cancellationToken,
+                AcceptHeader = "application/json",
+                UserAgent = Constant.UserAgent,
+            }).ConfigureAwait(false));
 
             var currentVersion = ParseVersion(CurrentVersion);
             var remoteVersion = ParseVersion(apiResult?.TagName);
@@ -74,9 +80,13 @@ public class UpdatePluginTask : IScheduledTask
                 if (!Uri.IsWellFormedUriString(url, UriKind.Absolute))
                     throw new Exception("Invalid download url");
 
-                // HttpClient doesn't support progress reporting, see this issue:
-                // https://github.com/dotnet/runtime/issues/16681
-                var zipStream = await httpClient.GetStreamAsync(url, cancellationToken).ConfigureAwait(false);
+                var zipStream = await _httpClient.Get(new HttpRequestOptions
+                {
+                    Url = url,
+                    CancellationToken = cancellationToken,
+                    UserAgent = Constant.UserAgent,
+                    Progress = progress
+                }).ConfigureAwait(false);
 
                 _zipClient.ExtractAllFromZip(zipStream, _applicationPaths.PluginsPath, true);
 
