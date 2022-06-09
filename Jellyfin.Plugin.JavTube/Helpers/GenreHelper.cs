@@ -3,7 +3,7 @@ using MediaBrowser.Controller.Providers;
 
 namespace Jellyfin.Plugin.JavTube.Helpers;
 
-public static class Genres
+public static class GenreHelper
 {
     public const string ChineseSubtitle = "中文字幕";
 
