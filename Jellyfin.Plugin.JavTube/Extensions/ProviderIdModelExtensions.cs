@@ -55,7 +55,6 @@ internal static class ProviderIdModelExtensions
 
     public static string Serialize(this ProviderIdModel pid)
     {
-        //var pid = this;
         var values = new List<string>
         {
             pid.Provider, pid.Id
