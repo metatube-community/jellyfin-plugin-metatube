@@ -24,7 +24,7 @@ jobs:
       - name: Generate Version
         id: shell
         run: |
-          echo ::set-output name=version::1.$(date '+%Y.%m%d.%H%M')
+          echo ::set-output name=version::$(date -u '+%Y.%-m%d.%-H%M.0')
 
       - name: Build Plugins
         run: |
