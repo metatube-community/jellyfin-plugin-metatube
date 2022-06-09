@@ -19,7 +19,7 @@ public class ActorProvider : BaseProvider, IRemoteMetadataProvider<Person, Perso
         httpClient,
         logManager.CreateLogger<ActorProvider>())
 #else
-    public ActorProvider(IHttpClientFactory httpClientFactory, ILogger logger) : base(
+    public ActorProvider(IHttpClientFactory httpClientFactory, ILogger<ActorProvider> logger) : base(
         httpClientFactory, logger)
 #endif
     {
