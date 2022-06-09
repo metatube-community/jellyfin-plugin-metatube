@@ -1,15 +1,8 @@
 using System.Collections.Specialized;
 using Jellyfin.Plugin.JavTube.Models;
 
-// ReSharper disable ConvertToConstant.Global
-//
-// Disabling reason:
-// We are intentionally using 'static readonly' here instead of 'const'.
-// 'const' values would be embedded into each assembly that used them and
-// each consuming assembly would have a different 'string' instance. Using
-// .'static readonly' means that all consumers get these exact same 'string'
-// instance, which means the 'ReferenceEquals' checks below work and allow
-// us to optimize comparisons when these constants are used.
+// ReSharper disable UnusedMember.Local
+// ReSharper disable ConvertToConstant.Local
 
 namespace Jellyfin.Plugin.JavTube.Helpers;
 
@@ -18,16 +11,26 @@ public static class TranslationHelper
     private const string AutoLanguage = "auto";
 
     [Flags]
-    public enum Mode
+    private enum Mode
     {
         None,
         Title,
+        Tagline,
+        TitleTagLine,
         Overview,
-        TitleOverview
+        TitleOverview,
+        TagLineOverview,
+        All
     }
 
-    public static class Engine
+    private static class Engine
     {
+        // We are intentionally using 'static readonly' here instead of 'const'.
+        // 'const' values would be embedded into each assembly that used them and
+        // each consuming assembly would have a different 'string' instance. Using
+        // .'static readonly' means that all consumers get these exact same 'string'
+        // instance, which means the 'ReferenceEquals' checks below work and allow
+        // us to optimize comparisons when these constants are used.
         public static readonly string Baidu = "Baidu";
         public static readonly string Google = "Google";
     }
@@ -73,6 +76,11 @@ public static class TranslationHelper
         if ((mode & Mode.Title) != 0 && !string.IsNullOrWhiteSpace(m.Title))
         {
             m.Title = await Translate(m.Title, AutoLanguage, to, cancellationToken);
+        }
+
+        if ((mode & Mode.Tagline) != 0 && !string.IsNullOrWhiteSpace(m.Series))
+        {
+            m.Series = await Translate(m.Series, AutoLanguage, to, cancellationToken);
         }
 
         if ((mode & Mode.Overview) != 0 && !string.IsNullOrWhiteSpace(m.Summary))
