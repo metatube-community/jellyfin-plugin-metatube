@@ -167,7 +167,7 @@ public static class ApiClient
             DefaultRequestHeaders =
             {
                 { "Accept", "application/json" },
-                { "User-Agent", Constant.UserAgent },
+                { "User-Agent", Constant.UserAgent }
             }
         };
 
