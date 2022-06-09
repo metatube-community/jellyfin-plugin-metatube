@@ -40,7 +40,7 @@ public abstract class BaseProvider
     public Task<HttpResponseMessage> GetImageResponse(string url, CancellationToken cancellationToken)
 #endif
     {
-        Logger.Info ("GetImageResponse for url: {0}", url);
+        Logger.Info("GetImageResponse for url: {0}", url);
         return GetAsync(url, cancellationToken);
     }
 

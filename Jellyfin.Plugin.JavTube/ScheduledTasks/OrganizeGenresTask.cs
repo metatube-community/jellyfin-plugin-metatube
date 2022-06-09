@@ -102,11 +102,7 @@ public class OrganizeGenresTask : IScheduledTask
             }
             catch (Exception e)
             {
-#if __EMBY__
                 _logger.Error("Chinese subtitle for video {0}: {1}", item.Name, e.Message);
-#else
-                _logger.LogError("Chinese subtitle for video {Name}: {Message}", item.Name, e.Message);
-#endif
             }
 
             // Remove Duplicates
@@ -119,11 +115,11 @@ public class OrganizeGenresTask : IScheduledTask
 
             item.Genres = orderedGenres.ToArray();
 
-#if __EMBY__
             _logger.Info("OrganizeGenres for video: {0}", item.Name);
+
+#if __EMBY__
             _libraryManager.UpdateItem(item, item, ItemUpdateType.MetadataEdit, null);
 #else
-            _logger.LogInformation("OrganizeGenres for video: {Name}", item.Name);
             _libraryManager
                 .UpdateItemAsync(item, item, ItemUpdateType.MetadataEdit, cancellationToken)
                 .ConfigureAwait(false);
