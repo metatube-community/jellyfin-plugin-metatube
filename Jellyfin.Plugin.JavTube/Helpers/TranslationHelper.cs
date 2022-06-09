@@ -5,8 +5,6 @@ namespace Jellyfin.Plugin.JavTube.Helpers;
 
 public static class TranslationHelper
 {
-    private const string AutoLanguage = "auto";
-
     [Flags]
     public enum Mode
     {
@@ -19,6 +17,8 @@ public static class TranslationHelper
         TagLineOverview,
         All
     }
+
+    private const string AutoLanguage = "auto";
 
     private static class Engine
     {
@@ -73,18 +73,12 @@ public static class TranslationHelper
         var mode = (Mode)Plugin.Instance.Configuration.TranslationMode;
 
         if ((mode & Mode.Title) != 0 && !string.IsNullOrWhiteSpace(m.Title))
-        {
             m.Title = await Translate(m.Title, AutoLanguage, to, cancellationToken);
-        }
 
         if ((mode & Mode.Tagline) != 0 && !string.IsNullOrWhiteSpace(m.Series))
-        {
             m.Series = await Translate(m.Series, AutoLanguage, to, cancellationToken);
-        }
 
         if ((mode & Mode.Overview) != 0 && !string.IsNullOrWhiteSpace(m.Summary))
-        {
             m.Summary = await Translate(m.Summary, AutoLanguage, to, cancellationToken);
-        }
     }
 }

@@ -52,9 +52,7 @@ public class MovieProvider : BaseProvider, IRemoteMetadataProvider<Movie, MovieI
 
         // Translate movie info.
         if (Plugin.Instance.Configuration.TranslationMode != (int)TranslationHelper.Mode.None)
-        {
             await TranslateMovieInfo(m, info.MetadataLanguage, cancellationToken);
-        }
 
         var result = new MetadataResult<Movie>
         {
