@@ -82,7 +82,8 @@ public class OrganizeGenresTask : IScheduledTask
             var genres = item.Genres?.ToList() ?? new List<string>();
 
             // Replace Genres.
-            foreach (var genre in genres.Where(genre => GenreHelper.SubstitutionTable.ContainsKey(genre)).ToArray())
+            foreach (var genre in genres.Where(genre =>
+                         GenreHelper.SubstitutionTable.ContainsKey(genre)).ToArray())
             {
                 var value = GenreHelper.SubstitutionTable[genre];
                 if (string.IsNullOrEmpty(value))
