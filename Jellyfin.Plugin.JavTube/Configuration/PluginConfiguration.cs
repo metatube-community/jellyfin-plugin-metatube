@@ -21,9 +21,9 @@ public class PluginConfiguration : BasePluginConfiguration
 
     public string Token { get; set; }
 
-    public string TranslationEngine { get; set; }
-
     public int TranslationMode { get; set; }
+
+    public string TranslationEngine { get; set; }
 
     public string BaiduAppId { get; set; }
 
