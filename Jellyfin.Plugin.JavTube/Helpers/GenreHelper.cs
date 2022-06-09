@@ -7,7 +7,7 @@ public static class GenreHelper
 {
     public const string ChineseSubtitle = "中文字幕";
 
-    public static readonly Dictionary<string, string> Substitution =
+    public static readonly Dictionary<string, string> SubstitutionTable =
         new(StringComparer.OrdinalIgnoreCase)
         {
             { "HD", null },
@@ -18,17 +18,17 @@ public static class GenreHelper
             { "60fps", null }
         };
 
-    public static bool HasChineseSubtitle(MovieInfo info)
+    public static bool HasEmbeddedChineseSubtitle(MovieInfo info)
     {
 #if __EMBY__
         var filename = Path.GetFileNameWithoutExtension(info.Name);
 #else
         var filename = Path.GetFileNameWithoutExtension(info.Path);
 #endif
-        return HasChineseSubtitle(filename);
+        return HasEmbeddedChineseSubtitle(filename);
     }
 
-    public static bool HasChineseSubtitle(string filename)
+    public static bool HasEmbeddedChineseSubtitle(string filename)
     {
         if (string.IsNullOrWhiteSpace(filename))
             return false;

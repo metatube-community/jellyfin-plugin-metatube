@@ -82,9 +82,9 @@ public class OrganizeGenresTask : IScheduledTask
             var genres = item.Genres?.ToList() ?? new List<string>();
 
             // Replace Genres.
-            foreach (var genre in genres.Where(genre => GenreHelper.Substitution.ContainsKey(genre)).ToArray())
+            foreach (var genre in genres.Where(genre => GenreHelper.SubstitutionTable.ContainsKey(genre)).ToArray())
             {
-                var value = GenreHelper.Substitution[genre];
+                var value = GenreHelper.SubstitutionTable[genre];
                 if (string.IsNullOrEmpty(value))
                     genres.Remove(genre); // should just be removed.
                 else
@@ -94,7 +94,7 @@ public class OrganizeGenresTask : IScheduledTask
             try
             {
                 // Add or Remove `ChineseSubtitle` Genre.
-                if (GenreHelper.HasChineseSubtitle(item.FileNameWithoutExtension) ||
+                if (GenreHelper.HasEmbeddedChineseSubtitle(item.FileNameWithoutExtension) ||
                     GenreHelper.HasExternalChineseSubtitle(item.Path))
                     genres.Add(GenreHelper.ChineseSubtitle);
                 else
