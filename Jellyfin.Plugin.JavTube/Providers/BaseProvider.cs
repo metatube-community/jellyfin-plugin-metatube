@@ -30,9 +30,9 @@ public abstract class BaseProvider
     }
 #endif
 
-    public int Order => 1;
+    public virtual int Order => 1;
 
-    public string Name => Plugin.Instance.Name;
+    public virtual string Name => Plugin.Instance.Name;
 
 #if __EMBY__
     public Task<HttpResponseInfo> GetImageResponse(string url, CancellationToken cancellationToken)
