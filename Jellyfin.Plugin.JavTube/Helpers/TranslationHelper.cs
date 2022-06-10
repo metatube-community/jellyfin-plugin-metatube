@@ -1,4 +1,5 @@
 using System.Collections.Specialized;
+using Jellyfin.Plugin.JavTube.Configuration;
 using Jellyfin.Plugin.JavTube.Models;
 
 namespace Jellyfin.Plugin.JavTube.Helpers;
@@ -34,43 +35,44 @@ public static class TranslationHelper
         public static readonly string Google = "Google";
     }
 
+    private static PluginConfiguration Configuration => Plugin.Instance.Configuration;
+
     private static async Task<string> Translate(string q, string from, string to, CancellationToken cancellationToken)
     {
-        var engine = Plugin.Instance.Configuration.TranslationEngine;
-
         var nv = new NameValueCollection();
-        if (string.Equals(engine, Engine.Baidu,
+        if (string.Equals(Configuration.TranslationEngine, Engine.Baidu,
                 StringComparison.OrdinalIgnoreCase))
         {
             // Limit Baidu API request rate to 1 rps.
             await Task.Delay(1000, cancellationToken);
             nv.Add(new NameValueCollection
             {
-                { "baidu-app-id", Plugin.Instance.Configuration.BaiduAppId },
-                { "baidu-app-key", Plugin.Instance.Configuration.BaiduAppKey }
+                { "baidu-app-id", Configuration.BaiduAppId },
+                { "baidu-app-key", Configuration.BaiduAppKey }
             });
         }
-        else if (string.Equals(engine, Engine.Google,
+        else if (string.Equals(Configuration.TranslationEngine, Engine.Google,
                      StringComparison.OrdinalIgnoreCase))
         {
             // Limit Google API request rate to 10 rps.
             await Task.Delay(100, cancellationToken);
             nv.Add(new NameValueCollection
             {
-                { "google-api-key", Plugin.Instance.Configuration.GoogleApiKey }
+                { "google-api-key", Configuration.GoogleApiKey }
             });
         }
         else
         {
-            throw new ArgumentException($"Invalid translation engine: {engine}");
+            throw new ArgumentException($"Invalid translation engine: {Configuration.TranslationEngine}");
         }
 
-        return (await ApiClient.GetTranslate(q, from, to, engine, nv, cancellationToken)).TranslatedText;
+        return (await ApiClient.GetTranslate(q, from, to, Configuration.TranslationEngine, nv, cancellationToken)
+            .ConfigureAwait(false)).TranslatedText;
     }
 
     public static async Task Translate(MovieInfoModel m, string to, CancellationToken cancellationToken)
     {
-        var mode = (Mode)Plugin.Instance.Configuration.TranslationMode;
+        var mode = (Mode)Configuration.TranslationMode;
 
         if ((mode & Mode.Title) != 0 && !string.IsNullOrWhiteSpace(m.Title))
             m.Title = await Translate(m.Title, AutoLanguage, to, cancellationToken);
