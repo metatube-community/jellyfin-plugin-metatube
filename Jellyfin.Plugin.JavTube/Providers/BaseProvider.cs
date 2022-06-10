@@ -52,9 +52,8 @@ public abstract class BaseProvider
         return await _httpClient.GetResponse(new HttpRequestOptions
         {
             Url = url,
-            EnableDefaultUserAgent = false,
-            UserAgent = Constant.UserAgent,
-            CancellationToken = cancellationToken
+            CancellationToken = cancellationToken,
+            UserAgent = Constant.UserAgent
         }).ConfigureAwait(false);
     }
 #else
