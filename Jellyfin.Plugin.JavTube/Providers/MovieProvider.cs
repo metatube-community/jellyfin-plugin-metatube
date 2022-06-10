@@ -50,6 +50,9 @@ public class MovieProvider : BaseProvider, IRemoteMetadataProvider<Movie, MovieI
 
         var m = await ApiClient.GetMovieInfo(pid.Provider, pid.Id, cancellationToken);
 
+        // Preserve original title.
+        var originalTitle = m.Title;
+
         // Translate movie info.
         if (Configuration.TranslationMode != (int)TranslationHelper.Mode.None)
             await TranslateMovieInfo(m, info.MetadataLanguage, cancellationToken);
@@ -59,7 +62,7 @@ public class MovieProvider : BaseProvider, IRemoteMetadataProvider<Movie, MovieI
             Item = new Movie
             {
                 Name = $"{m.Number} {m.Title}",
-                OriginalTitle = m.Title,
+                OriginalTitle = originalTitle,
                 Overview = m.Summary,
                 Tagline = m.Series,
                 Genres = m.Tags,
