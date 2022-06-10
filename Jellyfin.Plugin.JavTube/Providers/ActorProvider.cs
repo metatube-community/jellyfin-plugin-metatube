@@ -126,7 +126,7 @@ public class ActorProvider : BaseProvider, IRemoteMetadataProvider<Person, Perso
         }
 
         var overview = string.Empty;
-        overview += G("身長", $"{a.Height}cm");
+        overview += G("身長", a.Height > 0 ? $"{a.Height}cm" : null);
         overview += G("血液型", a.BloodType);
         overview += G("ブラのサイズ", a.CupSize);
         overview += G("スリーサイズ", a.Measurements);
