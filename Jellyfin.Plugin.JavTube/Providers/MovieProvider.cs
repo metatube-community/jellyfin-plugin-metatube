@@ -51,7 +51,7 @@ public class MovieProvider : BaseProvider, IRemoteMetadataProvider<Movie, MovieI
         var m = await ApiClient.GetMovieInfo(pid.Provider, pid.Id, cancellationToken);
 
         // Translate movie info.
-        if (Plugin.Instance.Configuration.TranslationMode != (int)TranslationHelper.Mode.None)
+        if (Configuration.TranslationMode != (int)TranslationHelper.Mode.None)
             await TranslateMovieInfo(m, info.MetadataLanguage, cancellationToken);
 
         var result = new MetadataResult<Movie>

@@ -1,8 +1,8 @@
+using Jellyfin.Plugin.JavTube.Configuration;
 #if __EMBY__
 using MediaBrowser.Common.Net;
 using MediaBrowser.Model.Logging;
 using HttpRequestOptions = MediaBrowser.Common.Net.HttpRequestOptions;
-
 #else
 using Microsoft.Extensions.Logging;
 using Jellyfin.Plugin.JavTube.Extensions;
@@ -13,22 +13,24 @@ namespace Jellyfin.Plugin.JavTube.Providers;
 public abstract class BaseProvider
 {
     protected readonly ILogger Logger;
+    protected readonly PluginConfiguration Configuration;
 
 #if __EMBY__
     private readonly IHttpClient _httpClient;
+
     protected BaseProvider(IHttpClient httpClient, ILogger logger)
     {
         _httpClient = httpClient;
-        Logger = logger;
-    }
 #else
     private readonly IHttpClientFactory _httpClientFactory;
+
     protected BaseProvider(IHttpClientFactory httpClientFactory, ILogger logger)
     {
         _httpClientFactory = httpClientFactory;
-        Logger = logger;
-    }
 #endif
+        Logger = logger;
+        Configuration = Plugin.Instance.Configuration;
+    }
 
     public virtual int Order => 1;
 
