@@ -16,7 +16,13 @@ body:
 
   - type: input
     attributes:
-      label: Version
+      label: JavTube Plugin Version
+    validations:
+      required: true
+
+  - type: input
+    attributes:
+      label: JavTube Server Version
     validations:
       required: true
 
