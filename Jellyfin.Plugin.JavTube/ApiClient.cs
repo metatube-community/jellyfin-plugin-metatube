@@ -50,13 +50,13 @@ public static class ApiClient
         });
     }
 
-    private static string ComposeSearchApiUrl(string path, string q, string provider, bool lazy)
+    private static string ComposeSearchApiUrl(string path, string q, string provider, bool fallback)
     {
         return ComposeUrl(path, new NameValueCollection
         {
             { "q", q },
             { "provider", provider },
-            { "lazy", lazy.ToString() }
+            { "fallback", fallback.ToString() }
         });
     }
 
@@ -109,7 +109,7 @@ public static class ApiClient
     public static async Task<ActorInfoModel> GetActorInfo(string provider, string id,
         CancellationToken cancellationToken)
     {
-        return await GetActorInfo(provider, id, true, cancellationToken);
+        return await GetActorInfo(provider, id, true /* default */, cancellationToken);
     }
 
     public static async Task<ActorInfoModel> GetActorInfo(string provider, string id, bool lazy,
@@ -122,7 +122,7 @@ public static class ApiClient
     public static async Task<MovieInfoModel> GetMovieInfo(string provider, string id,
         CancellationToken cancellationToken)
     {
-        return await GetMovieInfo(provider, id, true, cancellationToken);
+        return await GetMovieInfo(provider, id, true /* default */, cancellationToken);
     }
 
     public static async Task<MovieInfoModel> GetMovieInfo(string provider, string id, bool lazy,
@@ -134,37 +134,37 @@ public static class ApiClient
 
     public static async Task<List<ActorSearchResultModel>> SearchActor(string q, CancellationToken cancellationToken)
     {
-        return await SearchActor(q, string.Empty, false, cancellationToken);
+        return await SearchActor(q, string.Empty, cancellationToken);
     }
 
     public static async Task<List<ActorSearchResultModel>> SearchActor(string q, string provider,
         CancellationToken cancellationToken)
     {
-        return await SearchActor(q, provider, false, cancellationToken);
+        return await SearchActor(q, provider, true /* default */, cancellationToken);
     }
 
     public static async Task<List<ActorSearchResultModel>> SearchActor(string q, string provider,
-        bool lazy, CancellationToken cancellationToken)
+        bool fallback, CancellationToken cancellationToken)
     {
-        var apiUrl = ComposeSearchApiUrl(ActorSearchApi, q, provider, lazy);
+        var apiUrl = ComposeSearchApiUrl(ActorSearchApi, q, provider, fallback);
         return await GetDataFromApi<List<ActorSearchResultModel>>(apiUrl, true, cancellationToken);
     }
 
     public static async Task<List<MovieSearchResultModel>> SearchMovie(string q, CancellationToken cancellationToken)
     {
-        return await SearchMovie(q, string.Empty, false, cancellationToken);
+        return await SearchMovie(q, string.Empty, cancellationToken);
     }
 
     public static async Task<List<MovieSearchResultModel>> SearchMovie(string q, string provider,
         CancellationToken cancellationToken)
     {
-        return await SearchMovie(q, provider, false, cancellationToken);
+        return await SearchMovie(q, provider, true /* default */, cancellationToken);
     }
 
     public static async Task<List<MovieSearchResultModel>> SearchMovie(string q, string provider,
-        bool lazy, CancellationToken cancellationToken)
+        bool fallback, CancellationToken cancellationToken)
     {
-        var apiUrl = ComposeSearchApiUrl(MovieSearchApi, q, provider, lazy);
+        var apiUrl = ComposeSearchApiUrl(MovieSearchApi, q, provider, fallback);
         return await GetDataFromApi<List<MovieSearchResultModel>>(apiUrl, true, cancellationToken);
     }
 
