@@ -18,6 +18,17 @@ public static class GenreHelper
             { "60fps", null }
         };
 
+    private static bool HasTag(string filename, string tag)
+    {
+        var r = new Regex(@"[-_\s]", RegexOptions.Compiled);
+        return r.Split(filename).ToList().Contains(tag, StringComparer.OrdinalIgnoreCase);
+    }
+
+    private static bool HasTag(string filename, params string[] tags)
+    {
+        return tags.Any(tag => HasTag(filename, tag));
+    }
+
     public static bool HasEmbeddedChineseSubtitle(MovieInfo info)
     {
 #if __EMBY__
@@ -33,15 +44,7 @@ public static class GenreHelper
         if (string.IsNullOrWhiteSpace(filename))
             return false;
 
-        if (filename.Contains(ChineseSubtitle))
-            return true;
-
-        var r = new Regex(@"-cd\d+$",
-            RegexOptions.IgnoreCase | RegexOptions.CultureInvariant | RegexOptions.Compiled);
-        filename = r.Replace(filename, string.Empty);
-
-        return filename[Math.Max(0, filename.Length - 2)..]
-            .Equals("-C", StringComparison.OrdinalIgnoreCase);
+        return filename.Contains(ChineseSubtitle) || HasTag(filename, "C", "ch");
     }
 
     public static bool HasExternalChineseSubtitle(string path)
