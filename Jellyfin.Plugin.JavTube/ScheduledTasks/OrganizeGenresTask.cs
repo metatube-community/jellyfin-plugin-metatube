@@ -86,7 +86,7 @@ public class OrganizeGenresTask : IScheduledTask
                          GenreHelper.SubstitutionTable.ContainsKey(genre)).ToArray())
             {
                 var value = GenreHelper.SubstitutionTable[genre];
-                if (string.IsNullOrEmpty(value))
+                if (string.IsNullOrWhiteSpace(value))
                     genres.Remove(genre); // should just be removed.
                 else
                     genres[genres.IndexOf(genre)] = value; // replace.
