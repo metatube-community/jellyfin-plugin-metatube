@@ -29,16 +29,6 @@ public static class GenreHelper
         return tags.Any(tag => HasTag(filename, tag));
     }
 
-    public static bool HasEmbeddedChineseSubtitle(MovieInfo info)
-    {
-#if __EMBY__
-        var filename = Path.GetFileNameWithoutExtension(info.Name);
-#else
-        var filename = Path.GetFileNameWithoutExtension(info.Path);
-#endif
-        return HasEmbeddedChineseSubtitle(filename);
-    }
-
     public static bool HasEmbeddedChineseSubtitle(string filename)
     {
         if (string.IsNullOrWhiteSpace(filename))
