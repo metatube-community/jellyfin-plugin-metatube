@@ -54,7 +54,7 @@ public class MovieProvider : BaseProvider, IRemoteMetadataProvider<Movie, MovieI
         var originalTitle = m.Title;
 
         // Translate movie info.
-        if (Configuration.TranslationMode != (int)TranslationHelper.Mode.None)
+        if (Configuration.TranslationMode != (int)TranslationHelper.Mode.Disabled)
             await TranslateMovieInfo(m, info.MetadataLanguage, cancellationToken);
 
         var result = new MetadataResult<Movie>

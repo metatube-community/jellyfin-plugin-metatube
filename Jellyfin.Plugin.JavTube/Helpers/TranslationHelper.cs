@@ -9,7 +9,7 @@ public static class TranslationHelper
     [Flags]
     public enum Mode
     {
-        None,
+        Disabled,
         Title,
         Tagline,
         TitleTagLine,
