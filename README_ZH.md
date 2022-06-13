@@ -1,5 +1,5 @@
 <h1 align="center">Jellyfin Plugin JavTube</h1>
-<h5 align="center">简体中文 | <a href="README.md">English</a></h5>
+<p align="center">简体中文 | <a href="README.md">English</a></p>
 
 <p align="center">
 <img alt="Plugin Banner" src="https://javtube.github.io/logos/banner.png"/>
