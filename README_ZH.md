@@ -21,8 +21,11 @@
 <a href="https://github.com/javtube/jellyfin-plugin-javtube">
 <img alt="Downloads" src="https://img.shields.io/github/downloads/javtube/jellyfin-plugin-javtube/total">
 </a>
+<a href="https://hub.docker.com/r/javtube/javtube-server">
+<img alt="Docker Pulls" src="https://img.shields.io/docker/pulls/javtube/javtube-server?logo=docker">
+</a>
 <a href="https://github.com/javtube/jellyfin-plugin-javtube/releases">
-<img alt="Releases" src="https://img.shields.io/github/v/release/javtube/jellyfin-plugin-javtube?include_prereleases">
+<img alt="Releases" src="https://img.shields.io/github/v/release/javtube/jellyfin-plugin-javtube?include_prereleases&logo=smartthings">
 </a>
 
 ## 关于
