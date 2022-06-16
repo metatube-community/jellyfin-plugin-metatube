@@ -175,7 +175,8 @@ public static class ApiClient
         return await GetDataFromApi<TranslateModel>(apiUrl, false, cancellationToken);
     }
 
-    private static async Task<T> GetDataFromApi<T>(string url, bool requireAuth, CancellationToken cancellationToken)
+    private static async Task<TModel> GetDataFromApi<TModel>(string url, bool requireAuth,
+        CancellationToken cancellationToken)
     {
         cancellationToken.ThrowIfCancellationRequested();
 
@@ -203,7 +204,7 @@ public static class ApiClient
         // Response is unlikely to be null.
         // If it happens to be null, an exception is planed to be thrown either way.
         var model = (await response.Content!
-            .ReadFromJsonAsync<ResponseModel<T>>(cancellationToken: cancellationToken).ConfigureAwait(false))!;
+            .ReadFromJsonAsync<ResponseModel<TModel>>(cancellationToken: cancellationToken).ConfigureAwait(false))!;
 
         // EnsureSuccessStatusCode ignoring reason:
         // When the status is unsuccessful, the API response contains error details.

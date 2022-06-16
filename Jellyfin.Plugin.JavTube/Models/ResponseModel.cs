@@ -2,9 +2,9 @@ using System.Text.Json.Serialization;
 
 namespace Jellyfin.Plugin.JavTube.Models;
 
-public class ResponseModel<T>
+public class ResponseModel<TModel>
 {
-    [JsonPropertyName("data")] public T Data { get; set; }
+    [JsonPropertyName("data")] public TModel Data { get; set; }
 
     [JsonPropertyName("error")] public ErrorModel Error { get; set; }
 }
