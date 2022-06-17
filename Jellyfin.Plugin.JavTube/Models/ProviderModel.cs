@@ -4,19 +4,24 @@ namespace Jellyfin.Plugin.JavTube.Models;
 
 public class ProviderModel
 {
-    [JsonPropertyName("id")] public string Id { get; set; }
+    [JsonPropertyName("id")]
+    public string Id { get; set; }
 
-    [JsonPropertyName("provider")] public string Provider { get; set; }
+    [JsonPropertyName("provider")]
+    public string Provider { get; set; }
 }
 
 public class ProviderInfoModel : ProviderModel
 {
-    [JsonPropertyName("homepage")] public string Homepage { get; set; }
+    [JsonPropertyName("homepage")]
+    public string Homepage { get; set; }
 }
 
 public class ProviderIdModel : ProviderModel
 {
-    [JsonIgnore] public double? Position { get; set; }
+    [JsonIgnore]
+    public double? Position { get; set; }
 
-    [JsonIgnore] public bool? UpdateInfo { get; set; }
+    [JsonIgnore]
+    public bool? UpdateInfo { get; set; }
 }
