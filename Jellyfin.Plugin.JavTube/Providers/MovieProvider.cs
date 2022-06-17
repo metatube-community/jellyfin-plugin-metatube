@@ -82,14 +82,13 @@ public class MovieProvider : BaseProvider, IRemoteMetadataProvider<Movie, MovieI
             Position = pid.Position
         });
 
-        // Set studios: maker > publisher.
-        result.Item.Studios = !string.IsNullOrWhiteSpace(m.Maker)
-            ? new[] { m.Maker }
-            : !string.IsNullOrWhiteSpace(m.Publisher)
-                ? new[] { m.Publisher }
-                : null;
+        // Add Studios.
+        if (!string.IsNullOrWhiteSpace(m.Maker))
+            result.Item.AddStudio(m.Maker);
+        if (!string.IsNullOrWhiteSpace(m.Publisher))
+            result.Item.AddStudio(m.Publisher);
 
-        // Add director.
+        // Add Director.
         if (!string.IsNullOrWhiteSpace(m.Director))
             result.AddPerson(new PersonInfo
             {
@@ -97,7 +96,7 @@ public class MovieProvider : BaseProvider, IRemoteMetadataProvider<Movie, MovieI
                 Type = PersonType.Director
             });
 
-        // Add actors.
+        // Add Actors.
         foreach (var name in m.Actors)
             result.AddPerson(new PersonInfo
             {
