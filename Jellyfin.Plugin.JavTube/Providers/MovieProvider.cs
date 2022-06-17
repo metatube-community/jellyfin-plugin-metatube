@@ -81,13 +81,13 @@ public class MovieProvider : BaseProvider, IRemoteMetadataProvider<Movie, MovieI
             Position = pid.Position
         });
 
-        // Add Tag.
-        if (!string.IsNullOrWhiteSpace(m.Label))
-            result.Item.AddTag(m.Label);
-
         // Add Studio.
         if (!string.IsNullOrWhiteSpace(m.Maker))
             result.Item.AddStudio(m.Maker);
+
+        // Add Tag.
+        if (!string.IsNullOrWhiteSpace(m.Label))
+            result.Item.AddTag(m.Label);
 
         // Add Director.
         if (!string.IsNullOrWhiteSpace(m.Director))
