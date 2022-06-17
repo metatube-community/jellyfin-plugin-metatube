@@ -22,6 +22,12 @@
                     <input id="txtToken" is="emby-input" name="txtToken" type="text"/>
                     <div class="fieldDescription">Access Token of JavTube Server.</div>
                 </div>
+                <div class="checkboxContainer checkboxContainer-withDescripton">
+                    <label class="emby-checkbox-label">
+                        <input id="chkEnableTrailers" is="emby-checkbox" name="chkEnableTrailers" type="checkbox"/>
+                        <span>Enable Trailers</span>
+                    </label>
+                </div>
                 <div class="selectContainer">
                     <label class="selectLabel" for="sltTranslationMode">Translation Mode</label>
                     <select class="emby-select-withcolor emby-select" id="sltTranslationMode" is="emby-select"
@@ -76,6 +82,7 @@
             ApiClient.getPluginConfiguration(JavTubePluginConfig.uniquePluginId).then(function (config) {
                 $('#txtServer').val(config.Server).change();
                 $('#txtToken').val(config.Token).change();
+                $('#chkEnableTrailers').prop('checked', config.EnableTrailers);
                 $('#sltTranslationMode').val(config.TranslationMode).change();
                 $('#sltTranslationEngine').val(config.TranslationEngine).change();
                 $('#txtBaiduAppId').val(config.BaiduAppId).change();
@@ -90,6 +97,7 @@
             ApiClient.getPluginConfiguration(JavTubePluginConfig.uniquePluginId).then(function (config) {
                 config.Server = $('#txtServer').val();
                 config.Token = $('#txtToken').val();
+                config.EnableTrailers = $('#chkEnableTrailers').prop('checked');
                 config.TranslationMode = $('#sltTranslationMode').val();
                 config.TranslationEngine = $('#sltTranslationEngine').val();
                 config.BaiduAppId = $('#txtBaiduAppId').val();

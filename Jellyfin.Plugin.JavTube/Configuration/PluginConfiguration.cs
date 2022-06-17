@@ -8,6 +8,7 @@ public class PluginConfiguration : BasePluginConfiguration
     {
         Server = "https://api.javtube.internal";
         Token = string.Empty;
+        EnableTrailers = false;
         TranslationMode = 0;
         TranslationEngine = "Baidu";
         BaiduAppId = string.Empty;
@@ -18,6 +19,8 @@ public class PluginConfiguration : BasePluginConfiguration
     public string Server { get; set; }
 
     public string Token { get; set; }
+
+    public bool EnableTrailers { get; set; }
 
     public int TranslationMode { get; set; }
 
