@@ -1,5 +1,4 @@
 using System.Text.RegularExpressions;
-using MediaBrowser.Controller.Providers;
 
 namespace Jellyfin.Plugin.JavTube.Helpers;
 
