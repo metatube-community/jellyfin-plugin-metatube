@@ -54,13 +54,12 @@ public class OrganizeGenresTask : IScheduledTask
 
 #if __EMBY__
     public async Task Execute(CancellationToken cancellationToken, IProgress<double> progress)
+#else
+    public async Task ExecuteAsync(IProgress<double> progress, CancellationToken cancellationToken)
+#endif
     {
         await Task.Yield();
-#else
-    public Task ExecuteAsync(IProgress<double> progress, CancellationToken cancellationToken)
-    {
-        Task.Yield();
-#endif
+
         progress?.Report(0);
 
         var items = _libraryManager.GetItemList(new InternalItemsQuery
@@ -121,16 +120,12 @@ public class OrganizeGenresTask : IScheduledTask
 #if __EMBY__
             _libraryManager.UpdateItem(item, item, ItemUpdateType.MetadataEdit, null);
 #else
-            _libraryManager
+            await _libraryManager
                 .UpdateItemAsync(item, item, ItemUpdateType.MetadataEdit, cancellationToken)
                 .ConfigureAwait(false);
 #endif
         }
 
         progress?.Report(100);
-
-#if !__EMBY__
-        return Task.CompletedTask;
-#endif
     }
 }
