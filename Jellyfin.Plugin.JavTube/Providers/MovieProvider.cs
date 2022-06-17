@@ -9,7 +9,6 @@ using MediaBrowser.Model.Providers;
 #if __EMBY__
 using MediaBrowser.Common.Net;
 using MediaBrowser.Model.Logging;
-
 #else
 using Microsoft.Extensions.Logging;
 #endif
@@ -68,6 +67,7 @@ public class MovieProvider : BaseProvider, IRemoteMetadataProvider<Movie, MovieI
                 OfficialRating = Rating,
                 PremiereDate = m.ReleaseDate.TryGetValidDateTime(),
                 ProductionYear = m.ReleaseDate.TryGetValidDateTime()?.Year,
+                Genres = m.Tags?.Length > 0 ? m.Tags : Array.Empty<string>(),
                 CommunityRating = m.Score > 0 ? (float)Math.Round(m.Score * 2, 1) : null
             },
             HasMetadata = true
@@ -80,10 +80,6 @@ public class MovieProvider : BaseProvider, IRemoteMetadataProvider<Movie, MovieI
             Id = m.Id,
             Position = pid.Position
         });
-
-        // Set Genres.
-        if (m.Tags?.Length > 0)
-            result.Item.SetGenres(m.Tags);
 
         // Add Tag.
         if (!string.IsNullOrWhiteSpace(m.Label))
