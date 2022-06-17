@@ -8,7 +8,6 @@ using MediaBrowser.Model.Tasks;
 #if __EMBY__
 using MediaBrowser.Controller.Entities.Movies;
 using MediaBrowser.Model.Logging;
-
 #else
 using Microsoft.Extensions.Logging;
 using Jellyfin.Data.Enums;
@@ -115,7 +114,7 @@ public class OrganizeGenresTask : IScheduledTask
 
             item.Genres = orderedGenres.ToArray();
 
-            _logger.Info("OrganizeGenres for video: {0}", item.Name);
+            _logger.Info("Organize genres for video: {0}", item.Name);
 
 #if __EMBY__
             _libraryManager.UpdateItem(item, item, ItemUpdateType.MetadataEdit, null);
