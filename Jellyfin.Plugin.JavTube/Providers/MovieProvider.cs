@@ -9,7 +9,6 @@ using MediaBrowser.Model.Providers;
 #if __EMBY__
 using MediaBrowser.Common.Net;
 using MediaBrowser.Model.Logging;
-
 #else
 using Microsoft.Extensions.Logging;
 #endif
@@ -83,6 +82,17 @@ public class MovieProvider : BaseProvider, IRemoteMetadataProvider<Movie, MovieI
             Position = pid.Position
         });
 
+        if (Configuration.EnableTrailers)
+        {
+            // Add Trailer.
+            if (!string.IsNullOrWhiteSpace(m.PreviewVideoUrl))
+                result.Item.AddTrailerUrl(m.PreviewVideoUrl);
+
+            // Add HLS Trailer.
+            if (!string.IsNullOrWhiteSpace(m.PreviewVideoHlsUrl))
+                result.Item.AddTrailerUrl(m.PreviewVideoHlsUrl);
+        }
+
         // Add Studio.
         if (!string.IsNullOrWhiteSpace(m.Maker))
             result.Item.AddStudio(m.Maker);
@@ -90,14 +100,6 @@ public class MovieProvider : BaseProvider, IRemoteMetadataProvider<Movie, MovieI
         // Add Tag.
         if (!string.IsNullOrWhiteSpace(m.Label))
             result.Item.AddTag(m.Label);
-
-        // Add Trailer.
-        if (!string.IsNullOrWhiteSpace(m.PreviewVideoUrl))
-            result.Item.AddTrailerUrl(m.PreviewVideoUrl);
-
-        // Add HLS Trailer.
-        if (!string.IsNullOrWhiteSpace(m.PreviewVideoHlsUrl))
-            result.Item.AddTrailerUrl(m.PreviewVideoHlsUrl);
 
         // Add Director.
         if (!string.IsNullOrWhiteSpace(m.Director))
