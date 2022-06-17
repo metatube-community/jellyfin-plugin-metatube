@@ -131,6 +131,7 @@ public class ActorProvider : BaseProvider, IRemoteMetadataProvider<Person, Perso
         overview += G("ブラのサイズ", a.CupSize);
         overview += G("スリーサイズ", a.Measurements);
         overview += G("趣味", a.Hobby);
+        overview += G("特技", a.Skill);
         return overview;
     }
 }

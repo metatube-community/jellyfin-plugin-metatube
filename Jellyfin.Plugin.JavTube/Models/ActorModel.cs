@@ -25,6 +25,8 @@ public class ActorInfoModel : ActorSearchResultModel
 
     [JsonPropertyName("hobby")] public string Hobby { get; set; }
 
+    [JsonPropertyName("skill")] public string Skill { get; set; }
+
     [JsonPropertyName("measurements")] public string Measurements { get; set; }
 
     [JsonPropertyName("nationality")] public string Nationality { get; set; }
