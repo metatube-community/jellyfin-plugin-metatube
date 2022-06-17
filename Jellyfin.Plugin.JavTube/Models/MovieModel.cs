@@ -37,7 +37,7 @@ public class MovieInfoModel : MovieSearchResultModel
     [JsonPropertyName("preview_video_url")]
     public string PreviewVideoUrl { get; set; }
 
-    [JsonPropertyName("publisher")] public string Publisher { get; set; }
+    [JsonPropertyName("label")] public string Label { get; set; }
 
     [JsonPropertyName("runtime")] public int Runtime { get; set; }
 
