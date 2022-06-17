@@ -85,7 +85,7 @@ public class MovieProvider : BaseProvider, IRemoteMetadataProvider<Movie, MovieI
         if (m.Tags?.Length > 0)
             result.Item.SetGenres(m.Tags);
 
-        // Add Studios.
+        // Add Studio.
         if (!string.IsNullOrWhiteSpace(m.Maker))
             result.Item.AddStudio(m.Maker);
 
