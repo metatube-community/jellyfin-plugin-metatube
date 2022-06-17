@@ -65,7 +65,6 @@ public class MovieProvider : BaseProvider, IRemoteMetadataProvider<Movie, MovieI
                 OriginalTitle = originalTitle,
                 Overview = m.Summary,
                 Tagline = m.Series,
-                Genres = m.Tags,
                 OfficialRating = Rating,
                 PremiereDate = m.ReleaseDate.TryGetValidDateTime(),
                 ProductionYear = m.ReleaseDate.TryGetValidDateTime()?.Year,
@@ -81,6 +80,10 @@ public class MovieProvider : BaseProvider, IRemoteMetadataProvider<Movie, MovieI
             Id = m.Id,
             Position = pid.Position
         });
+
+        // Set Genres.
+        if (m.Tags?.Length > 0)
+            result.Item.SetGenres(m.Tags);
 
         // Add Studios.
         if (!string.IsNullOrWhiteSpace(m.Maker))
