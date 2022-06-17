@@ -16,7 +16,7 @@ namespace Jellyfin.Plugin.JavTube.ScheduledTasks;
 
 public class GenerateTrailersTask : IScheduledTask
 {
-    // Emby: trailers can also be stored in a trailers sub-folder.
+    // Emby: trailers can be stored in a trailers sub-folder.
     // https://support.emby.media/support/solutions/articles/44001159193-trailers
     private const string TrailersFolder = "trailers";
 
