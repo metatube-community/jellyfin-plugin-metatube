@@ -88,8 +88,6 @@ public class MovieProvider : BaseProvider, IRemoteMetadataProvider<Movie, MovieI
         // Add Studios.
         if (!string.IsNullOrWhiteSpace(m.Maker))
             result.Item.AddStudio(m.Maker);
-        if (!string.IsNullOrWhiteSpace(m.Publisher))
-            result.Item.AddStudio(m.Publisher);
 
         // Add Director.
         if (!string.IsNullOrWhiteSpace(m.Director))
