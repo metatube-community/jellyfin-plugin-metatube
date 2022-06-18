@@ -1,4 +1,5 @@
 using System.Web;
+using Jellyfin.Plugin.JavTube.Helpers;
 using MediaBrowser.Controller.Entities;
 using MediaBrowser.Model.Entities;
 
@@ -10,11 +11,11 @@ internal static class BaseItemExtensions
     {
         return !item.ProviderIds.Any()
             ? string.Empty
-            : HttpUtility.UrlDecode(item.GetProviderId(Constant.JavTrailerId));
+            : HttpUtility.UrlDecode(item.GetProviderId(TrailerHelper.TrailerId));
     }
 
     public static void SetTrailerUrl(this BaseItem item, string url)
     {
-        item.SetProviderId(Constant.JavTrailerId, HttpUtility.UrlEncode(url));
+        item.SetProviderId(TrailerHelper.TrailerId, HttpUtility.UrlEncode(url));
     }
 }
