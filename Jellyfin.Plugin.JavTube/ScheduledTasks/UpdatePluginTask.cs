@@ -3,6 +3,7 @@ using System.Reflection;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using Jellyfin.Plugin.JavTube.Extensions;
+using Jellyfin.Plugin.JavTube.Helpers;
 using MediaBrowser.Common;
 using MediaBrowser.Common.Configuration;
 using MediaBrowser.Common.Net;
@@ -62,7 +63,7 @@ public class UpdatePluginTask : IScheduledTask
                 Url = "https://api.github.com/repos/javtube/jellyfin-plugin-javtube/releases/latest",
                 CancellationToken = cancellationToken,
                 AcceptHeader = "application/json",
-                UserAgent = Constant.UserAgent
+                UserAgent = HttpClientHelper.UserAgent
             }).ConfigureAwait(false));
 
             var currentVersion = ParseVersion(CurrentVersion);
@@ -83,7 +84,7 @@ public class UpdatePluginTask : IScheduledTask
                 {
                     Url = url,
                     CancellationToken = cancellationToken,
-                    UserAgent = Constant.UserAgent,
+                    UserAgent = HttpClientHelper.UserAgent,
                     Progress = progress
                 }).ConfigureAwait(false);
 

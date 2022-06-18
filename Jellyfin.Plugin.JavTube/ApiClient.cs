@@ -2,6 +2,7 @@ using System.Collections.Specialized;
 using System.Net.Http.Headers;
 using System.Net.Http.Json;
 using System.Web;
+using Jellyfin.Plugin.JavTube.Helpers;
 using Jellyfin.Plugin.JavTube.Models;
 
 namespace Jellyfin.Plugin.JavTube;
@@ -189,7 +190,7 @@ public static class ApiClient
             DefaultRequestHeaders =
             {
                 { "Accept", "application/json" },
-                { "User-Agent", Constant.UserAgent }
+                { "User-Agent", HttpClientHelper.UserAgent }
             }
         };
 
