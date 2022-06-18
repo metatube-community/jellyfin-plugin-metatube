@@ -88,40 +88,40 @@ public class GenerateTrailersTask : IScheduledTask
         {
             progress?.Report((double)idx / items.Count * 100);
 
-            var trailersFolder = Path.Join(item.ContainingFolderPath, TrailersFolder);
+            var trailersFolderPath = Path.Join(item.ContainingFolderPath, TrailersFolder);
 
             // Skip if contains .ignore file.
-            if (File.Exists(Path.Join(trailersFolder, ".ignore")))
+            if (File.Exists(Path.Join(trailersFolderPath, ".ignore")))
                 continue;
 
             // Skip if no remote trailers.
             if (item.RemoteTrailers?.Any() != true)
             {
-                if (Directory.Exists(trailersFolder))
+                if (Directory.Exists(trailersFolderPath))
                 {
                     // Delete obsolete trailer files.
-                    DeleteFiles(trailersFolder, "*.strm");
+                    DeleteFiles(trailersFolderPath, "*.strm");
 
                     // Delete directory if empty.
-                    TryDeleteDirectory(trailersFolder);
+                    TryDeleteDirectory(trailersFolderPath);
                 }
 
                 continue;
             }
 
-            var trailerFile = Path.Join(trailersFolder,
+            var trailerFilePath = Path.Join(trailersFolderPath,
                 $"Trailer - {(!string.IsNullOrWhiteSpace(item.SortName) ? item.SortName : item.Name)}.strm");
 
             // Skip if trailer file already exists.
-            if (File.Exists(trailerFile))
+            if (File.Exists(trailerFilePath))
                 continue;
 
             // Create trailers folder if not exists.
-            if (!Directory.Exists(trailersFolder))
-                Directory.CreateDirectory(trailersFolder);
+            if (!Directory.Exists(trailersFolderPath))
+                Directory.CreateDirectory(trailersFolderPath);
 
             // Delete other trailer files.
-            DeleteFiles(trailersFolder, "*.strm");
+            DeleteFiles(trailersFolderPath, "*.strm");
 
 #if __EMBY__
             var trailerUrl = item.RemoteTrailers.First();
@@ -132,7 +132,7 @@ public class GenerateTrailersTask : IScheduledTask
             _logger.Info("Generate trailer for video: {0}", item.Name);
 
             // Write trailer .strm file.
-            await File.WriteAllTextAsync(trailerFile, trailerUrl, _utf8WithoutBom, cancellationToken);
+            await File.WriteAllTextAsync(trailerFilePath, trailerUrl, _utf8WithoutBom, cancellationToken);
         }
 
         progress?.Report(100);
