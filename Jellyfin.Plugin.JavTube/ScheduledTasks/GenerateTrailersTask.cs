@@ -99,8 +99,10 @@ public class GenerateTrailersTask : IScheduledTask
                 if (File.Exists(Path.Join(trailersFolderPath, ".ignore")))
                     continue;
 
+                var trailerUrl = item.GetTrailerUrl();
+
                 // Skip if no remote trailers.
-                if (item.RemoteTrailers?.Any() != true)
+                if (string.IsNullOrWhiteSpace(trailerUrl))
                 {
                     if (Directory.Exists(trailersFolderPath))
                     {
@@ -127,12 +129,6 @@ public class GenerateTrailersTask : IScheduledTask
 
                 // Delete other trailer files, if any.
                 DeleteFiles(trailersFolderPath, $"*{TrailerFileSuffix}");
-
-#if __EMBY__
-                var trailerUrl = item.RemoteTrailers.First();
-#else
-                var trailerUrl = item.RemoteTrailers[0].Url;
-#endif
 
                 _logger.Info("Generate trailer for video: {0}", item.Name);
 

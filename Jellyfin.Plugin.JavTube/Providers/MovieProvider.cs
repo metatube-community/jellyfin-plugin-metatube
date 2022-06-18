@@ -9,6 +9,7 @@ using MediaBrowser.Model.Providers;
 #if __EMBY__
 using MediaBrowser.Common.Net;
 using MediaBrowser.Model.Logging;
+
 #else
 using Microsoft.Extensions.Logging;
 #endif
@@ -81,16 +82,10 @@ public class MovieProvider : BaseProvider, IRemoteMetadataProvider<Movie, MovieI
             Position = pid.Position
         });
 
-        if (Configuration.EnableTrailers)
-        {
-            // Add Trailer.
-            if (!string.IsNullOrWhiteSpace(m.PreviewVideoUrl))
-                result.Item.AddTrailerUrl(m.PreviewVideoUrl);
-
-            // Add HLS Trailer.
-            if (!string.IsNullOrWhiteSpace(m.PreviewVideoHlsUrl))
-                result.Item.AddTrailerUrl(m.PreviewVideoHlsUrl);
-        }
+        // Set Trailer URL.
+        result.Item.SetTrailerUrl(!string.IsNullOrWhiteSpace(m.PreviewVideoUrl)
+            ? m.PreviewVideoUrl
+            : m.PreviewVideoHlsUrl);
 
         // Add Studio.
         if (!string.IsNullOrWhiteSpace(m.Maker))
