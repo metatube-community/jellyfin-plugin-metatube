@@ -7,6 +7,7 @@ using MediaBrowser.Model.Tasks;
 #if __EMBY__
 using MediaBrowser.Controller.Entities.Movies;
 using MediaBrowser.Model.Logging;
+
 #else
 using Microsoft.Extensions.Logging;
 using Jellyfin.Data.Enums;
@@ -60,6 +61,10 @@ public class GenerateTrailersTask : IScheduledTask
     public async Task ExecuteAsync(IProgress<double> progress, CancellationToken cancellationToken)
 #endif
     {
+        // Stop the task if disabled.
+        if (!Plugin.Instance.Configuration.EnableTrailers)
+            return;
+
         await Task.Yield();
 
         progress?.Report(0);
@@ -89,11 +94,14 @@ public class GenerateTrailersTask : IScheduledTask
             // Skip if no remote trailers.
             if (item.RemoteTrailers?.Any() != true)
             {
-                // Delete obsolete trailer files.
-                TryDeleteFiles(trailersFolder, "*.strm");
+                if (Directory.Exists(trailersFolder))
+                {
+                    // Delete obsolete trailer files.
+                    TryDeleteFiles(trailersFolder, "*.strm");
 
-                // Delete directory if empty.
-                TryDeleteDirectory(trailersFolder);
+                    // Delete directory if empty.
+                    TryDeleteDirectory(trailersFolder);
+                }
 
                 continue;
             }
@@ -115,7 +123,7 @@ public class GenerateTrailersTask : IScheduledTask
 #if __EMBY__
             var trailerUrl = item.RemoteTrailers.First();
 #else
-            var trailerUrl = item.RemoteTrailers.First().Url;
+            var trailerUrl = item.RemoteTrailers[0].Url;
 #endif
 
             _logger.Info("Generate trailer for video: {0}", item.Name);
@@ -129,20 +137,12 @@ public class GenerateTrailersTask : IScheduledTask
 
     private static void TryDeleteFiles(string path, string searchPattern)
     {
-        try
-        {
-            TryDeleteFiles(Directory.GetFiles(path, searchPattern));
-        }
-        catch (Exception)
-        {
-            // ignored.
-        }
+        TryDeleteFiles(Directory.GetFiles(path, searchPattern));
     }
 
     private static void TryDeleteFiles(IEnumerable<string> files)
     {
         foreach (var file in files)
-        {
             try
             {
                 File.Delete(file);
@@ -151,7 +151,6 @@ public class GenerateTrailersTask : IScheduledTask
             {
                 // ignored.
             }
-        }
     }
 
     private static void TryDeleteDirectory(string path)
