@@ -21,6 +21,9 @@ public class GenerateTrailersTask : IScheduledTask
     // https://support.emby.media/support/solutions/articles/44001159193-trailers
     private const string TrailersFolder = "trailers";
 
+    // Uniform suffix for all trailer files.
+    private const string TrailerFileSuffix = "-Trailer.strm";
+
     // UTF-8 without BOM encoding.
     private readonly Encoding _utf8WithoutBom = new UTF8Encoding(false);
 
@@ -102,7 +105,7 @@ public class GenerateTrailersTask : IScheduledTask
                     if (Directory.Exists(trailersFolderPath))
                     {
                         // Delete obsolete trailer files.
-                        DeleteFiles(trailersFolderPath, "*.strm");
+                        DeleteFiles(trailersFolderPath, $"*{TrailerFileSuffix}");
 
                         // Delete directory if empty.
                         DeleteDirectoryIfEmpty(trailersFolderPath);
@@ -112,7 +115,7 @@ public class GenerateTrailersTask : IScheduledTask
                 }
 
                 var trailerFilePath = Path.Join(trailersFolderPath,
-                    $"Trailer - {(!string.IsNullOrWhiteSpace(item.SortName) ? item.SortName : item.Name)}.strm");
+                    $"{(!string.IsNullOrWhiteSpace(item.SortName) ? item.SortName : item.Name)}{TrailerFileSuffix}");
 
                 // Skip if trailer file already exists.
                 if (File.Exists(trailerFilePath))
@@ -123,7 +126,7 @@ public class GenerateTrailersTask : IScheduledTask
                     Directory.CreateDirectory(trailersFolderPath);
 
                 // Delete other trailer files, if any.
-                DeleteFiles(trailersFolderPath, "*.strm");
+                DeleteFiles(trailersFolderPath, $"*{TrailerFileSuffix}");
 
 #if __EMBY__
                 var trailerUrl = item.RemoteTrailers.First();
