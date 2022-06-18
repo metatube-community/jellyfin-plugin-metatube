@@ -89,10 +89,10 @@ public class GenerateTrailersTask : IScheduledTask
 
         foreach (var (idx, item) in items.WithIndex())
         {
+            progress?.Report((double)idx / items.Count * 100);
+
             try
             {
-                progress?.Report((double)idx / items.Count * 100);
-
                 var trailersFolderPath = Path.Join(item.ContainingFolderPath, TrailersFolder);
 
                 // Skip if contains .ignore file.
