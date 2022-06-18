@@ -34,11 +34,12 @@
 
 ## 特性
 
-- 完整数据: 包括标题、**简介**、演员、标签、**评分**等内容。
-- 完整搜索: 支持通过众多的刮削源搜索影片和演员信息。
-- 计划任务: 自动整理影片标签以及在后台自动更新插件。
-- 人脸识别: 内置的人脸识别以人脸为中心裁剪海报图像。
-- 自动翻译: 支持将特定的元数据内容翻译成需要的语言。
+- 完整数据：包括标题、**简介**、演员、标签、**评分**等内容。
+- 完整搜索：支持通过众多的刮削源搜索影片和演员信息。
+- 预告功能：不用下载完整预告视频即可在线观看预告片。
+- 计划任务：自动整理影片标签以及在后台自动更新插件。
+- 人脸识别：内置的人脸识别以人脸为中心裁剪海报图像。
+- 自动翻译：支持将特定的元数据内容翻译成需要的语言。
 
 ## 平台
 
@@ -55,6 +56,7 @@ _注意：本项目仅支持 Jellyfin/Emby 稳定版。_
 - [后端部署](https://github.com/javtube/jellyfin-plugin-javtube/wiki/%E5%90%8E%E7%AB%AF%E9%83%A8%E7%BD%B2)
 - [命名规范](https://github.com/javtube/jellyfin-plugin-javtube/wiki/%E5%91%BD%E5%90%8D%E8%A7%84%E8%8C%83)
 - [人脸识别](https://github.com/javtube/jellyfin-plugin-javtube/wiki/%E4%BA%BA%E8%84%B8%E8%AF%86%E5%88%AB)
+- [影片预告](https://github.com/javtube/jellyfin-plugin-javtube/wiki/%E5%BD%B1%E7%89%87%E9%A2%84%E5%91%8A)
 - [自动翻译](https://github.com/javtube/jellyfin-plugin-javtube/wiki/%E8%87%AA%E5%8A%A8%E7%BF%BB%E8%AF%91)
 - [源码编译](https://github.com/javtube/jellyfin-plugin-javtube/wiki/%E6%BA%90%E7%A0%81%E7%BC%96%E8%AF%91)
 - [数据来源](https://github.com/javtube/jellyfin-plugin-javtube/wiki/%E6%95%B0%E6%8D%AE%E6%9D%A5%E6%BA%90)
