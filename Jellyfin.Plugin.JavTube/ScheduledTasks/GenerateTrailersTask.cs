@@ -86,53 +86,60 @@ public class GenerateTrailersTask : IScheduledTask
 
         foreach (var (idx, item) in items.WithIndex())
         {
-            progress?.Report((double)idx / items.Count * 100);
-
-            var trailersFolderPath = Path.Join(item.ContainingFolderPath, TrailersFolder);
-
-            // Skip if contains .ignore file.
-            if (File.Exists(Path.Join(trailersFolderPath, ".ignore")))
-                continue;
-
-            // Skip if no remote trailers.
-            if (item.RemoteTrailers?.Any() != true)
+            try
             {
-                if (Directory.Exists(trailersFolderPath))
-                {
-                    // Delete obsolete trailer files.
-                    DeleteFiles(trailersFolderPath, "*.strm");
+                progress?.Report((double)idx / items.Count * 100);
 
-                    // Delete directory if empty.
-                    TryDeleteDirectory(trailersFolderPath);
+                var trailersFolderPath = Path.Join(item.ContainingFolderPath, TrailersFolder);
+
+                // Skip if contains .ignore file.
+                if (File.Exists(Path.Join(trailersFolderPath, ".ignore")))
+                    continue;
+
+                // Skip if no remote trailers.
+                if (item.RemoteTrailers?.Any() != true)
+                {
+                    if (Directory.Exists(trailersFolderPath))
+                    {
+                        // Delete obsolete trailer files.
+                        DeleteFiles(trailersFolderPath, "*.strm");
+
+                        // Delete directory if empty.
+                        DeleteDirectoryIfEmpty(trailersFolderPath);
+                    }
+
+                    continue;
                 }
 
-                continue;
-            }
+                var trailerFilePath = Path.Join(trailersFolderPath,
+                    $"Trailer - {(!string.IsNullOrWhiteSpace(item.SortName) ? item.SortName : item.Name)}.strm");
 
-            var trailerFilePath = Path.Join(trailersFolderPath,
-                $"Trailer - {(!string.IsNullOrWhiteSpace(item.SortName) ? item.SortName : item.Name)}.strm");
+                // Skip if trailer file already exists.
+                if (File.Exists(trailerFilePath))
+                    continue;
 
-            // Skip if trailer file already exists.
-            if (File.Exists(trailerFilePath))
-                continue;
+                // Create trailers folder if not exists.
+                if (!Directory.Exists(trailersFolderPath))
+                    Directory.CreateDirectory(trailersFolderPath);
 
-            // Create trailers folder if not exists.
-            if (!Directory.Exists(trailersFolderPath))
-                Directory.CreateDirectory(trailersFolderPath);
-
-            // Delete other trailer files.
-            DeleteFiles(trailersFolderPath, "*.strm");
+                // Delete other trailer files, if any.
+                DeleteFiles(trailersFolderPath, "*.strm");
 
 #if __EMBY__
-            var trailerUrl = item.RemoteTrailers.First();
+                var trailerUrl = item.RemoteTrailers.First();
 #else
-            var trailerUrl = item.RemoteTrailers[0].Url;
+                var trailerUrl = item.RemoteTrailers[0].Url;
 #endif
 
-            _logger.Info("Generate trailer for video: {0}", item.Name);
+                _logger.Info("Generate trailer for video: {0}", item.Name);
 
-            // Write trailer .strm file.
-            await File.WriteAllTextAsync(trailerFilePath, trailerUrl, _utf8WithoutBom, cancellationToken);
+                // Write .strm trailer file.
+                await File.WriteAllTextAsync(trailerFilePath, trailerUrl, _utf8WithoutBom, cancellationToken);
+            }
+            catch (Exception e)
+            {
+                _logger.Error("Generate trailer for video {0} error: {1}", item.Name, e.Message);
+            }
         }
 
         progress?.Report(100);
@@ -149,15 +156,9 @@ public class GenerateTrailersTask : IScheduledTask
             File.Delete(file);
     }
 
-    private static void TryDeleteDirectory(string path)
+    private static void DeleteDirectoryIfEmpty(string path)
     {
-        try
-        {
+        if (!Directory.GetDirectories(path).Any() && !Directory.GetFiles(path).Any())
             Directory.Delete(path);
-        }
-        catch (Exception)
-        {
-            // ignored.
-        }
     }
 }
