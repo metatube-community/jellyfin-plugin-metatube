@@ -7,7 +7,7 @@ using MediaBrowser.Model.Providers;
 
 namespace Jellyfin.Plugin.JavTube.ExternalIds;
 
-public class MovieExternalId : BaseExternalId, IExternalId
+public class MovieExternalId : BaseExternalId
 {
 #if !__EMBY__
     public override ExternalIdMediaType? Type => ExternalIdMediaType.Movie;
