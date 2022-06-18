@@ -1,6 +1,9 @@
 using Jellyfin.Plugin.JavTube.Helpers;
 using MediaBrowser.Controller.Entities.Movies;
 using MediaBrowser.Model.Entities;
+#if !__EMBY__
+using MediaBrowser.Model.Providers;
+#endif
 
 namespace Jellyfin.Plugin.JavTube.ExternalIds;
 
