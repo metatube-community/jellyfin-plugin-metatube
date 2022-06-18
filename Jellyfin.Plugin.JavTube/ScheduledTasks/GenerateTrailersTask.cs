@@ -150,12 +150,7 @@ public class GenerateTrailersTask : IScheduledTask
 
     private static void DeleteFiles(string path, string searchPattern)
     {
-        DeleteFiles(Directory.GetFiles(path, searchPattern));
-    }
-
-    private static void DeleteFiles(IEnumerable<string> files)
-    {
-        foreach (var file in files)
+        foreach (var file in Directory.GetFiles(path, searchPattern))
             File.Delete(file);
     }
 
