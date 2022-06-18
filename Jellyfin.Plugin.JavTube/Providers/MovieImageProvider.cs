@@ -68,7 +68,7 @@ public class MovieImageProvider : BaseProvider, IRemoteImageProvider, IHasOrder
             {
                 ProviderName = Name,
                 Type = ImageType.Primary,
-                Url = ApiClient.GetPrimaryImageApiUrl(m.Provider, m.Id, imageUrl)
+                Url = ApiClient.GetPrimaryImageApiUrl(m.Provider, m.Id, imageUrl, pid.Position ?? -1)
             });
 
             images.Add(new RemoteImageInfo
