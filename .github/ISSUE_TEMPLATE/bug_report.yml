@@ -11,6 +11,9 @@ body:
         - label: Is this something you can **debug and fix**? Send a pull request! Bug fixes and documentation fixes are welcome.
           required: true
 
+        - label: I have read the [FAQ](https://github.com/javtube/jellyfin-plugin-javtube/wiki/%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98) page.
+          required: true
+
         - label: I have searched on the [issue tracker](……/) for a related issue.
           required: true
 
