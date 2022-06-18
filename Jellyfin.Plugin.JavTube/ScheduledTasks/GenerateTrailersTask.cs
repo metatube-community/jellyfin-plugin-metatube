@@ -100,7 +100,7 @@ public class GenerateTrailersTask : IScheduledTask
                 if (Directory.Exists(trailersFolder))
                 {
                     // Delete obsolete trailer files.
-                    TryDeleteFiles(trailersFolder, "*.strm");
+                    DeleteFiles(trailersFolder, "*.strm");
 
                     // Delete directory if empty.
                     TryDeleteDirectory(trailersFolder);
@@ -121,7 +121,7 @@ public class GenerateTrailersTask : IScheduledTask
                 Directory.CreateDirectory(trailersFolder);
 
             // Delete other trailer files.
-            TryDeleteFiles(trailersFolder, "*.strm");
+            DeleteFiles(trailersFolder, "*.strm");
 
 #if __EMBY__
             var trailerUrl = item.RemoteTrailers.First();
@@ -138,22 +138,15 @@ public class GenerateTrailersTask : IScheduledTask
         progress?.Report(100);
     }
 
-    private static void TryDeleteFiles(string path, string searchPattern)
+    private static void DeleteFiles(string path, string searchPattern)
     {
-        TryDeleteFiles(Directory.GetFiles(path, searchPattern));
+        DeleteFiles(Directory.GetFiles(path, searchPattern));
     }
 
-    private static void TryDeleteFiles(IEnumerable<string> files)
+    private static void DeleteFiles(IEnumerable<string> files)
     {
         foreach (var file in files)
-            try
-            {
-                File.Delete(file);
-            }
-            catch (Exception)
-            {
-                // ignored.
-            }
+            File.Delete(file);
     }
 
     private static void TryDeleteDirectory(string path)
