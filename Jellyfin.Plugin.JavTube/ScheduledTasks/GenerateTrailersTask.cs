@@ -21,6 +21,9 @@ public class GenerateTrailersTask : IScheduledTask
     // https://support.emby.media/support/solutions/articles/44001159193-trailers
     private const string TrailersFolder = "trailers";
 
+    // UTF-8 without BOM encoding.
+    private readonly Encoding _utf8WithoutBom = new UTF8Encoding(false);
+
     private readonly ILibraryManager _libraryManager;
     private readonly ILogger _logger;
 
@@ -129,7 +132,7 @@ public class GenerateTrailersTask : IScheduledTask
             _logger.Info("Generate trailer for video: {0}", item.Name);
 
             // Write trailer .strm file.
-            await File.WriteAllTextAsync(trailerFile, trailerUrl, Encoding.UTF8, cancellationToken);
+            await File.WriteAllTextAsync(trailerFile, trailerUrl, _utf8WithoutBom, cancellationToken);
         }
 
         progress?.Report(100);
