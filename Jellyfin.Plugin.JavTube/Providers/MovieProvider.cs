@@ -62,7 +62,6 @@ public class MovieProvider : BaseProvider, IRemoteMetadataProvider<Movie, MovieI
             {
                 Name = $"{m.Number} {m.Title}",
                 OriginalTitle = originalTitle,
-                SortName = m.Number,
                 Overview = m.Summary,
                 Tagline = m.Series,
                 OfficialRating = Rating,

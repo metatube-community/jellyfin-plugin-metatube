@@ -114,8 +114,7 @@ public class GenerateTrailersTask : IScheduledTask
                     continue;
                 }
 
-                var trailerFilePath = Path.Join(trailersFolderPath,
-                    $"{(!string.IsNullOrWhiteSpace(item.SortName) ? item.SortName : item.Name)}{TrailerFileSuffix}");
+                var trailerFilePath = Path.Join(trailersFolderPath, $"{item.Name}{TrailerFileSuffix}");
 
                 // Skip if trailer file already exists.
                 if (File.Exists(trailerFilePath))
