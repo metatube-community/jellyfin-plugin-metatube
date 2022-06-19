@@ -61,6 +61,6 @@ public class MovieInfoModel : MovieSearchResultModel
     [JsonPropertyName("summary")]
     public string Summary { get; set; }
 
-    [JsonPropertyName("tags")]
-    public string[] Tags { get; set; }
+    [JsonPropertyName("genres")]
+    public string[] Genres { get; set; }
 }
