@@ -37,6 +37,9 @@ public class MovieInfoModel : MovieSearchResultModel
     [JsonPropertyName("director")]
     public string Director { get; set; }
 
+    [JsonPropertyName("genres")]
+    public string[] Genres { get; set; }
+
     [JsonPropertyName("maker")]
     public string Maker { get; set; }
 
@@ -60,7 +63,4 @@ public class MovieInfoModel : MovieSearchResultModel
 
     [JsonPropertyName("summary")]
     public string Summary { get; set; }
-
-    [JsonPropertyName("genres")]
-    public string[] Genres { get; set; }
 }
