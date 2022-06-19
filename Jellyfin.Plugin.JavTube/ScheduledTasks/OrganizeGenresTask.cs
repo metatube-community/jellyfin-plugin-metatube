@@ -8,6 +8,7 @@ using MediaBrowser.Model.Tasks;
 #if __EMBY__
 using MediaBrowser.Controller.Entities.Movies;
 using MediaBrowser.Model.Logging;
+
 #else
 using Microsoft.Extensions.Logging;
 using Jellyfin.Data.Enums;
