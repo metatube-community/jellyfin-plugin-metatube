@@ -120,7 +120,9 @@ public class GenerateTrailersTask : IScheduledTask
                     $"{item.Name.Split().First()}{TrailerFileSuffix}");
 
                 // Skip if trailer file already exists.
-                if (File.Exists(trailerFilePath))
+                if (File.Exists(trailerFilePath) &&
+                    // Also should make sure the trailer file is up to date.
+                    File.GetLastWriteTimeUtc(trailerFilePath).CompareTo(item.DateLastSaved.UtcDateTime) >= 0)
                     continue;
 
                 // Create trailers folder if not exists.
