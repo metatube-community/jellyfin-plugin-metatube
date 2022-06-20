@@ -12,10 +12,10 @@ public static class TranslationHelper
         Disabled,
         Title,
         Tagline,
-        TitleTagLine,
+        TitleTagline,
         Overview,
         TitleOverview,
-        TagLineOverview,
+        TaglineOverview,
         All
     }
 
