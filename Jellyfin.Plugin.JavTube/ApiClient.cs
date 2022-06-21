@@ -30,7 +30,7 @@ public static class ApiClient
 
         // Connection Pooling.
         PooledConnectionLifetime = TimeSpan.FromMinutes(10),
-        PooledConnectionIdleTimeout = TimeSpan.FromSeconds(90),
+        PooledConnectionIdleTimeout = TimeSpan.FromSeconds(90)
     });
 
     private static string ComposeUrl(string path, NameValueCollection nv)
