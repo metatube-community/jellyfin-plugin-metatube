@@ -9,11 +9,11 @@
 <a href="https://github.com/javtube/jellyfin-plugin-javtube/actions">
 <img alt="GitHub Workflow Status" src="https://img.shields.io/github/workflow/status/javtube/jellyfin-plugin-javtube/.NET?logo=github">
 </a>
+<a href="https://github.com/javtube/jellyfin-plugin-javtube/search?l=c%23">
+<img alt="GitHub top language" src="https://img.shields.io/github/languages/top/javtube/jellyfin-plugin-javtube?color=%23239120&label=.NET&logo=csharp">
+</a>
 <a href="https://github.com/javtube/jellyfin-plugin-javtube/blob/main/LICENSE">
 <img alt="License" src="https://img.shields.io/github/license/javtube/jellyfin-plugin-javtube">
-</a>
-<a href="https://github.com/javtube/jellyfin-plugin-javtube/discussions">
-<img alt="Ask Me Anything" src="https://img.shields.io/badge/Ask%20me-anything-1abc9c.svg">
 </a>
 <a href="https://t.me/JavTubePlugin">
 <img alt="Telegram Group" src="https://img.shields.io/badge/Telegram-2CA5E0?logo=telegram&logoColor=white">
