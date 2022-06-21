@@ -18,6 +18,12 @@ public static class ApiClient
     private const string BackdropImageApi = "/v1/images/backdrop";
     private const string TranslateApi = "/v1/translate";
 
+    private static readonly HttpClient HttpClient = new(new SocketsHttpHandler
+    {
+        PooledConnectionLifetime = TimeSpan.FromMinutes(30),
+        PooledConnectionIdleTimeout = TimeSpan.FromMinutes(10)
+    });
+
     private static string ComposeUrl(string path, NameValueCollection nv)
     {
         var query = HttpUtility.ParseQueryString(string.Empty);
@@ -181,25 +187,17 @@ public static class ApiClient
     {
         cancellationToken.ThrowIfCancellationRequested();
 
-        var httpClient = new HttpClient
-        {
-            // Set default timeout: 5 minutes.
-            Timeout = TimeSpan.FromMinutes(5),
-
-            // Set corresponding headers.
-            DefaultRequestHeaders =
-            {
-                { "Accept", "application/json" },
-                { "User-Agent", UserAgentHelper.Default }
-            }
-        };
+        var request = new HttpRequestMessage(HttpMethod.Get, url);
+        // Add General Headers.
+        request.Headers.Add("Accept", "application/json");
+        request.Headers.Add("User-Agent", UserAgentHelper.Default);
 
         // Set API Authorization Token.
         if (requireAuth && !string.IsNullOrWhiteSpace(Plugin.Instance.Configuration.Token))
-            httpClient.DefaultRequestHeaders.Authorization =
+            request.Headers.Authorization =
                 new AuthenticationHeaderValue("Bearer", Plugin.Instance.Configuration.Token);
 
-        var response = await httpClient.GetAsync(url, cancellationToken).ConfigureAwait(false);
+        var response = await HttpClient.SendAsync(request, cancellationToken).ConfigureAwait(false);
 
         // Nullable forgiving reason:
         // Response is unlikely to be null.
