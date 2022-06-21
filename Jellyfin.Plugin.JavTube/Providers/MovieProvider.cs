@@ -169,13 +169,16 @@ public class MovieProvider : BaseProvider, IRemoteMetadataProvider<Movie, MovieI
         try
         {
             // Use GFriends as actor image provider.
-            return (await ApiClient.GetActorInfo(GFriends, name, cancellationToken)).Images[0];
+            foreach (var actor in (await ApiClient.SearchActor(name, GFriends, false, cancellationToken))
+                     .Where(actor => actor.Images.Any()))
+                return actor.Images.First();
         }
         catch (Exception e)
         {
             Logger.Error("Get actor image error: {0} ({1})", name, e.Message);
-            return string.Empty;
         }
+
+        return string.Empty;
     }
 
     private async Task TranslateMovieInfo(MovieInfoModel m, string language, CancellationToken cancellationToken)
