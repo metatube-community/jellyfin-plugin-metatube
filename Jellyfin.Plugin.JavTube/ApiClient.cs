@@ -188,6 +188,7 @@ public static class ApiClient
         cancellationToken.ThrowIfCancellationRequested();
 
         var request = new HttpRequestMessage(HttpMethod.Get, url);
+
         // Add General Headers.
         request.Headers.Add("Accept", "application/json");
         request.Headers.Add("User-Agent", UserAgentHelper.Default);
