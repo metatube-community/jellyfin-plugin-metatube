@@ -119,10 +119,16 @@ public class GenerateTrailersTask : IScheduledTask
                 var trailerFilePath = Path.Join(trailersFolderPath,
                     $"{item.Name.Split().First()}{TrailerFileSuffix}");
 
+#if __EMBY__
+                var lastSavedUtcDateTime = item.DateLastSaved.UtcDateTime;
+#else
+                var lastSavedUtcDateTime = item.DateLastSaved.ToUniversalTime();
+#endif
+
                 // Skip if trailer file already exists.
                 if (File.Exists(trailerFilePath) &&
                     // Also should make sure the trailer file is up to date.
-                    File.GetLastWriteTimeUtc(trailerFilePath).CompareTo(item.DateLastSaved.UtcDateTime) >= 0)
+                    File.GetLastWriteTimeUtc(trailerFilePath).CompareTo(lastSavedUtcDateTime) >= 0)
                     continue;
 
                 // Create trailers folder if not exists.
