@@ -20,8 +20,17 @@ public static class ApiClient
 
     private static readonly HttpClient HttpClient = new(new SocketsHttpHandler
     {
+        // Connect Timeout.
+        ConnectTimeout = TimeSpan.FromSeconds(30),
+
+        // TCP Keep Alive.
+        KeepAlivePingPolicy = HttpKeepAlivePingPolicy.Always,
+        KeepAlivePingDelay = TimeSpan.FromSeconds(30),
+        KeepAlivePingTimeout = TimeSpan.FromSeconds(30),
+
+        // Connection Pooling.
         PooledConnectionLifetime = TimeSpan.FromMinutes(10),
-        PooledConnectionIdleTimeout = TimeSpan.FromMinutes(10)
+        PooledConnectionIdleTimeout = TimeSpan.FromSeconds(90),
     });
 
     private static string ComposeUrl(string path, NameValueCollection nv)
