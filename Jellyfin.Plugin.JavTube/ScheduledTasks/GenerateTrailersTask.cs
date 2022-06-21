@@ -23,6 +23,7 @@ public class GenerateTrailersTask : IScheduledTask
 
     // Uniform suffix for all trailer files.
     private const string TrailerFileSuffix = "-Trailer.strm";
+    private const string TrailerSearchPattern = $"*{TrailerFileSuffix}";
 
     // UTF-8 without BOM encoding.
     private static readonly Encoding Utf8WithoutBom = new UTF8Encoding(false);
@@ -107,7 +108,7 @@ public class GenerateTrailersTask : IScheduledTask
                     if (Directory.Exists(trailersFolderPath))
                     {
                         // Delete obsolete trailer files.
-                        DeleteFiles(trailersFolderPath, $"*{TrailerFileSuffix}");
+                        DeleteFiles(trailersFolderPath, TrailerSearchPattern);
 
                         // Delete directory if empty.
                         DeleteDirectoryIfEmpty(trailersFolderPath);
@@ -136,7 +137,7 @@ public class GenerateTrailersTask : IScheduledTask
                     Directory.CreateDirectory(trailersFolderPath);
 
                 // Delete other trailer files, if any.
-                DeleteFiles(trailersFolderPath, $"*{TrailerFileSuffix}", trailerFilePath);
+                DeleteFiles(trailersFolderPath, TrailerSearchPattern, trailerFilePath);
 
                 _logger.Info("Generate trailer for video: {0}", item.Name);
 
