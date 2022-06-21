@@ -136,7 +136,7 @@ public class GenerateTrailersTask : IScheduledTask
                     Directory.CreateDirectory(trailersFolderPath);
 
                 // Delete other trailer files, if any.
-                DeleteFiles(trailersFolderPath, $"*{TrailerFileSuffix}");
+                DeleteFiles(trailersFolderPath, $"*{TrailerFileSuffix}", trailerFilePath);
 
                 _logger.Info("Generate trailer for video: {0}", item.Name);
 
@@ -152,10 +152,14 @@ public class GenerateTrailersTask : IScheduledTask
         progress?.Report(100);
     }
 
-    private static void DeleteFiles(string path, string searchPattern)
+    private static void DeleteFiles(string path, string searchPattern, params string[] excludedFiles)
     {
-        foreach (var file in Directory.GetFiles(path, searchPattern))
-            File.Delete(file);
+        DeleteFiles(Directory.GetFiles(path, searchPattern).Where(file => !excludedFiles.Contains(file)));
+    }
+
+    private static void DeleteFiles(IEnumerable<string> files)
+    {
+        foreach (var file in files) File.Delete(file);
     }
 
     private static void DeleteDirectoryIfEmpty(string path)
