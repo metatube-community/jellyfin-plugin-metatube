@@ -25,7 +25,7 @@ public class GenerateTrailersTask : IScheduledTask
     private const string TrailerFileSuffix = "-Trailer.strm";
 
     // UTF-8 without BOM encoding.
-    private readonly Encoding _utf8WithoutBom = new UTF8Encoding(false);
+    private static readonly Encoding Utf8WithoutBom = new UTF8Encoding(false);
 
     private readonly ILibraryManager _libraryManager;
     private readonly ILogger _logger;
@@ -141,7 +141,7 @@ public class GenerateTrailersTask : IScheduledTask
                 _logger.Info("Generate trailer for video: {0}", item.Name);
 
                 // Write .strm trailer file.
-                await File.WriteAllTextAsync(trailerFilePath, trailerUrl, _utf8WithoutBom, cancellationToken);
+                await File.WriteAllTextAsync(trailerFilePath, trailerUrl, Utf8WithoutBom, cancellationToken);
             }
             catch (Exception e)
             {
