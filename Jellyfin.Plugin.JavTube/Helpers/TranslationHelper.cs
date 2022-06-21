@@ -37,14 +37,17 @@ public static class TranslationHelper
 
     private static PluginConfiguration Configuration => Plugin.Instance.Configuration;
 
+    private static readonly SemaphoreSlim semaphore = new SemaphoreSlim(1);
+
     private static async Task<string> Translate(string q, string from, string to, CancellationToken cancellationToken)
     {
+        int delayInMs = 0;
         var nv = new NameValueCollection();
         if (string.Equals(Configuration.TranslationEngine, Engine.Baidu,
                 StringComparison.OrdinalIgnoreCase))
         {
             // Limit Baidu API request rate to 1 rps.
-            await Task.Delay(1000, cancellationToken);
+            delayInMs = 1000;
             nv.Add(new NameValueCollection
             {
                 { "baidu-app-id", Configuration.BaiduAppId },
@@ -55,7 +58,7 @@ public static class TranslationHelper
                      StringComparison.OrdinalIgnoreCase))
         {
             // Limit Google API request rate to 10 rps.
-            await Task.Delay(100, cancellationToken);
+            delayInMs = 100;
             nv.Add(new NameValueCollection
             {
                 { "google-api-key", Configuration.GoogleApiKey }
@@ -66,8 +69,23 @@ public static class TranslationHelper
             throw new ArgumentException($"Invalid translation engine: {Configuration.TranslationEngine}");
         }
 
-        return (await ApiClient.GetTranslate(q, from, to, Configuration.TranslationEngine, nv, cancellationToken)
-            .ConfigureAwait(false)).TranslatedText;
+        semaphore.Wait();
+
+        try
+        {
+            var translateWithDelay = async () =>
+            {
+                await Task.Delay(delayInMs, cancellationToken);
+                return (await ApiClient.GetTranslate(q, from, to, Configuration.TranslationEngine, nv, cancellationToken)
+                    .ConfigureAwait(false)).TranslatedText;
+            };
+
+            return await RetryAsync(5, translateWithDelay);
+        }
+        finally
+        {
+            semaphore.Release();
+        }
     }
 
     public static async Task Translate(MovieInfoModel m, string to, CancellationToken cancellationToken)
@@ -82,5 +100,33 @@ public static class TranslationHelper
 
         if ((mode & Mode.Overview) != 0 && !string.IsNullOrWhiteSpace(m.Summary))
             m.Summary = await Translate(m.Summary, AutoLanguage, to, cancellationToken);
+    }
+
+    private static async Task<T> RetryAsync<T>(uint numRetries, Func<Task<T>> func)
+    {
+        uint numAttempts = 1;
+        while (true)
+        {
+            try
+            {
+                return await func();
+            }
+            catch (OperationCanceledException)
+            {
+                throw;
+            }
+            catch
+            {
+                if (numAttempts < numRetries)
+                {
+                    ++numAttempts;
+                    continue;
+                }
+                else
+                {
+                    throw;
+                }
+            }
+        }
     }
 }
