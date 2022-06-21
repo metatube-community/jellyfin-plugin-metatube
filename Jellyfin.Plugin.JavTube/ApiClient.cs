@@ -20,7 +20,7 @@ public static class ApiClient
 
     private static readonly HttpClient HttpClient = new(new SocketsHttpHandler
     {
-        PooledConnectionLifetime = TimeSpan.FromMinutes(30),
+        PooledConnectionLifetime = TimeSpan.FromMinutes(10),
         PooledConnectionIdleTimeout = TimeSpan.FromMinutes(10)
     });
 
