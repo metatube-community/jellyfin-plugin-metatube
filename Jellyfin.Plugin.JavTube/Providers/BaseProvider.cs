@@ -54,7 +54,7 @@ public abstract class BaseProvider
         {
             Url = url,
             CancellationToken = cancellationToken,
-            UserAgent = HttpClientHelper.UserAgent
+            UserAgent = UserAgentHelper.Default
         }).ConfigureAwait(false);
     }
 #else
@@ -62,7 +62,7 @@ public abstract class BaseProvider
     {
         var httpClient = _httpClientFactory.CreateClient(Name);
         httpClient.DefaultRequestHeaders
-            .Add("User-Agent", HttpClientHelper.UserAgent);
+            .Add("User-Agent", UserAgentHelper.Default);
         return await httpClient.GetAsync(url, cancellationToken).ConfigureAwait(false);
     }
 #endif

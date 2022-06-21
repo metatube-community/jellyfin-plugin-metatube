@@ -63,7 +63,7 @@ public class UpdatePluginTask : IScheduledTask
                 Url = "https://api.github.com/repos/javtube/jellyfin-plugin-javtube/releases/latest",
                 CancellationToken = cancellationToken,
                 AcceptHeader = "application/json",
-                UserAgent = HttpClientHelper.UserAgent
+                UserAgent = UserAgentHelper.Default
             }).ConfigureAwait(false));
 
             var currentVersion = ParseVersion(CurrentVersion);
@@ -84,7 +84,7 @@ public class UpdatePluginTask : IScheduledTask
                 {
                     Url = url,
                     CancellationToken = cancellationToken,
-                    UserAgent = HttpClientHelper.UserAgent,
+                    UserAgent = UserAgentHelper.Default,
                     Progress = progress
                 }).ConfigureAwait(false);
 
