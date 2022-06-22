@@ -52,7 +52,7 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          body: Auto Released by Actions
+          body: _Auto Released by Actions_
           draft: false
           tag_name: v${{ steps.shell.outputs.version }}
           files: |
