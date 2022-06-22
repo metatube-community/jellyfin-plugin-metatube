@@ -59,6 +59,8 @@ _注意：本项目仅支持 Jellyfin/Emby 稳定版。_
 - [源码编译](https://github.com/javtube/jellyfin-plugin-javtube/wiki/%E6%BA%90%E7%A0%81%E7%BC%96%E8%AF%91)
 - [数据来源](https://github.com/javtube/jellyfin-plugin-javtube/wiki/%E6%95%B0%E6%8D%AE%E6%9D%A5%E6%BA%90)
 
+> 推荐：[**免费**使用Heroku一键部署后端](https://github.com/javtube/javtube-server-heroku)
+
 完整的文档以及使用方法，请参阅 [Wiki](https://github.com/javtube/jellyfin-plugin-javtube/wiki)。
 
 ## 社区
