@@ -69,6 +69,6 @@ Welcome and feel free to ask any questions at [Discussions](https://github.com/j
 
 This plugin is released under the [MIT](https://github.com/javtube/jellyfin-plugin-javtube/blob/main/LICENSE) License.
 
-## Stargazers over time
+## Stargazers
 
 [![Stargazers over time](https://starchart.cc/javtube/jellyfin-plugin-javtube.svg)](https://starchart.cc/javtube/jellyfin-plugin-javtube)
