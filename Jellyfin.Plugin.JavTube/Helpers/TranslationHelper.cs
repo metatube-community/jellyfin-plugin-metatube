@@ -41,13 +41,13 @@ public static class TranslationHelper
 
     private static async Task<string> Translate(string q, string from, string to, CancellationToken cancellationToken)
     {
-        int delayInMs;
+        int millisecondsDelay;
         var nv = new NameValueCollection();
         if (string.Equals(Configuration.TranslationEngine, Engine.Baidu,
                 StringComparison.OrdinalIgnoreCase))
         {
             // Limit Baidu API request rate to 1 rps.
-            delayInMs = 1000;
+            millisecondsDelay = 1000;
             nv.Add(new NameValueCollection
             {
                 { "baidu-app-id", Configuration.BaiduAppId },
@@ -58,7 +58,7 @@ public static class TranslationHelper
                      StringComparison.OrdinalIgnoreCase))
         {
             // Limit Google API request rate to 10 rps.
-            delayInMs = 100;
+            millisecondsDelay = 100;
             nv.Add(new NameValueCollection
             {
                 { "google-api-key", Configuration.GoogleApiKey }
@@ -75,7 +75,7 @@ public static class TranslationHelper
         {
             async Task<string> TranslateWithDelay()
             {
-                await Task.Delay(delayInMs, cancellationToken);
+                await Task.Delay(millisecondsDelay, cancellationToken);
                 return (await ApiClient
                     .GetTranslate(q, from, to, Configuration.TranslationEngine, nv, cancellationToken)
                     .ConfigureAwait(false)).TranslatedText;
