@@ -37,11 +37,11 @@ public static class TranslationHelper
 
     private static PluginConfiguration Configuration => Plugin.Instance.Configuration;
 
-    private static readonly SemaphoreSlim semaphore = new SemaphoreSlim(1);
+    private static readonly SemaphoreSlim Semaphore = new(1);
 
     private static async Task<string> Translate(string q, string from, string to, CancellationToken cancellationToken)
     {
-        int delayInMs = 0;
+        int delayInMs;
         var nv = new NameValueCollection();
         if (string.Equals(Configuration.TranslationEngine, Engine.Baidu,
                 StringComparison.OrdinalIgnoreCase))
@@ -69,22 +69,23 @@ public static class TranslationHelper
             throw new ArgumentException($"Invalid translation engine: {Configuration.TranslationEngine}");
         }
 
-        semaphore.Wait();
+        await Semaphore.WaitAsync(cancellationToken);
 
         try
         {
-            var translateWithDelay = async () =>
+            async Task<string> TranslateWithDelay()
             {
                 await Task.Delay(delayInMs, cancellationToken);
-                return (await ApiClient.GetTranslate(q, from, to, Configuration.TranslationEngine, nv, cancellationToken)
+                return (await ApiClient
+                    .GetTranslate(q, from, to, Configuration.TranslationEngine, nv, cancellationToken)
                     .ConfigureAwait(false)).TranslatedText;
-            };
+            }
 
-            return await RetryAsync(5, translateWithDelay);
+            return await RetryAsync(5, TranslateWithDelay);
         }
         finally
         {
-            semaphore.Release();
+            Semaphore.Release();
         }
     }
 
@@ -120,7 +121,6 @@ public static class TranslationHelper
                 if (numAttempts < numRetries)
                 {
                     ++numAttempts;
-                    continue;
                 }
                 else
                 {
