@@ -106,7 +106,6 @@ public static class TranslationHelper
     private static async Task<T> RetryAsync<T>(Func<Task<T>> func, int retryCount)
     {
         while (true)
-        {
             try
             {
                 return await func();
@@ -114,6 +113,5 @@ public static class TranslationHelper
             catch when (--retryCount > 0)
             {
             }
-        }
     }
 }
