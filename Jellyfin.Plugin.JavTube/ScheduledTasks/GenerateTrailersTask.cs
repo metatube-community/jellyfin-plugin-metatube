@@ -126,11 +126,22 @@ public class GenerateTrailersTask : IScheduledTask
                 var lastSavedUtcDateTime = item.DateLastSaved.ToUniversalTime();
 #endif
 
-                // Skip if trailer file already exists.
-                if (File.Exists(trailerFilePath) &&
-                    // Also should make sure the trailer file is up to date.
-                    File.GetLastWriteTimeUtc(trailerFilePath).CompareTo(lastSavedUtcDateTime) >= 0)
-                    continue;
+                // When trailer file already exists.
+                if (File.Exists(trailerFilePath))
+                {
+                    // Skip if trailer file is up to date.
+                    if (File.GetLastWriteTimeUtc(trailerFilePath).CompareTo(lastSavedUtcDateTime) >= 0)
+                    {
+                        continue;
+                    }
+
+                    // Skip if content is not modified.
+                    if (string.Equals(await File.ReadAllTextAsync(trailerFilePath, cancellationToken), trailerUrl))
+                    {
+                        File.SetLastWriteTimeUtc(trailerFilePath, DateTime.UtcNow);
+                        continue;
+                    }
+                }
 
                 // Create trailers folder if not exists.
                 if (!Directory.Exists(trailersFolderPath))
