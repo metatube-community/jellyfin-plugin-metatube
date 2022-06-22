@@ -131,9 +131,7 @@ public class GenerateTrailersTask : IScheduledTask
                 {
                     // Skip if trailer file is up to date.
                     if (File.GetLastWriteTimeUtc(trailerFilePath).CompareTo(lastSavedUtcDateTime) >= 0)
-                    {
                         continue;
-                    }
 
                     // Skip if content is not modified.
                     if (string.Equals(await File.ReadAllTextAsync(trailerFilePath, cancellationToken), trailerUrl))
