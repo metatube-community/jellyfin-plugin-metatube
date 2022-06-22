@@ -81,7 +81,7 @@ public static class TranslationHelper
                     .ConfigureAwait(false)).TranslatedText;
             }
 
-            return await RetryAsync(5, TranslateWithDelay);
+            return await RetryAsync(TranslateWithDelay, 5);
         }
         finally
         {
@@ -103,29 +103,16 @@ public static class TranslationHelper
             m.Summary = await Translate(m.Summary, AutoLanguage, to, cancellationToken);
     }
 
-    private static async Task<T> RetryAsync<T>(uint numRetries, Func<Task<T>> func)
+    private static async Task<T> RetryAsync<T>(Func<Task<T>> func, int retryCount)
     {
-        uint numAttempts = 1;
         while (true)
         {
             try
             {
                 return await func();
             }
-            catch (OperationCanceledException)
+            catch when (--retryCount > 0)
             {
-                throw;
-            }
-            catch
-            {
-                if (numAttempts < numRetries)
-                {
-                    ++numAttempts;
-                }
-                else
-                {
-                    throw;
-                }
             }
         }
     }
