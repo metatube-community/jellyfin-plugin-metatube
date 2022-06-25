@@ -6,7 +6,7 @@ public static class GenreHelper
 {
     public const string ChineseSubtitle = "中文字幕";
 
-    public static Dictionary<string, string> ParseSubstitutionTable(string text)
+    public static Dictionary<string, string> DeserializeSubstitutionTable(string text)
     {
         var substitutionTable = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
 

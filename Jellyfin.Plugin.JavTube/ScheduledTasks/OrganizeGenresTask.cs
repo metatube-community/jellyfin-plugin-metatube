@@ -80,7 +80,8 @@ public class OrganizeGenresTask : IScheduledTask
 
             var genres = item.Genres?.ToList() ?? new List<string>();
 
-            var substitutionTable = GenreHelper.ParseSubstitutionTable(
+            // Deserialize Text to Substitution Table.
+            var substitutionTable = GenreHelper.DeserializeSubstitutionTable(
                 Plugin.Instance.Configuration.GenreSubstitutionText);
 
             // Replace Genres.
