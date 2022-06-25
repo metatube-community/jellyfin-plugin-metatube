@@ -4,31 +4,31 @@ namespace Jellyfin.Plugin.JavTube.Configuration;
 
 public class PluginConfiguration : BasePluginConfiguration
 {
-    public PluginConfiguration()
-    {
-        Server = "https://api.javtube.internal";
-        Token = string.Empty;
-        EnableTrailers = false;
-        TranslationMode = 0;
-        TranslationEngine = "Baidu";
-        BaiduAppId = string.Empty;
-        BaiduAppKey = string.Empty;
-        GoogleApiKey = string.Empty;
-    }
+    #region General
 
-    public string Server { get; set; }
+    public string Server { get; set; } = "https://api.javtube.internal";
 
-    public string Token { get; set; }
+    public string Token { get; set; } = string.Empty;
 
-    public bool EnableTrailers { get; set; }
+    #endregion
 
-    public int TranslationMode { get; set; }
+    #region Trailer
 
-    public string TranslationEngine { get; set; }
+    public bool EnableTrailers { get; set; } = false;
 
-    public string BaiduAppId { get; set; }
+    #endregion
 
-    public string BaiduAppKey { get; set; }
+    #region Translation
 
-    public string GoogleApiKey { get; set; }
+    public int TranslationMode { get; set; } = 0;
+
+    public string TranslationEngine { get; set; } = "Baidu";
+
+    public string BaiduAppId { get; set; } = string.Empty;
+
+    public string BaiduAppKey { get; set; } = string.Empty;
+
+    public string GoogleApiKey { get; set; } = string.Empty;
+
+    #endregion
 }
