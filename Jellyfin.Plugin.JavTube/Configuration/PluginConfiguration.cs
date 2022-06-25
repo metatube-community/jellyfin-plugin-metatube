@@ -14,7 +14,7 @@ public class PluginConfiguration : BasePluginConfiguration
 
     #region Rating
 
-    public bool EnableRating { get; set; } = true;
+    public bool EnableRatingSupport { get; set; } = true;
 
     #endregion
 

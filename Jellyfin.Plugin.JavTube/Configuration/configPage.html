@@ -24,13 +24,15 @@
                 </div>
                 <div class="checkboxContainer checkboxContainer-withDescripton">
                     <label class="emby-checkbox-label">
-                        <input id="chkEnableRating" is="emby-checkbox" name="chkEnableRating" type="checkbox"/>
-                        <span>Enable Rating</span>
+                        <input id="chkEnableRatingSupport" is="emby-checkbox" name="chkEnableRatingSupport"
+                               type="checkbox"/>
+                        <span>Enable Rating Support</span>
                     </label>
                 </div>
                 <div class="checkboxContainer checkboxContainer-withDescripton">
                     <label class="emby-checkbox-label">
-                        <input id="chkEnableTrailerSupport" is="emby-checkbox" name="chkEnableTrailerSupport" type="checkbox"/>
+                        <input id="chkEnableTrailerSupport" is="emby-checkbox" name="chkEnableTrailerSupport"
+                               type="checkbox"/>
                         <span>Enable Trailer Support</span>
                     </label>
                 </div>
@@ -95,7 +97,7 @@
             ApiClient.getPluginConfiguration(JavTubePluginConfig.uniquePluginId).then(function (config) {
                 $('#txtServer').val(config.Server).change();
                 $('#txtToken').val(config.Token).change();
-                $('#chkEnableRating').prop('checked', config.EnableRating);
+                $('#chkEnableRatingSupport').prop('checked', config.EnableRatingSupport);
                 $('#chkEnableTrailerSupport').prop('checked', config.EnableTrailerSupport);
                 $('#sltTranslationMode').val(config.TranslationMode).change();
                 $('#sltTranslationEngine').val(config.TranslationEngine).change();
@@ -112,7 +114,7 @@
             ApiClient.getPluginConfiguration(JavTubePluginConfig.uniquePluginId).then(function (config) {
                 config.Server = $('#txtServer').val();
                 config.Token = $('#txtToken').val();
-                config.EnableRating = $('#chkEnableRating').prop('checked');
+                config.EnableRatingSupport = $('#chkEnableRatingSupport').prop('checked');
                 config.EnableTrailerSupport = $('#chkEnableTrailerSupport').prop('checked');
                 config.TranslationMode = $('#sltTranslationMode').val();
                 config.TranslationEngine = $('#sltTranslationEngine').val();
