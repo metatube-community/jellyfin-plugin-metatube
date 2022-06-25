@@ -69,7 +69,6 @@ public class MovieProvider : BaseProvider, IRemoteMetadataProvider<Movie, MovieI
                 PremiereDate = m.ReleaseDate.TryGetValidDateTime(),
                 ProductionYear = m.ReleaseDate.TryGetValidDateTime()?.Year,
                 Genres = m.Genres?.Length > 0 ? m.Genres : Array.Empty<string>(),
-                CommunityRating = m.Score > 0 ? (float)Math.Round(m.Score * 2, 1) : null
             },
             HasMetadata = true
         };
@@ -86,6 +85,10 @@ public class MovieProvider : BaseProvider, IRemoteMetadataProvider<Movie, MovieI
         result.Item.SetTrailerUrl(!string.IsNullOrWhiteSpace(m.PreviewVideoUrl)
             ? m.PreviewVideoUrl
             : m.PreviewVideoHlsUrl);
+
+        // Set Community Rating.
+        if (Configuration.EnableRating)
+            result.Item.CommunityRating = m.Score > 0 ? (float)Math.Round(m.Score * 2, 1) : null;
 
         // Add Studio.
         if (!string.IsNullOrWhiteSpace(m.Maker))

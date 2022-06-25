@@ -12,6 +12,12 @@ public class PluginConfiguration : BasePluginConfiguration
 
     #endregion
 
+    #region Rating
+
+    public bool EnableRating { get; set; } = true;
+
+    #endregion
+
     #region Trailer
 
     public bool EnableTrailers { get; set; } = false;
@@ -32,7 +38,7 @@ public class PluginConfiguration : BasePluginConfiguration
 
     #endregion
 
-    #region GenreSubstitution
+    #region Genres
 
     public string GenreSubstitutionText { get; set; } = DefaultGenreSubstitutionText;
 
