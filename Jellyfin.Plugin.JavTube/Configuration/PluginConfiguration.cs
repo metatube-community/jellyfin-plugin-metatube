@@ -20,7 +20,7 @@ public class PluginConfiguration : BasePluginConfiguration
 
     #region Trailer
 
-    public bool EnableTrailers { get; set; } = false;
+    public bool EnableTrailerSupport { get; set; } = false;
 
     #endregion
 

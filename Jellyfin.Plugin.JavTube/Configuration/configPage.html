@@ -30,8 +30,8 @@
                 </div>
                 <div class="checkboxContainer checkboxContainer-withDescripton">
                     <label class="emby-checkbox-label">
-                        <input id="chkEnableTrailers" is="emby-checkbox" name="chkEnableTrailers" type="checkbox"/>
-                        <span>Enable Trailers</span>
+                        <input id="chkEnableTrailerSupport" is="emby-checkbox" name="chkEnableTrailerSupport" type="checkbox"/>
+                        <span>Enable Trailer Support</span>
                     </label>
                 </div>
                 <div class="selectContainer">
@@ -96,7 +96,7 @@
                 $('#txtServer').val(config.Server).change();
                 $('#txtToken').val(config.Token).change();
                 $('#chkEnableRating').prop('checked', config.EnableRating);
-                $('#chkEnableTrailers').prop('checked', config.EnableTrailers);
+                $('#chkEnableTrailerSupport').prop('checked', config.EnableTrailerSupport);
                 $('#sltTranslationMode').val(config.TranslationMode).change();
                 $('#sltTranslationEngine').val(config.TranslationEngine).change();
                 $('#txtBaiduAppId').val(config.BaiduAppId).change();
@@ -113,7 +113,7 @@
                 config.Server = $('#txtServer').val();
                 config.Token = $('#txtToken').val();
                 config.EnableRating = $('#chkEnableRating').prop('checked');
-                config.EnableTrailers = $('#chkEnableTrailers').prop('checked');
+                config.EnableTrailerSupport = $('#chkEnableTrailerSupport').prop('checked');
                 config.TranslationMode = $('#sltTranslationMode').val();
                 config.TranslationEngine = $('#sltTranslationEngine').val();
                 config.BaiduAppId = $('#txtBaiduAppId').val();
