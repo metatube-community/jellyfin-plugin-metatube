@@ -6,16 +6,26 @@ public static class GenreHelper
 {
     public const string ChineseSubtitle = "中文字幕";
 
-    public static readonly Dictionary<string, string> SubstitutionTable =
-        new(StringComparer.OrdinalIgnoreCase)
+    public static Dictionary<string, string> ParseSubstitutionTable(string text)
+    {
+        var substitutionTable = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
+
+        var reader = new StringReader(text ?? string.Empty);
+        while (reader.ReadLine() is { } line)
         {
-            { "HD", null },
-            { "4K", null },
-            { "5K", null },
-            { "720p", null },
-            { "1080p", null },
-            { "60fps", null }
-        };
+            var kvp = line.Split('=', 2).Select(s => s.Trim()).ToList();
+            if (string.IsNullOrWhiteSpace(kvp.First()))
+                continue;
+            substitutionTable[kvp[0]] = kvp.Count switch
+            {
+                1 => null,
+                2 => kvp[1],
+                _ => substitutionTable[kvp[0]]
+            };
+        }
+
+        return substitutionTable;
+    }
 
     private static bool HasTag(string filename, string tag)
     {

@@ -80,11 +80,14 @@ public class OrganizeGenresTask : IScheduledTask
 
             var genres = item.Genres?.ToList() ?? new List<string>();
 
+            var substitutionTable = GenreHelper.ParseSubstitutionTable(
+                Plugin.Instance.Configuration.GenreSubstitutionText);
+
             // Replace Genres.
             foreach (var genre in genres.Where(genre =>
-                         GenreHelper.SubstitutionTable.ContainsKey(genre)).ToArray())
+                         substitutionTable.ContainsKey(genre)).ToArray())
             {
-                var value = GenreHelper.SubstitutionTable[genre];
+                var value = substitutionTable[genre];
                 if (string.IsNullOrWhiteSpace(value))
                     genres.Remove(genre); // should just be removed.
                 else

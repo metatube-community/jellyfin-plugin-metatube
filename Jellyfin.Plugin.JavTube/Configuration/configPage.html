@@ -28,6 +28,13 @@
                         <span>Enable Trailers</span>
                     </label>
                 </div>
+                <div class="inputContainer">
+                    <label class="inputLabel inputLabel-float inputLabelUnfocused" for="txtGenreSubstitutionText">Genre
+                        Substitution Text</label>
+                    <textarea rows="10" is="emby-input" type="text" id="txtGenreSubstitutionText"
+                              name="txtGenreSubstitutionText" class="emby-input"></textarea>
+                    <div class="fieldDescription"></div>
+                </div>
                 <div class="selectContainer">
                     <label class="selectLabel" for="sltTranslationMode">Translation Mode</label>
                     <select class="emby-select-withcolor emby-select" id="sltTranslationMode" is="emby-select"
@@ -83,6 +90,7 @@
                 $('#txtServer').val(config.Server).change();
                 $('#txtToken').val(config.Token).change();
                 $('#chkEnableTrailers').prop('checked', config.EnableTrailers);
+                $('#txtGenreSubstitutionText').val(config.GenreSubstitutionText).change();
                 $('#sltTranslationMode').val(config.TranslationMode).change();
                 $('#sltTranslationEngine').val(config.TranslationEngine).change();
                 $('#txtBaiduAppId').val(config.BaiduAppId).change();
@@ -98,6 +106,7 @@
                 config.Server = $('#txtServer').val();
                 config.Token = $('#txtToken').val();
                 config.EnableTrailers = $('#chkEnableTrailers').prop('checked');
+                config.GenreSubstitutionText = $('#txtGenreSubstitutionText').val();
                 config.TranslationMode = $('#sltTranslationMode').val();
                 config.TranslationEngine = $('#sltTranslationEngine').val();
                 config.BaiduAppId = $('#txtBaiduAppId').val();

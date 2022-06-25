@@ -18,6 +18,20 @@ public class PluginConfiguration : BasePluginConfiguration
 
     #endregion
 
+    #region GenreSubstitution
+
+    public string GenreSubstitutionText { get; set; } = DefaultGenreSubstitutionText;
+
+    private static string DefaultGenreSubstitutionText =>
+        @"HD=
+4K=
+5K=
+720p=
+1080p=
+60fps=";
+
+    #endregion
+
     #region Translation
 
     public int TranslationMode { get; set; } = 0;
