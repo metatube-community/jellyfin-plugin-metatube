@@ -44,6 +44,7 @@ public class PluginConfiguration : BasePluginConfiguration
 
     private static string DefaultGenreSubstitutionText =>
         @"HD=
+FHD=
 4K=
 5K=
 720p=
