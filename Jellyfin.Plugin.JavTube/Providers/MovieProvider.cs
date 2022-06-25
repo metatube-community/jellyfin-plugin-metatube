@@ -68,7 +68,7 @@ public class MovieProvider : BaseProvider, IRemoteMetadataProvider<Movie, MovieI
                 OfficialRating = Rating,
                 PremiereDate = m.ReleaseDate.TryGetValidDateTime(),
                 ProductionYear = m.ReleaseDate.TryGetValidDateTime()?.Year,
-                Genres = m.Genres?.Length > 0 ? m.Genres : Array.Empty<string>(),
+                Genres = m.Genres?.Length > 0 ? m.Genres : Array.Empty<string>()
             },
             HasMetadata = true
         };

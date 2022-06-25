@@ -4,14 +4,6 @@ namespace Jellyfin.Plugin.JavTube.Configuration;
 
 public class PluginConfiguration : BasePluginConfiguration
 {
-    #region General
-
-    public string Server { get; set; } = "https://api.javtube.internal";
-
-    public string Token { get; set; } = string.Empty;
-
-    #endregion
-
     #region Rating
 
     public bool EnableRatingSupport { get; set; } = true;
@@ -21,6 +13,14 @@ public class PluginConfiguration : BasePluginConfiguration
     #region Trailer
 
     public bool EnableTrailerSupport { get; set; } = false;
+
+    #endregion
+
+    #region General
+
+    public string Server { get; set; } = "https://api.javtube.internal";
+
+    public string Token { get; set; } = string.Empty;
 
     #endregion
 
