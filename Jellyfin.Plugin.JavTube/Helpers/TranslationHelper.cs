@@ -89,10 +89,10 @@ public static class TranslationHelper
     {
         var mode = (Mode)Configuration.TranslationMode;
 
-        if ((mode & Mode.Title) != 0 && !string.IsNullOrWhiteSpace(m.Title))
+        if (mode.HasFlag(Mode.Title) && !string.IsNullOrWhiteSpace(m.Title))
             m.Title = await Translate(m.Title, AutoLanguage, to, cancellationToken);
 
-        if ((mode & Mode.Summary) != 0 && !string.IsNullOrWhiteSpace(m.Summary))
+        if (mode.HasFlag(Mode.Summary) && !string.IsNullOrWhiteSpace(m.Summary))
             m.Summary = await Translate(m.Summary, AutoLanguage, to, cancellationToken);
     }
 
