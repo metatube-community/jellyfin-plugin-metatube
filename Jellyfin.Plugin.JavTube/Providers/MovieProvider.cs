@@ -94,7 +94,15 @@ public class MovieProvider : BaseProvider, IRemoteMetadataProvider<Movie, MovieI
         if (!string.IsNullOrWhiteSpace(m.Maker))
             result.Item.AddStudio(m.Maker);
 
-        // Add Tag.
+        // Add Tag (Series).
+        if (!string.IsNullOrWhiteSpace(m.Series))
+            result.Item.AddTag(m.Series);
+
+        // Add Tag (Maker).
+        if (!string.IsNullOrWhiteSpace(m.Maker))
+            result.Item.AddTag(m.Maker);
+
+        // Add Tag (Label).
         if (!string.IsNullOrWhiteSpace(m.Label))
             result.Item.AddTag(m.Label);
 
