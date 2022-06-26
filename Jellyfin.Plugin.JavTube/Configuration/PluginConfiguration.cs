@@ -6,13 +6,13 @@ public class PluginConfiguration : BasePluginConfiguration
 {
     #region Rating
 
-    public bool EnableRatingSupport { get; set; } = true;
+    public bool EnableRating { get; set; } = true;
 
     #endregion
 
     #region Trailer
 
-    public bool EnableTrailerSupport { get; set; } = false;
+    public bool EnableTrailer { get; set; } = false;
 
     #endregion
 

@@ -24,16 +24,14 @@
                 </div>
                 <div class="checkboxContainer checkboxContainer-withDescripton">
                     <label class="emby-checkbox-label">
-                        <input id="chkEnableRatingSupport" is="emby-checkbox" name="chkEnableRatingSupport"
-                               type="checkbox"/>
-                        <span>Enable Rating Support</span>
+                        <input id="chkEnableRating" is="emby-checkbox" name="chkEnableRating" type="checkbox"/>
+                        <span>Enable Rating</span>
                     </label>
                 </div>
                 <div class="checkboxContainer checkboxContainer-withDescripton">
                     <label class="emby-checkbox-label">
-                        <input id="chkEnableTrailerSupport" is="emby-checkbox" name="chkEnableTrailerSupport"
-                               type="checkbox"/>
-                        <span>Enable Trailer Support</span>
+                        <input id="chkEnableTrailer" is="emby-checkbox" name="chkEnableTrailer" type="checkbox"/>
+                        <span>Enable Trailer</span>
                     </label>
                 </div>
                 <div class="selectContainer">
@@ -97,8 +95,8 @@
             ApiClient.getPluginConfiguration(JavTubePluginConfig.uniquePluginId).then(function (config) {
                 $('#txtServer').val(config.Server).change();
                 $('#txtToken').val(config.Token).change();
-                $('#chkEnableRatingSupport').prop('checked', config.EnableRatingSupport);
-                $('#chkEnableTrailerSupport').prop('checked', config.EnableTrailerSupport);
+                $('#chkEnableRating').prop('checked', config.EnableRating);
+                $('#chkEnableTrailer').prop('checked', config.EnableTrailer);
                 $('#sltTranslationMode').val(config.TranslationMode).change();
                 $('#sltTranslationEngine').val(config.TranslationEngine).change();
                 $('#txtBaiduAppId').val(config.BaiduAppId).change();
@@ -114,8 +112,8 @@
             ApiClient.getPluginConfiguration(JavTubePluginConfig.uniquePluginId).then(function (config) {
                 config.Server = $('#txtServer').val();
                 config.Token = $('#txtToken').val();
-                config.EnableRatingSupport = $('#chkEnableRatingSupport').prop('checked');
-                config.EnableTrailerSupport = $('#chkEnableTrailerSupport').prop('checked');
+                config.EnableRating = $('#chkEnableRating').prop('checked');
+                config.EnableTrailer = $('#chkEnableTrailer').prop('checked');
                 config.TranslationMode = $('#sltTranslationMode').val();
                 config.TranslationEngine = $('#sltTranslationEngine').val();
                 config.BaiduAppId = $('#txtBaiduAppId').val();

@@ -87,7 +87,7 @@ public class MovieProvider : BaseProvider, IRemoteMetadataProvider<Movie, MovieI
             : m.PreviewVideoHlsUrl);
 
         // Set Community Rating.
-        if (Configuration.EnableRatingSupport)
+        if (Configuration.EnableRating)
             result.Item.CommunityRating = m.Score > 0 ? (float)Math.Round(m.Score * 2, 1) : null;
 
         // Add Studio.

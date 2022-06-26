@@ -69,7 +69,7 @@ public class GenerateTrailersTask : IScheduledTask
 #endif
     {
         // Stop the task if disabled.
-        if (!Plugin.Instance.Configuration.EnableTrailerSupport)
+        if (!Plugin.Instance.Configuration.EnableTrailer)
             return;
 
         await Task.Yield();
