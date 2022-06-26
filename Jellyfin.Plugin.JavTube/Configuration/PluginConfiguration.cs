@@ -38,11 +38,11 @@ public class PluginConfiguration : BasePluginConfiguration
 
     #endregion
 
-    #region Genres
+    #region Genre
 
-    public string GenreSubstitutionText { get; set; } = DefaultGenreSubstitutionText;
+    public string GenreSubstitutionTable { get; set; } = DefaultGenreSubstitutionTable;
 
-    private static string DefaultGenreSubstitutionText =>
+    private static string DefaultGenreSubstitutionTable =>
         @"HD=
 FHD=
 4K=

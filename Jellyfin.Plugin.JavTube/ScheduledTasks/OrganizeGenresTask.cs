@@ -82,7 +82,7 @@ public class OrganizeGenresTask : IScheduledTask
 
             // Deserialize Text to Substitution Table.
             var substitutionTable = GenreHelper.DeserializeSubstitutionTable(
-                Plugin.Instance.Configuration.GenreSubstitutionText);
+                Plugin.Instance.Configuration.GenreSubstitutionTable);
 
             // Replace Genres.
             foreach (var genre in genres.Where(genre =>

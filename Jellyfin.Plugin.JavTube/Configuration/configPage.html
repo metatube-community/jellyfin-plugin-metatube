@@ -72,10 +72,10 @@
                     <div class="fieldDescription">*Required if using Google as the translation engine.</div>
                 </div>
                 <div class="inputContainer">
-                    <label class="inputLabel inputLabel-float inputLabelUnfocused" for="txtGenreSubstitutionText">Genre
-                        Substitution Text</label>
-                    <textarea class="emby-input" id="txtGenreSubstitutionText" is="emby-input"
-                              name="txtGenreSubstitutionText" rows="10" type="text"></textarea>
+                    <label class="inputLabel inputLabel-float inputLabelUnfocused" for="txtGenreSubstitutionTable">Genre
+                        Substitution Table</label>
+                    <textarea class="emby-input" id="txtGenreSubstitutionTable" is="emby-input"
+                              name="txtGenreSubstitutionTable" rows="10" type="text"></textarea>
                     <div class="fieldDescription"></div>
                 </div>
                 <div>
@@ -102,7 +102,7 @@
                 $('#txtBaiduAppId').val(config.BaiduAppId).change();
                 $('#txtBaiduAppKey').val(config.BaiduAppKey).change();
                 $('#txtGoogleApiKey').val(config.GoogleApiKey).change();
-                $('#txtGenreSubstitutionText').val(config.GenreSubstitutionText).change();
+                $('#txtGenreSubstitutionTable').val(config.GenreSubstitutionTable).change();
                 Dashboard.hideLoadingMsg();
             });
         });
@@ -119,7 +119,7 @@
                 config.BaiduAppId = $('#txtBaiduAppId').val();
                 config.BaiduAppKey = $('#txtBaiduAppKey').val();
                 config.GoogleApiKey = $('#txtGoogleApiKey').val();
-                config.GenreSubstitutionText = $('#txtGenreSubstitutionText').val();
+                config.GenreSubstitutionTable = $('#txtGenreSubstitutionTable').val();
                 ApiClient.updatePluginConfiguration(JavTubePluginConfig.uniquePluginId, config).then(
                     Dashboard.processPluginConfigurationUpdateResult);
             });
