@@ -132,7 +132,7 @@ public static class ApiClient
         CancellationToken cancellationToken)
     {
         var apiUrl = ComposeInfoApiUrl(ActorInfoApi, provider, id, lazy);
-        return await GetDataFromApi<ActorInfoModel>(apiUrl, true, cancellationToken);
+        return await GetDataAsync<ActorInfoModel>(apiUrl, true, cancellationToken);
     }
 
     public static async Task<MovieInfoModel> GetMovieInfo(string provider, string id,
@@ -145,7 +145,7 @@ public static class ApiClient
         CancellationToken cancellationToken)
     {
         var apiUrl = ComposeInfoApiUrl(MovieInfoApi, provider, id, lazy);
-        return await GetDataFromApi<MovieInfoModel>(apiUrl, true, cancellationToken);
+        return await GetDataAsync<MovieInfoModel>(apiUrl, true, cancellationToken);
     }
 
     public static async Task<List<ActorSearchResultModel>> SearchActor(string q, CancellationToken cancellationToken)
@@ -163,7 +163,7 @@ public static class ApiClient
         bool fallback, CancellationToken cancellationToken)
     {
         var apiUrl = ComposeSearchApiUrl(ActorSearchApi, q, provider, fallback);
-        return await GetDataFromApi<List<ActorSearchResultModel>>(apiUrl, true, cancellationToken);
+        return await GetDataAsync<List<ActorSearchResultModel>>(apiUrl, true, cancellationToken);
     }
 
     public static async Task<List<MovieSearchResultModel>> SearchMovie(string q, CancellationToken cancellationToken)
@@ -181,17 +181,17 @@ public static class ApiClient
         bool fallback, CancellationToken cancellationToken)
     {
         var apiUrl = ComposeSearchApiUrl(MovieSearchApi, q, provider, fallback);
-        return await GetDataFromApi<List<MovieSearchResultModel>>(apiUrl, true, cancellationToken);
+        return await GetDataAsync<List<MovieSearchResultModel>>(apiUrl, true, cancellationToken);
     }
 
     public static async Task<TranslateModel> GetTranslate(string q, string from, string to, string engine,
         NameValueCollection nv, CancellationToken cancellationToken)
     {
         var apiUrl = ComposeTranslateApiUrl(TranslateApi, q, from, to, engine, nv);
-        return await GetDataFromApi<TranslateModel>(apiUrl, false, cancellationToken);
+        return await GetDataAsync<TranslateModel>(apiUrl, false, cancellationToken);
     }
 
-    private static async Task<TModel> GetDataFromApi<TModel>(string url, bool requireAuth,
+    private static async Task<TModel> GetDataAsync<TModel>(string url, bool requireAuth,
         CancellationToken cancellationToken)
     {
         cancellationToken.ThrowIfCancellationRequested();
