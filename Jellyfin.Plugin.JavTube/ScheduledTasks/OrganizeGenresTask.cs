@@ -110,11 +110,11 @@ public class OrganizeGenresTask : IScheduledTask
             }
 
             // Remove Duplicates.
-            var orderedGenres = genres.Distinct().OrderByString(g => g).ToList();
+            var orderedGenres = genres.Distinct().OrderByString(genre => genre).ToList();
 
             // Skip updating item if equal.
             if (!orderedGenres.Any() ||
-                (item.Genres?.SequenceEqual(orderedGenres, StringComparer.Ordinal)).GetValueOrDefault(false))
+                (item.Genres?.SequenceEqual(orderedGenres, StringComparer.OrdinalIgnoreCase)).GetValueOrDefault(false))
                 continue;
 
             item.Genres = orderedGenres.ToArray();
