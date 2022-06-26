@@ -11,11 +11,7 @@ public static class TranslationHelper
     {
         Disabled,
         Title,
-        Tagline,
-        TitleTagline,
-        Overview,
-        TitleOverview,
-        TaglineOverview,
+        Summary,
         All
     }
 
@@ -96,10 +92,7 @@ public static class TranslationHelper
         if ((mode & Mode.Title) != 0 && !string.IsNullOrWhiteSpace(m.Title))
             m.Title = await Translate(m.Title, AutoLanguage, to, cancellationToken);
 
-        if ((mode & Mode.Tagline) != 0 && !string.IsNullOrWhiteSpace(m.Series))
-            m.Series = await Translate(m.Series, AutoLanguage, to, cancellationToken);
-
-        if ((mode & Mode.Overview) != 0 && !string.IsNullOrWhiteSpace(m.Summary))
+        if ((mode & Mode.Summary) != 0 && !string.IsNullOrWhiteSpace(m.Summary))
             m.Summary = await Translate(m.Summary, AutoLanguage, to, cancellationToken);
     }
 
