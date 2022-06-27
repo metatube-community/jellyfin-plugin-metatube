@@ -12,7 +12,7 @@
 
             <h1>JavTube</h1>
 
-            <form class="JavTubeConfigForm">
+            <form class="JavTubeConfigurationForm">
 
                 <div class="inputContainer">
                     <label class="inputeLabel inputLabelUnfocused" for="txtServer">Server</label>
@@ -117,7 +117,7 @@
             });
         });
 
-        $('.JavTubeConfigForm').on('submit', function () {
+        $('.JavTubeConfigurationForm').on('submit', function () {
             Dashboard.showLoadingMsg();
             var form = this;
             ApiClient.getPluginConfiguration(JavTubePluginConfig.pluginUniqueId).then(function (config) {
