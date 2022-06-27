@@ -50,8 +50,8 @@
 
                 <div class="selectContainer">
                     <label class="selectLabel" for="sltTranslationMode">Translation Mode</label>
-                    <select class="emby-select-withcolor emby-select" id="sltTranslationMode" is="emby-select"
-                            name="sltTranslationMode">
+                    <select class="emby-select-withcolor emby-select sltTranslationMode" id="sltTranslationMode"
+                            is="emby-select" name="sltTranslationMode">
                         <option value="Disabled">Disabled</option>
                         <option value="Title">Title</option>
                         <option value="Summary">Summary</option>
@@ -59,31 +59,37 @@
                     </select>
                 </div>
 
-                <div class="selectContainer">
-                    <label class="selectLabel" for="sltTranslationEngine">Translation Engine</label>
-                    <select class="emby-select-withcolor emby-select" id="sltTranslationEngine" is="emby-select"
-                            name="sltTranslationEngine">
-                        <option value="Baidu">Baidu</option>
-                        <option value="Google">Google</option>
-                    </select>
-                </div>
+                <div class="translationEngineConfiguration">
+                    <div class="selectContainer">
+                        <label class="selectLabel" for="sltTranslationEngine">Translation Engine</label>
+                        <select class="emby-select-withcolor emby-select sltTranslationEngine" id="sltTranslationEngine"
+                                is="emby-select" name="sltTranslationEngine">
+                            <option value="Baidu">Baidu</option>
+                            <option value="Google">Google</option>
+                        </select>
+                    </div>
 
-                <div class="inputContainer">
-                    <label class="inputeLabel inputLabelUnfocused" for="txtBaiduAppId">Baidu APP ID</label>
-                    <input id="txtBaiduAppId" is="emby-input" name="txtBaiduAppId" type="text"/>
-                    <div class="fieldDescription">*Required if using Baidu as the translation engine.</div>
-                </div>
+                    <div class="baiduApiConfiguration">
+                        <div class="inputContainer">
+                            <label class="inputeLabel inputLabelUnfocused" for="txtBaiduAppId">Baidu APP ID</label>
+                            <input id="txtBaiduAppId" is="emby-input" name="txtBaiduAppId" type="text"/>
+                            <div class="fieldDescription"></div>
+                        </div>
 
-                <div class="inputContainer">
-                    <label class="inputeLabel inputLabelUnfocused" for="txtBaiduAppKey">Baidu APP Key</label>
-                    <input id="txtBaiduAppKey" is="emby-input" name="txtBaiduAppKey" type="text"/>
-                    <div class="fieldDescription">*Required if using Baidu as the translation engine.</div>
-                </div>
+                        <div class="inputContainer">
+                            <label class="inputeLabel inputLabelUnfocused" for="txtBaiduAppKey">Baidu APP Key</label>
+                            <input id="txtBaiduAppKey" is="emby-input" name="txtBaiduAppKey" type="text"/>
+                            <div class="fieldDescription"></div>
+                        </div>
+                    </div>
 
-                <div class="inputContainer">
-                    <label class="inputeLabel inputLabelUnfocused" for="txtGoogleApiKey">Google API Key</label>
-                    <input id="txtGoogleApiKey" is="emby-input" name="txtGoogleApiKey" type="text"/>
-                    <div class="fieldDescription">*Required if using Google as the translation engine.</div>
+                    <div class="googleApiConfiguration">
+                        <div class="inputContainer">
+                            <label class="inputeLabel inputLabelUnfocused" for="txtGoogleApiKey">Google API Key</label>
+                            <input id="txtGoogleApiKey" is="emby-input" name="txtGoogleApiKey" type="text"/>
+                            <div class="fieldDescription"></div>
+                        </div>
+                    </div>
                 </div>
 
                 <div class="inputContainer">
@@ -106,6 +112,27 @@
         var JavTubePluginConfig = {
             pluginUniqueId: "01cc53ec-c415-4108-bbd4-a684a9801a32"
         };
+
+        $('.sltTranslationMode').on('change', function (_) {
+            if (this.value === "Disabled") {
+                $('.translationEngineConfiguration').css('display', 'none');
+            } else {
+                $('.translationEngineConfiguration').css('display', 'inherit');
+            }
+        });
+
+        $('.sltTranslationEngine').on('change', function (_) {
+            if (this.value === "Baidu") {
+                $('.baiduApiConfiguration').css('display', 'inherit');
+                $('.googleApiConfiguration').css('display', 'none');
+            } else if (this.value === "Google") {
+                $('.baiduApiConfiguration').css('display', 'none');
+                $('.googleApiConfiguration').css('display', 'inherit');
+            } else {
+                $('.baiduApiConfiguration').css('display', 'none');
+                $('.googleApiConfiguration').css('display', 'none');
+            }
+        });
 
         $('.JavTubeConfigurationPage').on('pageshow', function () {
             Dashboard.showLoadingMsg();
