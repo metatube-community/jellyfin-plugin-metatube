@@ -7,7 +7,7 @@ public enum TranslationMode
     Disabled,
     Title,
     Summary,
-    All
+    Both
 }
 
 public enum TranslationEngine
