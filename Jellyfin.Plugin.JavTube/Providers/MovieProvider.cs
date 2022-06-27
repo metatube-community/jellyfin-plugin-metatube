@@ -1,3 +1,4 @@
+using Jellyfin.Plugin.JavTube.Configuration;
 using Jellyfin.Plugin.JavTube.Extensions;
 using Jellyfin.Plugin.JavTube.Helpers;
 using Jellyfin.Plugin.JavTube.Models;
@@ -54,7 +55,7 @@ public class MovieProvider : BaseProvider, IRemoteMetadataProvider<Movie, MovieI
         var originalTitle = m.Title;
 
         // Translate movie info.
-        if (Configuration.TranslationMode != (int)TranslationHelper.Mode.Disabled)
+        if (Configuration.TranslationMode != TranslationMode.Disabled)
             await TranslateMovieInfo(m, info.MetadataLanguage, cancellationToken);
 
         var result = new MetadataResult<Movie>

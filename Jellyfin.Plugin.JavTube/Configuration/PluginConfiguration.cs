@@ -2,6 +2,20 @@ using MediaBrowser.Model.Plugins;
 
 namespace Jellyfin.Plugin.JavTube.Configuration;
 
+public enum TranslationMode
+{
+    Disabled,
+    Title,
+    Summary,
+    All
+}
+
+public enum TranslationEngine
+{
+    Baidu,
+    Google
+}
+
 public class PluginConfiguration : BasePluginConfiguration
 {
     #region Rating
@@ -26,9 +40,9 @@ public class PluginConfiguration : BasePluginConfiguration
 
     #region Translation
 
-    public int TranslationMode { get; set; } = 0;
+    public TranslationMode TranslationMode { get; set; } = TranslationMode.Disabled;
 
-    public string TranslationEngine { get; set; } = "Baidu";
+    public TranslationEngine TranslationEngine { get; set; } = TranslationEngine.Baidu;
 
     public string BaiduAppId { get; set; } = string.Empty;
 
