@@ -59,7 +59,7 @@
                     </select>
                 </div>
 
-                <div class="translationEngineConfiguration">
+                <div class="sltTranslationModeEnabled">
                     <div class="selectContainer">
                         <label class="selectLabel" for="sltTranslationEngine">Translation Engine</label>
                         <select class="emby-select-withcolor emby-select sltTranslationEngine" id="sltTranslationEngine"
@@ -69,7 +69,7 @@
                         </select>
                     </div>
 
-                    <div class="baiduApiConfiguration">
+                    <div class="sltTranslationEngineBaidu">
                         <div class="inputContainer">
                             <label class="inputeLabel inputLabelUnfocused" for="txtBaiduAppId">Baidu APP ID</label>
                             <input id="txtBaiduAppId" is="emby-input" name="txtBaiduAppId" type="text"/>
@@ -83,7 +83,7 @@
                         </div>
                     </div>
 
-                    <div class="googleApiConfiguration">
+                    <div class="sltTranslationEngineGoogle">
                         <div class="inputContainer">
                             <label class="inputeLabel inputLabelUnfocused" for="txtGoogleApiKey">Google API Key</label>
                             <input id="txtGoogleApiKey" is="emby-input" name="txtGoogleApiKey" type="text"/>
@@ -115,22 +115,22 @@
 
         $('.sltTranslationMode').on('change', function (_) {
             if (this.value === "Disabled") {
-                $('.translationEngineConfiguration').css('display', 'none');
+                $('.sltTranslationModeEnabled').css('display', 'none');
             } else {
-                $('.translationEngineConfiguration').css('display', 'inherit');
+                $('.sltTranslationModeEnabled').css('display', 'inherit');
             }
         });
 
         $('.sltTranslationEngine').on('change', function (_) {
             if (this.value === "Baidu") {
-                $('.baiduApiConfiguration').css('display', 'inherit');
-                $('.googleApiConfiguration').css('display', 'none');
+                $('.sltTranslationEngineBaidu').css('display', 'inherit');
+                $('.sltTranslationEngineGoogle').css('display', 'none');
             } else if (this.value === "Google") {
-                $('.baiduApiConfiguration').css('display', 'none');
-                $('.googleApiConfiguration').css('display', 'inherit');
+                $('.sltTranslationEngineBaidu').css('display', 'none');
+                $('.sltTranslationEngineGoogle').css('display', 'inherit');
             } else {
-                $('.baiduApiConfiguration').css('display', 'none');
-                $('.googleApiConfiguration').css('display', 'none');
+                $('.sltTranslationEngineBaidu').css('display', 'none');
+                $('.sltTranslationEngineGoogle').css('display', 'none');
             }
         });
 
