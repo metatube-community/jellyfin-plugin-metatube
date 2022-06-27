@@ -4,36 +4,42 @@
     <title>JavTube</title>
 </head>
 <body>
-<div class="page type-interior pluginConfigurationPage"
-     data-require="emby-input,emby-button,emby-select,emby-checkbox"
-     data-role="page"
-     id="JavTubeConfigurationPage">
+<div class="page type-interior pluginConfigurationPage JavTubeConfigurationPage"
+     data-require="emby-input,emby-button,emby-select,emby-checkbox,emby-linkbutton"
+     data-role="page">
     <div data-role="content">
         <div class="content-primary">
+
             <h1>JavTube</h1>
-            <form id="JavTubeConfigForm">
+
+            <form class="JavTubeConfigForm">
+
                 <div class="inputContainer">
                     <label class="inputeLabel inputLabelUnfocused" for="txtServer">Server</label>
                     <input id="txtServer" is="emby-input" name="txtServer" required type="text"/>
                     <div class="fieldDescription">URL of JavTube Server.</div>
                 </div>
+
                 <div class="inputContainer">
                     <label class="inputeLabel inputLabelUnfocused" for="txtToken">Token</label>
                     <input id="txtToken" is="emby-input" name="txtToken" type="text"/>
                     <div class="fieldDescription">Access Token of JavTube Server.</div>
                 </div>
+
                 <div class="checkboxContainer checkboxContainer-withDescripton">
                     <label class="emby-checkbox-label">
                         <input id="chkEnableRating" is="emby-checkbox" name="chkEnableRating" type="checkbox"/>
                         <span>Enable Rating</span>
                     </label>
                 </div>
+
                 <div class="checkboxContainer checkboxContainer-withDescripton">
                     <label class="emby-checkbox-label">
                         <input id="chkEnableTrailer" is="emby-checkbox" name="chkEnableTrailer" type="checkbox"/>
                         <span>Enable Trailer</span>
                     </label>
                 </div>
+
                 <div class="selectContainer">
                     <label class="selectLabel" for="sltTranslationMode">Translation Mode</label>
                     <select class="emby-select-withcolor emby-select" id="sltTranslationMode" is="emby-select"
@@ -44,6 +50,7 @@
                         <option value="3">Translate All</option>
                     </select>
                 </div>
+
                 <div class="selectContainer">
                     <label class="selectLabel" for="sltTranslationEngine">Translation Engine</label>
                     <select class="emby-select-withcolor emby-select" id="sltTranslationEngine" is="emby-select"
@@ -52,21 +59,25 @@
                         <option value="Google">Google</option>
                     </select>
                 </div>
+
                 <div class="inputContainer">
                     <label class="inputeLabel inputLabelUnfocused" for="txtBaiduAppId">Baidu APP ID</label>
                     <input id="txtBaiduAppId" is="emby-input" name="txtBaiduAppId" type="text"/>
                     <div class="fieldDescription">*Required if using Baidu as the translation engine.</div>
                 </div>
+
                 <div class="inputContainer">
                     <label class="inputeLabel inputLabelUnfocused" for="txtBaiduAppKey">Baidu APP Key</label>
                     <input id="txtBaiduAppKey" is="emby-input" name="txtBaiduAppKey" type="text"/>
                     <div class="fieldDescription">*Required if using Baidu as the translation engine.</div>
                 </div>
+
                 <div class="inputContainer">
                     <label class="inputeLabel inputLabelUnfocused" for="txtGoogleApiKey">Google API Key</label>
                     <input id="txtGoogleApiKey" is="emby-input" name="txtGoogleApiKey" type="text"/>
                     <div class="fieldDescription">*Required if using Google as the translation engine.</div>
                 </div>
+
                 <div class="inputContainer">
                     <label class="inputLabel inputLabel-float inputLabelUnfocused" for="txtGenreSubstitutionTable">Genre
                         Substitution Table</label>
@@ -74,51 +85,56 @@
                               name="txtGenreSubstitutionTable" rows="10" type="text"></textarea>
                     <div class="fieldDescription"></div>
                 </div>
+
                 <div>
                     <button class="raised button-submit block" is="emby-button" type="submit">
                         <span>Save</span></button>
                 </div>
+
             </form>
         </div>
     </div>
     <script type="text/javascript">
         var JavTubePluginConfig = {
-            uniquePluginId: "01cc53ec-c415-4108-bbd4-a684a9801a32"
+            pluginUniqueId: "01cc53ec-c415-4108-bbd4-a684a9801a32"
         };
 
-        $('#JavTubeConfigurationPage').on('pageshow', function () {
+        $('.JavTubeConfigurationPage').on('pageshow', function () {
             Dashboard.showLoadingMsg();
-            ApiClient.getPluginConfiguration(JavTubePluginConfig.uniquePluginId).then(function (config) {
-                $('#txtServer').val(config.Server).change();
-                $('#txtToken').val(config.Token).change();
-                $('#chkEnableRating').prop('checked', config.EnableRating);
-                $('#chkEnableTrailer').prop('checked', config.EnableTrailer);
-                $('#sltTranslationMode').val(config.TranslationMode).change();
-                $('#sltTranslationEngine').val(config.TranslationEngine).change();
-                $('#txtBaiduAppId').val(config.BaiduAppId).change();
-                $('#txtBaiduAppKey').val(config.BaiduAppKey).change();
-                $('#txtGoogleApiKey').val(config.GoogleApiKey).change();
-                $('#txtGenreSubstitutionTable').val(config.GenreSubstitutionTable).change();
+            var page = this;
+            ApiClient.getPluginConfiguration(JavTubePluginConfig.pluginUniqueId).then(function (config) {
+                $('#txtServer', page).val(config.Server).change();
+                $('#txtToken', page).val(config.Token).change();
+                page.querySelector('#chkEnableRating').checked = config.EnableRating;
+                page.querySelector('#chkEnableTrailer').checked = config.EnableTrailer;
+                $('#sltTranslationMode', page).val(config.TranslationMode).change();
+                $('#sltTranslationEngine', page).val(config.TranslationEngine).change();
+                $('#txtBaiduAppId', page).val(config.BaiduAppId).change();
+                $('#txtBaiduAppKey', page).val(config.BaiduAppKey).change();
+                $('#txtGoogleApiKey', page).val(config.GoogleApiKey).change();
+                $('#txtGenreSubstitutionTable', page).val(config.GenreSubstitutionTable).change();
                 Dashboard.hideLoadingMsg();
             });
         });
 
-        $('#JavTubeConfigForm').on('submit', function () {
+        $('.JavTubeConfigForm').on('submit', function () {
             Dashboard.showLoadingMsg();
-            ApiClient.getPluginConfiguration(JavTubePluginConfig.uniquePluginId).then(function (config) {
-                config.Server = $('#txtServer').val();
-                config.Token = $('#txtToken').val();
+            var form = this;
+            ApiClient.getPluginConfiguration(JavTubePluginConfig.pluginUniqueId).then(function (config) {
+                config.Server = $('#txtServer', form).val();
+                config.Token = $('#txtToken', form).val();
                 config.EnableRating = $('#chkEnableRating').prop('checked');
                 config.EnableTrailer = $('#chkEnableTrailer').prop('checked');
-                config.TranslationMode = $('#sltTranslationMode').val();
-                config.TranslationEngine = $('#sltTranslationEngine').val();
-                config.BaiduAppId = $('#txtBaiduAppId').val();
-                config.BaiduAppKey = $('#txtBaiduAppKey').val();
-                config.GoogleApiKey = $('#txtGoogleApiKey').val();
-                config.GenreSubstitutionTable = $('#txtGenreSubstitutionTable').val();
-                ApiClient.updatePluginConfiguration(JavTubePluginConfig.uniquePluginId, config).then(
+                config.TranslationMode = $('#sltTranslationMode', form).val();
+                config.TranslationEngine = $('#sltTranslationEngine', form).val();
+                config.BaiduAppId = $('#txtBaiduAppId', form).val();
+                config.BaiduAppKey = $('#txtBaiduAppKey', form).val();
+                config.GoogleApiKey = $('#txtGoogleApiKey', form).val();
+                config.GenreSubstitutionTable = $('#txtGenreSubstitutionTable', form).val();
+                ApiClient.updatePluginConfiguration(JavTubePluginConfig.pluginUniqueId, config).then(
                     Dashboard.processPluginConfigurationUpdateResult);
             });
+            // Disable default form submission
             return false;
         });
     </script>
