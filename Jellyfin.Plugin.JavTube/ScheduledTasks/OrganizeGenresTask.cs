@@ -83,7 +83,7 @@ public class OrganizeGenresTask : IScheduledTask
             if (Plugin.Instance.Configuration.EnableGenreSubstitution)
             {
                 // Deserialize Text to Substitution Table.
-                var substitutionTable = GenreHelper.DeserializeSubstitutionTable(
+                var substitutionTable = DictionaryHelper.Deserialize(
                     Plugin.Instance.Configuration.GenreSubstitutionTable);
 
                 // Replace Genres.
