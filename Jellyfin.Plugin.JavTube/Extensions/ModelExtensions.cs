@@ -2,8 +2,10 @@ using Jellyfin.Plugin.JavTube.Models;
 
 namespace Jellyfin.Plugin.JavTube.Extensions;
 
-internal static class ProviderIdModelExtensions
+internal static class ModelExtensions
 {
+    #region ProviderIdModel
+
     private const char Separator = ':';
 
     private static double? ParseDouble(string s)
@@ -41,7 +43,7 @@ internal static class ProviderIdModelExtensions
         return null;
     }
 
-    public static ProviderIdModel Deserialize(string rawPid)
+    public static ProviderIdModel DeserializePid(string rawPid)
     {
         var providerIds = rawPid?.Split(Separator);
         return new ProviderIdModel
@@ -63,4 +65,6 @@ internal static class ProviderIdModelExtensions
         if (pid.UpdateInfo.HasValue) values.Add(pid.UpdateInfo.ToString());
         return string.Join(Separator, values);
     }
+
+    #endregion
 }
