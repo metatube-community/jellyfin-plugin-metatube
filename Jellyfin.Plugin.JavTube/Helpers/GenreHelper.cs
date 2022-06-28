@@ -54,7 +54,7 @@ public static class GenreHelper
 
     private static bool HasExternalChineseSubtitle(string basename, IEnumerable<string> files)
     {
-        var r = new Regex(@"\.(chinese|chi|chs|cht)\.(ass|srt|ssa|stl|sub|vid|vtt)$",
+        var r = new Regex(@"\.(chinese|ch[ist]|zh(-(cn|hk|tw|hans|hant))?)\.(ass|srt|ssa|stl|sub|vid|vtt)$",
             RegexOptions.IgnoreCase | RegexOptions.CultureInvariant | RegexOptions.Compiled);
         return files.Any(name => r.IsMatch(name) &&
                                  r.Replace(name, string.Empty)
