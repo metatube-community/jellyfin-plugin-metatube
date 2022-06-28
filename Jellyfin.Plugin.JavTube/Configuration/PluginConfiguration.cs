@@ -59,6 +59,8 @@ public class PluginConfiguration : BasePluginConfiguration
     #endregion
 
     #region Genre
+    
+    public bool EnableGenreSubstitution { get; set; } = true;
 
     public string GenreSubstitutionTable { get; set; } = DefaultGenreSubstitutionTable;
 

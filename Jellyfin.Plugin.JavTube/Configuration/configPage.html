@@ -94,6 +94,13 @@
                     </div>
                 </div>
 
+                <div class="checkboxContainer checkboxContainer-withDescripton">
+                    <label class="emby-checkbox-label">
+                        <input id="chkEnableGenreSubstitution" is="emby-checkbox" name="chkEnableGenreSubstitution" type="checkbox"/>
+                        <span>Enable Genre Substitution</span>
+                    </label>
+                </div>
+
                 <div class="inputContainer">
                     <label class="inputLabel inputLabel-float inputLabelUnfocused" for="txtGenreSubstitutionTable">Genre substitution table:</label>
                     <textarea class="emby-input" id="txtGenreSubstitutionTable" is="emby-input" name="txtGenreSubstitutionTable" rows="10" type="text"></textarea>
@@ -148,6 +155,7 @@
                 $('#txtBaiduAppId', page).val(config.BaiduAppId).change();
                 $('#txtBaiduAppKey', page).val(config.BaiduAppKey).change();
                 $('#txtGoogleApiKey', page).val(config.GoogleApiKey).change();
+                page.querySelector('#chkEnableGenreSubstitution').checked = config.EnableGenreSubstitution;
                 $('#txtGenreSubstitutionTable', page).val(config.GenreSubstitutionTable).change();
                 Dashboard.hideLoadingMsg();
             });
@@ -167,6 +175,7 @@
                 config.BaiduAppId = $('#txtBaiduAppId', form).val();
                 config.BaiduAppKey = $('#txtBaiduAppKey', form).val();
                 config.GoogleApiKey = $('#txtGoogleApiKey', form).val();
+                config.EnableGenreSubstitution = $('#chkEnableGenreSubstitution').prop('checked');
                 config.GenreSubstitutionTable = $('#txtGenreSubstitutionTable', form).val();
                 ApiClient.updatePluginConfiguration(JavTubePluginConfig.pluginUniqueId, config).then(
                     Dashboard.processPluginConfigurationUpdateResult);

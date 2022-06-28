@@ -80,19 +80,22 @@ public class OrganizeGenresTask : IScheduledTask
 
             var genres = item.Genres?.ToList() ?? new List<string>();
 
-            // Deserialize Text to Substitution Table.
-            var substitutionTable = GenreHelper.DeserializeSubstitutionTable(
-                Plugin.Instance.Configuration.GenreSubstitutionTable);
-
-            // Replace Genres.
-            foreach (var genre in genres.Where(genre =>
-                         substitutionTable.ContainsKey(genre)).ToArray())
+            if (Plugin.Instance.Configuration.EnableGenreSubstitution)
             {
-                var value = substitutionTable[genre];
-                if (string.IsNullOrWhiteSpace(value))
-                    genres.Remove(genre); // should just be removed.
-                else
-                    genres[genres.IndexOf(genre)] = value; // replace.
+                // Deserialize Text to Substitution Table.
+                var substitutionTable = GenreHelper.DeserializeSubstitutionTable(
+                    Plugin.Instance.Configuration.GenreSubstitutionTable);
+
+                // Replace Genres.
+                foreach (var genre in genres.Where(genre =>
+                             substitutionTable.ContainsKey(genre)).ToArray())
+                {
+                    var value = substitutionTable[genre];
+                    if (string.IsNullOrWhiteSpace(value))
+                        genres.Remove(genre); // should just be removed.
+                    else
+                        genres[genres.IndexOf(genre)] = value; // replace.
+                }
             }
 
             try
