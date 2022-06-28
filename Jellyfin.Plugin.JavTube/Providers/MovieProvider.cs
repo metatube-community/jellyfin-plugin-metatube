@@ -91,6 +91,9 @@ public class MovieProvider : BaseProvider, IRemoteMetadataProvider<Movie, MovieI
         if (Configuration.EnableRating)
             result.Item.CommunityRating = m.Score > 0 ? (float)Math.Round(m.Score * 2, 1) : null;
 
+        if (Configuration.EnableCollection && !string.IsNullOrWhiteSpace(m.Series))
+            result.Item.AddCollection(m.Series);
+
         // Add Studio.
         if (!string.IsNullOrWhiteSpace(m.Maker))
             result.Item.AddStudio(m.Maker);

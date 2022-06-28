@@ -37,6 +37,13 @@
 
                 <div class="checkboxContainer checkboxContainer-withDescripton">
                     <label class="emby-checkbox-label">
+                        <input id="chkEnableCollection" is="emby-checkbox" name="chkEnableCollection" type="checkbox"/>
+                        <span>Enable Collection</span>
+                    </label>
+                </div>
+
+                <div class="checkboxContainer checkboxContainer-withDescripton">
+                    <label class="emby-checkbox-label">
                         <input id="chkEnableRating" is="emby-checkbox" name="chkEnableRating" type="checkbox"/>
                         <span>Enable Rating</span>
                     </label>
@@ -143,6 +150,7 @@
             ApiClient.getPluginConfiguration(JavTubePluginConfig.pluginUniqueId).then(function (config) {
                 $('#txtServer', page).val(config.Server).change();
                 $('#txtToken', page).val(config.Token).change();
+                page.querySelector('#chkEnableCollection').checked = config.EnableCollection;
                 page.querySelector('#chkEnableRating').checked = config.EnableRating;
                 page.querySelector('#chkEnableTrailer').checked = config.EnableTrailer;
                 $('#sltTranslationMode', page).val(config.TranslationMode).change();
@@ -161,6 +169,7 @@
             ApiClient.getPluginConfiguration(JavTubePluginConfig.pluginUniqueId).then(function (config) {
                 config.Server = $('#txtServer', form).val();
                 config.Token = $('#txtToken', form).val();
+                config.EnableCollection = $('#chkEnableCollection').prop('checked');
                 config.EnableRating = $('#chkEnableRating').prop('checked');
                 config.EnableTrailer = $('#chkEnableTrailer').prop('checked');
                 config.TranslationMode = $('#sltTranslationMode', form).val();

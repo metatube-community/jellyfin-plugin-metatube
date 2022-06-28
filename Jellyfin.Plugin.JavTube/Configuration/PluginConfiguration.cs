@@ -18,6 +18,12 @@ public enum TranslationEngine
 
 public class PluginConfiguration : BasePluginConfiguration
 {
+    #region Collection
+
+    public bool EnableCollection { get; set; } = false;
+
+    #endregion
+
     #region Rating
 
     public bool EnableRating { get; set; } = true;
