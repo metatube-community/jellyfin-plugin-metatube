@@ -24,8 +24,9 @@
 
                 <div class="inputContainer">
                     <label class="inputeLabel inputLabelUnfocused" for="txtServer">Server:</label>
-                    <input id="txtServer" is="emby-input" name="txtServer" required type="text"/>
-                    <div class="fieldDescription">URL of JavTube Server.</div>
+                    <input id="txtServer" is="emby-input" name="txtServer" pattern="^https?://.+$" required
+                           type="text"/>
+                    <div class="fieldDescription">HTTP URL of JavTube Server.</div>
                 </div>
 
                 <div class="inputContainer">
