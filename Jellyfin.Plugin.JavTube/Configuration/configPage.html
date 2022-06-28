@@ -177,8 +177,7 @@
                 config.GoogleApiKey = $('#txtGoogleApiKey', form).val();
                 config.EnableGenreSubstitution = $('#chkEnableGenreSubstitution').prop('checked');
                 config.GenreSubstitutionTable = $('#txtGenreSubstitutionTable', form).val();
-                ApiClient.updatePluginConfiguration(JavTubePluginConfig.pluginUniqueId, config).then(
-                    Dashboard.processPluginConfigurationUpdateResult);
+                ApiClient.updatePluginConfiguration(JavTubePluginConfig.pluginUniqueId, config).then(Dashboard.processPluginConfigurationUpdateResult);
             });
             // Disable default form submission
             return false;
