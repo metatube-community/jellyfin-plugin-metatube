@@ -148,7 +148,7 @@ public class GenerateTrailersTask : IScheduledTask
                 // Delete other trailer files, if any.
                 DeleteFiles(trailersFolderPath, TrailerSearchPattern, trailerFilePath);
 
-                _logger.Info("Generate trailer for video: {0}", item.Name);
+                _logger.Info("Generate trailer for video {0} at {1}", item.Name, trailerFilePath);
 
                 // Write .strm trailer file.
                 await File.WriteAllTextAsync(trailerFilePath, trailerUrl, Utf8WithoutBom, cancellationToken);
