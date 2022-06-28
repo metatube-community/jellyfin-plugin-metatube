@@ -18,93 +18,105 @@
 
             <form class="JavTubeConfigurationForm">
 
-                <div class="inputContainer">
-                    <label class="inputeLabel inputLabelUnfocused" for="txtServer">Server:</label>
-                    <input id="txtServer" is="emby-input" name="txtServer" pattern="^https?://.+$" required
-                           type="text"/>
-                    <div class="fieldDescription">HTTP URL of JavTube Server.</div>
+                <div class="verticalSection">
+                    <h2>General</h2>
+
+                    <div class="inputContainer">
+                        <label class="inputeLabel inputLabelUnfocused" for="txtServer">Server:</label>
+                        <input id="txtServer" is="emby-input" name="txtServer" pattern="^https?://.+$" required
+                               type="text"/>
+                        <div class="fieldDescription">HTTP URL of JavTube Server.</div>
+                    </div>
+
+                    <div class="inputContainer">
+                        <label class="inputeLabel inputLabelUnfocused" for="txtToken">Token:</label>
+                        <input id="txtToken" is="emby-input" name="txtToken" type="text"/>
+                        <div class="fieldDescription">Access Token of JavTube Server.</div>
+                    </div>
+
+                    <div class="checkboxContainer checkboxContainer-withDescripton">
+                        <label class="emby-checkbox-label">
+                            <input id="chkEnableCollection" is="emby-checkbox" name="chkEnableCollection" type="checkbox"/>
+                            <span>Enable Collection</span>
+                        </label>
+                    </div>
+
+                    <div class="checkboxContainer checkboxContainer-withDescripton">
+                        <label class="emby-checkbox-label">
+                            <input id="chkEnableRating" is="emby-checkbox" name="chkEnableRating" type="checkbox"/>
+                            <span>Enable Rating</span>
+                        </label>
+                    </div>
+
+                    <div class="checkboxContainer checkboxContainer-withDescripton">
+                        <label class="emby-checkbox-label">
+                            <input id="chkEnableTrailer" is="emby-checkbox" name="chkEnableTrailer" type="checkbox"/>
+                            <span>Enable Trailer</span>
+                        </label>
+                    </div>
                 </div>
 
-                <div class="inputContainer">
-                    <label class="inputeLabel inputLabelUnfocused" for="txtToken">Token:</label>
-                    <input id="txtToken" is="emby-input" name="txtToken" type="text"/>
-                    <div class="fieldDescription">Access Token of JavTube Server.</div>
-                </div>
+                <div class="verticalSection">
+                    <h2 class="sectionTitle">Translation</h2>
 
-                <div class="checkboxContainer checkboxContainer-withDescripton">
-                    <label class="emby-checkbox-label">
-                        <input id="chkEnableCollection" is="emby-checkbox" name="chkEnableCollection" type="checkbox"/>
-                        <span>Enable Collection</span>
-                    </label>
-                </div>
-
-                <div class="checkboxContainer checkboxContainer-withDescripton">
-                    <label class="emby-checkbox-label">
-                        <input id="chkEnableRating" is="emby-checkbox" name="chkEnableRating" type="checkbox"/>
-                        <span>Enable Rating</span>
-                    </label>
-                </div>
-
-                <div class="checkboxContainer checkboxContainer-withDescripton">
-                    <label class="emby-checkbox-label">
-                        <input id="chkEnableTrailer" is="emby-checkbox" name="chkEnableTrailer" type="checkbox"/>
-                        <span>Enable Trailer</span>
-                    </label>
-                </div>
-
-                <div class="selectContainer">
-                    <label class="selectLabel" for="selectTranslationMode">Translation mode:</label>
-                    <select class="emby-select-withcolor emby-select selectTranslationMode" id="selectTranslationMode" is="emby-select" name="selectTranslationMode">
-                        <option value="Disabled">Disabled</option>
-                        <option value="Title">Title</option>
-                        <option value="Summary">Summary</option>
-                        <option value="Both">Title and Summary</option>
-                    </select>
-                </div>
-
-                <div class="selectTranslationModeEnabled">
                     <div class="selectContainer">
-                        <label class="selectLabel" for="selectTranslationEngine">Translation engine:</label>
-                        <select class="emby-select-withcolor emby-select selectTranslationEngine" id="selectTranslationEngine" is="emby-select" name="selectTranslationEngine">
-                            <option value="Baidu">Baidu</option>
-                            <option value="Google">Google</option>
+                        <label class="selectLabel" for="selectTranslationMode">Translation mode:</label>
+                        <select class="emby-select-withcolor emby-select selectTranslationMode" id="selectTranslationMode" is="emby-select" name="selectTranslationMode">
+                            <option value="Disabled">Disabled</option>
+                            <option value="Title">Title</option>
+                            <option value="Summary">Summary</option>
+                            <option value="Both">Title and Summary</option>
                         </select>
                     </div>
 
-                    <div class="selectTranslationEngineBaidu">
-                        <div class="inputContainer">
-                            <label class="inputeLabel inputLabelUnfocused" for="txtBaiduAppId">Baidu app id:</label>
-                            <input id="txtBaiduAppId" is="emby-input" name="txtBaiduAppId" type="text"/>
-                            <div class="fieldDescription"></div>
+                    <div class="selectTranslationModeEnabled">
+                        <div class="selectContainer">
+                            <label class="selectLabel" for="selectTranslationEngine">Translation engine:</label>
+                            <select class="emby-select-withcolor emby-select selectTranslationEngine" id="selectTranslationEngine" is="emby-select" name="selectTranslationEngine">
+                                <option value="Baidu">Baidu</option>
+                                <option value="Google">Google</option>
+                            </select>
                         </div>
 
-                        <div class="inputContainer">
-                            <label class="inputeLabel inputLabelUnfocused" for="txtBaiduAppKey">Baidu app key:</label>
-                            <input id="txtBaiduAppKey" is="emby-input" name="txtBaiduAppKey" type="text"/>
-                            <div class="fieldDescription"></div>
-                        </div>
-                    </div>
+                        <div class="selectTranslationEngineBaidu">
+                            <div class="inputContainer">
+                                <label class="inputeLabel inputLabelUnfocused" for="txtBaiduAppId">Baidu app id:</label>
+                                <input id="txtBaiduAppId" is="emby-input" name="txtBaiduAppId" type="text"/>
+                                <div class="fieldDescription"></div>
+                            </div>
 
-                    <div class="selectTranslationEngineGoogle">
-                        <div class="inputContainer">
-                            <label class="inputeLabel inputLabelUnfocused" for="txtGoogleApiKey">Google api key:</label>
-                            <input id="txtGoogleApiKey" is="emby-input" name="txtGoogleApiKey" type="text"/>
-                            <div class="fieldDescription"></div>
+                            <div class="inputContainer">
+                                <label class="inputeLabel inputLabelUnfocused" for="txtBaiduAppKey">Baidu app key:</label>
+                                <input id="txtBaiduAppKey" is="emby-input" name="txtBaiduAppKey" type="text"/>
+                                <div class="fieldDescription"></div>
+                            </div>
+                        </div>
+
+                        <div class="selectTranslationEngineGoogle">
+                            <div class="inputContainer">
+                                <label class="inputeLabel inputLabelUnfocused" for="txtGoogleApiKey">Google api key:</label>
+                                <input id="txtGoogleApiKey" is="emby-input" name="txtGoogleApiKey" type="text"/>
+                                <div class="fieldDescription"></div>
+                            </div>
                         </div>
                     </div>
                 </div>
 
-                <div class="checkboxContainer checkboxContainer-withDescripton">
-                    <label class="emby-checkbox-label">
-                        <input id="chkEnableGenreSubstitution" is="emby-checkbox" name="chkEnableGenreSubstitution" type="checkbox"/>
-                        <span>Enable Genre Substitution</span>
-                    </label>
-                </div>
+                <div class="verticalSection">
+                    <h2 class="sectionTitle">Substitution</h2>
 
-                <div class="inputContainer">
-                    <label class="inputLabel inputLabel-float inputLabelUnfocused" for="txtGenreSubstitutionTable">Genre substitution table:</label>
-                    <textarea class="emby-input" id="txtGenreSubstitutionTable" is="emby-input" name="txtGenreSubstitutionTable" rows="10" type="text"></textarea>
-                    <div class="fieldDescription">One record per line, separated by equal signs. Leave the target genre blank to delete the source genre.</div>
+                    <div class="checkboxContainer checkboxContainer-withDescripton">
+                        <label class="emby-checkbox-label">
+                            <input id="chkEnableGenreSubstitution" is="emby-checkbox" name="chkEnableGenreSubstitution" type="checkbox"/>
+                            <span>Enable Genre Substitution</span>
+                        </label>
+                    </div>
+
+                    <div class="inputContainer">
+                        <label class="inputLabel inputLabel-float inputLabelUnfocused" for="txtGenreSubstitutionTable">Genre substitution table:</label>
+                        <textarea class="emby-input" id="txtGenreSubstitutionTable" is="emby-input" name="txtGenreSubstitutionTable" rows="10" type="text"></textarea>
+                        <div class="fieldDescription">One record per line, separated by equal signs. Leave the target genre blank to delete the source genre.</div>
+                    </div>
                 </div>
 
                 <div>

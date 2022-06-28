@@ -18,29 +18,17 @@ public enum TranslationEngine
 
 public class PluginConfiguration : BasePluginConfiguration
 {
-    #region Collection
-
-    public bool EnableCollection { get; set; } = false;
-
-    #endregion
-
-    #region Rating
-
-    public bool EnableRating { get; set; } = true;
-
-    #endregion
-
-    #region Trailer
-
-    public bool EnableTrailer { get; set; } = false;
-
-    #endregion
-
     #region General
 
     public string Server { get; set; } = "https://api.javtube.internal";
 
     public string Token { get; set; } = string.Empty;
+
+    public bool EnableCollection { get; set; } = false;
+
+    public bool EnableRating { get; set; } = true;
+
+    public bool EnableTrailer { get; set; } = false;
 
     #endregion
 
@@ -58,8 +46,8 @@ public class PluginConfiguration : BasePluginConfiguration
 
     #endregion
 
-    #region Genre
-    
+    #region Substitution
+
     public bool EnableGenreSubstitution { get; set; } = true;
 
     public string GenreSubstitutionTable { get; set; } = DefaultGenreSubstitutionTable;
