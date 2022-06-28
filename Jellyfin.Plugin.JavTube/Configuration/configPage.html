@@ -57,9 +57,9 @@
                 </div>
 
                 <div class="selectContainer">
-                    <label class="selectLabel" for="sltTranslationMode">Translation mode:</label>
-                    <select class="emby-select-withcolor emby-select sltTranslationMode" id="sltTranslationMode"
-                            is="emby-select" name="sltTranslationMode">
+                    <label class="selectLabel" for="selectTranslationMode">Translation mode:</label>
+                    <select class="emby-select-withcolor emby-select selectTranslationMode" id="selectTranslationMode"
+                            is="emby-select" name="selectTranslationMode">
                         <option value="Disabled">Disabled</option>
                         <option value="Title">Title</option>
                         <option value="Summary">Summary</option>
@@ -67,17 +67,17 @@
                     </select>
                 </div>
 
-                <div class="sltTranslationModeEnabled">
+                <div class="selectTranslationModeEnabled">
                     <div class="selectContainer">
-                        <label class="selectLabel" for="sltTranslationEngine">Translation engine:</label>
-                        <select class="emby-select-withcolor emby-select sltTranslationEngine" id="sltTranslationEngine"
-                                is="emby-select" name="sltTranslationEngine">
+                        <label class="selectLabel" for="selectTranslationEngine">Translation engine:</label>
+                        <select class="emby-select-withcolor emby-select selectTranslationEngine" id="selectTranslationEngine"
+                                is="emby-select" name="selectTranslationEngine">
                             <option value="Baidu">Baidu</option>
                             <option value="Google">Google</option>
                         </select>
                     </div>
 
-                    <div class="sltTranslationEngineBaidu">
+                    <div class="selectTranslationEngineBaidu">
                         <div class="inputContainer">
                             <label class="inputeLabel inputLabelUnfocused" for="txtBaiduAppId">Baidu app id:</label>
                             <input id="txtBaiduAppId" is="emby-input" name="txtBaiduAppId" type="text"/>
@@ -91,7 +91,7 @@
                         </div>
                     </div>
 
-                    <div class="sltTranslationEngineGoogle">
+                    <div class="selectTranslationEngineGoogle">
                         <div class="inputContainer">
                             <label class="inputeLabel inputLabelUnfocused" for="txtGoogleApiKey">Google api key:</label>
                             <input id="txtGoogleApiKey" is="emby-input" name="txtGoogleApiKey" type="text"/>
@@ -123,24 +123,24 @@
             pluginUniqueId: "01cc53ec-c415-4108-bbd4-a684a9801a32"
         };
 
-        $('.sltTranslationMode').on('change', function (_) {
+        $('.selectTranslationMode').on('change', function (_) {
             if (this.value === "Disabled") {
-                $('.sltTranslationModeEnabled').css('display', 'none');
+                $('.selectTranslationModeEnabled').css('display', 'none');
             } else {
-                $('.sltTranslationModeEnabled').css('display', 'inherit');
+                $('.selectTranslationModeEnabled').css('display', 'inherit');
             }
         });
 
-        $('.sltTranslationEngine').on('change', function (_) {
+        $('.selectTranslationEngine').on('change', function (_) {
             if (this.value === "Baidu") {
-                $('.sltTranslationEngineBaidu').css('display', 'inherit');
-                $('.sltTranslationEngineGoogle').css('display', 'none');
+                $('.selectTranslationEngineBaidu').css('display', 'inherit');
+                $('.selectTranslationEngineGoogle').css('display', 'none');
             } else if (this.value === "Google") {
-                $('.sltTranslationEngineBaidu').css('display', 'none');
-                $('.sltTranslationEngineGoogle').css('display', 'inherit');
+                $('.selectTranslationEngineBaidu').css('display', 'none');
+                $('.selectTranslationEngineGoogle').css('display', 'inherit');
             } else {
-                $('.sltTranslationEngineBaidu').css('display', 'none');
-                $('.sltTranslationEngineGoogle').css('display', 'none');
+                $('.selectTranslationEngineBaidu').css('display', 'none');
+                $('.selectTranslationEngineGoogle').css('display', 'none');
             }
         });
 
@@ -153,8 +153,8 @@
                 page.querySelector('#chkEnableCollection').checked = config.EnableCollection;
                 page.querySelector('#chkEnableRating').checked = config.EnableRating;
                 page.querySelector('#chkEnableTrailer').checked = config.EnableTrailer;
-                $('#sltTranslationMode', page).val(config.TranslationMode).change();
-                $('#sltTranslationEngine', page).val(config.TranslationEngine).change();
+                $('#selectTranslationMode', page).val(config.TranslationMode).change();
+                $('#selectTranslationEngine', page).val(config.TranslationEngine).change();
                 $('#txtBaiduAppId', page).val(config.BaiduAppId).change();
                 $('#txtBaiduAppKey', page).val(config.BaiduAppKey).change();
                 $('#txtGoogleApiKey', page).val(config.GoogleApiKey).change();
@@ -172,8 +172,8 @@
                 config.EnableCollection = $('#chkEnableCollection').prop('checked');
                 config.EnableRating = $('#chkEnableRating').prop('checked');
                 config.EnableTrailer = $('#chkEnableTrailer').prop('checked');
-                config.TranslationMode = $('#sltTranslationMode', form).val();
-                config.TranslationEngine = $('#sltTranslationEngine', form).val();
+                config.TranslationMode = $('#selectTranslationMode', form).val();
+                config.TranslationEngine = $('#selectTranslationEngine', form).val();
                 config.BaiduAppId = $('#txtBaiduAppId', form).val();
                 config.BaiduAppKey = $('#txtBaiduAppKey', form).val();
                 config.GoogleApiKey = $('#txtGoogleApiKey', form).val();
