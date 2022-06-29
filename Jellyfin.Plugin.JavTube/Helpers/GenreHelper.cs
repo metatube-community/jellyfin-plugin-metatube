@@ -9,7 +9,7 @@ public static class GenreHelper
     private static bool HasTag(string filename, string tag)
     {
         var r = new Regex(@"[-_\s]", RegexOptions.Compiled);
-        return r.Split(filename).ToList().Contains(tag, StringComparer.OrdinalIgnoreCase);
+        return r.Split(filename).Contains(tag, StringComparer.OrdinalIgnoreCase);
     }
 
     private static bool HasTag(string filename, params string[] tags)
