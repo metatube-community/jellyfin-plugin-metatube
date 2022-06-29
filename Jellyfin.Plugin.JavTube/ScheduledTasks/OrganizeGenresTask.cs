@@ -78,25 +78,9 @@ public class OrganizeGenresTask : IScheduledTask
         {
             progress?.Report((double)idx / items.Count * 100);
 
-            var genres = item.Genres?.ToList() ?? new List<string>();
-
-            if (Plugin.Instance.Configuration.EnableGenreSubstitution)
-            {
-                // Deserialize Text to Substitution Table.
-                var substitutionTable = DictionaryHelper.Deserialize(
-                    Plugin.Instance.Configuration.GenreSubstitutionTable);
-
-                // Replace Genres.
-                foreach (var genre in genres.Where(genre =>
-                             substitutionTable.ContainsKey(genre)).ToArray())
-                {
-                    var value = substitutionTable[genre];
-                    if (string.IsNullOrWhiteSpace(value))
-                        genres.Remove(genre); // should just be removed.
-                    else
-                        genres[genres.IndexOf(genre)] = value; // replace.
-                }
-            }
+            var genres = Plugin.Instance.Configuration.EnableGenreSubstitution
+                ? item.Genres.Substitute(Plugin.Instance.Configuration.GetGenreSubstitutionTable()).ToList()
+                : item.Genres?.ToList() ?? new List<string>();
 
             try
             {

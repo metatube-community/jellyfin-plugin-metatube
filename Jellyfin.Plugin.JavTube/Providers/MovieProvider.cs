@@ -54,6 +54,10 @@ public class MovieProvider : BaseProvider, IRemoteMetadataProvider<Movie, MovieI
         // Preserve original title.
         var originalTitle = m.Title;
 
+        // Substitute genres.
+        if (Configuration.EnableGenreSubstitution)
+            m.Genres = m.Genres.Substitute(Configuration.GetGenreSubstitutionTable()).ToArray();
+
         // Translate movie info.
         if (Configuration.TranslationMode != TranslationMode.Disabled)
             await TranslateMovieInfo(m, info.MetadataLanguage, cancellationToken);

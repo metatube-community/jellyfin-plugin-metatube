@@ -113,8 +113,8 @@
                     </div>
 
                     <div class="inputContainer">
-                        <label class="inputLabel inputLabel-float inputLabelUnfocused" for="txtGenreSubstitutionTable">Genre substitution table:</label>
-                        <textarea class="emby-input" id="txtGenreSubstitutionTable" is="emby-input" name="txtGenreSubstitutionTable" rows="10" type="text"></textarea>
+                        <label class="inputLabel inputLabel-float inputLabelUnfocused" for="txtGenreRawSubstitutionTable">Genre substitution table:</label>
+                        <textarea class="emby-input" id="txtGenreRawSubstitutionTable" is="emby-input" name="txtGenreRawSubstitutionTable" rows="10" type="text"></textarea>
                         <div class="fieldDescription">One record per line, separated by equal signs. Leave the target genre blank to delete the source genre.</div>
                     </div>
                 </div>
@@ -168,7 +168,7 @@
                 $('#txtBaiduAppKey', page).val(config.BaiduAppKey).change();
                 $('#txtGoogleApiKey', page).val(config.GoogleApiKey).change();
                 page.querySelector('#chkEnableGenreSubstitution').checked = config.EnableGenreSubstitution;
-                $('#txtGenreSubstitutionTable', page).val(config.GenreSubstitutionTable).change();
+                $('#txtGenreRawSubstitutionTable', page).val(config.GenreRawSubstitutionTable).change();
                 Dashboard.hideLoadingMsg();
             });
         });
@@ -188,7 +188,7 @@
                 config.BaiduAppKey = $('#txtBaiduAppKey', form).val();
                 config.GoogleApiKey = $('#txtGoogleApiKey', form).val();
                 config.EnableGenreSubstitution = $('#chkEnableGenreSubstitution', form).prop('checked');
-                config.GenreSubstitutionTable = $('#txtGenreSubstitutionTable', form).val();
+                config.GenreRawSubstitutionTable = $('#txtGenreRawSubstitutionTable', form).val();
                 ApiClient.updatePluginConfiguration(JavTubePluginConfig.pluginUniqueId, config).then(Dashboard.processPluginConfigurationUpdateResult);
             });
             // Disable default form submission
