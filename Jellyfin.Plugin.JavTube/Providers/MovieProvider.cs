@@ -78,7 +78,7 @@ public class MovieProvider : BaseProvider, IRemoteMetadataProvider<Movie, MovieI
             HasMetadata = true
         };
 
-        // Set ProviderIdModel.
+        // Set pid.
         result.Item.SetProviderIdModel(Name, new ProviderIdModel
         {
             Provider = m.Provider,
@@ -86,35 +86,36 @@ public class MovieProvider : BaseProvider, IRemoteMetadataProvider<Movie, MovieI
             Position = pid.Position
         });
 
-        // Set Trailer URL.
+        // Set trailer url.
         result.Item.SetTrailerUrl(!string.IsNullOrWhiteSpace(m.PreviewVideoUrl)
             ? m.PreviewVideoUrl
             : m.PreviewVideoHlsUrl);
 
-        // Set Community Rating.
+        // Set community rating.
         if (Configuration.EnableRating)
             result.Item.CommunityRating = m.Score > 0 ? (float)Math.Round(m.Score * 2, 1) : null;
 
+        // Add collection.
         if (Configuration.EnableCollection && !string.IsNullOrWhiteSpace(m.Series))
             result.Item.AddCollection(m.Series);
 
-        // Add Studio.
+        // Add studio.
         if (!string.IsNullOrWhiteSpace(m.Maker))
             result.Item.AddStudio(m.Maker);
 
-        // Add Tag (Series).
+        // Add tag (series).
         if (!string.IsNullOrWhiteSpace(m.Series))
             result.Item.AddTag(m.Series);
 
-        // Add Tag (Maker).
+        // Add tag (maker).
         if (!string.IsNullOrWhiteSpace(m.Maker))
             result.Item.AddTag(m.Maker);
 
-        // Add Tag (Label).
+        // Add tag (label).
         if (!string.IsNullOrWhiteSpace(m.Label))
             result.Item.AddTag(m.Label);
 
-        // Add Director.
+        // Add director.
         if (!string.IsNullOrWhiteSpace(m.Director))
             result.AddPerson(new PersonInfo
             {
@@ -122,7 +123,7 @@ public class MovieProvider : BaseProvider, IRemoteMetadataProvider<Movie, MovieI
                 Type = PersonType.Director
             });
 
-        // Add Actors.
+        // Add actors.
         foreach (var name in m.Actors)
             result.AddPerson(new PersonInfo
             {
