@@ -1,5 +1,4 @@
 #if !__EMBY__
-
 using MediaBrowser.Controller.Entities.Movies;
 
 namespace Jellyfin.Plugin.JavTube.Extensions;
