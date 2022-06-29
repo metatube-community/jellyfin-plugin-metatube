@@ -184,11 +184,11 @@ public static class ApiClient
         return await GetDataAsync<List<MovieSearchResultModel>>(apiUrl, true, cancellationToken);
     }
 
-    public static async Task<TranslateModel> GetTranslate(string q, string from, string to, string engine,
+    public static async Task<TranslationModel> GetTranslate(string q, string from, string to, string engine,
         NameValueCollection nv, CancellationToken cancellationToken)
     {
         var apiUrl = ComposeTranslateApiUrl(TranslateApi, q, from, to, engine, nv);
-        return await GetDataAsync<TranslateModel>(apiUrl, false, cancellationToken);
+        return await GetDataAsync<TranslationModel>(apiUrl, false, cancellationToken);
     }
 
     private static async Task<TModel> GetDataAsync<TModel>(string url, bool requireAuth,

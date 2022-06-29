@@ -2,7 +2,7 @@ using System.Text.Json.Serialization;
 
 namespace Jellyfin.Plugin.JavTube.Models;
 
-public class TranslateModel
+public class TranslationModel
 {
     [JsonPropertyName("from")]
     public string From { get; set; }
