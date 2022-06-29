@@ -121,20 +121,24 @@ public class MovieProvider : BaseProvider, IRemoteMetadataProvider<Movie, MovieI
 
         // Add director.
         if (!string.IsNullOrWhiteSpace(m.Director))
+        {
             result.AddPerson(new PersonInfo
             {
                 Name = m.Director,
                 Type = PersonType.Director
             });
+        }
 
         // Add actors.
         foreach (var name in m.Actors)
+        {
             result.AddPerson(new PersonInfo
             {
                 Name = name,
                 Type = PersonType.Actor,
                 ImageUrl = await GetActorImageUrl(name, cancellationToken)
             });
+        }
 
         return result;
     }
