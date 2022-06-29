@@ -75,8 +75,8 @@ public class MovieProvider : BaseProvider, IRemoteMetadataProvider<Movie, MovieI
                 Overview = m.Summary,
                 Tagline = m.Series,
                 OfficialRating = Rating,
-                PremiereDate = m.ReleaseDate.TryGetValidDateTime(),
-                ProductionYear = m.ReleaseDate.TryGetValidDateTime()?.Year,
+                PremiereDate = m.ReleaseDate.GetValidDateTime(),
+                ProductionYear = m.ReleaseDate.GetValidYear(),
                 Genres = m.Genres?.Length > 0 ? m.Genres : Array.Empty<string>()
             },
             HasMetadata = true
@@ -174,8 +174,8 @@ public class MovieProvider : BaseProvider, IRemoteMetadataProvider<Movie, MovieI
             {
                 Name = $"[{m.Provider}] {m.Number} {m.Title}",
                 SearchProviderName = Name,
-                PremiereDate = m.ReleaseDate.TryGetValidDateTime(),
-                ProductionYear = m.ReleaseDate.TryGetValidYear(),
+                PremiereDate = m.ReleaseDate.GetValidDateTime(),
+                ProductionYear = m.ReleaseDate.GetValidYear(),
                 ImageUrl = ApiClient.GetPrimaryImageApiUrl(m.Provider, m.Id, m.ThumbUrl, 1.0, true)
             };
             result.SetProviderIdModel(Name, new ProviderIdModel

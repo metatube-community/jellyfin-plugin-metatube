@@ -49,8 +49,8 @@ public class ActorProvider : BaseProvider, IRemoteMetadataProvider<Person, Perso
             Item = new Person
             {
                 Name = m.Name,
-                PremiereDate = m.Birthday.TryGetValidDateTime(),
-                ProductionYear = m.Birthday.TryGetValidDateTime()?.Year,
+                PremiereDate = m.Birthday.GetValidDateTime(),
+                ProductionYear = m.Birthday.GetValidYear(),
                 Overview = FormatOverview(m)
             },
             HasMetadata = true
