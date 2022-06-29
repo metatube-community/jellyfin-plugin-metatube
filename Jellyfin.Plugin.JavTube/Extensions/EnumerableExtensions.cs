@@ -9,15 +9,19 @@ internal static class EnumerableExtensions
 
     public static IEnumerable<string> Substitute(this IEnumerable<string> source, Dictionary<string, string> table)
     {
+        if (table?.Any() != true)
+        {
+            return source;
+        }
+
         var target = new List<string>();
 
         foreach (var item in source ?? Enumerable.Empty<string>())
         {
             if (!table.TryGetValue(item, out var value))
-                target.Add(item); // Add original item.
+                target.Add(item);
             else if (!string.IsNullOrWhiteSpace(value))
-                target.Add(value); // Add replaced item.
-            // Ignore deleted item.
+                target.Add(value);
         }
 
         return target;
