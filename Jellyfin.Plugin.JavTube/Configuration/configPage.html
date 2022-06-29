@@ -107,6 +107,19 @@
 
                     <div class="checkboxContainer checkboxContainer-withDescripton">
                         <label class="emby-checkbox-label">
+                            <input id="chkEnableActorSubstitution" is="emby-checkbox" name="chkEnableActorSubstitution" type="checkbox"/>
+                            <span>Enable Actor Substitution</span>
+                        </label>
+                    </div>
+
+                    <div class="inputContainer">
+                        <label class="inputLabel inputLabel-float inputLabelUnfocused" for="txtActorRawSubstitutionTable">Actor substitution table:</label>
+                        <textarea class="emby-input" id="txtActorRawSubstitutionTable" is="emby-input" name="txtActorRawSubstitutionTable" rows="10" type="text"></textarea>
+                        <div class="fieldDescription">One record per line, separated by equal signs. Leave the target actor blank to delete the source actor.</div>
+                    </div>
+
+                    <div class="checkboxContainer checkboxContainer-withDescripton">
+                        <label class="emby-checkbox-label">
                             <input id="chkEnableGenreSubstitution" is="emby-checkbox" name="chkEnableGenreSubstitution" type="checkbox"/>
                             <span>Enable Genre Substitution</span>
                         </label>
@@ -167,6 +180,8 @@
                 $('#txtBaiduAppId', page).val(config.BaiduAppId).change();
                 $('#txtBaiduAppKey', page).val(config.BaiduAppKey).change();
                 $('#txtGoogleApiKey', page).val(config.GoogleApiKey).change();
+                page.querySelector('#chkEnableActorSubstitution').checked = config.EnableActorSubstitution;
+                $('#txtActorRawSubstitutionTable', page).val(config.ActorRawSubstitutionTable).change();
                 page.querySelector('#chkEnableGenreSubstitution').checked = config.EnableGenreSubstitution;
                 $('#txtGenreRawSubstitutionTable', page).val(config.GenreRawSubstitutionTable).change();
                 Dashboard.hideLoadingMsg();
@@ -187,6 +202,8 @@
                 config.BaiduAppId = $('#txtBaiduAppId', form).val();
                 config.BaiduAppKey = $('#txtBaiduAppKey', form).val();
                 config.GoogleApiKey = $('#txtGoogleApiKey', form).val();
+                config.EnableActorSubstitution = $('#chkEnableActorSubstitution', form).prop('checked');
+                config.ActorRawSubstitutionTable = $('#txtActorRawSubstitutionTable', form).val();
                 config.EnableGenreSubstitution = $('#chkEnableGenreSubstitution', form).prop('checked');
                 config.GenreRawSubstitutionTable = $('#txtGenreRawSubstitutionTable', form).val();
                 ApiClient.updatePluginConfiguration(JavTubePluginConfig.pluginUniqueId, config).then(Dashboard.processPluginConfigurationUpdateResult);

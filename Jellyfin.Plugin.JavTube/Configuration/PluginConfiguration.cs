@@ -48,6 +48,27 @@ public class PluginConfiguration : BasePluginConfiguration
 
     #region Substitution
 
+    #region Actors
+
+    public bool EnableActorSubstitution { get; set; } = false;
+
+    public string ActorRawSubstitutionTable
+    {
+        get => TableSerializer.Serialize(_actorSubstitutionTable);
+        set => _actorSubstitutionTable = TableSerializer.Deserialize(value);
+    }
+
+    public Dictionary<string, string> GetActorSubstitutionTable()
+    {
+        return _actorSubstitutionTable;
+    }
+
+    private Dictionary<string, string> _actorSubstitutionTable;
+
+    #endregion
+
+    #region Genres
+
     public bool EnableGenreSubstitution { get; set; } = false;
 
     public string GenreRawSubstitutionTable
@@ -62,6 +83,8 @@ public class PluginConfiguration : BasePluginConfiguration
     }
 
     private Dictionary<string, string> _genreSubstitutionTable;
+
+    #endregion
 
     #endregion
 

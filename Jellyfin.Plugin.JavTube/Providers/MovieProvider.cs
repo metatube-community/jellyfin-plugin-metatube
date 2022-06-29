@@ -54,6 +54,10 @@ public class MovieProvider : BaseProvider, IRemoteMetadataProvider<Movie, MovieI
         // Preserve original title.
         var originalTitle = m.Title;
 
+        // Substitute actors.
+        if (Configuration.EnableActorSubstitution)
+            m.Actors = m.Actors.Substitute(Configuration.GetActorSubstitutionTable()).ToArray();
+
         // Substitute genres.
         if (Configuration.EnableGenreSubstitution)
             m.Genres = m.Genres.Substitute(Configuration.GetGenreSubstitutionTable()).ToArray();
