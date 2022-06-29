@@ -10,9 +10,7 @@ internal static class EnumerableExtensions
     public static IEnumerable<string> Substitute(this IEnumerable<string> source, Dictionary<string, string> table)
     {
         if (table?.Any() != true)
-        {
             return source;
-        }
 
         var target = new List<string>();
 

@@ -18,6 +18,43 @@ public enum TranslationEngine
 
 public class PluginConfiguration : BasePluginConfiguration
 {
+    #region TableSerializer
+
+    private class TableSerializer
+    {
+        public static Dictionary<string, string> Deserialize(string text)
+        {
+            var dictionary = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
+
+            var reader = new StringReader(text ?? string.Empty);
+            while (reader.ReadLine() is { } line)
+            {
+                var kvp = line.Split('=', 2).Select(s => s.Trim()).ToList();
+                if (string.IsNullOrWhiteSpace(kvp.First()))
+                    continue;
+                dictionary[kvp[0]] = kvp.Count switch
+                {
+                    1 => null,
+                    2 => kvp[1],
+                    _ => dictionary[kvp[0]]
+                };
+            }
+
+            return dictionary;
+        }
+
+        public static string Serialize(Dictionary<string, string> table)
+        {
+            return table?.Any() != true
+                ? string.Empty
+                : string.Join('\n',
+                    table.Where(kvp => !string.IsNullOrWhiteSpace(kvp.Key))
+                        .Select(kvp => $"{kvp.Key?.Trim()}={kvp.Value?.Trim()}"));
+        }
+    }
+
+    #endregion
+
     #region General
 
     public string Server { get; set; } = "https://api.javtube.internal";
@@ -85,43 +122,6 @@ public class PluginConfiguration : BasePluginConfiguration
     private Dictionary<string, string> _genreSubstitutionTable;
 
     #endregion
-
-    #endregion
-
-    #region TableSerializer
-
-    private class TableSerializer
-    {
-        public static Dictionary<string, string> Deserialize(string text)
-        {
-            var dictionary = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
-
-            var reader = new StringReader(text ?? string.Empty);
-            while (reader.ReadLine() is { } line)
-            {
-                var kvp = line.Split('=', 2).Select(s => s.Trim()).ToList();
-                if (string.IsNullOrWhiteSpace(kvp.First()))
-                    continue;
-                dictionary[kvp[0]] = kvp.Count switch
-                {
-                    1 => null,
-                    2 => kvp[1],
-                    _ => dictionary[kvp[0]]
-                };
-            }
-
-            return dictionary;
-        }
-
-        public static string Serialize(Dictionary<string, string> table)
-        {
-            return table?.Any() != true
-                ? string.Empty
-                : string.Join('\n',
-                    table.Where(kvp => !string.IsNullOrWhiteSpace(kvp.Key))
-                        .Select(kvp => $"{kvp.Key?.Trim()}={kvp.Value?.Trim()}"));
-        }
-    }
 
     #endregion
 }
