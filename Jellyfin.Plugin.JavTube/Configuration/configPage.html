@@ -179,15 +179,15 @@
             ApiClient.getPluginConfiguration(JavTubePluginConfig.pluginUniqueId).then(function (config) {
                 config.Server = $('#txtServer', form).val();
                 config.Token = $('#txtToken', form).val();
-                config.EnableCollection = $('#chkEnableCollection').prop('checked');
-                config.EnableRating = $('#chkEnableRating').prop('checked');
-                config.EnableTrailer = $('#chkEnableTrailer').prop('checked');
+                config.EnableCollection = $('#chkEnableCollection', form).prop('checked');
+                config.EnableRating = $('#chkEnableRating', form).prop('checked');
+                config.EnableTrailer = $('#chkEnableTrailer', form).prop('checked');
                 config.TranslationMode = $('#selectTranslationMode', form).val();
                 config.TranslationEngine = $('#selectTranslationEngine', form).val();
                 config.BaiduAppId = $('#txtBaiduAppId', form).val();
                 config.BaiduAppKey = $('#txtBaiduAppKey', form).val();
                 config.GoogleApiKey = $('#txtGoogleApiKey', form).val();
-                config.EnableGenreSubstitution = $('#chkEnableGenreSubstitution').prop('checked');
+                config.EnableGenreSubstitution = $('#chkEnableGenreSubstitution', form).prop('checked');
                 config.GenreSubstitutionTable = $('#txtGenreSubstitutionTable', form).val();
                 ApiClient.updatePluginConfiguration(JavTubePluginConfig.pluginUniqueId, config).then(Dashboard.processPluginConfigurationUpdateResult);
             });
