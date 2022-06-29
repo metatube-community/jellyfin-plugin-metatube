@@ -78,13 +78,11 @@ public class OrganizeGenresTask : IScheduledTask
         {
             progress?.Report((double)idx / items.Count * 100);
 
-            var genres = Plugin.Instance.Configuration.EnableGenreSubstitution
-                ? item.Genres.Substitute(Plugin.Instance.Configuration.GetGenreSubstitutionTable()).ToList()
-                : item.Genres?.ToList() ?? new List<string>();
+            var genres = item.Genres?.ToList() ?? new List<string>();
 
             try
             {
-                // Add or Remove `ChineseSubtitle` Genre.
+                // Add or Remove `ChineseSubtitle` genre.
                 if (GenreHelper.HasEmbeddedChineseSubtitle(item.FileNameWithoutExtension) ||
                     GenreHelper.HasExternalChineseSubtitle(item.Path))
                     genres.Add(GenreHelper.ChineseSubtitle);
@@ -93,11 +91,15 @@ public class OrganizeGenresTask : IScheduledTask
             }
             catch (Exception e)
             {
-                _logger.Error("Chinese subtitle for video {0}: {1}", item.Name, e.Message);
+                _logger.Error("Update ChineseSubtitle for video {0}: {1}", item.Name, e.Message);
             }
 
-            // Remove Duplicates.
-            var orderedGenres = genres.Distinct().OrderByString(genre => genre).ToList();
+            // Remove duplicates.
+            var orderedGenres =
+                (Plugin.Instance.Configuration.EnableGenreSubstitution
+                    // Substitute genres.
+                    ? genres.Substitute(Plugin.Instance.Configuration.GetGenreSubstitutionTable())
+                    : genres).Distinct().OrderByString(genre => genre).ToList();
 
             // Skip updating item if equal.
             if (!orderedGenres.Any() ||
