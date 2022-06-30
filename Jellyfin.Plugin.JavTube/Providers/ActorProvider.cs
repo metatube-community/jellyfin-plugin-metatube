@@ -32,12 +32,8 @@ public class ActorProvider : BaseProvider, IRemoteMetadataProvider<Person, Perso
         var pid = info.GetPid(Name);
         if (string.IsNullOrWhiteSpace(pid.Id) || string.IsNullOrWhiteSpace(pid.Provider))
         {
-            var searchResults = (await GetSearchResults(info, cancellationToken)).ToList();
-            if (searchResults.Any())
-            {
-                var firstResult = searchResults.First();
-                pid = firstResult.GetPid(Name);
-            }
+            var firstResult = (await GetSearchResults(info, cancellationToken)).FirstOrDefault();
+            if (firstResult != null) pid = firstResult.GetPid(Name);
         }
 
         Logger.Info("Get actor info: {0}", pid.Serialize());

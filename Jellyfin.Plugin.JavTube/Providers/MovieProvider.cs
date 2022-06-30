@@ -39,12 +39,8 @@ public class MovieProvider : BaseProvider, IRemoteMetadataProvider<Movie, MovieI
         if (string.IsNullOrWhiteSpace(pid.Id) || string.IsNullOrWhiteSpace(pid.Provider))
         {
             // Search movie and pick the first result.
-            var searchResults = (await GetSearchResults(info, cancellationToken)).ToList();
-            if (searchResults.Any())
-            {
-                var firstResult = searchResults.First();
-                pid = firstResult.GetPid(Name);
-            }
+            var firstResult = (await GetSearchResults(info, cancellationToken)).FirstOrDefault();
+            if (firstResult != null) pid = firstResult.GetPid(Name);
         }
 
         Logger.Info("Get movie info: {0}", pid.Serialize());
