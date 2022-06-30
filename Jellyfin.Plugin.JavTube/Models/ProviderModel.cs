@@ -9,19 +9,7 @@ public class ProviderModel
 
     [JsonPropertyName("provider")]
     public string Provider { get; set; }
-}
 
-public class ProviderInfoModel : ProviderModel
-{
     [JsonPropertyName("homepage")]
     public string Homepage { get; set; }
-}
-
-public class ProviderIdModel : ProviderModel
-{
-    [JsonIgnore]
-    public double? Position { get; set; }
-
-    [JsonIgnore]
-    public bool? UpdateInfo { get; set; }
 }
