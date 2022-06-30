@@ -36,7 +36,7 @@ public class ProviderId
             pid.Provider, pid.Id
         };
         if (pid.Position.HasValue) values.Add(pid.Position.ToString());
-        if (pid.UpdateInfo.HasValue) values.Add(pid.UpdateInfo.ToString());
+        if (pid.UpdateInfo.HasValue) values.Add((values.Count == 2 ? ":" : string.Empty) + pid.UpdateInfo);
         return string.Join(Separator, values);
     }
 
