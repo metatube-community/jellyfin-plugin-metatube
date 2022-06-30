@@ -38,10 +38,6 @@ public class Plugin : BasePlugin<PluginConfiguration>, IHasWebPages
             new PluginPageInfo
             {
                 Name = Name,
-                // EnableInMainMenu = true,
-                // MenuSection = "server",
-                // MenuIcon = "theaters",
-                // DisplayName = "JavTube",
                 EmbeddedResourcePath = $"{GetType().Namespace}.Configuration.configPage.html"
             }
         };
