@@ -2,7 +2,6 @@ using System.Collections.Specialized;
 using System.Net.Http.Headers;
 using System.Net.Http.Json;
 using System.Web;
-using Jellyfin.Plugin.JavTube.Helpers;
 using Jellyfin.Plugin.JavTube.Models;
 
 namespace Jellyfin.Plugin.JavTube;
@@ -200,7 +199,7 @@ public static class ApiClient
 
         // Add General Headers.
         request.Headers.Add("Accept", "application/json");
-        request.Headers.Add("User-Agent", UserAgentHelper.Default);
+        request.Headers.Add("User-Agent", Plugin.Instance.UserAgent);
 
         // Set API Authorization Token.
         if (requireAuth && !string.IsNullOrWhiteSpace(Plugin.Instance.Configuration.Token))

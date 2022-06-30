@@ -1,5 +1,4 @@
 using Jellyfin.Plugin.JavTube.Configuration;
-using Jellyfin.Plugin.JavTube.Helpers;
 #if __EMBY__
 using MediaBrowser.Common.Net;
 using MediaBrowser.Model.Logging;
@@ -54,7 +53,7 @@ public abstract class BaseProvider
         {
             Url = url,
             CancellationToken = cancellationToken,
-            UserAgent = UserAgentHelper.Default
+            UserAgent = Plugin.Instance.UserAgent
         }).ConfigureAwait(false);
     }
 #else
@@ -62,7 +61,7 @@ public abstract class BaseProvider
     {
         var httpClient = _httpClientFactory.CreateClient(Name);
         httpClient.DefaultRequestHeaders
-            .Add("User-Agent", UserAgentHelper.Default);
+            .Add("User-Agent", Plugin.Instance.UserAgent);
         return await httpClient.GetAsync(url, cancellationToken).ConfigureAwait(false);
     }
 #endif
