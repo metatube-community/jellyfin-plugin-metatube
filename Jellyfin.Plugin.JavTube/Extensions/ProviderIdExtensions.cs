@@ -10,14 +10,14 @@ internal static class ProviderIdExtensions
     }
 
     public static void SetPid(this IHasProviderIds instance, string name, string provider, string id,
-        double? position = null, bool? updateInfo = null)
+        double? position = null, bool? update = null)
     {
         var pid = new ProviderId
         {
             Provider = provider,
             Id = id,
             Position = position,
-            UpdateInfo = updateInfo
+            Update = update
         };
         instance.SetProviderId(name, pid.ToString());
     }

@@ -79,7 +79,7 @@ public class ActorProvider : BaseProvider, IRemoteMetadataProvider<Person, Perso
             // Exact search.
             Logger.Info("Search for actor: {0}", pid.ToString());
             searchResults.Add(await ApiClient.GetActorInfo(pid.Provider, pid.Id,
-                pid.UpdateInfo != true, cancellationToken));
+                pid.Update != true, cancellationToken));
         }
 
         var results = new List<RemoteSearchResult>();

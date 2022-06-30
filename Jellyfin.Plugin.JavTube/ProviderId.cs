@@ -10,7 +10,7 @@ public class ProviderId
 
     public double? Position { get; set; }
 
-    public bool? UpdateInfo { get; set; }
+    public bool? Update { get; set; }
 
     public static ProviderId Parse(string rawPid)
     {
@@ -20,7 +20,7 @@ public class ProviderId
             Provider = values?.Length > 0 ? values[0] : string.Empty,
             Id = values?.Length > 1 ? values[1] : string.Empty,
             Position = values?.Length > 2 ? values[2].ToDouble() : null,
-            UpdateInfo = values?.Length > 3 ? values[3].ToBool() : null
+            Update = values?.Length > 3 ? values[3].ToBool() : null
         };
     }
 
@@ -32,7 +32,7 @@ public class ProviderId
             pid.Provider, pid.Id
         };
         if (pid.Position.HasValue) values.Add(pid.Position.ToString());
-        if (pid.UpdateInfo.HasValue) values.Add((values.Count == 2 ? ":" : string.Empty) + pid.UpdateInfo);
+        if (pid.Update.HasValue) values.Add((values.Count == 2 ? ":" : string.Empty) + pid.Update);
         return string.Join(':', values);
     }
 }

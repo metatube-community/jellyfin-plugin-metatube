@@ -149,7 +149,7 @@ public class MovieProvider : BaseProvider, IRemoteMetadataProvider<Movie, MovieI
             // Exact search.
             Logger.Info("Search for movie: {0}", pid.ToString());
             searchResults.Add(await ApiClient.GetMovieInfo(pid.Provider, pid.Id,
-                pid.UpdateInfo != true, cancellationToken));
+                pid.Update != true, cancellationToken));
         }
 
         var results = new List<RemoteSearchResult>();
