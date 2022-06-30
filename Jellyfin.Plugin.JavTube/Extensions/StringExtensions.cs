@@ -27,13 +27,6 @@ internal static class StringExtensions
 
     public static double? ToDouble(this string s)
     {
-        try
-        {
-            return double.Parse(s);
-        }
-        catch (Exception)
-        {
-            return null;
-        }
+        return double.TryParse(s, out var result) ? result : null;
     }
 }
