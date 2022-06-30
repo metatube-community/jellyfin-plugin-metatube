@@ -12,13 +12,9 @@ public class ProviderId
 
     public bool? UpdateInfo { get; set; }
 
-    #region Serializer
-
-    private const char Separator = ':';
-
-    public static ProviderId Deserialize(string rawPid)
+    public static ProviderId Parse(string rawPid)
     {
-        var values = rawPid?.Split(Separator);
+        var values = rawPid?.Split(':');
         return new ProviderId
         {
             Provider = values?.Length > 0 ? values[0] : string.Empty,
@@ -28,7 +24,7 @@ public class ProviderId
         };
     }
 
-    public string Serialize()
+    public override string ToString()
     {
         var pid = this;
         var values = new List<string>
@@ -37,8 +33,6 @@ public class ProviderId
         };
         if (pid.Position.HasValue) values.Add(pid.Position.ToString());
         if (pid.UpdateInfo.HasValue) values.Add((values.Count == 2 ? ":" : string.Empty) + pid.UpdateInfo);
-        return string.Join(Separator, values);
+        return string.Join(':', values);
     }
-
-    #endregion
 }

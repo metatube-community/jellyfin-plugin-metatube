@@ -43,7 +43,7 @@ public class MovieProvider : BaseProvider, IRemoteMetadataProvider<Movie, MovieI
             if (firstResult != null) pid = firstResult.GetPid(Name);
         }
 
-        Logger.Info("Get movie info: {0}", pid.Serialize());
+        Logger.Info("Get movie info: {0}", pid.ToString());
 
         var m = await ApiClient.GetMovieInfo(pid.Provider, pid.Id, cancellationToken);
 
@@ -147,7 +147,7 @@ public class MovieProvider : BaseProvider, IRemoteMetadataProvider<Movie, MovieI
         else
         {
             // Exact search.
-            Logger.Info("Search for movie: {0}", pid.Serialize());
+            Logger.Info("Search for movie: {0}", pid.ToString());
             searchResults.Add(await ApiClient.GetMovieInfo(pid.Provider, pid.Id,
                 pid.UpdateInfo != true, cancellationToken));
         }

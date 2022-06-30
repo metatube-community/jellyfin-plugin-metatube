@@ -6,7 +6,7 @@ internal static class ProviderIdExtensions
 {
     public static ProviderId GetPid(this IHasProviderIds instance, string name)
     {
-        return ProviderId.Deserialize(instance.GetProviderId(name));
+        return ProviderId.Parse(instance.GetProviderId(name));
     }
 
     public static void SetPid(this IHasProviderIds instance, string name, string provider, string id,
@@ -19,6 +19,6 @@ internal static class ProviderIdExtensions
             Position = position,
             UpdateInfo = updateInfo
         };
-        instance.SetProviderId(name, pid.Serialize());
+        instance.SetProviderId(name, pid.ToString());
     }
 }

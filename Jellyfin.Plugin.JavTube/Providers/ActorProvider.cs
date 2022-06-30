@@ -36,7 +36,7 @@ public class ActorProvider : BaseProvider, IRemoteMetadataProvider<Person, Perso
             if (firstResult != null) pid = firstResult.GetPid(Name);
         }
 
-        Logger.Info("Get actor info: {0}", pid.Serialize());
+        Logger.Info("Get actor info: {0}", pid.ToString());
 
         var m = await ApiClient.GetActorInfo(pid.Provider, pid.Id, cancellationToken);
 
@@ -77,7 +77,7 @@ public class ActorProvider : BaseProvider, IRemoteMetadataProvider<Person, Perso
         else
         {
             // Exact search.
-            Logger.Info("Search for actor: {0}", pid.Serialize());
+            Logger.Info("Search for actor: {0}", pid.ToString());
             searchResults.Add(await ApiClient.GetActorInfo(pid.Provider, pid.Id,
                 pid.UpdateInfo != true, cancellationToken));
         }
