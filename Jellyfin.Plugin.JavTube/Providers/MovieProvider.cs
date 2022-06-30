@@ -35,7 +35,7 @@ public class MovieProvider : BaseProvider, IRemoteMetadataProvider<Movie, MovieI
     public async Task<MetadataResult<Movie>> GetMetadata(MovieInfo info,
         CancellationToken cancellationToken)
     {
-        var pid = info.GetProviderIdModel(Name);
+        var pid = info.GetPid(Name);
         if (string.IsNullOrWhiteSpace(pid.Id) || string.IsNullOrWhiteSpace(pid.Provider))
         {
             // Search movie and pick the first result.
@@ -43,7 +43,7 @@ public class MovieProvider : BaseProvider, IRemoteMetadataProvider<Movie, MovieI
             if (searchResults.Any())
             {
                 var firstResult = searchResults.First();
-                pid = firstResult.GetProviderIdModel(Name);
+                pid = firstResult.GetPid(Name);
             }
         }
 
@@ -83,12 +83,7 @@ public class MovieProvider : BaseProvider, IRemoteMetadataProvider<Movie, MovieI
         };
 
         // Set pid.
-        result.Item.SetProviderIdModel(Name, new ProviderIdModel
-        {
-            Provider = m.Provider,
-            Id = m.Id,
-            Position = pid.Position
-        });
+        result.Item.SetPid(Name, m.Provider, m.Id, pid.Position);
 
         // Set trailer url.
         result.Item.SetTrailerUrl(!string.IsNullOrWhiteSpace(m.PreviewVideoUrl)
@@ -144,7 +139,7 @@ public class MovieProvider : BaseProvider, IRemoteMetadataProvider<Movie, MovieI
     public async Task<IEnumerable<RemoteSearchResult>> GetSearchResults(MovieInfo info,
         CancellationToken cancellationToken)
     {
-        var pid = info.GetProviderIdModel(Name);
+        var pid = info.GetPid(Name);
 
         var searchResults = new List<MovieSearchResultModel>();
         if (string.IsNullOrWhiteSpace(pid.Id) || string.IsNullOrWhiteSpace(pid.Provider))
@@ -178,12 +173,7 @@ public class MovieProvider : BaseProvider, IRemoteMetadataProvider<Movie, MovieI
                 ProductionYear = m.ReleaseDate.GetValidYear(),
                 ImageUrl = ApiClient.GetPrimaryImageApiUrl(m.Provider, m.Id, m.ThumbUrl, 1.0, true)
             };
-            result.SetProviderIdModel(Name, new ProviderIdModel
-            {
-                Provider = m.Provider,
-                Id = m.Id,
-                Position = pid.Position
-            });
+            result.SetPid(Name, m.Provider, m.Id, pid.Position);
             results.Add(result);
         }
 

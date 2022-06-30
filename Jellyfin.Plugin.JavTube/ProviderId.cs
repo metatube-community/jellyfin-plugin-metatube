@@ -1,11 +1,23 @@
-using Jellyfin.Plugin.JavTube.Models;
+namespace Jellyfin.Plugin.JavTube;
 
-namespace Jellyfin.Plugin.JavTube.Extensions;
-
-internal static class ModelExtensions
+public class ProviderId
 {
-    #region ProviderIdModel
+    public string Provider { get; set; }
 
+    public string Id { get; set; }
+
+    public double? Position { get; set; }
+
+    public bool? UpdateInfo { get; set; }
+
+    public string Serialize()
+    {
+        return ProviderIdSerializer.Serialize(this);
+    }
+}
+
+public static class ProviderIdSerializer
+{
     private const char Separator = ':';
 
     private static double? ParseDouble(string s)
@@ -43,19 +55,19 @@ internal static class ModelExtensions
         return null;
     }
 
-    public static ProviderIdModel DeserializePid(string rawPid)
+    public static ProviderId Deserialize(string rawPid)
     {
-        var providerIds = rawPid?.Split(Separator);
-        return new ProviderIdModel
+        var values = rawPid?.Split(Separator);
+        return new ProviderId
         {
-            Provider = providerIds?.Length > 0 ? providerIds[0] : string.Empty,
-            Id = providerIds?.Length > 1 ? providerIds[1] : string.Empty,
-            Position = providerIds?.Length > 2 ? ParseDouble(providerIds[2]) : null,
-            UpdateInfo = providerIds?.Length > 3 ? ParseBool(providerIds[3]) : null
+            Provider = values?.Length > 0 ? values[0] : string.Empty,
+            Id = values?.Length > 1 ? values[1] : string.Empty,
+            Position = values?.Length > 2 ? ParseDouble(values[2]) : null,
+            UpdateInfo = values?.Length > 3 ? ParseBool(values[3]) : null
         };
     }
 
-    public static string Serialize(this ProviderIdModel pid)
+    public static string Serialize(ProviderId pid)
     {
         var values = new List<string>
         {
@@ -65,6 +77,4 @@ internal static class ModelExtensions
         if (pid.UpdateInfo.HasValue) values.Add(pid.UpdateInfo.ToString());
         return string.Join(Separator, values);
     }
-
-    #endregion
 }

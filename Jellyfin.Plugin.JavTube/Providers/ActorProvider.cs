@@ -29,14 +29,14 @@ public class ActorProvider : BaseProvider, IRemoteMetadataProvider<Person, Perso
     public async Task<MetadataResult<Person>> GetMetadata(PersonLookupInfo info,
         CancellationToken cancellationToken)
     {
-        var pid = info.GetProviderIdModel(Name);
+        var pid = info.GetPid(Name);
         if (string.IsNullOrWhiteSpace(pid.Id) || string.IsNullOrWhiteSpace(pid.Provider))
         {
             var searchResults = (await GetSearchResults(info, cancellationToken)).ToList();
             if (searchResults.Any())
             {
                 var firstResult = searchResults.First();
-                pid = firstResult.GetProviderIdModel(Name);
+                pid = firstResult.GetPid(Name);
             }
         }
 
@@ -57,11 +57,7 @@ public class ActorProvider : BaseProvider, IRemoteMetadataProvider<Person, Perso
         };
 
         // Set ProviderIdModel.
-        result.Item.SetProviderIdModel(Name, new ProviderIdModel
-        {
-            Provider = m.Provider,
-            Id = m.Id
-        });
+        result.Item.SetPid(Name, m.Provider, m.Id);
 
         // Set actor nationality.
         if (!string.IsNullOrWhiteSpace(m.Nationality))
@@ -73,7 +69,7 @@ public class ActorProvider : BaseProvider, IRemoteMetadataProvider<Person, Perso
     public async Task<IEnumerable<RemoteSearchResult>> GetSearchResults(
         PersonLookupInfo info, CancellationToken cancellationToken)
     {
-        var pid = info.GetProviderIdModel(Name);
+        var pid = info.GetPid(Name);
 
         var searchResults = new List<ActorSearchResultModel>();
         if (string.IsNullOrWhiteSpace(pid.Id))
@@ -107,11 +103,7 @@ public class ActorProvider : BaseProvider, IRemoteMetadataProvider<Person, Perso
                     ? ApiClient.GetPrimaryImageApiUrl(m.Provider, m.Id, m.Images[0], 0.5, true)
                     : string.Empty
             };
-            result.SetProviderIdModel(Name, new ProviderIdModel
-            {
-                Provider = m.Provider,
-                Id = m.Id
-            });
+            result.SetPid(Name, m.Provider, m.Id);
             results.Add(result);
         }
 
