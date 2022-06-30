@@ -2,7 +2,7 @@ using System.Text.RegularExpressions;
 
 namespace Jellyfin.Plugin.JavTube.Helpers;
 
-internal static class GenreHelper
+public static class GenreHelper
 {
     public const string ChineseSubtitle = "中文字幕";
 

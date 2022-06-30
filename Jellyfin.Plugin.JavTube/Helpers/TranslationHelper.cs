@@ -4,7 +4,7 @@ using Jellyfin.Plugin.JavTube.Models;
 
 namespace Jellyfin.Plugin.JavTube.Helpers;
 
-internal static class TranslationHelper
+public static class TranslationHelper
 {
     private const string AutoLanguage = "auto";
 
