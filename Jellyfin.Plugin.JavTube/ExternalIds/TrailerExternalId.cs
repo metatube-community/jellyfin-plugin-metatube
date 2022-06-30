@@ -1,4 +1,3 @@
-using Jellyfin.Plugin.JavTube.Helpers;
 using MediaBrowser.Controller.Entities.Movies;
 using MediaBrowser.Model.Entities;
 #if !__EMBY__
@@ -10,14 +9,14 @@ namespace Jellyfin.Plugin.JavTube.ExternalIds;
 public class TrailerExternalId : BaseExternalId
 {
 #if __EMBY__
-    public override string Name => TrailerHelper.Name;
+    public override string Name => "TrailerUrl";
 #else
-    public override string ProviderName => TrailerHelper.Name;
+    public override string ProviderName => "TrailerUrl";
 
     public override ExternalIdMediaType? Type => ExternalIdMediaType.Movie;
 #endif
 
-    public override string Key => TrailerHelper.Name;
+    public override string Key => "TrailerUrl";
 
     public override string UrlFormatString => null;
 
