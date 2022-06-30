@@ -8,7 +8,7 @@ internal static class ProviderIdExtensions
     {
         return !instance.ProviderIds.Any()
             ? new ProviderId()
-            : ProviderIdSerializer.Deserialize(instance.GetProviderId(name));
+            : ProviderId.Deserialize(instance.GetProviderId(name));
     }
 
     public static void SetPid(this IHasProviderIds instance, string name, string provider, string id,
