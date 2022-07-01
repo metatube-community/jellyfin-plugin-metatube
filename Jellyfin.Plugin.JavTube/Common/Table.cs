@@ -1,8 +1,8 @@
 namespace Jellyfin.Plugin.JavTube.Common;
 
-public class Table: Dictionary<string,string>
+public class Table : Dictionary<string, string>
 {
-    private Table():base(StringComparer.OrdinalIgnoreCase)
+    private Table() : base(StringComparer.OrdinalIgnoreCase)
     {
     }
 
