@@ -1,5 +1,5 @@
+using System.Text.RegularExpressions;
 using Jellyfin.Plugin.JavTube.Extensions;
-using Jellyfin.Plugin.JavTube.Helpers;
 using MediaBrowser.Controller.Entities;
 using MediaBrowser.Controller.Library;
 using MediaBrowser.Controller.Sorting;
@@ -83,11 +83,11 @@ public class OrganizeGenresTask : IScheduledTask
             try
             {
                 // Add or Remove `ChineseSubtitle` genre.
-                if (GenreHelper.HasEmbeddedChineseSubtitle(item.FileNameWithoutExtension) ||
-                    GenreHelper.HasExternalChineseSubtitle(item.Path))
-                    genres.Add(GenreHelper.ChineseSubtitle);
+                if (HasEmbeddedChineseSubtitle(item.FileNameWithoutExtension) ||
+                    HasExternalChineseSubtitle(item.Path))
+                    genres.Add(ChineseSubtitle);
                 else
-                    genres.RemoveAll(s => s.Equals(GenreHelper.ChineseSubtitle));
+                    genres.RemoveAll(s => s.Equals(ChineseSubtitle));
             }
             catch (Exception e)
             {
@@ -121,4 +121,44 @@ public class OrganizeGenresTask : IScheduledTask
 
         progress?.Report(100);
     }
+
+    #region Helper
+
+    private const string ChineseSubtitle = "中文字幕";
+
+    private static bool HasTag(string filename, string tag)
+    {
+        var r = new Regex(@"[-_\s]", RegexOptions.Compiled);
+        return r.Split(filename).Contains(tag, StringComparer.OrdinalIgnoreCase);
+    }
+
+    private static bool HasTag(string filename, params string[] tags)
+    {
+        return tags.Any(tag => HasTag(filename, tag));
+    }
+
+    private static bool HasEmbeddedChineseSubtitle(string filename)
+    {
+        if (string.IsNullOrWhiteSpace(filename))
+            return false;
+
+        return filename.Contains(ChineseSubtitle) || HasTag(filename, "C", "ch");
+    }
+
+    private static bool HasExternalChineseSubtitle(string path)
+    {
+        return HasExternalChineseSubtitle(Path.GetFileNameWithoutExtension(path),
+            Directory.GetParent(path)?.GetFiles().Select(info => info.Name));
+    }
+
+    private static bool HasExternalChineseSubtitle(string basename, IEnumerable<string> files)
+    {
+        var r = new Regex(@"\.(chinese|ch[ist]|zh(-(cn|hk|tw|hans|hant))?)\.(ass|srt|ssa|stl|sub|vid|vtt)$",
+            RegexOptions.IgnoreCase | RegexOptions.CultureInvariant | RegexOptions.Compiled);
+        return files.Any(name => r.IsMatch(name) &&
+                                 r.Replace(name, string.Empty)
+                                     .Equals(basename, StringComparison.OrdinalIgnoreCase));
+    }
+
+    #endregion
 }
