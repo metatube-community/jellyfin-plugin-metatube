@@ -1,3 +1,4 @@
+using Jellyfin.Plugin.JavTube.Common;
 using MediaBrowser.Model.Plugins;
 
 namespace Jellyfin.Plugin.JavTube.Configuration;
@@ -18,43 +19,6 @@ public enum TranslationEngine
 
 public class PluginConfiguration : BasePluginConfiguration
 {
-    #region TableSerializer
-
-    private class TableSerializer
-    {
-        public static Dictionary<string, string> Deserialize(string text)
-        {
-            var dictionary = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
-
-            var reader = new StringReader(text ?? string.Empty);
-            while (reader.ReadLine() is { } line)
-            {
-                var kvp = line.Split('=', 2).Select(s => s.Trim()).ToList();
-                if (string.IsNullOrWhiteSpace(kvp.First()))
-                    continue;
-                dictionary[kvp[0]] = kvp.Count switch
-                {
-                    1 => null,
-                    2 => kvp[1],
-                    _ => dictionary[kvp[0]]
-                };
-            }
-
-            return dictionary;
-        }
-
-        public static string Serialize(Dictionary<string, string> table)
-        {
-            return table?.Any() != true
-                ? string.Empty
-                : string.Join('\n',
-                    table.Where(kvp => !string.IsNullOrWhiteSpace(kvp.Key))
-                        .Select(kvp => $"{kvp.Key?.Trim()}={kvp.Value?.Trim()}"));
-        }
-    }
-
-    #endregion
-
     #region General
 
     public string Server { get; set; } = "https://api.javtube.internal";
@@ -85,43 +49,35 @@ public class PluginConfiguration : BasePluginConfiguration
 
     #region Substitution
 
-    #region Actors
-
     public bool EnableActorSubstitution { get; set; } = false;
 
     public string ActorRawSubstitutionTable
     {
-        get => TableSerializer.Serialize(_actorSubstitutionTable);
-        set => _actorSubstitutionTable = TableSerializer.Deserialize(value);
+        get => _actorSubstitutionTable?.ToString();
+        set => _actorSubstitutionTable = Table.Parse(value);
     }
 
-    public Dictionary<string, string> GetActorSubstitutionTable()
+    public Table GetActorSubstitutionTable()
     {
         return _actorSubstitutionTable;
     }
 
-    private Dictionary<string, string> _actorSubstitutionTable;
-
-    #endregion
-
-    #region Genres
+    private Table _actorSubstitutionTable;
 
     public bool EnableGenreSubstitution { get; set; } = false;
 
     public string GenreRawSubstitutionTable
     {
-        get => TableSerializer.Serialize(_genreSubstitutionTable);
-        set => _genreSubstitutionTable = TableSerializer.Deserialize(value);
+        get => _genreSubstitutionTable.ToString();
+        set => _genreSubstitutionTable = Table.Parse(value);
     }
 
-    public Dictionary<string, string> GetGenreSubstitutionTable()
+    public Table GetGenreSubstitutionTable()
     {
         return _genreSubstitutionTable;
     }
 
-    private Dictionary<string, string> _genreSubstitutionTable;
-
-    #endregion
+    private Table _genreSubstitutionTable;
 
     #endregion
 }
