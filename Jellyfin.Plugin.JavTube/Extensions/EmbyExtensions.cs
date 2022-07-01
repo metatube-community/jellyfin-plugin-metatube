@@ -3,7 +3,7 @@ using MediaBrowser.Model.Logging;
 
 namespace Jellyfin.Plugin.JavTube.Extensions;
 
-internal static class EmbyExtensions
+public static class EmbyExtensions
 {
     #region LogManagerExtensions
 

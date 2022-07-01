@@ -6,7 +6,7 @@ using Microsoft.Extensions.Logging;
 
 namespace Jellyfin.Plugin.JavTube.Extensions;
 
-internal static class JellyfinExtensions
+public static class JellyfinExtensions
 {
     #region LoggerExtensions
 
