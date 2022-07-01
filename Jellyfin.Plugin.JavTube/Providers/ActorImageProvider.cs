@@ -37,7 +37,7 @@ public class ActorImageProvider : BaseProvider, IRemoteImageProvider, IHasOrder
         if (string.IsNullOrWhiteSpace(pid.Id) || string.IsNullOrWhiteSpace(pid.Provider))
             return new List<RemoteImageInfo>();
 
-        var actorInfo = await ApiClient.GetActorInfo(pid.Provider, pid.Id, cancellationToken);
+        var actorInfo = await ApiClient.GetActorInfoAsync(pid.Provider, pid.Id, cancellationToken);
 
         return actorInfo.Images.Select(image => new RemoteImageInfo
         {

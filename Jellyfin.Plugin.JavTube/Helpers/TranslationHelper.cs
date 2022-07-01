@@ -12,7 +12,8 @@ public static class TranslationHelper
 
     private static PluginConfiguration Configuration => Plugin.Instance.Configuration;
 
-    private static async Task<string> Translate(string q, string from, string to, CancellationToken cancellationToken)
+    private static async Task<string> TranslateAsync(string q, string from, string to,
+        CancellationToken cancellationToken)
     {
         int millisecondsDelay;
         var nv = new NameValueCollection();
@@ -45,7 +46,7 @@ public static class TranslationHelper
             {
                 await Task.Delay(millisecondsDelay, cancellationToken);
                 return (await ApiClient
-                    .GetTranslate(q, from, to, Configuration.TranslationEngine.ToString(), nv, cancellationToken)
+                    .TranslateAsync(q, from, to, Configuration.TranslationEngine.ToString(), nv, cancellationToken)
                     .ConfigureAwait(false)).TranslatedText;
             }
 
@@ -57,13 +58,13 @@ public static class TranslationHelper
         }
     }
 
-    public static async Task Translate(MovieInfoModel m, string to, CancellationToken cancellationToken)
+    public static async Task TranslateAsync(MovieInfoModel m, string to, CancellationToken cancellationToken)
     {
         if (Configuration.TranslationMode.HasFlag(TranslationMode.Title) && !string.IsNullOrWhiteSpace(m.Title))
-            m.Title = await Translate(m.Title, AutoLanguage, to, cancellationToken);
+            m.Title = await TranslateAsync(m.Title, AutoLanguage, to, cancellationToken);
 
         if (Configuration.TranslationMode.HasFlag(TranslationMode.Summary) && !string.IsNullOrWhiteSpace(m.Summary))
-            m.Summary = await Translate(m.Summary, AutoLanguage, to, cancellationToken);
+            m.Summary = await TranslateAsync(m.Summary, AutoLanguage, to, cancellationToken);
     }
 
     private static async Task<T> RetryAsync<T>(Func<Task<T>> func, int retryCount)

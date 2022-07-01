@@ -45,7 +45,7 @@ public class MovieProvider : BaseProvider, IRemoteMetadataProvider<Movie, MovieI
 
         Logger.Info("Get movie info: {0}", pid.ToString());
 
-        var m = await ApiClient.GetMovieInfo(pid.Provider, pid.Id, cancellationToken);
+        var m = await ApiClient.GetMovieInfoAsync(pid.Provider, pid.Id, cancellationToken);
 
         // Preserve original title.
         var originalTitle = m.Title;
@@ -142,13 +142,13 @@ public class MovieProvider : BaseProvider, IRemoteMetadataProvider<Movie, MovieI
         {
             // Search movie by name.
             Logger.Info("Search for movie: {0}", info.Name);
-            searchResults.AddRange(await ApiClient.SearchMovie(info.Name, pid.Provider, cancellationToken));
+            searchResults.AddRange(await ApiClient.SearchMovieAsync(info.Name, pid.Provider, cancellationToken));
         }
         else
         {
             // Exact search.
             Logger.Info("Search for movie: {0}", pid.ToString());
-            searchResults.Add(await ApiClient.GetMovieInfo(pid.Provider, pid.Id,
+            searchResults.Add(await ApiClient.GetMovieInfoAsync(pid.Provider, pid.Id,
                 pid.Update != true, cancellationToken));
         }
 
@@ -181,7 +181,7 @@ public class MovieProvider : BaseProvider, IRemoteMetadataProvider<Movie, MovieI
         try
         {
             // Use GFriends as actor image provider.
-            foreach (var actor in (await ApiClient.SearchActor(name, GFriends, false, cancellationToken))
+            foreach (var actor in (await ApiClient.SearchActorAsync(name, GFriends, false, cancellationToken))
                      .Where(actor => actor.Images.Any()))
                 return actor.Images.First();
         }
@@ -198,7 +198,7 @@ public class MovieProvider : BaseProvider, IRemoteMetadataProvider<Movie, MovieI
         try
         {
             Logger.Info("Translate movie info language: {0} => {1}", m.Number, language);
-            await TranslationHelper.Translate(m, language, cancellationToken);
+            await TranslationHelper.TranslateAsync(m, language, cancellationToken);
         }
         catch (Exception e)
         {

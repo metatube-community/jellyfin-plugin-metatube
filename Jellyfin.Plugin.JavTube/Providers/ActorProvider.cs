@@ -38,7 +38,7 @@ public class ActorProvider : BaseProvider, IRemoteMetadataProvider<Person, Perso
 
         Logger.Info("Get actor info: {0}", pid.ToString());
 
-        var m = await ApiClient.GetActorInfo(pid.Provider, pid.Id, cancellationToken);
+        var m = await ApiClient.GetActorInfoAsync(pid.Provider, pid.Id, cancellationToken);
 
         var result = new MetadataResult<Person>
         {
@@ -72,13 +72,13 @@ public class ActorProvider : BaseProvider, IRemoteMetadataProvider<Person, Perso
         {
             // Search actor by name.
             Logger.Info("Search for actor: {0}", info.Name);
-            searchResults.AddRange(await ApiClient.SearchActor(info.Name, pid.Provider, cancellationToken));
+            searchResults.AddRange(await ApiClient.SearchActorAsync(info.Name, pid.Provider, cancellationToken));
         }
         else
         {
             // Exact search.
             Logger.Info("Search for actor: {0}", pid.ToString());
-            searchResults.Add(await ApiClient.GetActorInfo(pid.Provider, pid.Id,
+            searchResults.Add(await ApiClient.GetActorInfoAsync(pid.Provider, pid.Id,
                 pid.Update != true, cancellationToken));
         }
 
