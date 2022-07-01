@@ -185,11 +185,11 @@ public static class ApiClient
         return await GetDataAsync<List<MovieSearchResult>>(apiUrl, true, cancellationToken);
     }
 
-    public static async Task<Translation> TranslateAsync(string q, string from, string to, string engine,
+    public static async Task<TranslationInfo> TranslateAsync(string q, string from, string to, string engine,
         NameValueCollection nv, CancellationToken cancellationToken)
     {
         var apiUrl = ComposeTranslateApiUrl(TranslateApi, q, from, to, engine, nv);
-        return await GetDataAsync<Translation>(apiUrl, false, cancellationToken);
+        return await GetDataAsync<TranslationInfo>(apiUrl, false, cancellationToken);
     }
 
     private static async Task<T> GetDataAsync<T>(string url, bool requireAuth,
@@ -214,7 +214,7 @@ public static class ApiClient
         // Response is unlikely to be null.
         // If it happens to be null, an exception is planed to be thrown either way.
         var apiResponse = (await response.Content!
-            .ReadFromJsonAsync<Response<T>>(cancellationToken: cancellationToken).ConfigureAwait(false))!;
+            .ReadFromJsonAsync<ResponseInfo<T>>(cancellationToken: cancellationToken).ConfigureAwait(false))!;
 
         // EnsureSuccessStatusCode ignoring reason:
         // When the status is unsuccessful, the API response contains error details.
