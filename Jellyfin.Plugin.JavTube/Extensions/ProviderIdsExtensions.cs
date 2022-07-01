@@ -1,8 +1,9 @@
+using System.Web;
 using MediaBrowser.Model.Entities;
 
 namespace Jellyfin.Plugin.JavTube.Extensions;
 
-internal static class ProviderIdExtensions
+internal static class ProviderIdsExtensions
 {
     public static ProviderId GetPid(this IHasProviderIds instance, string name)
     {
@@ -20,5 +21,17 @@ internal static class ProviderIdExtensions
             Update = update
         };
         instance.SetProviderId(name, pid.ToString());
+    }
+
+    public static string GetTrailerUrl(this IHasProviderIds instance)
+    {
+        return !instance.ProviderIds.Any()
+            ? string.Empty
+            : HttpUtility.UrlDecode(instance.GetProviderId("TrailerUrl"));
+    }
+
+    public static void SetTrailerUrl(this IHasProviderIds instance, string url)
+    {
+        instance.SetProviderId("TrailerUrl", HttpUtility.UrlEncode(url));
     }
 }
