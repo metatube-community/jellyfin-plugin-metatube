@@ -108,18 +108,17 @@ public class ActorProvider : BaseProvider, IRemoteMetadataProvider<Person, Perso
 
     private static string FormatOverview(ActorInfo a)
     {
-        string G(string k, string v)
+        var info = new List<(string, string)>
         {
-            return !string.IsNullOrWhiteSpace(v) ? $"{k}: {v}\n" : string.Empty;
-        }
+            ("身長", a.Height > 0 ? a.Height.ToString() : string.Empty),
+            ("趣味", a.Hobby),
+            ("特技", a.Skill),
+            ("血液型", a.BloodType),
+            ("カップサイズ", a.CupSize),
+            ("スリーサイズ", a.Measurements)
+        };
 
-        var overview = string.Empty;
-        overview += G("身長", a.Height > 0 ? $"{a.Height}cm" : null);
-        overview += G("血液型", a.BloodType);
-        overview += G("ブラのサイズ", a.CupSize);
-        overview += G("スリーサイズ", a.Measurements);
-        overview += G("趣味", a.Hobby);
-        overview += G("特技", a.Skill);
-        return overview;
+        return string.Join("\n",
+            info.Where(kvp => !string.IsNullOrWhiteSpace(kvp.Item2)).Select(kvp => $"{kvp.Item1}：{kvp.Item2}"));
     }
 }
