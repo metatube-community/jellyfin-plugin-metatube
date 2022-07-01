@@ -1,7 +1,6 @@
-using Jellyfin.Plugin.JavTube.Configuration;
 using Jellyfin.Plugin.JavTube.Extensions;
-using Jellyfin.Plugin.JavTube.Helpers;
 using Jellyfin.Plugin.JavTube.Metadata;
+using Jellyfin.Plugin.JavTube.Translation;
 using MediaBrowser.Controller.Entities;
 using MediaBrowser.Controller.Entities.Movies;
 using MediaBrowser.Controller.Providers;

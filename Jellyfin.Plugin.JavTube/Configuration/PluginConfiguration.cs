@@ -1,21 +1,8 @@
 using Jellyfin.Plugin.JavTube.Common;
+using Jellyfin.Plugin.JavTube.Translation;
 using MediaBrowser.Model.Plugins;
 
 namespace Jellyfin.Plugin.JavTube.Configuration;
-
-public enum TranslationMode
-{
-    Disabled,
-    Title,
-    Summary,
-    Both
-}
-
-public enum TranslationEngine
-{
-    Baidu,
-    Google
-}
 
 public class PluginConfiguration : BasePluginConfiguration
 {

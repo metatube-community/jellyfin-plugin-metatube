@@ -2,7 +2,7 @@ using System.Collections.Specialized;
 using Jellyfin.Plugin.JavTube.Configuration;
 using Jellyfin.Plugin.JavTube.Metadata;
 
-namespace Jellyfin.Plugin.JavTube.Helpers;
+namespace Jellyfin.Plugin.JavTube.Translation;
 
 public static class TranslationHelper
 {
