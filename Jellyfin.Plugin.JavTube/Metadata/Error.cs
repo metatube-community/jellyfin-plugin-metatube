@@ -2,7 +2,7 @@ using System.Text.Json.Serialization;
 
 namespace Jellyfin.Plugin.JavTube.Metadata;
 
-public class ErrorInfo
+public class Error
 {
     [JsonPropertyName("code")]
     public int Code { get; set; }

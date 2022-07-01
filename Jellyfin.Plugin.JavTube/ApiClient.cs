@@ -185,11 +185,11 @@ public static class ApiClient
         return await GetDataAsync<List<MovieSearchResult>>(apiUrl, true, cancellationToken);
     }
 
-    public static async Task<TranslationInfo> TranslateAsync(string q, string from, string to, string engine,
+    public static async Task<Translation> TranslateAsync(string q, string from, string to, string engine,
         NameValueCollection nv, CancellationToken cancellationToken)
     {
         var apiUrl = ComposeTranslateApiUrl(TranslateApi, q, from, to, engine, nv);
-        return await GetDataAsync<TranslationInfo>(apiUrl, false, cancellationToken);
+        return await GetDataAsync<Translation>(apiUrl, false, cancellationToken);
     }
 
     private static async Task<T> GetDataAsync<T>(string url, bool requireAuth,
@@ -213,18 +213,18 @@ public static class ApiClient
         // Nullable forgiving reason:
         // Response is unlikely to be null.
         // If it happens to be null, an exception is planed to be thrown either way.
-        var model = (await response.Content!
-            .ReadFromJsonAsync<ResponseInfo<T>>(cancellationToken: cancellationToken).ConfigureAwait(false))!;
+        var apiResponse = (await response.Content!
+            .ReadFromJsonAsync<Response<T>>(cancellationToken: cancellationToken).ConfigureAwait(false))!;
 
         // EnsureSuccessStatusCode ignoring reason:
         // When the status is unsuccessful, the API response contains error details.
-        if (!response.IsSuccessStatusCode && model.Error != null)
-            throw new Exception($"API request error: {model.Error.Code} ({model.Error.Message})");
+        if (!response.IsSuccessStatusCode && apiResponse.Error != null)
+            throw new Exception($"API request error: {apiResponse.Error.Code} ({apiResponse.Error.Message})");
 
         // Note: data field must not be null if there are no errors.
-        if (model.Data == null)
+        if (apiResponse.Data == null)
             throw new Exception("Response data field is null");
 
-        return model.Data;
+        return apiResponse.Data;
     }
 }

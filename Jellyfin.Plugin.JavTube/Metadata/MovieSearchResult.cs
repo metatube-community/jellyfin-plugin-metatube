@@ -2,7 +2,7 @@ using System.Text.Json.Serialization;
 
 namespace Jellyfin.Plugin.JavTube.Metadata;
 
-public class MovieSearchResult : ProviderInfo
+public class MovieSearchResult : BaseInfo
 {
     [JsonPropertyName("cover_url")]
     public string CoverUrl { get; set; }
