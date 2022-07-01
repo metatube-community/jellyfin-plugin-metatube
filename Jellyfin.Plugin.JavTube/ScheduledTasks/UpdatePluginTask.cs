@@ -57,7 +57,7 @@ public class UpdatePluginTask : IScheduledTask
 
         try
         {
-            var apiResult = JsonSerializer.Deserialize<ApiResult>(await _httpClient.Get(new HttpRequestOptions
+            var apiResult = JsonSerializer.Deserialize<ApiResponseInfo>(await _httpClient.Get(new HttpRequestOptions
             {
                 Url = "https://api.github.com/repos/javtube/jellyfin-plugin-javtube/releases/latest",
                 CancellationToken = cancellationToken,
@@ -111,16 +111,16 @@ public class UpdatePluginTask : IScheduledTask
         return new Version(v.StartsWith("v") ? v[1..] : v);
     }
 
-    private class ApiResult
+    private class ApiResponseInfo
     {
         [JsonPropertyName("tag_name")]
         public string TagName { get; set; }
 
         [JsonPropertyName("assets")]
-        public ApiAsset[] Assets { get; set; }
+        public ApiAssetInfo[] Assets { get; set; }
     }
 
-    private class ApiAsset
+    private class ApiAssetInfo
     {
         [JsonPropertyName("name")]
         public string Name { get; set; }
