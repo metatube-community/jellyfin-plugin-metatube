@@ -30,7 +30,7 @@ public class Table : Dictionary<string, string>
     public override string ToString()
     {
         var table = this;
-        return table?.Any() != true
+        return table.Any() != true
             ? string.Empty
             : string.Join('\n',
                 table.Where(kvp => !string.IsNullOrWhiteSpace(kvp.Key))

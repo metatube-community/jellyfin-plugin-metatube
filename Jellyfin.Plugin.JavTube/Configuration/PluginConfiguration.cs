@@ -68,7 +68,7 @@ public class PluginConfiguration : BasePluginConfiguration
 
     public string GenreRawSubstitutionTable
     {
-        get => _genreSubstitutionTable.ToString();
+        get => _genreSubstitutionTable?.ToString();
         set => _genreSubstitutionTable = Table.Parse(value);
     }
 
