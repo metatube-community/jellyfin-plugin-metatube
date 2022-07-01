@@ -1,5 +1,5 @@
 using Jellyfin.Plugin.JavTube.Extensions;
-using Jellyfin.Plugin.JavTube.Models;
+using Jellyfin.Plugin.JavTube.Metadata;
 using MediaBrowser.Controller.Entities;
 using MediaBrowser.Controller.Providers;
 using MediaBrowser.Model.Providers;
@@ -67,7 +67,7 @@ public class ActorProvider : BaseProvider, IRemoteMetadataProvider<Person, Perso
     {
         var pid = info.GetPid(Name);
 
-        var searchResults = new List<ActorSearchResultModel>();
+        var searchResults = new List<ActorSearchResult>();
         if (string.IsNullOrWhiteSpace(pid.Id))
         {
             // Search actor by name.
@@ -106,7 +106,7 @@ public class ActorProvider : BaseProvider, IRemoteMetadataProvider<Person, Perso
         return results;
     }
 
-    private static string FormatOverview(ActorInfoModel a)
+    private static string FormatOverview(ActorInfo a)
     {
         string G(string k, string v)
         {

@@ -1,6 +1,6 @@
 using System.Collections.Specialized;
 using Jellyfin.Plugin.JavTube.Configuration;
-using Jellyfin.Plugin.JavTube.Models;
+using Jellyfin.Plugin.JavTube.Metadata;
 
 namespace Jellyfin.Plugin.JavTube.Helpers;
 
@@ -58,7 +58,7 @@ public static class TranslationHelper
         }
     }
 
-    public static async Task TranslateAsync(MovieInfoModel m, string to, CancellationToken cancellationToken)
+    public static async Task TranslateAsync(MovieInfo m, string to, CancellationToken cancellationToken)
     {
         if (Configuration.TranslationMode.HasFlag(TranslationMode.Title) && !string.IsNullOrWhiteSpace(m.Title))
             m.Title = await TranslateAsync(m.Title, AutoLanguage, to, cancellationToken);

@@ -1,8 +1,8 @@
 using System.Text.Json.Serialization;
 
-namespace Jellyfin.Plugin.JavTube.Models;
+namespace Jellyfin.Plugin.JavTube.Metadata;
 
-public class ProviderModel
+public class ProviderInfo
 {
     [JsonPropertyName("id")]
     public string Id { get; set; }

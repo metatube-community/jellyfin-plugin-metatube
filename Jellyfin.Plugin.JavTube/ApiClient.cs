@@ -2,7 +2,7 @@ using System.Collections.Specialized;
 using System.Net.Http.Headers;
 using System.Net.Http.Json;
 using System.Web;
-using Jellyfin.Plugin.JavTube.Models;
+using Jellyfin.Plugin.JavTube.Metadata;
 
 namespace Jellyfin.Plugin.JavTube;
 
@@ -121,78 +121,78 @@ public static class ApiClient
         return ComposeImageApiUrl(BackdropImageApi, provider, id, url, position, auto);
     }
 
-    public static async Task<ActorInfoModel> GetActorInfoAsync(string provider, string id,
+    public static async Task<ActorInfo> GetActorInfoAsync(string provider, string id,
         CancellationToken cancellationToken)
     {
         return await GetActorInfoAsync(provider, id, true /* default */, cancellationToken);
     }
 
-    public static async Task<ActorInfoModel> GetActorInfoAsync(string provider, string id, bool lazy,
+    public static async Task<ActorInfo> GetActorInfoAsync(string provider, string id, bool lazy,
         CancellationToken cancellationToken)
     {
         var apiUrl = ComposeInfoApiUrl(ActorInfoApi, provider, id, lazy);
-        return await GetDataAsync<ActorInfoModel>(apiUrl, true, cancellationToken);
+        return await GetDataAsync<ActorInfo>(apiUrl, true, cancellationToken);
     }
 
-    public static async Task<MovieInfoModel> GetMovieInfoAsync(string provider, string id,
+    public static async Task<MovieInfo> GetMovieInfoAsync(string provider, string id,
         CancellationToken cancellationToken)
     {
         return await GetMovieInfoAsync(provider, id, true /* default */, cancellationToken);
     }
 
-    public static async Task<MovieInfoModel> GetMovieInfoAsync(string provider, string id, bool lazy,
+    public static async Task<MovieInfo> GetMovieInfoAsync(string provider, string id, bool lazy,
         CancellationToken cancellationToken)
     {
         var apiUrl = ComposeInfoApiUrl(MovieInfoApi, provider, id, lazy);
-        return await GetDataAsync<MovieInfoModel>(apiUrl, true, cancellationToken);
+        return await GetDataAsync<MovieInfo>(apiUrl, true, cancellationToken);
     }
 
-    public static async Task<List<ActorSearchResultModel>> SearchActorAsync(string q,
+    public static async Task<List<ActorSearchResult>> SearchActorAsync(string q,
         CancellationToken cancellationToken)
     {
         return await SearchActorAsync(q, string.Empty, cancellationToken);
     }
 
-    public static async Task<List<ActorSearchResultModel>> SearchActorAsync(string q, string provider,
+    public static async Task<List<ActorSearchResult>> SearchActorAsync(string q, string provider,
         CancellationToken cancellationToken)
     {
         return await SearchActorAsync(q, provider, true /* default */, cancellationToken);
     }
 
-    public static async Task<List<ActorSearchResultModel>> SearchActorAsync(string q, string provider,
+    public static async Task<List<ActorSearchResult>> SearchActorAsync(string q, string provider,
         bool fallback, CancellationToken cancellationToken)
     {
         var apiUrl = ComposeSearchApiUrl(ActorSearchApi, q, provider, fallback);
-        return await GetDataAsync<List<ActorSearchResultModel>>(apiUrl, true, cancellationToken);
+        return await GetDataAsync<List<ActorSearchResult>>(apiUrl, true, cancellationToken);
     }
 
-    public static async Task<List<MovieSearchResultModel>> SearchMovieAsync(string q,
+    public static async Task<List<MovieSearchResult>> SearchMovieAsync(string q,
         CancellationToken cancellationToken)
     {
         return await SearchMovieAsync(q, string.Empty, cancellationToken);
     }
 
-    public static async Task<List<MovieSearchResultModel>> SearchMovieAsync(string q, string provider,
+    public static async Task<List<MovieSearchResult>> SearchMovieAsync(string q, string provider,
         CancellationToken cancellationToken)
     {
         return await SearchMovieAsync(q, provider, true /* default */, cancellationToken);
     }
 
-    public static async Task<List<MovieSearchResultModel>> SearchMovieAsync(string q, string provider,
+    public static async Task<List<MovieSearchResult>> SearchMovieAsync(string q, string provider,
         bool fallback, CancellationToken cancellationToken)
     {
         var apiUrl = ComposeSearchApiUrl(MovieSearchApi, q, provider, fallback);
-        return await GetDataAsync<List<MovieSearchResultModel>>(apiUrl, true, cancellationToken);
+        return await GetDataAsync<List<MovieSearchResult>>(apiUrl, true, cancellationToken);
     }
 
-    public static async Task<TranslationModel> TranslateAsync(string q, string from, string to, string engine,
+    public static async Task<TranslationInfo> TranslateAsync(string q, string from, string to, string engine,
         NameValueCollection nv, CancellationToken cancellationToken)
     {
         var apiUrl = ComposeTranslateApiUrl(TranslateApi, q, from, to, engine, nv);
-        return await GetDataAsync<TranslationModel>(apiUrl, false, cancellationToken);
+        return await GetDataAsync<TranslationInfo>(apiUrl, false, cancellationToken);
     }
 
-    private static async Task<TModel> GetDataAsync<TModel>(string url, bool requireAuth,
+    private static async Task<T> GetDataAsync<T>(string url, bool requireAuth,
         CancellationToken cancellationToken)
     {
         cancellationToken.ThrowIfCancellationRequested();
@@ -214,7 +214,7 @@ public static class ApiClient
         // Response is unlikely to be null.
         // If it happens to be null, an exception is planed to be thrown either way.
         var model = (await response.Content!
-            .ReadFromJsonAsync<ResponseModel<TModel>>(cancellationToken: cancellationToken).ConfigureAwait(false))!;
+            .ReadFromJsonAsync<ResponseInfo<T>>(cancellationToken: cancellationToken).ConfigureAwait(false))!;
 
         // EnsureSuccessStatusCode ignoring reason:
         // When the status is unsuccessful, the API response contains error details.

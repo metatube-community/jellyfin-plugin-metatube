@@ -1,12 +1,13 @@
 using Jellyfin.Plugin.JavTube.Configuration;
 using Jellyfin.Plugin.JavTube.Extensions;
 using Jellyfin.Plugin.JavTube.Helpers;
-using Jellyfin.Plugin.JavTube.Models;
+using Jellyfin.Plugin.JavTube.Metadata;
 using MediaBrowser.Controller.Entities;
 using MediaBrowser.Controller.Entities.Movies;
 using MediaBrowser.Controller.Providers;
 using MediaBrowser.Model.Entities;
 using MediaBrowser.Model.Providers;
+using MovieInfo = MediaBrowser.Controller.Providers.MovieInfo;
 #if __EMBY__
 using MediaBrowser.Common.Net;
 using MediaBrowser.Model.Logging;
@@ -137,7 +138,7 @@ public class MovieProvider : BaseProvider, IRemoteMetadataProvider<Movie, MovieI
     {
         var pid = info.GetPid(Name);
 
-        var searchResults = new List<MovieSearchResultModel>();
+        var searchResults = new List<MovieSearchResult>();
         if (string.IsNullOrWhiteSpace(pid.Id) || string.IsNullOrWhiteSpace(pid.Provider))
         {
             // Search movie by name.
@@ -193,7 +194,7 @@ public class MovieProvider : BaseProvider, IRemoteMetadataProvider<Movie, MovieI
         return string.Empty;
     }
 
-    private async Task TranslateMovieInfo(MovieInfoModel m, string language, CancellationToken cancellationToken)
+    private async Task TranslateMovieInfo(Metadata.MovieInfo m, string language, CancellationToken cancellationToken)
     {
         try
         {
