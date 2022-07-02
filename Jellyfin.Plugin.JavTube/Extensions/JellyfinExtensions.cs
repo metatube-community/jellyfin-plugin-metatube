@@ -8,7 +8,7 @@ namespace Jellyfin.Plugin.JavTube.Extensions;
 
 public static class JellyfinExtensions
 {
-    #region LoggerExtensions
+    #region Logger
 
     public static void Debug(this ILogger logger, string message, params object[] args)
     {
@@ -32,7 +32,7 @@ public static class JellyfinExtensions
 
     #endregion
 
-    #region MovieExtensions
+    #region Movie
 
     public static void AddCollection(this Movie movie, string name)
     {
