@@ -110,6 +110,7 @@ public class ActorProvider : BaseProvider, IRemoteMetadataProvider<Person, Perso
     {
         var info = new List<(string, string)>
         {
+            ("別名", a.Aliases?.Any() == true ? string.Join(", ", a.Aliases) : string.Empty),
             ("身長", a.Height > 0 ? a.Height.ToString() : string.Empty),
             ("趣味", a.Hobby),
             ("特技", a.Skill),
@@ -118,7 +119,7 @@ public class ActorProvider : BaseProvider, IRemoteMetadataProvider<Person, Perso
             ("スリーサイズ", a.Measurements)
         };
 
-        return string.Join("\n",
-            info.Where(kvp => !string.IsNullOrWhiteSpace(kvp.Item2)).Select(kvp => $"{kvp.Item1}：{kvp.Item2}"));
+        return string.Join("\n<br>\n",
+            info.Where(kvp => !string.IsNullOrWhiteSpace(kvp.Item2)).Select(kvp => $"{kvp.Item1}: {kvp.Item2}"));
     }
 }
