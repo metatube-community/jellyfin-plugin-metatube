@@ -1,4 +1,5 @@
 using System.Collections.Specialized;
+using System.Net;
 using System.Net.Http.Headers;
 using System.Net.Http.Json;
 using System.Web;
@@ -8,6 +9,24 @@ namespace Jellyfin.Plugin.JavTube;
 
 public static class ApiClient
 {
+    static ApiClient()
+    {
+        HttpClient = new HttpClient(new SocketsHttpHandler
+        {
+            // Connect Timeout.
+            ConnectTimeout = TimeSpan.FromSeconds(30),
+
+            // TCP Keep Alive.
+            KeepAlivePingPolicy = HttpKeepAlivePingPolicy.Always,
+            KeepAlivePingDelay = TimeSpan.FromSeconds(30),
+            KeepAlivePingTimeout = TimeSpan.FromSeconds(30),
+
+            // Connection Pooling.
+            PooledConnectionLifetime = TimeSpan.FromMinutes(10),
+            PooledConnectionIdleTimeout = TimeSpan.FromSeconds(90)
+        });
+    }
+
     private const string ActorInfoApi = "/v1/actors";
     private const string MovieInfoApi = "/v1/movies";
     private const string ActorSearchApi = "/v1/actors/search";
@@ -17,20 +36,7 @@ public static class ApiClient
     private const string BackdropImageApi = "/v1/images/backdrop";
     private const string TranslateApi = "/v1/translate";
 
-    private static readonly HttpClient HttpClient = new(new SocketsHttpHandler
-    {
-        // Connect Timeout.
-        ConnectTimeout = TimeSpan.FromSeconds(30),
-
-        // TCP Keep Alive.
-        KeepAlivePingPolicy = HttpKeepAlivePingPolicy.Always,
-        KeepAlivePingDelay = TimeSpan.FromSeconds(30),
-        KeepAlivePingTimeout = TimeSpan.FromSeconds(30),
-
-        // Connection Pooling.
-        PooledConnectionLifetime = TimeSpan.FromMinutes(10),
-        PooledConnectionIdleTimeout = TimeSpan.FromSeconds(90)
-    });
+    private static readonly HttpClient HttpClient;
 
     private static string ComposeUrl(string path, NameValueCollection nv)
     {
