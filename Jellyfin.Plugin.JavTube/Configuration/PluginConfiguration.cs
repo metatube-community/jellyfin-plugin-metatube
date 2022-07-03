@@ -24,7 +24,7 @@ public class PluginConfiguration : BasePluginConfiguration
 
     public string TitleTemplate { get; set; } = "{number} {title}";
 
-    public string TaglineTemplate { get; set; } = "发行日期 {date}";
+    public string TaglineTemplate { get; set; } = "発売日 {date}";
 
     #endregion
 

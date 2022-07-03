@@ -60,12 +60,30 @@ public class MovieProvider : BaseProvider, IRemoteMetadataProvider<Movie, MovieI
         if (Configuration.TranslationMode != TranslationMode.Disabled)
             await TranslateMovieInfo(m, info.MetadataLanguage, cancellationToken);
 
+        // Build parameters.
+        var parameters = new Dictionary<string, string>
+        {
+            { @"{provider}", m.Provider },
+            { @"{id}", m.Id },
+            { @"{number}", m.Number },
+            { @"{title}", m.Title },
+            { @"{series}", m.Series },
+            { @"{maker}", m.Maker },
+            { @"{label}", m.Label },
+            { @"{director}", m.Director },
+            { @"{actors}", m.Actors?.Any() == true ? string.Join(' ', m.Actors) : string.Empty },
+            { @"{first_actor}", m.Actors?.FirstOrDefault() },
+            { @"{year}", $"{m.ReleaseDate:yyyy}" },
+            { @"{month}", $"{m.ReleaseDate:MM}" },
+            { @"{date}", $"{m.ReleaseDate:yyyy-MM-dd}" }
+        };
+
         var result = new MetadataResult<Movie>
         {
             Item = new Movie
             {
-                Name = RenderTemplate(Configuration.TitleTemplate, m),
-                Tagline = RenderTemplate(Configuration.TaglineTemplate, m),
+                Name = RenderTemplate(Configuration.TitleTemplate, parameters),
+                Tagline = RenderTemplate(Configuration.TaglineTemplate, parameters),
                 OriginalTitle = originalTitle,
                 Overview = m.Summary,
                 OfficialRating = Rating,
@@ -204,27 +222,10 @@ public class MovieProvider : BaseProvider, IRemoteMetadataProvider<Movie, MovieI
         }
     }
 
-    private static string RenderTemplate(string template, Metadata.MovieInfo m)
+    private static string RenderTemplate(string template, Dictionary<string, string> parameters)
     {
         if (string.IsNullOrWhiteSpace(template))
             return string.Empty;
-
-        var parameters = new Dictionary<string, string>
-        {
-            { @"{provider}", m.Provider },
-            { @"{id}", m.Id },
-            { @"{number}", m.Number },
-            { @"{title}", m.Title },
-            { @"{series}", m.Series },
-            { @"{maker}", m.Maker },
-            { @"{label}", m.Label },
-            { @"{director}", m.Director },
-            { @"{actors}", m.Actors?.Any() == true ? string.Join(' ', m.Actors) : string.Empty },
-            { @"{first_actor}", m.Actors?.FirstOrDefault() },
-            { @"{year}", $"{m.ReleaseDate.GetValidYear()}" },
-            { @"{month}", $"{m.ReleaseDate.GetValidDateTime():MM}" },
-            { @"{date}", $"{m.ReleaseDate.GetValidDateTime():yyyy-MM-dd}" }
-        };
 
         var sb = parameters.Where(kvp => template.Contains(kvp.Key))
             .Aggregate(new StringBuilder(template),
