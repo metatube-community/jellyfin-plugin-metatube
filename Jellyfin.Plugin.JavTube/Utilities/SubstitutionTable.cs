@@ -1,14 +1,14 @@
 namespace Jellyfin.Plugin.JavTube.Utilities;
 
-public class Table : Dictionary<string, string>
+public class SubstitutionTable : Dictionary<string, string>
 {
-    private Table() : base(StringComparer.OrdinalIgnoreCase)
+    private SubstitutionTable() : base(StringComparer.OrdinalIgnoreCase)
     {
     }
 
-    public static Table Parse(string text)
+    public static SubstitutionTable Parse(string text)
     {
-        var dictionary = new Table();
+        var dictionary = new SubstitutionTable();
 
         var reader = new StringReader(text ?? string.Empty);
         while (reader.ReadLine() is { } line)

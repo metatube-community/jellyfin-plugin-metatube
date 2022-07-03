@@ -48,31 +48,31 @@ public class PluginConfiguration : BasePluginConfiguration
 
     public string ActorRawSubstitutionTable
     {
-        get => _actorSubstitutionTable?.ToString();
-        set => _actorSubstitutionTable = Table.Parse(value);
+        get => _actorSubstitutionSubstitutionTable?.ToString();
+        set => _actorSubstitutionSubstitutionTable = SubstitutionTable.Parse(value);
     }
 
-    public Table GetActorSubstitutionTable()
+    public SubstitutionTable GetActorSubstitutionTable()
     {
-        return _actorSubstitutionTable;
+        return _actorSubstitutionSubstitutionTable;
     }
 
-    private Table _actorSubstitutionTable;
+    private SubstitutionTable _actorSubstitutionSubstitutionTable;
 
     public bool EnableGenreSubstitution { get; set; } = false;
 
     public string GenreRawSubstitutionTable
     {
-        get => _genreSubstitutionTable?.ToString();
-        set => _genreSubstitutionTable = Table.Parse(value);
+        get => _genreSubstitutionSubstitutionTable?.ToString();
+        set => _genreSubstitutionSubstitutionTable = SubstitutionTable.Parse(value);
     }
 
-    public Table GetGenreSubstitutionTable()
+    public SubstitutionTable GetGenreSubstitutionTable()
     {
-        return _genreSubstitutionTable;
+        return _genreSubstitutionSubstitutionTable;
     }
 
-    private Table _genreSubstitutionTable;
+    private SubstitutionTable _genreSubstitutionSubstitutionTable;
 
     #endregion
 }
