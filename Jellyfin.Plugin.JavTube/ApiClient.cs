@@ -117,7 +117,7 @@ public static class ApiClient
     {
         var request = new HttpRequestMessage(HttpMethod.Get, url);
         request.Headers.Add("User-Agent", DefaultUserAgent);
-        using var response = await HttpClient.SendAsync(request, cancellationToken).ConfigureAwait(false);
+        var response = await HttpClient.SendAsync(request, cancellationToken).ConfigureAwait(false);
 #if __EMBY__
         return new HttpResponseInfo
         {
