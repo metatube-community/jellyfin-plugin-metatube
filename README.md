@@ -56,6 +56,7 @@ _NOTE: This project will only support stable versions._
 - [Face detection](https://github.com/javtube/jellyfin-plugin-javtube/wiki/%E4%BA%BA%E8%84%B8%E8%AF%86%E5%88%AB)
 - [Trailer preview](https://github.com/javtube/jellyfin-plugin-javtube/wiki/%E5%BD%B1%E7%89%87%E9%A2%84%E5%91%8A)
 - [Auto translation](https://github.com/javtube/jellyfin-plugin-javtube/wiki/%E8%87%AA%E5%8A%A8%E7%BF%BB%E8%AF%91)
+- [Text Template](https://github.com/javtube/jellyfin-plugin-javtube/wiki/%E6%96%87%E6%9C%AC%E6%A8%A1%E7%89%88)
 - [Build from source](https://github.com/javtube/jellyfin-plugin-javtube/wiki/%E8%87%AA%E8%A1%8C%E7%BC%96%E8%AF%91)
 - [Metadata providers](https://github.com/javtube/jellyfin-plugin-javtube/wiki/%E6%95%B0%E6%8D%AE%E6%9D%A5%E6%BA%90)
 

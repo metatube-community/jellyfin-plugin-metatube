@@ -56,6 +56,7 @@ _注意：本项目仅支持 Jellyfin/Emby 稳定版。_
 - [人脸识别](https://github.com/javtube/jellyfin-plugin-javtube/wiki/%E4%BA%BA%E8%84%B8%E8%AF%86%E5%88%AB)
 - [影片预告](https://github.com/javtube/jellyfin-plugin-javtube/wiki/%E5%BD%B1%E7%89%87%E9%A2%84%E5%91%8A)
 - [自动翻译](https://github.com/javtube/jellyfin-plugin-javtube/wiki/%E8%87%AA%E5%8A%A8%E7%BF%BB%E8%AF%91)
+- [文本模版](https://github.com/javtube/jellyfin-plugin-javtube/wiki/%E6%96%87%E6%9C%AC%E6%A8%A1%E7%89%88)
 - [源码编译](https://github.com/javtube/jellyfin-plugin-javtube/wiki/%E6%BA%90%E7%A0%81%E7%BC%96%E8%AF%91)
 - [数据来源](https://github.com/javtube/jellyfin-plugin-javtube/wiki/%E6%95%B0%E6%8D%AE%E6%9D%A5%E6%BA%90)
 
