@@ -8,7 +8,6 @@ using MediaBrowser.Model.Entities;
 using MediaBrowser.Model.Providers;
 using MovieInfo = MediaBrowser.Controller.Providers.MovieInfo;
 #if __EMBY__
-using MediaBrowser.Common.Net;
 using MediaBrowser.Model.Logging;
 
 #else
@@ -23,11 +22,9 @@ public class MovieProvider : BaseProvider, IRemoteMetadataProvider<Movie, MovieI
     private const string Rating = "JP-18+";
 
 #if __EMBY__
-    public MovieProvider(IHttpClient httpClient, ILogManager logManager) : base(
-        httpClient, logManager.CreateLogger<MovieProvider>())
+    public MovieProvider(ILogManager logManager) : base(logManager.CreateLogger<MovieProvider>())
 #else
-    public MovieProvider(IHttpClientFactory httpClientFactory, ILogger<MovieProvider> logger) : base(
-        httpClientFactory, logger)
+    public MovieProvider(ILogger<MovieProvider> logger) : base(logger)
 #endif
     {
     }

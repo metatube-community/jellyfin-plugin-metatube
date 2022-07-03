@@ -4,7 +4,6 @@ using MediaBrowser.Controller.Entities;
 using MediaBrowser.Controller.Providers;
 using MediaBrowser.Model.Providers;
 #if __EMBY__
-using MediaBrowser.Common.Net;
 using MediaBrowser.Model.Logging;
 
 #else
@@ -16,12 +15,9 @@ namespace Jellyfin.Plugin.JavTube.Providers;
 public class ActorProvider : BaseProvider, IRemoteMetadataProvider<Person, PersonLookupInfo>, IHasOrder
 {
 #if __EMBY__
-    public ActorProvider(IHttpClient httpClient, ILogManager logManager) : base(
-        httpClient,
-        logManager.CreateLogger<ActorProvider>())
+    public ActorProvider(ILogManager logManager) : base(logManager.CreateLogger<ActorProvider>())
 #else
-    public ActorProvider(IHttpClientFactory httpClientFactory, ILogger<ActorProvider> logger) : base(
-        httpClientFactory, logger)
+    public ActorProvider(ILogger<ActorProvider> logger) : base(logger)
 #endif
     {
     }
