@@ -32,10 +32,7 @@ def main():
     with urlopen('https://raw.githubusercontent.com/javtube/jellyfin-plugin-javtube/dist/manifest.json') as f:
         manifest = json.load(f)
 
-    manifest[0]['versions'].insert(
-        0,
-        generate(filename, version)
-    )
+    manifest[0]['versions'].insert(0, generate(filename, version))
 
     with open('manifest.json', 'w') as f:
         json.dump(manifest, f, indent=2)
