@@ -1,4 +1,4 @@
-namespace Jellyfin.Plugin.JavTube.Common;
+namespace Jellyfin.Plugin.JavTube.Utilities;
 
 public class ProviderId
 {
