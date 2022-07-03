@@ -1,4 +1,5 @@
 #if __EMBY__
+
 using MediaBrowser.Model.Logging;
 
 namespace Jellyfin.Plugin.JavTube.Extensions;
@@ -14,4 +15,5 @@ public static class EmbyExtensions
 
     #endregion
 }
+
 #endif
