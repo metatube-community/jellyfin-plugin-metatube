@@ -3,29 +3,14 @@ using System.Net.Http.Headers;
 using System.Net.Http.Json;
 using System.Web;
 using Jellyfin.Plugin.JavTube.Metadata;
+#if __EMBY__
+using MediaBrowser.Common.Net;
+#endif
 
 namespace Jellyfin.Plugin.JavTube;
 
 public static class ApiClient
 {
-    static ApiClient()
-    {
-        HttpClient = new HttpClient(new SocketsHttpHandler
-        {
-            // Connect Timeout.
-            ConnectTimeout = TimeSpan.FromSeconds(30),
-
-            // TCP Keep Alive.
-            KeepAlivePingPolicy = HttpKeepAlivePingPolicy.Always,
-            KeepAlivePingDelay = TimeSpan.FromSeconds(30),
-            KeepAlivePingTimeout = TimeSpan.FromSeconds(30),
-
-            // Connection Pooling.
-            PooledConnectionLifetime = TimeSpan.FromMinutes(10),
-            PooledConnectionIdleTimeout = TimeSpan.FromSeconds(90)
-        });
-    }
-
     private const string ActorInfoApi = "/v1/actors";
     private const string MovieInfoApi = "/v1/movies";
     private const string ActorSearchApi = "/v1/actors/search";
@@ -34,8 +19,6 @@ public static class ApiClient
     private const string ThumbImageApi = "/v1/images/thumb";
     private const string BackdropImageApi = "/v1/images/backdrop";
     private const string TranslateApi = "/v1/translate";
-
-    private static readonly HttpClient HttpClient;
 
     private static string ComposeUrl(string path, NameValueCollection nv)
     {
@@ -126,6 +109,29 @@ public static class ApiClient
         return ComposeImageApiUrl(BackdropImageApi, provider, id, url, position, auto);
     }
 
+#if __EMBY__
+    public static async Task<HttpResponseInfo> GetImageResponse(string url, CancellationToken cancellationToken)
+#else
+    public static async Task<HttpResponseMessage> GetImageResponse(string url, CancellationToken cancellationToken)
+#endif
+    {
+        var request = new HttpRequestMessage(HttpMethod.Get, url);
+        request.Headers.Add("User-Agent", DefaultUserAgent);
+        using var response = await HttpClient.SendAsync(request, cancellationToken).ConfigureAwait(false);
+#if __EMBY__
+        return new HttpResponseInfo
+        {
+            Content = await response.Content.ReadAsStreamAsync(cancellationToken).ConfigureAwait(false),
+            ContentLength = response.Content.Headers.ContentLength,
+            ContentType = response.Content.Headers.ContentType?.ToString(),
+            StatusCode = response.StatusCode,
+            Headers = response.Content.Headers.ToDictionary(kvp => kvp.Key, kvp => string.Join(", ", kvp.Value))
+        };
+#else
+        return response;
+#endif
+    }
+
     public static async Task<ActorInfo> GetActorInfoAsync(string provider, string id,
         CancellationToken cancellationToken)
     {
@@ -206,7 +212,7 @@ public static class ApiClient
 
         // Add General Headers.
         request.Headers.Add("Accept", "application/json");
-        request.Headers.Add("User-Agent", Plugin.Instance.UserAgent);
+        request.Headers.Add("User-Agent", DefaultUserAgent);
 
         // Set API Authorization Token.
         if (requireAuth && !string.IsNullOrWhiteSpace(Plugin.Instance.Configuration.Token))
@@ -232,4 +238,29 @@ public static class ApiClient
 
         return apiResponse.Data;
     }
+
+    #region Http
+
+    private static readonly HttpClient HttpClient;
+    private static string DefaultUserAgent => $"{Plugin.Instance.Name}/{Plugin.Instance.Version}";
+
+    static ApiClient()
+    {
+        HttpClient = new HttpClient(new SocketsHttpHandler
+        {
+            // Connect Timeout.
+            ConnectTimeout = TimeSpan.FromSeconds(30),
+
+            // TCP Keep Alive.
+            KeepAlivePingPolicy = HttpKeepAlivePingPolicy.Always,
+            KeepAlivePingDelay = TimeSpan.FromSeconds(30),
+            KeepAlivePingTimeout = TimeSpan.FromSeconds(30),
+
+            // Connection Pooling.
+            PooledConnectionLifetime = TimeSpan.FromMinutes(10),
+            PooledConnectionIdleTimeout = TimeSpan.FromSeconds(90)
+        });
+    }
+
+    #endregion
 }
