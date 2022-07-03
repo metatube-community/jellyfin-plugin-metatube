@@ -1,3 +1,4 @@
+using System.Text;
 using Jellyfin.Plugin.JavTube.Extensions;
 using Jellyfin.Plugin.JavTube.Metadata;
 using Jellyfin.Plugin.JavTube.Translation;
@@ -63,10 +64,10 @@ public class MovieProvider : BaseProvider, IRemoteMetadataProvider<Movie, MovieI
         {
             Item = new Movie
             {
-                Name = $"{m.Number} {m.Title}",
+                Name = RenderTemplate(Configuration.TitleTemplate, m),
+                Tagline = RenderTemplate(Configuration.TaglineTemplate, m),
                 OriginalTitle = originalTitle,
                 Overview = m.Summary,
-                Tagline = m.Series,
                 OfficialRating = Rating,
                 PremiereDate = m.ReleaseDate.GetValidDateTime(),
                 ProductionYear = m.ReleaseDate.GetValidYear(),
@@ -201,5 +202,34 @@ public class MovieProvider : BaseProvider, IRemoteMetadataProvider<Movie, MovieI
         {
             Logger.Error("Translate error: {0}", e.Message);
         }
+    }
+
+    private static string RenderTemplate(string template, Metadata.MovieInfo m)
+    {
+        if (string.IsNullOrWhiteSpace(template))
+            return string.Empty;
+
+        var parameters = new Dictionary<string, string>
+        {
+            { @"{provider}", m.Provider },
+            { @"{id}", m.Id },
+            { @"{number}", m.Number },
+            { @"{title}", m.Title },
+            { @"{series}", m.Series },
+            { @"{maker}", m.Maker },
+            { @"{label}", m.Label },
+            { @"{director}", m.Director },
+            { @"{actors}", m.Actors?.Any() == true ? string.Join(' ', m.Actors) : string.Empty },
+            { @"{first_actor}", m.Actors?.FirstOrDefault() },
+            { @"{year}", $"{m.ReleaseDate.GetValidYear()}" },
+            { @"{month}", $"{m.ReleaseDate.GetValidDateTime():MM}" },
+            { @"{date}", $"{m.ReleaseDate.GetValidDateTime():yyyy-MM-dd}" }
+        };
+
+        var sb = parameters.Where(kvp => template.Contains(kvp.Key))
+            .Aggregate(new StringBuilder(template),
+                (sb, kvp) => sb.Replace(kvp.Key, kvp.Value));
+
+        return sb.ToString().Trim();
     }
 }

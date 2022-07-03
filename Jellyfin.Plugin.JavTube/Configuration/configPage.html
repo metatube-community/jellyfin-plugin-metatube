@@ -57,6 +57,22 @@
                 </div>
 
                 <div class="verticalSection">
+                    <h2 class="sectionTitle">Template</h2>
+
+                    <div class="inputContainer">
+                        <label class="inputeLabel inputLabelUnfocused" for="txtTitleTemplate">Title template:</label>
+                        <input id="txtTitleTemplate" is="emby-input" name="txtTitleTemplate" type="text"/>
+                        <div class="fieldDescription"></div>
+                    </div>
+
+                    <div class="inputContainer">
+                        <label class="inputeLabel inputLabelUnfocused" for="txtTaglineTemplate">Tagline template:</label>
+                        <input id="txtTaglineTemplate" is="emby-input" name="txtTaglineTemplate" type="text"/>
+                        <div class="fieldDescription"></div>
+                    </div>
+                </div>
+
+                <div class="verticalSection">
                     <h2 class="sectionTitle">Translation</h2>
 
                     <div class="selectContainer">
@@ -175,6 +191,8 @@
                 page.querySelector('#chkEnableCollection').checked = config.EnableCollection;
                 page.querySelector('#chkEnableRating').checked = config.EnableRating;
                 page.querySelector('#chkEnableTrailer').checked = config.EnableTrailer;
+                $('#txtTitleTemplate', page).val(config.TitleTemplate).change();
+                $('#txtTaglineTemplate', page).val(config.TaglineTemplate).change();
                 $('#selectTranslationMode', page).val(config.TranslationMode).change();
                 $('#selectTranslationEngine', page).val(config.TranslationEngine).change();
                 $('#txtBaiduAppId', page).val(config.BaiduAppId).change();
@@ -197,6 +215,8 @@
                 config.EnableCollection = $('#chkEnableCollection', form).prop('checked');
                 config.EnableRating = $('#chkEnableRating', form).prop('checked');
                 config.EnableTrailer = $('#chkEnableTrailer', form).prop('checked');
+                config.TitleTemplate = $('#txtTitleTemplate', form).val();
+                config.TaglineTemplate = $('#txtTaglineTemplate', form).val();
                 config.TranslationMode = $('#selectTranslationMode', form).val();
                 config.TranslationEngine = $('#selectTranslationEngine', form).val();
                 config.BaiduAppId = $('#txtBaiduAppId', form).val();

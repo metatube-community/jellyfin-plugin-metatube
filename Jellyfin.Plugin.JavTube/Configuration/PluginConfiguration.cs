@@ -20,6 +20,14 @@ public class PluginConfiguration : BasePluginConfiguration
 
     #endregion
 
+    #region Template
+
+    public string TitleTemplate { get; set; } = "{number} {title}";
+
+    public string TaglineTemplate { get; set; } = "发行日期 {date}";
+
+    #endregion
+
     #region Translation
 
     public TranslationMode TranslationMode { get; set; } = TranslationMode.Disabled;
