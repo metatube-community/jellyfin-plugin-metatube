@@ -29,8 +29,6 @@ public class Plugin : BasePlugin<PluginConfiguration>, IHasWebPages
 
     public static Plugin Instance { get; private set; }
 
-    public string UserAgent => $"{Name}/{Version}";
-
     public IEnumerable<PluginPageInfo> GetPages()
     {
         return new[]
