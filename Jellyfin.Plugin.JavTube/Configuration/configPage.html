@@ -60,8 +60,8 @@
                     <h2 class="sectionTitle">Template</h2>
 
                     <div class="inputContainer">
-                        <label class="inputeLabel inputLabelUnfocused" for="txtTitleTemplate">Title template:</label>
-                        <input id="txtTitleTemplate" is="emby-input" name="txtTitleTemplate" type="text"/>
+                        <label class="inputeLabel inputLabelUnfocused" for="txtNameTemplate">Name template:</label>
+                        <input id="txtNameTemplate" is="emby-input" name="txtNameTemplate" type="text"/>
                         <div class="fieldDescription"></div>
                     </div>
 
@@ -191,7 +191,7 @@
                 page.querySelector('#chkEnableCollection').checked = config.EnableCollection;
                 page.querySelector('#chkEnableRating').checked = config.EnableRating;
                 page.querySelector('#chkEnableTrailer').checked = config.EnableTrailer;
-                $('#txtTitleTemplate', page).val(config.TitleTemplate).change();
+                $('#txtNameTemplate', page).val(config.NameTemplate).change();
                 $('#txtTaglineTemplate', page).val(config.TaglineTemplate).change();
                 $('#selectTranslationMode', page).val(config.TranslationMode).change();
                 $('#selectTranslationEngine', page).val(config.TranslationEngine).change();
@@ -215,7 +215,7 @@
                 config.EnableCollection = $('#chkEnableCollection', form).prop('checked');
                 config.EnableRating = $('#chkEnableRating', form).prop('checked');
                 config.EnableTrailer = $('#chkEnableTrailer', form).prop('checked');
-                config.TitleTemplate = $('#txtTitleTemplate', form).val();
+                config.NameTemplate = $('#txtNameTemplate', form).val();
                 config.TaglineTemplate = $('#txtTaglineTemplate', form).val();
                 config.TranslationMode = $('#selectTranslationMode', form).val();
                 config.TranslationEngine = $('#selectTranslationEngine', form).val();

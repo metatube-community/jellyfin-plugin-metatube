@@ -82,7 +82,7 @@ public class MovieProvider : BaseProvider, IRemoteMetadataProvider<Movie, MovieI
         {
             Item = new Movie
             {
-                Name = RenderTemplate(Configuration.TitleTemplate, parameters),
+                Name = RenderTemplate(Configuration.NameTemplate, parameters),
                 Tagline = RenderTemplate(Configuration.TaglineTemplate, parameters),
                 OriginalTitle = originalTitle,
                 Overview = m.Summary,

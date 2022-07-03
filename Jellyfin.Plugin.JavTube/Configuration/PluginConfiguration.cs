@@ -22,7 +22,7 @@ public class PluginConfiguration : BasePluginConfiguration
 
     #region Template
 
-    public string TitleTemplate { get; set; } = "{number} {title}";
+    public string NameTemplate { get; set; } = "{number} {title}";
 
     public string TaglineTemplate { get; set; } = "発売日 {date}";
 
