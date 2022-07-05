@@ -6,7 +6,8 @@ namespace Jellyfin.Plugin.JavTube.Translation;
 
 public static class TranslationHelper
 {
-    private const string AutoLanguage = "auto";
+    private const string AutoLanguageCode = "auto";
+    private const string JapaneseLanguageCode = "ja";
 
     private static readonly SemaphoreSlim Semaphore = new(1);
 
@@ -60,11 +61,14 @@ public static class TranslationHelper
 
     public static async Task TranslateAsync(MovieInfo m, string to, CancellationToken cancellationToken)
     {
+        if (string.Equals(to, JapaneseLanguageCode, StringComparison.OrdinalIgnoreCase))
+            throw new ArgumentException($"language not allowed: {to}");
+
         if (Configuration.TranslationMode.HasFlag(TranslationMode.Title) && !string.IsNullOrWhiteSpace(m.Title))
-            m.Title = await TranslateAsync(m.Title, AutoLanguage, to, cancellationToken);
+            m.Title = await TranslateAsync(m.Title, AutoLanguageCode, to, cancellationToken);
 
         if (Configuration.TranslationMode.HasFlag(TranslationMode.Summary) && !string.IsNullOrWhiteSpace(m.Summary))
-            m.Summary = await TranslateAsync(m.Summary, AutoLanguage, to, cancellationToken);
+            m.Summary = await TranslateAsync(m.Summary, AutoLanguageCode, to, cancellationToken);
     }
 
     private static async Task<T> RetryAsync<T>(Func<Task<T>> func, int retryCount)
