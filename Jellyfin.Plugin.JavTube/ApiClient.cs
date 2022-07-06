@@ -78,7 +78,7 @@ public static class ApiClient
 
     public static string GetPrimaryImageApiUrl(string provider, string id, double position = -1)
     {
-        return ComposeImageApiUrl(PrimaryImageApi, provider, id, position: position, auto: false);
+        return ComposeImageApiUrl(PrimaryImageApi, provider, id, position: position);
     }
 
     public static string GetPrimaryImageApiUrl(string provider, string id, string url, double position = -1,
@@ -89,7 +89,7 @@ public static class ApiClient
 
     public static string GetThumbImageApiUrl(string provider, string id)
     {
-        return ComposeImageApiUrl(ThumbImageApi, provider, id, position: -1, auto: false);
+        return ComposeImageApiUrl(ThumbImageApi, provider, id);
     }
 
     public static string GetThumbImageApiUrl(string provider, string id, string url, double position = -1,
@@ -100,7 +100,7 @@ public static class ApiClient
 
     public static string GetBackdropImageApiUrl(string provider, string id)
     {
-        return ComposeImageApiUrl(BackdropImageApi, provider, id, position: -1, auto: false);
+        return ComposeImageApiUrl(BackdropImageApi, provider, id);
     }
 
     public static string GetBackdropImageApiUrl(string provider, string id, string url, double position = -1,
