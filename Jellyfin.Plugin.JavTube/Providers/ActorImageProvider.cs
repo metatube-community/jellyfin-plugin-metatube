@@ -32,16 +32,19 @@ public class ActorImageProvider : BaseProvider, IRemoteImageProvider, IHasOrder
     {
         var pid = item.GetPid(Name);
         if (string.IsNullOrWhiteSpace(pid.Id) || string.IsNullOrWhiteSpace(pid.Provider))
-            return new List<RemoteImageInfo>();
+            return Enumerable.Empty<RemoteImageInfo>();
 
         var actorInfo = await ApiClient.GetActorInfoAsync(pid.Provider, pid.Id, cancellationToken);
+
+        if (actorInfo.Images?.Any() != true)
+            return Enumerable.Empty<RemoteImageInfo>();
 
         return actorInfo.Images.Select(image => new RemoteImageInfo
         {
             ProviderName = Name,
             Type = ImageType.Primary,
             Url = ApiClient.GetPrimaryImageApiUrl(actorInfo.Provider, actorInfo.Id, image, 0.5, true)
-        }).ToList();
+        });
     }
 
     public bool Supports(BaseItem item)
