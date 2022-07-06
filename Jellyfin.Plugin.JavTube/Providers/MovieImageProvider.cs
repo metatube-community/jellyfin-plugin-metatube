@@ -33,7 +33,7 @@ public class MovieImageProvider : BaseProvider, IRemoteImageProvider, IHasOrder
     {
         var pid = item.GetPid(Name);
         if (string.IsNullOrWhiteSpace(pid.Id) || string.IsNullOrWhiteSpace(pid.Provider))
-            return new List<RemoteImageInfo>();
+            return Enumerable.Empty<RemoteImageInfo>();
 
         var m = await ApiClient.GetMovieInfoAsync(pid.Provider, pid.Id, cancellationToken);
         var images = new List<RemoteImageInfo>
@@ -58,7 +58,7 @@ public class MovieImageProvider : BaseProvider, IRemoteImageProvider, IHasOrder
             }
         };
 
-        foreach (var imageUrl in m.PreviewImages)
+        foreach (var imageUrl in m.PreviewImages ?? Enumerable.Empty<string>())
         {
             images.Add(new RemoteImageInfo
             {
