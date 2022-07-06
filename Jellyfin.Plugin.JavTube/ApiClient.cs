@@ -34,8 +34,8 @@ public static class ApiClient
         return uriBuilder.ToString();
     }
 
-    private static string ComposeImageApiUrl(string path, string provider, string id, string url, double position,
-        bool auto)
+    private static string ComposeImageApiUrl(string path, string provider, string id, string url = default,
+        double position = -1, bool auto = false)
     {
         return ComposeUrl(Path.Combine(path, provider, id), new NameValueCollection
         {
@@ -78,35 +78,35 @@ public static class ApiClient
 
     public static string GetPrimaryImageApiUrl(string provider, string id, double position = -1)
     {
-        return ComposeImageApiUrl(PrimaryImageApi, provider, id, string.Empty, position, false);
+        return ComposeImageApiUrl(PrimaryImageApi, provider, id, position: position, auto: false);
     }
 
     public static string GetPrimaryImageApiUrl(string provider, string id, string url, double position = -1,
         bool auto = false)
     {
-        return ComposeImageApiUrl(PrimaryImageApi, provider, id, url, position, auto);
+        return ComposeImageApiUrl(PrimaryImageApi, provider, id, url, position: position, auto: auto);
     }
 
     public static string GetThumbImageApiUrl(string provider, string id)
     {
-        return ComposeImageApiUrl(ThumbImageApi, provider, id, string.Empty, -1, false);
+        return ComposeImageApiUrl(ThumbImageApi, provider, id, position: -1, auto: false);
     }
 
     public static string GetThumbImageApiUrl(string provider, string id, string url, double position = -1,
         bool auto = false)
     {
-        return ComposeImageApiUrl(ThumbImageApi, provider, id, url, position, auto);
+        return ComposeImageApiUrl(ThumbImageApi, provider, id, url, position: position, auto: auto);
     }
 
     public static string GetBackdropImageApiUrl(string provider, string id)
     {
-        return ComposeImageApiUrl(BackdropImageApi, provider, id, string.Empty, -1, false);
+        return ComposeImageApiUrl(BackdropImageApi, provider, id, position: -1, auto: false);
     }
 
     public static string GetBackdropImageApiUrl(string provider, string id, string url, double position = -1,
         bool auto = false)
     {
-        return ComposeImageApiUrl(BackdropImageApi, provider, id, url, position, auto);
+        return ComposeImageApiUrl(BackdropImageApi, provider, id, url, position: position, auto: auto);
     }
 
 #if __EMBY__
