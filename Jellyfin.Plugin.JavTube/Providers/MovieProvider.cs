@@ -135,7 +135,7 @@ public class MovieProvider : BaseProvider, IRemoteMetadataProvider<Movie, MovieI
             });
 
         // Add actors.
-        foreach (var name in m.Actors)
+        foreach (var name in m.Actors ?? Enumerable.Empty<string>())
         {
             result.AddPerson(new PersonInfo
             {
