@@ -104,9 +104,12 @@ public class ActorProvider : BaseProvider, IRemoteMetadataProvider<Person, Perso
 
     private static string FormatOverview(ActorInfo a)
     {
+        var aliases = a.Aliases?.Where(alias => !string.Equals(alias, a.Name, StringComparison.OrdinalIgnoreCase))
+            .Distinct(StringComparer.OrdinalIgnoreCase);
+
         var info = new List<(string, string)>
         {
-            ("別名", a.Aliases?.Any() == true ? string.Join(", ", a.Aliases) : string.Empty),
+            ("別名", string.Join(", ", aliases ?? Enumerable.Empty<string>())),
             ("身長", a.Height > 0 ? a.Height.ToString() : string.Empty),
             ("趣味", a.Hobby),
             ("特技", a.Skill),
