@@ -84,7 +84,7 @@ public static class ApiClient
     public static string GetPrimaryImageApiUrl(string provider, string id, string url, double position = -1,
         bool auto = false)
     {
-        return ComposeImageApiUrl(PrimaryImageApi, provider, id, url, position: position, auto: auto);
+        return ComposeImageApiUrl(PrimaryImageApi, provider, id, url, position, auto);
     }
 
     public static string GetThumbImageApiUrl(string provider, string id)
@@ -95,7 +95,7 @@ public static class ApiClient
     public static string GetThumbImageApiUrl(string provider, string id, string url, double position = -1,
         bool auto = false)
     {
-        return ComposeImageApiUrl(ThumbImageApi, provider, id, url, position: position, auto: auto);
+        return ComposeImageApiUrl(ThumbImageApi, provider, id, url, position, auto);
     }
 
     public static string GetBackdropImageApiUrl(string provider, string id)
@@ -106,7 +106,7 @@ public static class ApiClient
     public static string GetBackdropImageApiUrl(string provider, string id, string url, double position = -1,
         bool auto = false)
     {
-        return ComposeImageApiUrl(BackdropImageApi, provider, id, url, position: position, auto: auto);
+        return ComposeImageApiUrl(BackdropImageApi, provider, id, url, position, auto);
     }
 
 #if __EMBY__
