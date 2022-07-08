@@ -91,7 +91,7 @@ public class ActorProvider : BaseProvider, IRemoteMetadataProvider<Person, Perso
             {
                 Name = m.Name,
                 SearchProviderName = Name,
-                ImageUrl = m.Images.Length > 0
+                ImageUrl = m.Images?.Any() == true
                     ? ApiClient.GetPrimaryImageApiUrl(m.Provider, m.Id, m.Images[0], 0.5, true)
                     : string.Empty
             };
