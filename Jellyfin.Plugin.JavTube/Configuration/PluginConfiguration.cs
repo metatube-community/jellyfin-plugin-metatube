@@ -6,6 +6,12 @@ namespace Jellyfin.Plugin.JavTube.Configuration;
 
 public class PluginConfiguration : BasePluginConfiguration
 {
+    #region Image
+
+    public double PrimaryImageRatio { get; set; } = -1;
+
+    #endregion
+
     #region General
 
     public string Server { get; set; } = "https://api.javtube.internal";

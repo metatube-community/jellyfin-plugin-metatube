@@ -57,6 +57,16 @@
                 </div>
 
                 <div class="verticalSection">
+                    <h2 class="sectionTitle">Image</h2>
+
+                    <div class="inputContainer">
+                        <label class="inputLabel inputLabelUnfocused" for="txtPrimaryImageRatio">Primary image ratio:</label>
+                        <input id="txtPrimaryImageRatio" is="emby-input" name="txtPrimaryImageRatio" pattern="[0-9]*" step=".1" type="number"/>
+                        <div class="fieldDescription">Ratio for primary images, set a negtive value to use the default.</div>
+                    </div>
+                </div>
+
+                <div class="verticalSection">
                     <h2 class="sectionTitle">Template</h2>
 
                     <div class="inputContainer">
@@ -191,6 +201,7 @@
                 page.querySelector('#chkEnableCollection').checked = config.EnableCollection;
                 page.querySelector('#chkEnableRating').checked = config.EnableRating;
                 page.querySelector('#chkEnableTrailer').checked = config.EnableTrailer;
+                $('#txtPrimaryImageRatio', page).val(config.PrimaryImageRatio).change();
                 $('#txtNameTemplate', page).val(config.NameTemplate).change();
                 $('#txtTaglineTemplate', page).val(config.TaglineTemplate).change();
                 $('#selectTranslationMode', page).val(config.TranslationMode).change();
@@ -215,6 +226,7 @@
                 config.EnableCollection = $('#chkEnableCollection', form).prop('checked');
                 config.EnableRating = $('#chkEnableRating', form).prop('checked');
                 config.EnableTrailer = $('#chkEnableTrailer', form).prop('checked');
+                config.PrimaryImageRatio = $('#txtPrimaryImageRatio', form).val();
                 config.NameTemplate = $('#txtNameTemplate', form).val();
                 config.TaglineTemplate = $('#txtTaglineTemplate', form).val();
                 config.TranslationMode = $('#selectTranslationMode', form).val();
