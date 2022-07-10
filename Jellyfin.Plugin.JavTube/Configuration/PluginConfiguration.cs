@@ -1,5 +1,5 @@
+using Jellyfin.Plugin.JavTube.Helpers;
 using Jellyfin.Plugin.JavTube.Translation;
-using Jellyfin.Plugin.JavTube.Utilities;
 using MediaBrowser.Model.Plugins;
 
 namespace Jellyfin.Plugin.JavTube.Configuration;
