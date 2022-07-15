@@ -90,6 +90,7 @@ public class GenerateTrailersTask : IScheduledTask
 
         foreach (var (idx, item) in items.WithIndex())
         {
+            cancellationToken.ThrowIfCancellationRequested();
             progress?.Report((double)idx / items.Count * 100);
 
             try

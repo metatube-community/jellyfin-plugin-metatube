@@ -76,6 +76,7 @@ public class OrganizeGenresTask : IScheduledTask
 
         foreach (var (idx, item) in items.WithIndex())
         {
+            cancellationToken.ThrowIfCancellationRequested();
             progress?.Report((double)idx / items.Count * 100);
 
             var genres = item.Genres?.ToList() ?? new List<string>();
