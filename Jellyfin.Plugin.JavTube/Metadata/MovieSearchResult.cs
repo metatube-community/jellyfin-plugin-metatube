@@ -4,6 +4,9 @@ namespace Jellyfin.Plugin.JavTube.Metadata;
 
 public class MovieSearchResult : ProviderInfo
 {
+    [JsonPropertyName("actors")]
+    public string[] Actors { get; set; }
+
     [JsonPropertyName("cover_url")]
     public string CoverUrl { get; set; }
 
