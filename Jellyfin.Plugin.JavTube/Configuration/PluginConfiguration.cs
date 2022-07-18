@@ -24,6 +24,8 @@ public class PluginConfiguration : BasePluginConfiguration
 
     public bool EnableTrailer { get; set; } = false;
 
+    public bool EnableRealActorName { get; set; } = false;
+
     #endregion
 
     #region Template

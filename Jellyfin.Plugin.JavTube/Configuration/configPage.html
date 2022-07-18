@@ -57,6 +57,14 @@
                         </label>
                         <div class="fieldDescription checkboxFieldDescription">Generate online video trailers in strm format.</div>
                     </div>
+
+                    <div class="checkboxContainer checkboxContainer-withDescription">
+                        <label class="emby-checkbox-label">
+                            <input id="chkEnableRealActorName" is="emby-checkbox" name="chkEnableRealActorName" type="checkbox"/>
+                            <span>Enable real actor name</span>
+                        </label>
+                        <div class="fieldDescription checkboxFieldDescription">Search and replace with real actor names from AVWIKI.</div>
+                    </div>
                 </div>
 
                 <div class="verticalSection">
@@ -206,6 +214,7 @@
                 page.querySelector('#chkEnableCollection').checked = config.EnableCollection;
                 page.querySelector('#chkEnableRating').checked = config.EnableRating;
                 page.querySelector('#chkEnableTrailer').checked = config.EnableTrailer;
+                page.querySelector('#chkEnableRealActorName').checked = config.EnableRealActorName;
                 $('#txtPrimaryImageRatio', page).val(config.PrimaryImageRatio).change();
                 $('#txtNameTemplate', page).val(config.NameTemplate).change();
                 $('#txtTaglineTemplate', page).val(config.TaglineTemplate).change();
@@ -231,6 +240,7 @@
                 config.EnableCollection = $('#chkEnableCollection', form).prop('checked');
                 config.EnableRating = $('#chkEnableRating', form).prop('checked');
                 config.EnableTrailer = $('#chkEnableTrailer', form).prop('checked');
+                config.EnableRealActorName = $('#chkEnableRealActorName', form).prop('checked');
                 config.PrimaryImageRatio = $('#txtPrimaryImageRatio', form).val();
                 config.NameTemplate = $('#txtNameTemplate', form).val();
                 config.TaglineTemplate = $('#txtTaglineTemplate', form).val();

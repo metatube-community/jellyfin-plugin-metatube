@@ -19,8 +19,11 @@ namespace Jellyfin.Plugin.JavTube.Providers;
 
 public class MovieProvider : BaseProvider, IRemoteMetadataProvider<Movie, MovieInfo>, IHasOrder
 {
+    private const string AvWiki = "AVWIKI";
     private const string GFriends = "GFriends";
     private const string Rating = "JP-18+";
+
+    private static readonly string[] AvWikiSupportedProviderNames = { "DUGA", "FANZA", "Getchu", "MGS", "Pcolle" };
 
 #if __EMBY__
     public MovieProvider(ILogManager logManager) : base(logManager.CreateLogger<MovieProvider>())
@@ -47,6 +50,10 @@ public class MovieProvider : BaseProvider, IRemoteMetadataProvider<Movie, MovieI
 
         // Preserve original title.
         var originalTitle = m.Title;
+
+        // Convert to real actor names.
+        if (Configuration.EnableRealActorName)
+            await ConvertToRealActorNames(m, cancellationToken);
 
         // Substitute actors.
         if (Configuration.EnableActorSubstitution)
@@ -207,6 +214,25 @@ public class MovieProvider : BaseProvider, IRemoteMetadataProvider<Movie, MovieI
         }
 
         return string.Empty;
+    }
+
+    private async Task ConvertToRealActorNames(MovieSearchResult m, CancellationToken cancellationToken)
+    {
+        if (!AvWikiSupportedProviderNames.Contains(m.Provider, StringComparer.OrdinalIgnoreCase)) return;
+
+        try
+        {
+            var searchResults = await ApiClient.SearchMovieAsync(m.Number, AvWiki, cancellationToken);
+            foreach (var result in searchResults.Where(
+                         result => result.Actors?.Any() == true
+                                   && m.Number.Contains(result.Number, StringComparison.OrdinalIgnoreCase)
+                                   && Math.Abs(m.ReleaseDate.Subtract(result.ReleaseDate).TotalDays) < 360))
+                m.Actors = result.Actors;
+        }
+        catch (Exception e)
+        {
+            Logger.Error("Convert to real actor names error: {0} ({1})", m.Number, e.Message);
+        }
     }
 
     private async Task TranslateMovieInfo(Metadata.MovieInfo m, string language, CancellationToken cancellationToken)
