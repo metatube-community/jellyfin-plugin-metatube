@@ -18,13 +18,13 @@ public class PluginConfiguration : BasePluginConfiguration
 
     public string Token { get; set; } = string.Empty;
 
-    public bool EnableCollection { get; set; } = false;
+    public bool EnableCollections { get; set; } = false;
 
-    public bool EnableRating { get; set; } = true;
+    public bool EnableRatings { get; set; } = true;
 
-    public bool EnableTrailer { get; set; } = false;
+    public bool EnableTrailers { get; set; } = false;
 
-    public bool EnableRealActorName { get; set; } = false;
+    public bool EnableRealActorNames { get; set; } = false;
 
     #endregion
 

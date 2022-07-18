@@ -36,32 +36,32 @@
 
                     <div class="checkboxContainer checkboxContainer-withDescription">
                         <label class="emby-checkbox-label">
-                            <input id="chkEnableCollection" is="emby-checkbox" name="chkEnableCollection" type="checkbox"/>
-                            <span>Enable collection</span>
+                            <input id="chkEnableCollections" is="emby-checkbox" name="chkEnableCollections" type="checkbox"/>
+                            <span>Enable collections</span>
                         </label>
                         <div class="fieldDescription checkboxFieldDescription">Automatically create collections by series.</div>
                     </div>
 
                     <div class="checkboxContainer checkboxContainer-withDescription">
                         <label class="emby-checkbox-label">
-                            <input id="chkEnableRating" is="emby-checkbox" name="chkEnableRating" type="checkbox"/>
-                            <span>Enable rating</span>
+                            <input id="chkEnableRatings" is="emby-checkbox" name="chkEnableRatings" type="checkbox"/>
+                            <span>Enable ratings</span>
                         </label>
                         <div class="fieldDescription checkboxFieldDescription">Display community ratings from the original website.</div>
                     </div>
 
                     <div class="checkboxContainer checkboxContainer-withDescription">
                         <label class="emby-checkbox-label">
-                            <input id="chkEnableTrailer" is="emby-checkbox" name="chkEnableTrailer" type="checkbox"/>
-                            <span>Enable trailer</span>
+                            <input id="chkEnableTrailers" is="emby-checkbox" name="chkEnableTrailers" type="checkbox"/>
+                            <span>Enable trailers</span>
                         </label>
                         <div class="fieldDescription checkboxFieldDescription">Generate online video trailers in strm format.</div>
                     </div>
 
                     <div class="checkboxContainer checkboxContainer-withDescription">
                         <label class="emby-checkbox-label">
-                            <input id="chkEnableRealActorName" is="emby-checkbox" name="chkEnableRealActorName" type="checkbox"/>
-                            <span>Enable real actor name</span>
+                            <input id="chkEnableRealActorNames" is="emby-checkbox" name="chkEnableRealActorNames" type="checkbox"/>
+                            <span>Enable real actor names</span>
                         </label>
                         <div class="fieldDescription checkboxFieldDescription">Search and replace with real actor names from AVWIKI.</div>
                     </div>
@@ -211,10 +211,10 @@
             ApiClient.getPluginConfiguration(JavTubePluginConfig.pluginUniqueId).then(function (config) {
                 $('#txtServer', page).val(config.Server).change();
                 $('#txtToken', page).val(config.Token).change();
-                page.querySelector('#chkEnableCollection').checked = config.EnableCollection;
-                page.querySelector('#chkEnableRating').checked = config.EnableRating;
-                page.querySelector('#chkEnableTrailer').checked = config.EnableTrailer;
-                page.querySelector('#chkEnableRealActorName').checked = config.EnableRealActorName;
+                page.querySelector('#chkEnableCollections').checked = config.EnableCollections;
+                page.querySelector('#chkEnableRatings').checked = config.EnableRatings;
+                page.querySelector('#chkEnableTrailers').checked = config.EnableTrailers;
+                page.querySelector('#chkEnableRealActorNames').checked = config.EnableRealActorNames;
                 $('#txtPrimaryImageRatio', page).val(config.PrimaryImageRatio).change();
                 $('#txtNameTemplate', page).val(config.NameTemplate).change();
                 $('#txtTaglineTemplate', page).val(config.TaglineTemplate).change();
@@ -237,10 +237,10 @@
             ApiClient.getPluginConfiguration(JavTubePluginConfig.pluginUniqueId).then(function (config) {
                 config.Server = $('#txtServer', form).val();
                 config.Token = $('#txtToken', form).val();
-                config.EnableCollection = $('#chkEnableCollection', form).prop('checked');
-                config.EnableRating = $('#chkEnableRating', form).prop('checked');
-                config.EnableTrailer = $('#chkEnableTrailer', form).prop('checked');
-                config.EnableRealActorName = $('#chkEnableRealActorName', form).prop('checked');
+                config.EnableCollections = $('#chkEnableCollections', form).prop('checked');
+                config.EnableRatings = $('#chkEnableRatings', form).prop('checked');
+                config.EnableTrailers = $('#chkEnableTrailers', form).prop('checked');
+                config.EnableRealActorNames = $('#chkEnableRealActorNames', form).prop('checked');
                 config.PrimaryImageRatio = $('#txtPrimaryImageRatio', form).val();
                 config.NameTemplate = $('#txtNameTemplate', form).val();
                 config.TaglineTemplate = $('#txtTaglineTemplate', form).val();

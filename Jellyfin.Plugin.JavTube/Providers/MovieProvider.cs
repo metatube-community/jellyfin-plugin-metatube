@@ -52,7 +52,7 @@ public class MovieProvider : BaseProvider, IRemoteMetadataProvider<Movie, MovieI
         var originalTitle = m.Title;
 
         // Convert to real actor names.
-        if (Configuration.EnableRealActorName)
+        if (Configuration.EnableRealActorNames)
             await ConvertToRealActorNames(m, cancellationToken);
 
         // Substitute actors.
@@ -110,11 +110,11 @@ public class MovieProvider : BaseProvider, IRemoteMetadataProvider<Movie, MovieI
             : m.PreviewVideoHlsUrl);
 
         // Set community rating.
-        if (Configuration.EnableRating)
+        if (Configuration.EnableRatings)
             result.Item.CommunityRating = m.Score > 0 ? (float)Math.Round(m.Score * 2, 1) : null;
 
         // Add collection.
-        if (Configuration.EnableCollection && !string.IsNullOrWhiteSpace(m.Series))
+        if (Configuration.EnableCollections && !string.IsNullOrWhiteSpace(m.Series))
             result.Item.AddCollection(m.Series);
 
         // Add studio.
