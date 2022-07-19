@@ -205,7 +205,7 @@ public class MovieProvider : BaseProvider, IRemoteMetadataProvider<Movie, MovieI
         {
             // Use GFriends as actor image provider.
             foreach (var actor in (await ApiClient.SearchActorAsync(name, GFriends, false, cancellationToken))
-                     .Where(actor => actor.Images.Any()))
+                     .Where(actor => actor.Images?.Any() == true))
                 return actor.Images.First();
         }
         catch (Exception e)
