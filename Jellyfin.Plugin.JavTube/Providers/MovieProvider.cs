@@ -101,7 +101,7 @@ public class MovieProvider : BaseProvider, IRemoteMetadataProvider<Movie, MovieI
             HasMetadata = true
         };
 
-        // Set pid.
+        // Set provider id.
         result.Item.SetPid(Name, m.Provider, m.Id, pid.Position);
 
         // Set trailer url.
