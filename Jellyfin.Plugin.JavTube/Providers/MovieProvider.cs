@@ -222,12 +222,21 @@ public class MovieProvider : BaseProvider, IRemoteMetadataProvider<Movie, MovieI
 
         try
         {
-            var searchResults = await ApiClient.SearchMovieAsync(m.Number, AvWiki, cancellationToken);
-            foreach (var result in searchResults.Where(
-                         result => result.Actors?.Any() == true
-                                   && m.Number.Contains(result.Number, StringComparison.OrdinalIgnoreCase)
-                                   && Math.Abs(m.ReleaseDate.Subtract(result.ReleaseDate).TotalDays) < 360))
-                m.Actors = result.Actors;
+            var searchResults = await ApiClient.SearchMovieAsync(m.Id, AvWiki, cancellationToken);
+            if (!searchResults.Any())
+            {
+                Logger.Warn("Movie not found on AVWIKI: {0}", m.Id);
+            }
+            else if (searchResults.Count > 1)
+            {
+                // Ignore multiple results to avoid ambiguity.
+                Logger.Warn("Multiple movies found on AVWIKI: {0}", m.Id);
+            }
+            else
+            {
+                var firstResult = searchResults.First();
+                if (firstResult.Actors?.Any() == true) m.Actors = firstResult.Actors;
+            }
         }
         catch (Exception e)
         {
