@@ -39,7 +39,7 @@ public class OrganizeGenresTask : IScheduledTask
 
     public string Name => "Organize Genres";
 
-    public string Description => $"Organize metadata genres provided by {Plugin.Instance.Name} in library.";
+    public string Description => $"Organizes metadata genres provided by {Plugin.Instance.Name} in library.";
 
     public string Category => Plugin.Instance.Name;
 

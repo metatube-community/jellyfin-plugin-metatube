@@ -49,7 +49,7 @@ public class GenerateTrailersTask : IScheduledTask
 
     public string Name => "Generate Trailers";
 
-    public string Description => $"Generate video trailers provided by {Plugin.Instance.Name} in library.";
+    public string Description => $"Generates video trailers provided by {Plugin.Instance.Name} in library.";
 
     public string Category => Plugin.Instance.Name;
 

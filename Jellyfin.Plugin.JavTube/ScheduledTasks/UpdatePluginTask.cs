@@ -37,7 +37,7 @@ public class UpdatePluginTask : IScheduledTask
 
     public string Name => "Update Plugin";
 
-    public string Description => $"Update {Plugin.Instance.Name} plugin to latest version.";
+    public string Description => $"Updates {Plugin.Instance.Name} plugin to latest version.";
 
     public string Category => Plugin.Instance.Name;
 
