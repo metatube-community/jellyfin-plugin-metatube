@@ -99,7 +99,7 @@ public class OrganizeGenresTask : IScheduledTask
             var orderedGenres =
                 (Plugin.Instance.Configuration.EnableGenreSubstitution
                     // Substitute genres.
-                    ? genres.Substitute(Plugin.Instance.Configuration.GetGenreSubstitutionTable())
+                    ? Plugin.Instance.Configuration.GetGenreSubstitutionTable().Substitute(genres)
                     : genres).Distinct().OrderByString(genre => genre).ToList();
 
             // Skip updating item if equal.

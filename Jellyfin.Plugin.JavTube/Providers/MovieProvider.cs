@@ -57,11 +57,11 @@ public class MovieProvider : BaseProvider, IRemoteMetadataProvider<Movie, MovieI
 
         // Substitute actors.
         if (Configuration.EnableActorSubstitution)
-            m.Actors = m.Actors.Substitute(Configuration.GetActorSubstitutionTable()).ToArray();
+            m.Actors = Configuration.GetActorSubstitutionTable().Substitute(m.Actors).ToArray();
 
         // Substitute genres.
         if (Configuration.EnableGenreSubstitution)
-            m.Genres = m.Genres.Substitute(Configuration.GetGenreSubstitutionTable()).ToArray();
+            m.Genres = Configuration.GetGenreSubstitutionTable().Substitute(m.Genres).ToArray();
 
         // Translate movie info.
         if (Configuration.TranslationMode != TranslationMode.Disabled)

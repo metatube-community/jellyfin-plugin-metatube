@@ -36,4 +36,24 @@ public class SubstitutionTable : Dictionary<string, string>
                 table.Where(kvp => !string.IsNullOrWhiteSpace(kvp.Key))
                     .Select(kvp => $"{kvp.Key?.Trim()}={kvp.Value?.Trim()}"));
     }
+
+    public IEnumerable<string> Substitute(IEnumerable<string> source)
+    {
+        var table = this;
+
+        if (table.Any() != true)
+            return source;
+
+        var target = new List<string>();
+
+        foreach (var item in source ?? Enumerable.Empty<string>())
+        {
+            if (!table.TryGetValue(item, out var value))
+                target.Add(item);
+            else if (!string.IsNullOrWhiteSpace(value))
+                target.Add(value);
+        }
+
+        return target;
+    }
 }
