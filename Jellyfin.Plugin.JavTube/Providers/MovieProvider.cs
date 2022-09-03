@@ -134,7 +134,7 @@ public class MovieProvider : BaseProvider, IRemoteMetadataProvider<Movie, MovieI
             result.Item.AddTag(m.Label);
 
         // Add director.
-        if (!string.IsNullOrWhiteSpace(m.Director))
+        if (Configuration.EnableDirectors && !string.IsNullOrWhiteSpace(m.Director))
             result.AddPerson(new PersonInfo
             {
                 Name = m.Director,

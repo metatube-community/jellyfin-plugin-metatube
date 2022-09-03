@@ -20,6 +20,8 @@ public class PluginConfiguration : BasePluginConfiguration
 
     public bool EnableCollections { get; set; } = false;
 
+    public bool EnableDirectors { get; set; } = true;
+
     public bool EnableRatings { get; set; } = true;
 
     public bool EnableTrailers { get; set; } = false;
