@@ -55,6 +55,10 @@ public class MovieProvider : BaseProvider, IRemoteMetadataProvider<Movie, MovieI
         if (Configuration.EnableRealActorNames)
             await ConvertToRealActorNames(m, cancellationToken);
 
+        // Substitute title.
+        if (Configuration.EnableTitleSubstitution)
+            m.Title = Configuration.GetTitleSubstitutionTable().Substitute(m.Title);
+
         // Substitute actors.
         if (Configuration.EnableActorSubstitution)
             m.Actors = Configuration.GetActorSubstitutionTable().Substitute(m.Actors).ToArray();

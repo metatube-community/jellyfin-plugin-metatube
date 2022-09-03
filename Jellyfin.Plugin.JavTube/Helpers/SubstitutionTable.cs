@@ -1,3 +1,5 @@
+using System.Text;
+
 namespace Jellyfin.Plugin.JavTube.Helpers;
 
 public class SubstitutionTable : Dictionary<string, string>
@@ -35,6 +37,15 @@ public class SubstitutionTable : Dictionary<string, string>
             : string.Join('\n',
                 table.Where(kvp => !string.IsNullOrWhiteSpace(kvp.Key))
                     .Select(kvp => $"{kvp.Key?.Trim()}={kvp.Value?.Trim()}"));
+    }
+
+    public string Substitute(string source)
+    {
+        var table = this;
+
+        return table.Any() != true
+            ? source
+            : table.Aggregate(new StringBuilder(source), (sb, kvp) => sb.Replace(kvp.Key, kvp.Value)).ToString();
     }
 
     public IEnumerable<string> Substitute(IEnumerable<string> source)

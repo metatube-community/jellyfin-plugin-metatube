@@ -54,6 +54,21 @@ public class PluginConfiguration : BasePluginConfiguration
 
     #region Substitution
 
+    public bool EnableTitleSubstitution { get; set; } = false;
+
+    public string TitleRawSubstitutionTable
+    {
+        get => _titleSubstitutionTable?.ToString();
+        set => _titleSubstitutionTable = SubstitutionTable.Parse(value);
+    }
+
+    public SubstitutionTable GetTitleSubstitutionTable()
+    {
+        return _titleSubstitutionTable;
+    }
+
+    private SubstitutionTable _titleSubstitutionTable;
+
     public bool EnableActorSubstitution { get; set; } = false;
 
     public string ActorRawSubstitutionTable

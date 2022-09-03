@@ -152,6 +152,20 @@
 
                     <div class="checkboxContainer checkboxContainer-withDescription">
                         <label class="emby-checkbox-label">
+                            <input id="chkEnableTitleSubstitution" is="emby-checkbox" name="chkEnableTitleSubstitution" type="checkbox"/>
+                            <span>Enable title substitution</span>
+                        </label>
+                        <div class="fieldDescription checkboxFieldDescription"></div>
+                    </div>
+
+                    <div class="inputContainer">
+                        <label class="inputLabel inputLabel-float inputLabelUnfocused" for="txtTitleRawSubstitutionTable">Title substitution table:</label>
+                        <textarea class="emby-input" id="txtTitleRawSubstitutionTable" is="emby-input" name="txtTitleRawSubstitutionTable" rows="5"></textarea>
+                        <div class="fieldDescription">One record per line, separated by equal signs. Leave the target substring blank to delete the source substring.</div>
+                    </div>
+
+                    <div class="checkboxContainer checkboxContainer-withDescription">
+                        <label class="emby-checkbox-label">
                             <input id="chkEnableActorSubstitution" is="emby-checkbox" name="chkEnableActorSubstitution" type="checkbox"/>
                             <span>Enable actor substitution</span>
                         </label>
@@ -232,6 +246,8 @@
                 $('#txtBaiduAppId', page).val(config.BaiduAppId).change();
                 $('#txtBaiduAppKey', page).val(config.BaiduAppKey).change();
                 $('#txtGoogleApiKey', page).val(config.GoogleApiKey).change();
+                page.querySelector('#chkEnableTitleSubstitution').checked = config.EnableTitleSubstitution;
+                $('#txtTitleRawSubstitutionTable', page).val(config.TitleRawSubstitutionTable).change();
                 page.querySelector('#chkEnableActorSubstitution').checked = config.EnableActorSubstitution;
                 $('#txtActorRawSubstitutionTable', page).val(config.ActorRawSubstitutionTable).change();
                 page.querySelector('#chkEnableGenreSubstitution').checked = config.EnableGenreSubstitution;
@@ -259,6 +275,8 @@
                 config.BaiduAppId = $('#txtBaiduAppId', form).val();
                 config.BaiduAppKey = $('#txtBaiduAppKey', form).val();
                 config.GoogleApiKey = $('#txtGoogleApiKey', form).val();
+                config.EnableTitleSubstitution = $('#chkEnableTitleSubstitution', form).prop('checked');
+                config.TitleRawSubstitutionTable = $('#txtTitleRawSubstitutionTable', form).val();
                 config.EnableActorSubstitution = $('#chkEnableActorSubstitution', form).prop('checked');
                 config.ActorRawSubstitutionTable = $('#txtActorRawSubstitutionTable', form).val();
                 config.EnableGenreSubstitution = $('#chkEnableGenreSubstitution', form).prop('checked');
