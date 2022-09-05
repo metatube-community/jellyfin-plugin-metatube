@@ -35,14 +35,15 @@ public static class ApiClient
     }
 
     private static string ComposeImageApiUrl(string path, string provider, string id, string url = default,
-        double ratio = -1, double position = -1, bool auto = false)
+        double ratio = -1, double position = -1, bool auto = false, string badge = default)
     {
         return ComposeUrl(Path.Combine(path, provider, id), new NameValueCollection
         {
             { "url", url },
             { "ratio", ratio.ToString("R") },
             { "pos", position.ToString("R") },
-            { "auto", auto.ToString() }
+            { "auto", auto.ToString() },
+            { "badge", badge }
         });
     }
 
@@ -77,17 +78,17 @@ public static class ApiClient
         });
     }
 
-    public static string GetPrimaryImageApiUrl(string provider, string id, double position = -1)
+    public static string GetPrimaryImageApiUrl(string provider, string id, double position = -1, string badge = default)
     {
         return ComposeImageApiUrl(PrimaryImageApi, provider, id,
-            ratio: Plugin.Instance.Configuration.PrimaryImageRatio, position: position);
+            ratio: Plugin.Instance.Configuration.PrimaryImageRatio, position: position, badge: badge);
     }
 
     public static string GetPrimaryImageApiUrl(string provider, string id, string url, double position = -1,
-        bool auto = false)
+        bool auto = false, string badge = default)
     {
         return ComposeImageApiUrl(PrimaryImageApi, provider, id, url,
-            Plugin.Instance.Configuration.PrimaryImageRatio, position, auto);
+            Plugin.Instance.Configuration.PrimaryImageRatio, position, auto, badge);
     }
 
     public static string GetThumbImageApiUrl(string provider, string id)

@@ -76,6 +76,24 @@
                 </div>
 
                 <div class="verticalSection">
+                    <h2 class="sectionTitle">Badge</h2>
+
+                    <div class="checkboxContainer checkboxContainer-withDescription">
+                        <label class="emby-checkbox-label">
+                            <input id="chkEnableBadges" is="emby-checkbox" name="chkEnableBadges" type="checkbox"/>
+                            <span>Enable badges</span>
+                        </label>
+                        <div class="fieldDescription checkboxFieldDescription">Add Chinese subtitle badges to primary images.</div>
+                    </div>
+
+                    <div class="inputContainer">
+                        <label class="inputLabel inputLabelUnfocused" for="txtBadgeUrl">Badge url:</label>
+                        <input id="txtBadgeUrl" is="emby-input" name="txtBadgeUrl" type="text"/>
+                        <div class="fieldDescription">Custom badge url, PNG format is recommended. (default: zimu.png)</div>
+                    </div>
+                </div>
+
+                <div class="verticalSection">
                     <h2 class="sectionTitle">Image</h2>
 
                     <div class="inputContainer">
@@ -238,6 +256,8 @@
                 page.querySelector('#chkEnableRatings').checked = config.EnableRatings;
                 page.querySelector('#chkEnableTrailers').checked = config.EnableTrailers;
                 page.querySelector('#chkEnableRealActorNames').checked = config.EnableRealActorNames;
+                page.querySelector('#chkEnableBadges').checked = config.EnableBadges;
+                $('#txtBadgeUrl', page).val(config.BadgeUrl).change();
                 $('#txtPrimaryImageRatio', page).val(config.PrimaryImageRatio).change();
                 $('#txtNameTemplate', page).val(config.NameTemplate).change();
                 $('#txtTaglineTemplate', page).val(config.TaglineTemplate).change();
@@ -267,6 +287,8 @@
                 config.EnableRatings = $('#chkEnableRatings', form).prop('checked');
                 config.EnableTrailers = $('#chkEnableTrailers', form).prop('checked');
                 config.EnableRealActorNames = $('#chkEnableRealActorNames', form).prop('checked');
+                config.EnableBadges = $('#chkEnableBadges', form).prop('checked');
+                config.BadgeUrl = $('#txtBadgeUrl', form).val();
                 config.PrimaryImageRatio = $('#txtPrimaryImageRatio', form).val();
                 config.NameTemplate = $('#txtNameTemplate', form).val();
                 config.TaglineTemplate = $('#txtTaglineTemplate', form).val();

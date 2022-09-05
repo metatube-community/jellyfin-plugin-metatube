@@ -83,12 +83,26 @@ public class OrganizeGenresTask : IScheduledTask
 
             try
             {
-                // Add or Remove `ChineseSubtitle` genre.
-                if (HasEmbeddedChineseSubtitle(item.FileNameWithoutExtension) ||
-                    HasExternalChineseSubtitle(item.Path))
-                    genres.Add(ChineseSubtitle);
-                else
-                    genres.RemoveAll(s => s.Equals(ChineseSubtitle));
+                switch (HasEmbeddedChineseSubtitle(item.FileNameWithoutExtension) ||
+                        HasExternalChineseSubtitle(item.Path))
+                {
+                    // Add `ChineseSubtitle` genre.
+                    case true when !genres.Contains(ChineseSubtitle):
+                    {
+                        genres.Add(ChineseSubtitle);
+                        if (Plugin.Instance.Configuration.EnableBadges)
+                            await SetPrimaryImage(item, Plugin.Instance.Configuration.BadgeUrl, cancellationToken);
+                        break;
+                    }
+                    // Remove `ChineseSubtitle` genre.
+                    case false when genres.Contains(ChineseSubtitle):
+                    {
+                        genres.RemoveAll(s => s.Equals(ChineseSubtitle));
+                        if (Plugin.Instance.Configuration.EnableBadges)
+                            await SetPrimaryImage(item, string.Empty, cancellationToken);
+                        break;
+                    }
+                }
             }
             catch (Exception e)
             {
@@ -159,6 +173,22 @@ public class OrganizeGenresTask : IScheduledTask
         return files.Any(name => r.IsMatch(name) &&
                                  r.Replace(name, string.Empty)
                                      .Equals(basename, StringComparison.OrdinalIgnoreCase));
+    }
+
+    private static async Task SetPrimaryImage(BaseItem item, string badge, CancellationToken cancellationToken)
+    {
+        var pid = item.GetPid(Plugin.Instance.Name);
+        if (string.IsNullOrWhiteSpace(pid.Id) || string.IsNullOrWhiteSpace(pid.Provider))
+            return;
+
+        var m = await ApiClient.GetMovieInfoAsync(pid.Provider, pid.Id, cancellationToken);
+        // Set first primary image.
+        item.SetImage(new ItemImageInfo
+        {
+            Path = ApiClient.GetPrimaryImageApiUrl(m.Provider, m.Id, pid.Position ?? -1, badge),
+            Type = ImageType.Primary,
+            DateModified = DateTimeOffset.UtcNow
+        }, 0);
     }
 
     #endregion

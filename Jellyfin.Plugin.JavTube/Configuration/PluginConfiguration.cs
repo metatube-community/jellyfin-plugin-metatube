@@ -12,6 +12,14 @@ public class PluginConfiguration : BasePluginConfiguration
 
     #endregion
 
+    #region Badge
+
+    public bool EnableBadges { get; set; } = false;
+
+    public string BadgeUrl { get; set; } = "zimu.png";
+
+    #endregion
+
     #region General
 
     public string Server { get; set; } = "https://api.javtube.internal";
