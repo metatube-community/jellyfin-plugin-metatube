@@ -186,8 +186,7 @@ public class OrganizeMetadataTask : IScheduledTask
         item.SetImage(new ItemImageInfo
         {
             Path = ApiClient.GetPrimaryImageApiUrl(m.Provider, m.Id, pid.Position ?? -1, badge),
-            Type = ImageType.Primary,
-            DateModified = DateTimeOffset.UtcNow
+            Type = ImageType.Primary
         }, 0);
     }
 
