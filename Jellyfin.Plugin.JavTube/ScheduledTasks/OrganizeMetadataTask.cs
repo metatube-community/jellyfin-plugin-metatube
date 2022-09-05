@@ -16,30 +16,30 @@ using Jellyfin.Data.Enums;
 
 namespace Jellyfin.Plugin.JavTube.ScheduledTasks;
 
-public class OrganizeGenresTask : IScheduledTask
+public class OrganizeMetadataTask : IScheduledTask
 {
     private readonly ILibraryManager _libraryManager;
     private readonly ILogger _logger;
 
 #if __EMBY__
-    public OrganizeGenresTask(ILogManager logManager, ILibraryManager libraryManager)
+    public OrganizeMetadataTask(ILogManager logManager, ILibraryManager libraryManager)
     {
-        _logger = logManager.CreateLogger<OrganizeGenresTask>();
+        _logger = logManager.CreateLogger<OrganizeMetadataTask>();
         _libraryManager = libraryManager;
     }
 #else
-    public OrganizeGenresTask(ILogger<OrganizeGenresTask> logger, ILibraryManager libraryManager)
+    public OrganizeMetadataTask(ILogger<OrganizeMetadataTask> logger, ILibraryManager libraryManager)
     {
         _logger = logger;
         _libraryManager = libraryManager;
     }
 #endif
 
-    public string Key => $"{Plugin.Instance.Name}OrganizeGenres";
+    public string Key => $"{Plugin.Instance.Name}OrganizeMetadata";
 
-    public string Name => "Organize Genres";
+    public string Name => "Organize Metadata";
 
-    public string Description => $"Organizes metadata genres provided by {Plugin.Instance.Name} in library.";
+    public string Description => $"Organizes video metadata provided by {Plugin.Instance.Name} in library.";
 
     public string Category => Plugin.Instance.Name;
 
@@ -123,7 +123,7 @@ public class OrganizeGenresTask : IScheduledTask
 
             item.Genres = orderedGenres.ToArray();
 
-            _logger.Info("Organize genres for video: {0}", item.Name);
+            _logger.Info("Organize metadata for video: {0}", item.Name);
 
 #if __EMBY__
             _libraryManager.UpdateItem(item, item, ItemUpdateType.MetadataEdit, null);
