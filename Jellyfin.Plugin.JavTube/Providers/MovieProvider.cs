@@ -179,6 +179,16 @@ public class MovieProvider : BaseProvider, IRemoteMetadataProvider<Movie, MovieI
                 pid.Update != true, cancellationToken));
         }
 
+        if (Configuration.EnableMovieProviderFilter)
+        {
+            var filter = Configuration.GetMovieProviderFilter();
+            // Filter out mismatched results.
+            searchResults.RemoveAll(m => !filter.Contains(m.Provider, StringComparer.OrdinalIgnoreCase));
+            // Reorder results by stable sort.
+            searchResults = searchResults
+                .OrderBy(m => filter.FindIndex(s => s.Equals(m.Provider, StringComparison.OrdinalIgnoreCase))).ToList();
+        }
+
         var results = new List<RemoteSearchResult>();
         if (!searchResults.Any())
         {

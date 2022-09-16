@@ -104,6 +104,24 @@
                 </div>
 
                 <div class="verticalSection">
+                    <h2 class="sectionTitle">Provider</h2>
+
+                    <div class="checkboxContainer checkboxContainer-withDescription">
+                        <label class="emby-checkbox-label">
+                            <input id="chkEnableMovieProviderFilter" is="emby-checkbox" name="chkEnableMovieProviderFilter" type="checkbox"/>
+                            <span>Enable movie provider filter</span>
+                        </label>
+                        <div class="fieldDescription checkboxFieldDescription">Filter and reorder search results from movie providers.</div>
+                    </div>
+
+                    <div class="inputContainer">
+                        <label class="inputLabel inputLabelUnfocused" for="txtRawMovieProviderFilter">Movie provider filter:</label>
+                        <input id="txtRawMovieProviderFilter" is="emby-input" name="txtRawMovieProviderFilter" type="text"/>
+                        <div class="fieldDescription">Priority descends from left to right, separated by commas.</div>
+                    </div>
+                </div>
+
+                <div class="verticalSection">
                     <h2 class="sectionTitle">Template</h2>
 
                     <div class="inputContainer">
@@ -259,6 +277,8 @@
                 page.querySelector('#chkEnableBadges').checked = config.EnableBadges;
                 $('#txtBadgeUrl', page).val(config.BadgeUrl).change();
                 $('#txtPrimaryImageRatio', page).val(config.PrimaryImageRatio).change();
+                page.querySelector('#chkEnableMovieProviderFilter').checked = config.EnableMovieProviderFilter;
+                $('#txtRawMovieProviderFilter', page).val(config.RawMovieProviderFilter).change();
                 $('#txtNameTemplate', page).val(config.NameTemplate).change();
                 $('#txtTaglineTemplate', page).val(config.TaglineTemplate).change();
                 $('#selectTranslationMode', page).val(config.TranslationMode).change();
@@ -290,6 +310,8 @@
                 config.EnableBadges = $('#chkEnableBadges', form).prop('checked');
                 config.BadgeUrl = $('#txtBadgeUrl', form).val();
                 config.PrimaryImageRatio = $('#txtPrimaryImageRatio', form).val();
+                config.EnableMovieProviderFilter = $('#chkEnableMovieProviderFilter', form).prop('checked');
+                config.RawMovieProviderFilter = $('#txtRawMovieProviderFilter', form).val();
                 config.NameTemplate = $('#txtNameTemplate', form).val();
                 config.TaglineTemplate = $('#txtTaglineTemplate', form).val();
                 config.TranslationMode = $('#selectTranslationMode', form).val();

@@ -60,6 +60,26 @@ public class PluginConfiguration : BasePluginConfiguration
 
     #endregion
 
+    #region Provider
+
+    public bool EnableMovieProviderFilter { get; set; } = false;
+
+    public string RawMovieProviderFilter
+    {
+        get => _movieProviderFilter?.Any() == true ? string.Join(',', _movieProviderFilter) : string.Empty;
+        set => _movieProviderFilter = value?.Split(',').Select(s => s.Trim()).Where(s => s.Any())
+            .Distinct(StringComparer.OrdinalIgnoreCase).ToList();
+    }
+
+    public List<string> GetMovieProviderFilter()
+    {
+        return _movieProviderFilter;
+    }
+
+    private List<string> _movieProviderFilter;
+
+    #endregion
+
     #region Substitution
 
     public bool EnableTitleSubstitution { get; set; } = false;
