@@ -179,6 +179,13 @@ public class MovieProvider : BaseProvider, IRemoteMetadataProvider<Movie, MovieI
                 pid.Update != true, cancellationToken));
         }
 
+        var results = new List<RemoteSearchResult>();
+        if (!searchResults.Any())
+        {
+            Logger.Warn("Movie not found: {0}", pid.Id);
+            return results;
+        }
+
         if (Configuration.EnableMovieProviderFilter)
         {
             var filter = Configuration.GetMovieProviderFilter();
@@ -187,13 +194,6 @@ public class MovieProvider : BaseProvider, IRemoteMetadataProvider<Movie, MovieI
             // Reorder results by stable sort.
             searchResults = searchResults
                 .OrderBy(m => filter.FindIndex(s => s.Equals(m.Provider, StringComparison.OrdinalIgnoreCase))).ToList();
-        }
-
-        var results = new List<RemoteSearchResult>();
-        if (!searchResults.Any())
-        {
-            Logger.Warn("Movie not found: {0}", pid.Id);
-            return results;
         }
 
         foreach (var m in searchResults)
