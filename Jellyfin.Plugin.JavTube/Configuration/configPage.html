@@ -25,13 +25,13 @@
                         <label class="inputLabel inputLabelUnfocused" for="txtServer">Server:</label>
                         <input id="txtServer" is="emby-input" name="txtServer" pattern="^https?://.+$" required
                                type="text"/>
-                        <div class="fieldDescription">HTTP url of JavTube Server.</div>
+                        <div class="fieldDescription">Full url of the JavTube Server, HTTPS protocol is recommended.</div>
                     </div>
 
                     <div class="inputContainer">
                         <label class="inputLabel inputLabelUnfocused" for="txtToken">Token:</label>
                         <input id="txtToken" is="emby-input" name="txtToken" type="text"/>
-                        <div class="fieldDescription">Access token of JavTube Server.</div>
+                        <div class="fieldDescription">Access token for the JavTube Server, or blank if no token is set by the backend.</div>
                     </div>
 
                     <div class="checkboxContainer checkboxContainer-withDescription">
@@ -99,7 +99,7 @@
                     <div class="inputContainer">
                         <label class="inputLabel inputLabelUnfocused" for="txtPrimaryImageRatio">Primary image ratio:</label>
                         <input id="txtPrimaryImageRatio" is="emby-input" name="txtPrimaryImageRatio" step="any" type="number"/>
-                        <div class="fieldDescription">Ratio for primary images, set a negtive value to use the default.</div>
+                        <div class="fieldDescription">Aspect ratio for primary images, set a negtive value to use the default.</div>
                     </div>
                 </div>
 
