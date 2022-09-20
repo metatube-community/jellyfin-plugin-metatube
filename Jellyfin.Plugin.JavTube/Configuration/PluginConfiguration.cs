@@ -10,6 +10,8 @@ public class PluginConfiguration : BasePluginConfiguration
 
     public double PrimaryImageRatio { get; set; } = -1;
 
+    public int DefaultImageQuality { get; set; } = 90;
+
     #endregion
 
     #region Badge

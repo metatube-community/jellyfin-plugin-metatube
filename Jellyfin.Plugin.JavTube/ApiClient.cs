@@ -43,7 +43,8 @@ public static class ApiClient
             { "ratio", ratio.ToString("R") },
             { "pos", position.ToString("R") },
             { "auto", auto.ToString() },
-            { "badge", badge }
+            { "badge", badge },
+            { "quality", Plugin.Instance.Configuration.DefaultImageQuality.ToString() }
         });
     }
 

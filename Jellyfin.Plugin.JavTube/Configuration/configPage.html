@@ -101,6 +101,12 @@
                         <input id="txtPrimaryImageRatio" is="emby-input" name="txtPrimaryImageRatio" step="any" type="number"/>
                         <div class="fieldDescription">Aspect ratio for primary images, set a negtive value to use the default.</div>
                     </div>
+
+                    <div class="inputContainer">
+                        <label class="inputLabel inputLabelUnfocused" for="txtDefaultImageQuality">Default image quality:</label>
+                        <input id="txtDefaultImageQuality" is="emby-input" name="txtDefaultImageQuality" step="1" type="number"/>
+                        <div class="fieldDescription">Default compress quality for JEPG images, the default value is 90.</div>
+                    </div>
                 </div>
 
                 <div class="verticalSection">
@@ -277,6 +283,7 @@
                 page.querySelector('#chkEnableBadges').checked = config.EnableBadges;
                 $('#txtBadgeUrl', page).val(config.BadgeUrl).change();
                 $('#txtPrimaryImageRatio', page).val(config.PrimaryImageRatio).change();
+                $('#txtDefaultImageQuality', page).val(config.DefaultImageQuality).change();
                 page.querySelector('#chkEnableMovieProviderFilter').checked = config.EnableMovieProviderFilter;
                 $('#txtRawMovieProviderFilter', page).val(config.RawMovieProviderFilter).change();
                 $('#txtNameTemplate', page).val(config.NameTemplate).change();
@@ -310,6 +317,7 @@
                 config.EnableBadges = $('#chkEnableBadges', form).prop('checked');
                 config.BadgeUrl = $('#txtBadgeUrl', form).val();
                 config.PrimaryImageRatio = $('#txtPrimaryImageRatio', form).val();
+                config.DefaultImageQuality = $('#txtDefaultImageQuality', form).val();
                 config.EnableMovieProviderFilter = $('#chkEnableMovieProviderFilter', form).prop('checked');
                 config.RawMovieProviderFilter = $('#txtRawMovieProviderFilter', form).val();
                 config.NameTemplate = $('#txtNameTemplate', form).val();
