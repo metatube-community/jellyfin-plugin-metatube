@@ -24,7 +24,7 @@ jobs:
       - name: Generate Version
         id: shell
         run: |
-          echo ::set-output name=version::$(date -u '+%Y.%-m%d.%-H%M.0')
+          echo "version=$(date -u '+%Y.%-m%d.%-H%M.0')" >> $GITHUB_OUTPUT
 
       - name: Build Plugins
         run: |
