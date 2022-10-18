@@ -186,6 +186,14 @@
                                 <div class="fieldDescription"></div>
                             </div>
                         </div>
+
+                        <div class="selectTranslationEngineDeepl">
+                            <div class="inputContainer">
+                                <label class="inputLabel inputLabelUnfocused" for="txtDeeplApiKey">Deepl api key:</label>
+                                <input id="txtDeeplApiKey" is="emby-input" name="txtDeeplApiKey" type="text"/>
+                                <div class="fieldDescription"></div>
+                            </div>
+                        </div>
                     </div>
                 </div>
 
@@ -293,6 +301,7 @@
                 $('#txtBaiduAppId', page).val(config.BaiduAppId).change();
                 $('#txtBaiduAppKey', page).val(config.BaiduAppKey).change();
                 $('#txtGoogleApiKey', page).val(config.GoogleApiKey).change();
+                $('#txtDeeplApiKey', page).val(config.DeeplApiKey).change();
                 page.querySelector('#chkEnableTitleSubstitution').checked = config.EnableTitleSubstitution;
                 $('#txtTitleRawSubstitutionTable', page).val(config.TitleRawSubstitutionTable).change();
                 page.querySelector('#chkEnableActorSubstitution').checked = config.EnableActorSubstitution;
@@ -327,6 +336,7 @@
                 config.BaiduAppId = $('#txtBaiduAppId', form).val();
                 config.BaiduAppKey = $('#txtBaiduAppKey', form).val();
                 config.GoogleApiKey = $('#txtGoogleApiKey', form).val();
+                config.DeeplApiKey = $('#txtDeeplApiKey', form).val();
                 config.EnableTitleSubstitution = $('#chkEnableTitleSubstitution', form).prop('checked');
                 config.TitleRawSubstitutionTable = $('#txtTitleRawSubstitutionTable', form).val();
                 config.EnableActorSubstitution = $('#chkEnableActorSubstitution', form).prop('checked');
