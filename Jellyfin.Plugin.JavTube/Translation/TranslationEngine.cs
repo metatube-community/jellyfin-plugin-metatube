@@ -4,6 +4,5 @@ public enum TranslationEngine
 {
     Baidu,
     Google,
-
     Deepl
 }
