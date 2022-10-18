@@ -35,11 +35,11 @@ public static class TranslationHelper
                     { "google-api-key", Configuration.GoogleApiKey }
                 });
                 break;
-            case TranslationEngine.Deepl:
+            case TranslationEngine.DeepL:
                 millisecondsDelay = 100;
                 nv.Add(new NameValueCollection
                 {
-                    { "deepl-api-key", Configuration.DeeplApiKey }
+                    { "DeepL-api-key", Configuration.DeepLApiKey }
                 });
                 break;
             default:

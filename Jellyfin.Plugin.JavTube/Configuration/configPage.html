@@ -162,7 +162,7 @@
                             <select class="emby-select-withcolor emby-select selectTranslationEngine" id="selectTranslationEngine" is="emby-select" name="selectTranslationEngine">
                                 <option value="Baidu">Baidu</option>
                                 <option value="Google">Google</option>
-                                <option value="Deepl">Deepl (Free)</option>
+                                <option value="DeepL">DeepL (Free)</option>
                             </select>
                         </div>
 
@@ -188,10 +188,10 @@
                             </div>
                         </div>
 
-                        <div class="selectTranslationEngineDeepl">
+                        <div class="selectTranslationEngineDeepL">
                             <div class="inputContainer">
-                                <label class="inputLabel inputLabelUnfocused" for="txtDeeplApiKey">Deepl api key:</label>
-                                <input id="txtDeeplApiKey" is="emby-input" name="txtDeeplApiKey" type="text"/>
+                                <label class="inputLabel inputLabelUnfocused" for="txtDeepLApiKey">DeepL api key:</label>
+                                <input id="txtDeepLApiKey" is="emby-input" name="txtDeepLApiKey" type="text"/>
                                 <div class="fieldDescription"></div>
                             </div>
                         </div>
@@ -269,19 +269,19 @@
             if (this.value === "Baidu") {
                 $('.selectTranslationEngineBaidu').css('display', 'inherit');
                 $('.selectTranslationEngineGoogle').css('display', 'none');
-                $('.selectTranslationEngineDeepl').css('display', 'none');
+                $('.selectTranslationEngineDeepL').css('display', 'none');
             } else if (this.value === "Google") {
                 $('.selectTranslationEngineBaidu').css('display', 'none');
                 $('.selectTranslationEngineGoogle').css('display', 'inherit');
-                $('.selectTranslationEngineDeepl').css('display', 'none');
-            } else if (this.value === "Deepl") {
+                $('.selectTranslationEngineDeepL').css('display', 'none');
+            } else if (this.value === "DeepL") {
                 $('.selectTranslationEngineBaidu').css('display', 'none');
                 $('.selectTranslationEngineGoogle').css('display', 'none');
-                $('.selectTranslationEngineDeepl').css('display', 'inherit');
+                $('.selectTranslationEngineDeepL').css('display', 'inherit');
             } else {
                 $('.selectTranslationEngineBaidu').css('display', 'none');
                 $('.selectTranslationEngineGoogle').css('display', 'none');
-                $('.selectTranslationEngineDeepl').css('display', 'none');
+                $('.selectTranslationEngineDeepL').css('display', 'none');
             }
         });
 
@@ -309,7 +309,7 @@
                 $('#txtBaiduAppId', page).val(config.BaiduAppId).change();
                 $('#txtBaiduAppKey', page).val(config.BaiduAppKey).change();
                 $('#txtGoogleApiKey', page).val(config.GoogleApiKey).change();
-                $('#txtDeeplApiKey', page).val(config.DeeplApiKey).change();
+                $('#txtDeepLApiKey', page).val(config.DeepLApiKey).change();
                 page.querySelector('#chkEnableTitleSubstitution').checked = config.EnableTitleSubstitution;
                 $('#txtTitleRawSubstitutionTable', page).val(config.TitleRawSubstitutionTable).change();
                 page.querySelector('#chkEnableActorSubstitution').checked = config.EnableActorSubstitution;
@@ -344,7 +344,7 @@
                 config.BaiduAppId = $('#txtBaiduAppId', form).val();
                 config.BaiduAppKey = $('#txtBaiduAppKey', form).val();
                 config.GoogleApiKey = $('#txtGoogleApiKey', form).val();
-                config.DeeplApiKey = $('#txtDeeplApiKey', form).val();
+                config.DeepLApiKey = $('#txtDeepLApiKey', form).val();
                 config.EnableTitleSubstitution = $('#chkEnableTitleSubstitution', form).prop('checked');
                 config.TitleRawSubstitutionTable = $('#txtTitleRawSubstitutionTable', form).val();
                 config.EnableActorSubstitution = $('#chkEnableActorSubstitution', form).prop('checked');

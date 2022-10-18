@@ -60,7 +60,7 @@ public class PluginConfiguration : BasePluginConfiguration
 
     public string GoogleApiKey { get; set; } = string.Empty;
 
-    public string DeeplApiKey { get; set; } = string.Empty;
+    public string DeepLApiKey { get; set; } = string.Empty;
 
     #endregion
 
