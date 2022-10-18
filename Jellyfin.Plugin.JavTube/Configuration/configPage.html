@@ -162,6 +162,7 @@
                             <select class="emby-select-withcolor emby-select selectTranslationEngine" id="selectTranslationEngine" is="emby-select" name="selectTranslationEngine">
                                 <option value="Baidu">Baidu</option>
                                 <option value="Google">Google</option>
+                                <option value="Deepl">Deepl</option>
                             </select>
                         </div>
 
@@ -268,12 +269,19 @@
             if (this.value === "Baidu") {
                 $('.selectTranslationEngineBaidu').css('display', 'inherit');
                 $('.selectTranslationEngineGoogle').css('display', 'none');
+                $('.selectTranslationEngineDeepl').css('display', 'none');
             } else if (this.value === "Google") {
                 $('.selectTranslationEngineBaidu').css('display', 'none');
                 $('.selectTranslationEngineGoogle').css('display', 'inherit');
+                $('.selectTranslationEngineDeepl').css('display', 'none');
+            } else if (this.value === "Deepl") {
+                $('.selectTranslationEngineBaidu').css('display', 'none');
+                $('.selectTranslationEngineGoogle').css('display', 'none');
+                $('.selectTranslationEngineDeepl').css('display', 'inherit');
             } else {
                 $('.selectTranslationEngineBaidu').css('display', 'none');
                 $('.selectTranslationEngineGoogle').css('display', 'none');
+                $('.selectTranslationEngineDeepl').css('display', 'none');
             }
         });
 
