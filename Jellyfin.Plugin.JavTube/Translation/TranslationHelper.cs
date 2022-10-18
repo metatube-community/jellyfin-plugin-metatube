@@ -39,7 +39,7 @@ public static class TranslationHelper
                 millisecondsDelay = 100;
                 nv.Add(new NameValueCollection
                 {
-                    { "DeepL-api-key", Configuration.DeepLApiKey }
+                    { "deepl-api-key", Configuration.DeepLApiKey }
                 });
                 break;
             default:
