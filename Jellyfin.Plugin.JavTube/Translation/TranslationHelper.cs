@@ -35,6 +35,13 @@ public static class TranslationHelper
                     { "google-api-key", Configuration.GoogleApiKey }
                 });
                 break;
+            case TranslationEngine.DeepL:
+                millisecondsDelay = 100;
+                nv.Add(new NameValueCollection
+                {
+                    { "deepl-api-key", Configuration.DeepLApiKey }
+                });
+                break;
             default:
                 throw new ArgumentException($"Invalid translation engine: {Configuration.TranslationEngine}");
         }
