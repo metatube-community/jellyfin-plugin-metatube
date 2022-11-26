@@ -26,8 +26,8 @@
     </ItemGroup>
 
     <ItemGroup Condition="'$(Configuration)'=='Debug' or '$(Configuration)'=='Release'">
-        <PackageReference Include="Jellyfin.Controller" Version="10.8.1"/>
-        <PackageReference Include="Jellyfin.Model" Version="10.8.1"/>
+        <PackageReference Include="Jellyfin.Controller" Version="10.8.0"/>
+        <PackageReference Include="Jellyfin.Model" Version="10.8.0"/>
     </ItemGroup>
 
     <ItemGroup Condition="'$(Configuration)'=='Debug.Emby' or '$(Configuration)'=='Release.Emby'">
