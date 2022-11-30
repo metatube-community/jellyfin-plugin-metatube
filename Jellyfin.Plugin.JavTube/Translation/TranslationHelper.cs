@@ -36,7 +36,7 @@ public static class TranslationHelper
                 });
                 break;
             case TranslationEngine.GoogleFree:
-                millisecondsDelay = 100; // Limit Google API request rate to 10 rps.
+                millisecondsDelay = 100;
                 nv.Add(new NameValueCollection{});
                 break;
             case TranslationEngine.DeepL:
