@@ -1,0 +1,63 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>net6.0</TargetFramework>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <Configurations>Debug;Release;Debug.Emby;Release.Emby</Configurations>
+        <Platforms>AnyCPU</Platforms>
+        <AssemblyName>MetaTube</AssemblyName>
+        <Authors>MetaTube</Authors>
+        <Description>Meta Tube Plugin for Jellyfin/Emby</Description>
+        <Version>$([System.DateTime]::UtcNow.ToString(yyyy.Mdd.Hmm.0))</Version>
+        <Copyright>Copyright © 2022 MetaTube</Copyright>
+        <RepositoryType>Git</RepositoryType>
+        <RepositoryUrl>https://github.com/javtube/jellyfin-plugin-metatube.git</RepositoryUrl>
+        <PackageProjectUrl>https://github.com/javtube/jellyfin-plugin-metatube</PackageProjectUrl>
+        <PackageLicenseUrl>https://github.com/javtube/jellyfin-plugin-metatube/blob/main/LICENSE</PackageLicenseUrl>
+        <PackageIcon>thumb.png</PackageIcon>
+        <PackageId>MetaTube</PackageId>
+        <Company>MetaTube</Company>
+        <Product>MetaTube</Product>
+    </PropertyGroup>
+
+    <PropertyGroup Condition="'$(Configuration)'=='Debug.Emby' or '$(Configuration)'=='Release.Emby'">
+        <DefineConstants>__EMBY__</DefineConstants>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <PackageReference Include="System.Memory" Version="4.5.5" />
+    </ItemGroup>
+
+    <ItemGroup Condition="'$(Configuration)'=='Debug' or '$(Configuration)'=='Release'">
+        <PackageReference Include="Jellyfin.Controller" Version="10.8.0" />
+        <PackageReference Include="Jellyfin.Model" Version="10.8.0" />
+    </ItemGroup>
+
+    <ItemGroup Condition="'$(Configuration)'=='Debug.Emby' or '$(Configuration)'=='Release.Emby'">
+        <PackageReference Include="MediaBrowser.Server.Core" Version="4.7.1" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <None Remove="Configuration\configPage.html" />
+        <EmbeddedResource Include="Configuration\configPage.html" />
+    </ItemGroup>
+
+    <ItemGroup Condition="'$(Configuration)'=='Debug.Emby' or '$(Configuration)'=='Release.Emby'">
+        <None Remove="thumb.png" />
+        <EmbeddedResource Include="thumb.png" />
+    </ItemGroup>
+
+    <Target Name="Zip" AfterTargets="PostBuildEvent" Condition="'$(Configuration)'=='Release' or '$(Configuration)'=='Release.Emby'">
+        <ItemGroup>
+            <FilesToDelete Include="$(BaseOutputPath)Jellyfin.MetaTube*.zip" Condition="'$(Configuration)'=='Release'" />
+            <FilesToDelete Include="$(BaseOutputPath)Emby.MetaTube*.zip" Condition="'$(Configuration)'=='Release.Emby'" />
+            <TempZipDirectory Include="$(OutputPath)output" />
+        </ItemGroup>
+        <Delete Files="@(FilesToDelete)" />
+        <Copy SourceFiles="$(OutputPath)$(AssemblyName).dll" DestinationFolder="@(TempZipDirectory)" />
+        <ZipDirectory SourceDirectory="@(TempZipDirectory)" DestinationFile="$(BaseOutputPath)Jellyfin.MetaTube@v$(Version).zip" Condition="'$(Configuration)'=='Release'" />
+        <ZipDirectory SourceDirectory="@(TempZipDirectory)" DestinationFile="$(BaseOutputPath)Emby.MetaTube@v$(Version).zip" Condition="'$(Configuration)'=='Release.Emby'" />
+        <RemoveDir Directories="@(TempZipDirectory)" />
+    </Target>
+
+</Project>

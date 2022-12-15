@@ -11,7 +11,7 @@ body:
         - label: Is this something you can **debug and fix**? Send a pull request! Bug fixes and documentation fixes are welcome.
           required: true
 
-        - label: I have read the [Wiki](https://github.com/javtube/jellyfin-plugin-javtube/wiki), especially the [FAQ](https://github.com/javtube/jellyfin-plugin-javtube/wiki/%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98) page.
+        - label: I have read the [Wiki](https://github.com/javtube/jellyfin-plugin-metatube/wiki), especially the [FAQ](https://github.com/javtube/jellyfin-plugin-metatube/wiki/%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98) page.
           required: true
 
         - label: I have searched on the [issue tracker](……/) for a related issue.
@@ -19,13 +19,13 @@ body:
 
   - type: input
     attributes:
-      label: JavTube Plugin Version
+      label: MetaTube Plugin Version
     validations:
       required: true
 
   - type: input
     attributes:
-      label: JavTube Server Version
+      label: MetaTube Server Version
     validations:
       required: true
 
@@ -48,7 +48,7 @@ body:
 
   - type: textarea
     attributes:
-      label: JavTube Server
+      label: MetaTube Server
       description: Paste the command line parameters or environment below.
 
   - type: textarea
@@ -58,8 +58,8 @@ body:
 
   - type: textarea
     attributes:
-      label: JavTube Server Logs
-      description: Paste the javtube server logs below.
+      label: MetaTube Server Logs
+      description: Paste the MetaTube server logs below.
 
   - type: textarea
     attributes:

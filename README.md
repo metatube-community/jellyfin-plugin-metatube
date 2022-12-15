@@ -1,4 +1,4 @@
-<h1 align="center">Jellyfin Plugin JavTube</h1>
+<h1 align="center">Jellyfin Plugin MetaTube</h1>
 <p align="center"><b>English | <a href="README_ZH.md">简体中文</a></b></p>
 
 <p align="center">
@@ -10,22 +10,22 @@
 <img alt="GitHub Workflow Status" src="https://img.shields.io/github/workflow/status/javtube/jellyfin-plugin-javtube/.NET?logo=github">
 </a>
 <a href="https://github.com/javtube/jellyfin-plugin-javtube/search?l=c%23">
-<img alt="GitHub top language" src="https://img.shields.io/github/languages/top/javtube/jellyfin-plugin-javtube?color=%23239120&label=.NET&logo=csharp">
+<img alt="GitHub top language" src="https://img.shields.io/github/languages/top/javtube/jellyfin-plugin-metatube?color=%23239120&label=.NET&logo=csharp">
 </a>
 <a href="https://github.com/javtube/jellyfin-plugin-javtube/blob/main/LICENSE">
-<img alt="License" src="https://img.shields.io/github/license/javtube/jellyfin-plugin-javtube">
+<img alt="License" src="https://img.shields.io/github/license/javtube/jellyfin-plugin-metatube">
 </a>
-<a href="https://t.me/JavTubePlugin">
+<a href="https://t.me/MetaTubePlugin">
 <img alt="Telegram Group" src="https://img.shields.io/badge/Telegram-2CA5E0?logo=telegram&logoColor=white">
 </a>
-<a href="https://github.com/javtube/jellyfin-plugin-javtube">
+<a href="https://github.com/javtube/jellyfin-plugin-metatube">
 <img alt="Downloads" src="https://img.shields.io/github/downloads/javtube/jellyfin-plugin-javtube/total">
 </a>
-<a href="https://hub.docker.com/r/javtube/javtube-server">
-<img alt="Docker Pulls" src="https://img.shields.io/docker/pulls/javtube/javtube-server?logo=docker">
+<a href="https://hub.docker.com/r/javtube/metatube-server">
+<img alt="Docker Pulls" src="https://img.shields.io/docker/pulls/javtube/metatube-server?logo=docker">
 </a>
 <a href="https://github.com/javtube/jellyfin-plugin-javtube/releases">
-<img alt="Releases" src="https://img.shields.io/github/v/release/javtube/jellyfin-plugin-javtube?include_prereleases&logo=smartthings">
+<img alt="Releases" src="https://img.shields.io/github/v/release/javtube/jellyfin-plugin-metatube?include_prereleases&logo=smartthings">
 </a>
 
 ## About
@@ -69,4 +69,4 @@ This plugin is released under the [MIT](https://github.com/javtube/jellyfin-plug
 
 ## Stargazers
 
-[![Stargazers over time](https://starchart.cc/javtube/jellyfin-plugin-javtube.svg)](https://starchart.cc/javtube/jellyfin-plugin-javtube)
+[![Stargazers over time](https://starchart.cc/javtube/jellyfin-plugin-metatube.svg)](https://starchart.cc/javtube/jellyfin-plugin-metatube)

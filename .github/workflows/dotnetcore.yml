@@ -33,12 +33,12 @@ jobs:
 
       - name: Generate Manifest
         run: |
-          python3 scripts/manifest.py Jellyfin.Plugin.JavTube/bin/Jellyfin.JavTube@v${{ steps.shell.outputs.version }}.zip
+          python3 scripts/manifest.py Jellyfin.Plugin.MetaTube/bin/Jellyfin.MetaTube@v${{ steps.shell.outputs.version }}.zip
 
       - name: Publish Manifest
         run: |
-          git config --global user.name  'javtube-bot'
-          git config --global user.email 'javtube-bot@users.noreply.github.com'
+          git config --global user.name  'metatube-bot'
+          git config --global user.email 'metatube-bot@users.noreply.github.com'
           git remote set-url origin https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${GITHUB_REPOSITORY}
 
           git checkout --orphan dist
@@ -56,5 +56,5 @@ jobs:
           draft: false
           tag_name: v${{ steps.shell.outputs.version }}
           files: |
-            Jellyfin.Plugin.JavTube/bin/Jellyfin.JavTube@v${{ steps.shell.outputs.version }}.zip
-            Jellyfin.Plugin.JavTube/bin/Emby.JavTube@v${{ steps.shell.outputs.version }}.zip
+            Jellyfin.Plugin.MetaTube/bin/Jellyfin.MetaTube@v${{ steps.shell.outputs.version }}.zip
+            Jellyfin.Plugin.MetaTube/bin/Emby.MetaTube@v${{ steps.shell.outputs.version }}.zip
