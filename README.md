@@ -6,25 +6,25 @@
 <br/>
 <br/>
 
-<a href="https://github.com/javtube/jellyfin-plugin-javtube/actions">
-<img alt="GitHub Workflow Status" src="https://img.shields.io/github/workflow/status/javtube/jellyfin-plugin-javtube/.NET?logo=github">
+<a href="https://github.com/javtube/jellyfin-plugin-metatube/actions">
+<img alt="GitHub Workflow Status" src="https://img.shields.io/github/workflow/status/javtube/jellyfin-plugin-metatube/.NET?logo=github">
 </a>
-<a href="https://github.com/javtube/jellyfin-plugin-javtube/search?l=c%23">
+<a href="https://github.com/javtube/jellyfin-plugin-metatube/search?l=c%23">
 <img alt="GitHub top language" src="https://img.shields.io/github/languages/top/javtube/jellyfin-plugin-metatube?color=%23239120&label=.NET&logo=csharp">
 </a>
-<a href="https://github.com/javtube/jellyfin-plugin-javtube/blob/main/LICENSE">
+<a href="https://github.com/javtube/jellyfin-plugin-metatube/blob/main/LICENSE">
 <img alt="License" src="https://img.shields.io/github/license/javtube/jellyfin-plugin-metatube">
 </a>
 <a href="https://t.me/MetaTubePlugin">
 <img alt="Telegram Group" src="https://img.shields.io/badge/Telegram-2CA5E0?logo=telegram&logoColor=white">
 </a>
 <a href="https://github.com/javtube/jellyfin-plugin-metatube">
-<img alt="Downloads" src="https://img.shields.io/github/downloads/javtube/jellyfin-plugin-javtube/total">
+<img alt="Downloads" src="https://img.shields.io/github/downloads/javtube/jellyfin-plugin-metatube/total">
 </a>
 <a href="https://hub.docker.com/r/javtube/metatube-server">
 <img alt="Docker Pulls" src="https://img.shields.io/docker/pulls/javtube/metatube-server?logo=docker">
 </a>
-<a href="https://github.com/javtube/jellyfin-plugin-javtube/releases">
+<a href="https://github.com/javtube/jellyfin-plugin-metatube/releases">
 <img alt="Releases" src="https://img.shields.io/github/v/release/javtube/jellyfin-plugin-metatube?include_prereleases&logo=smartthings">
 </a>
 
@@ -50,22 +50,22 @@ _NOTE: This project will only support stable versions._
 
 ## Documentation
 
-- [Plugin installation](https://github.com/javtube/jellyfin-plugin-javtube/wiki/%E6%8F%92%E4%BB%B6%E5%AE%89%E8%A3%85)
-- [Server deployment](https://github.com/javtube/jellyfin-plugin-javtube/wiki/%E5%90%8E%E7%AB%AF%E9%83%A8%E7%BD%B2)
-- [File naming rules](https://github.com/javtube/jellyfin-plugin-javtube/wiki/%E5%91%BD%E5%90%8D%E8%A7%84%E8%8C%83)
-- [Auto translation](https://github.com/javtube/jellyfin-plugin-javtube/wiki/%E8%87%AA%E5%8A%A8%E7%BF%BB%E8%AF%91)
-- [Build from source](https://github.com/javtube/jellyfin-plugin-javtube/wiki/%E8%87%AA%E8%A1%8C%E7%BC%96%E8%AF%91)
-- [Metadata providers](https://github.com/javtube/jellyfin-plugin-javtube/wiki/%E6%95%B0%E6%8D%AE%E6%9D%A5%E6%BA%90)
+- [Plugin installation](https://github.com/javtube/jellyfin-plugin-metatube/wiki/%E6%8F%92%E4%BB%B6%E5%AE%89%E8%A3%85)
+- [Server deployment](https://github.com/javtube/jellyfin-plugin-metatube/wiki/%E5%90%8E%E7%AB%AF%E9%83%A8%E7%BD%B2)
+- [File naming rules](https://github.com/javtube/jellyfin-plugin-metatube/wiki/%E5%91%BD%E5%90%8D%E8%A7%84%E8%8C%83)
+- [Auto translation](https://github.com/javtube/jellyfin-plugin-metatube/wiki/%E8%87%AA%E5%8A%A8%E7%BF%BB%E8%AF%91)
+- [Build from source](https://github.com/javtube/jellyfin-plugin-metatube/wiki/%E8%87%AA%E8%A1%8C%E7%BC%96%E8%AF%91)
+- [Metadata providers](https://github.com/javtube/jellyfin-plugin-metatube/wiki/%E6%95%B0%E6%8D%AE%E6%9D%A5%E6%BA%90)
 
-Full documentation and examples can be found at [Wiki](https://github.com/javtube/jellyfin-plugin-javtube/wiki).
+Full documentation and examples can be found at [Wiki](https://github.com/javtube/jellyfin-plugin-metatube/wiki).
 
 ## Community
 
-Welcome and feel free to ask any questions at [Discussions](https://github.com/javtube/jellyfin-plugin-javtube/discussions).
+Welcome and feel free to ask any questions at [Discussions](https://github.com/javtube/jellyfin-plugin-metatube/discussions).
 
 ## Licence
 
-This plugin is released under the [MIT](https://github.com/javtube/jellyfin-plugin-javtube/blob/main/LICENSE) License.
+This plugin is released under the [MIT](https://github.com/javtube/jellyfin-plugin-metatube/blob/main/LICENSE) License.
 
 ## Stargazers
 

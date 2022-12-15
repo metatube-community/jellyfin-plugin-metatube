@@ -6,25 +6,25 @@
 <br/>
 <br/>
 
-<a href="https://github.com/javtube/jellyfin-plugin-javtube/actions">
-<img alt="GitHub Workflow Status" src="https://img.shields.io/github/workflow/status/javtube/jellyfin-plugin-javtube/.NET?logo=github">
+<a href="https://github.com/javtube/jellyfin-plugin-metatube/actions">
+<img alt="GitHub Workflow Status" src="https://img.shields.io/github/workflow/status/javtube/jellyfin-plugin-metatube/.NET?logo=github">
 </a>
-<a href="https://github.com/javtube/jellyfin-plugin-javtube/search?l=c%23">
+<a href="https://github.com/javtube/jellyfin-plugin-metatube/search?l=c%23">
 <img alt="GitHub top language" src="https://img.shields.io/github/languages/top/javtube/jellyfin-plugin-metatube?color=%23239120&label=.NET&logo=csharp">
 </a>
-<a href="https://github.com/javtube/jellyfin-plugin-javtube/blob/main/LICENSE">
+<a href="https://github.com/javtube/jellyfin-plugin-metatube/blob/main/LICENSE">
 <img alt="License" src="https://img.shields.io/github/license/javtube/jellyfin-plugin-metatube">
 </a>
 <a href="https://t.me/MetaTubePlugin">
 <img alt="Telegram Group" src="https://img.shields.io/badge/Telegram-2CA5E0?logo=telegram&logoColor=white">
 </a>
 <a href="https://github.com/javtube/jellyfin-plugin-metatube">
-<img alt="Downloads" src="https://img.shields.io/github/downloads/javtube/jellyfin-plugin-javtube/total">
+<img alt="Downloads" src="https://img.shields.io/github/downloads/javtube/jellyfin-plugin-metatube/total">
 </a>
 <a href="https://hub.docker.com/r/javtube/metatube-server">
 <img alt="Docker Pulls" src="https://img.shields.io/docker/pulls/javtube/metatube-server?logo=docker">
 </a>
-<a href="https://github.com/javtube/jellyfin-plugin-javtube/releases">
+<a href="https://github.com/javtube/jellyfin-plugin-metatube/releases">
 <img alt="Releases" src="https://img.shields.io/github/v/release/javtube/jellyfin-plugin-metatube?include_prereleases&logo=smartthings">
 </a>
 
@@ -50,22 +50,22 @@ _注意：本项目仅支持 Jellyfin/Emby 稳定版。_
 
 ## 文档
 
-- [插件安装](https://github.com/javtube/jellyfin-plugin-javtube/wiki/%E6%8F%92%E4%BB%B6%E5%AE%89%E8%A3%85)
-- [后端部署](https://github.com/javtube/jellyfin-plugin-javtube/wiki/%E5%90%8E%E7%AB%AF%E9%83%A8%E7%BD%B2)
-- [命名规范](https://github.com/javtube/jellyfin-plugin-javtube/wiki/%E5%91%BD%E5%90%8D%E8%A7%84%E8%8C%83)
-- [自动翻译](https://github.com/javtube/jellyfin-plugin-javtube/wiki/%E8%87%AA%E5%8A%A8%E7%BF%BB%E8%AF%91)
-- [源码编译](https://github.com/javtube/jellyfin-plugin-javtube/wiki/%E6%BA%90%E7%A0%81%E7%BC%96%E8%AF%91)
-- [数据来源](https://github.com/javtube/jellyfin-plugin-javtube/wiki/%E6%95%B0%E6%8D%AE%E6%9D%A5%E6%BA%90)
+- [插件安装](https://github.com/javtube/jellyfin-plugin-metatube/wiki/%E6%8F%92%E4%BB%B6%E5%AE%89%E8%A3%85)
+- [后端部署](https://github.com/javtube/jellyfin-plugin-metatube/wiki/%E5%90%8E%E7%AB%AF%E9%83%A8%E7%BD%B2)
+- [命名规范](https://github.com/javtube/jellyfin-plugin-metatube/wiki/%E5%91%BD%E5%90%8D%E8%A7%84%E8%8C%83)
+- [自动翻译](https://github.com/javtube/jellyfin-plugin-metatube/wiki/%E8%87%AA%E5%8A%A8%E7%BF%BB%E8%AF%91)
+- [源码编译](https://github.com/javtube/jellyfin-plugin-metatube/wiki/%E6%BA%90%E7%A0%81%E7%BC%96%E8%AF%91)
+- [数据来源](https://github.com/javtube/jellyfin-plugin-metatube/wiki/%E6%95%B0%E6%8D%AE%E6%9D%A5%E6%BA%90)
 
-完整的文档以及使用方法，请参阅 [Wiki](https://github.com/javtube/jellyfin-plugin-javtube/wiki)。
+完整的文档以及使用方法，请参阅 [Wiki](https://github.com/javtube/jellyfin-plugin-metatube/wiki)。
 
 ## 社区
 
-有任何问题欢迎来 [Discussions](https://github.com/javtube/jellyfin-plugin-javtube/discussions) 提问讨论，或者加入 [TG群](https://t.me/MetaTubePlugin)。
+有任何问题欢迎来 [Discussions](https://github.com/javtube/jellyfin-plugin-metatube/discussions) 提问讨论，或者加入 [TG群](https://t.me/MetaTubePlugin)。
 
 ## 许可
 
-本插件项目在 [MIT](https://github.com/javtube/jellyfin-plugin-javtube/blob/main/LICENSE) 许可授权下发行。此外，如果使用本项目表明还额外接受以下条款：
+本插件项目在 [MIT](https://github.com/javtube/jellyfin-plugin-metatube/blob/main/LICENSE) 许可授权下发行。此外，如果使用本项目表明还额外接受以下条款：
 
 - 本插件仅供学习以及技术交流使用
 - 请勿在公共社交平台上宣传此项目

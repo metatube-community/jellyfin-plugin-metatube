@@ -59,7 +59,7 @@ public class UpdatePluginTask : IScheduledTask
         {
             var apiResult = JsonSerializer.Deserialize<ApiResponseInfo>(await _httpClient.Get(new HttpRequestOptions
             {
-                Url = "https://api.github.com/repos/javtube/jellyfin-plugin-javtube/releases/latest",
+                Url = "https://api.github.com/repos/javtube/jellyfin-plugin-metatube/releases/latest",
                 CancellationToken = cancellationToken,
                 AcceptHeader = "application/json",
                 EnableDefaultUserAgent = true
