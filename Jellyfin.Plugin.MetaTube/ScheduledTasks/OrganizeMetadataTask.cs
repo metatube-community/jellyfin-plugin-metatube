@@ -72,7 +72,7 @@ public class OrganizeMetadataTask : IScheduledTask
 #if __EMBY__
                 HasAnyProviderId = new[] { previousProviderIdName },
 #else
-                HasAnyProviderId = new Dictionary<string, string> { { previousProviderId, string.Empty } },
+                HasAnyProviderId = new Dictionary<string, string> { { previousProviderIdName, string.Empty } },
 #endif
             }).ToList();
 
