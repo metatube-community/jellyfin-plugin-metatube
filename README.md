@@ -30,7 +30,7 @@
 
 ## About
 
-Just Another Video Tube Plugin for Jellyfin/Emby.
+Metadata Tube Plugin for Jellyfin/Emby.
 
 ## Features
 

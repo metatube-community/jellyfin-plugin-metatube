@@ -30,7 +30,7 @@
 
 ## 关于
 
-另一个为 Jellyfin/Emby 开发的超级好用的 JAV 插件。
+为 Jellyfin/Emby 开发的超级好用的元数据插件。
 
 ## 特性
 
