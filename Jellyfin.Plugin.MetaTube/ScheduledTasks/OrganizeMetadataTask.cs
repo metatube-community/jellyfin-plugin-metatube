@@ -82,6 +82,7 @@ public class OrganizeMetadataTask : IScheduledTask
 
                 var providerId = item.GetProviderId(previousProviderIdName);
                 item.SetProviderId(Plugin.Instance.Name, providerId);
+                item.ProviderIds.Remove(previousProviderIdName);
 
                 _logger.Info("Transfer ProviderId: {0}", providerId);
 
