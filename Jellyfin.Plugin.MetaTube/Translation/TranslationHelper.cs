@@ -37,7 +37,7 @@ public static class TranslationHelper
                 break;
             case TranslationEngine.GoogleFree:
                 millisecondsDelay = 100;
-                nv.Add(new NameValueCollection{});
+                nv.Add(new NameValueCollection());
                 break;
             case TranslationEngine.DeepL:
                 millisecondsDelay = 100;

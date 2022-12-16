@@ -1,5 +1,4 @@
 #if __EMBY__
-
 using MediaBrowser.Model.Logging;
 
 namespace Jellyfin.Plugin.MetaTube.Extensions;
