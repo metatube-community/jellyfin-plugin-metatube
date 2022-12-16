@@ -11,9 +11,9 @@
         <Version>$([System.DateTime]::UtcNow.ToString(yyyy.Mdd.Hmm.0))</Version>
         <Copyright>Copyright © 2022 MetaTube</Copyright>
         <RepositoryType>Git</RepositoryType>
-        <RepositoryUrl>https://github.com/javtube/jellyfin-plugin-metatube.git</RepositoryUrl>
-        <PackageProjectUrl>https://github.com/javtube/jellyfin-plugin-metatube</PackageProjectUrl>
-        <PackageLicenseUrl>https://github.com/javtube/jellyfin-plugin-metatube/blob/main/LICENSE</PackageLicenseUrl>
+        <RepositoryUrl>https://github.com/metatube-community/jellyfin-plugin-metatube.git</RepositoryUrl>
+        <PackageProjectUrl>https://github.com/metatube-community/jellyfin-plugin-metatube</PackageProjectUrl>
+        <PackageLicenseUrl>https://github.com/metatube-community/jellyfin-plugin-metatube/blob/main/LICENSE</PackageLicenseUrl>
         <PackageIcon>thumb.png</PackageIcon>
         <PackageId>MetaTube</PackageId>
         <Company>MetaTube</Company>

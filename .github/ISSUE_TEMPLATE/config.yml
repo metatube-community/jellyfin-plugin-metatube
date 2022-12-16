@@ -2,8 +2,8 @@ blank_issues_enabled: false
 
 contact_links:
   - name: MetaTube GitHub Wiki
-    url: https://github.com/javtube/jellyfin-plugin-metatube/wiki
+    url: https://github.com/metatube-community/jellyfin-plugin-metatube/wiki
     about: Please see the wiki for configuration and examples
   - name: MetaTube GitHub Discussions
-    url: https://github.com/javtube/jellyfin-plugin-metatube/discussions
+    url: https://github.com/metatube-community/jellyfin-plugin-metatube/discussions
     about: Ask questions and get help on GitHub Discussions
