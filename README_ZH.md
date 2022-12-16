@@ -2,7 +2,7 @@
 <p align="center"><b><a href="README.md">English</a> | 简体中文</b></p>
 
 <p align="center">
-<img alt="Plugin Banner" src="https://metatube-community.github.io/logos/banner.png"/>
+<img alt="Plugin Banner" src="https://metatube-community.github.io/logos/banner-dark.png"/>
 <br/>
 <br/>
 
