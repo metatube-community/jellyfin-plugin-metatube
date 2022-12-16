@@ -7,7 +7,7 @@
 <br/>
 
 <a href="https://github.com/metatube-community/jellyfin-plugin-metatube/actions">
-<img alt="GitHub Workflow Status" src="https://img.shields.io/github/workflow/status/metatube-community/jellyfin-plugin-metatube/.NET?logo=github">
+<img alt="GitHub Workflow Status" src="https://img.shields.io/github/actions/workflow/status/metatube-community/jellyfin-plugin-metatube/dotnetcore.yml?branch=main&logo=github">
 </a>
 <a href="https://github.com/metatube-community/jellyfin-plugin-metatube/search?l=c%23">
 <img alt="GitHub top language" src="https://img.shields.io/github/languages/top/metatube-community/jellyfin-plugin-metatube?color=%23239120&label=.NET&logo=csharp">
