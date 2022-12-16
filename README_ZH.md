@@ -22,7 +22,7 @@
 <img alt="Downloads" src="https://img.shields.io/github/downloads/metatube-community/jellyfin-plugin-metatube/total">
 </a>
 <a href="https://hub.docker.com/r/metatube/metatube-server">
-<img alt="Docker Pulls" src="https://img.shields.io/docker/pulls/metatube-community/metatube-server?logo=docker">
+<img alt="Docker Pulls" src="https://img.shields.io/docker/pulls/metatube/metatube-server?logo=docker">
 </a>
 <a href="https://github.com/metatube-community/jellyfin-plugin-metatube/releases">
 <img alt="Releases" src="https://img.shields.io/github/v/release/metatube-community/jellyfin-plugin-metatube?include_prereleases&logo=smartthings">
