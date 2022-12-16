@@ -76,7 +76,7 @@ public class OrganizeMetadataTask : IScheduledTask
 #endif
             }).ToList();
 
-            foreach (var (idx, item) in outdatedItems.WithIndex())
+            foreach (var item in outdatedItems)
             {
                 if (item.HasProviderId(Plugin.Instance.Name)) continue;
 
