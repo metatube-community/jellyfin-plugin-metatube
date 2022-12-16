@@ -62,6 +62,39 @@ public class OrganizeMetadataTask : IScheduledTask
 
         progress?.Report(0);
 
+        {
+            // Compatible code for renaming process.
+
+            const string previousProviderIdName = "JavTube";
+
+            var outdatedItems = _libraryManager.GetItemList(new InternalItemsQuery
+            {
+#if __EMBY__
+                HasAnyProviderId = new[] { previousProviderIdName },
+#else
+                HasAnyProviderId = new Dictionary<string, string> { { previousProviderId, string.Empty } },
+#endif
+            }).ToList();
+
+            foreach (var (idx, item) in outdatedItems.WithIndex())
+            {
+                if (item.HasProviderId(Plugin.Instance.Name)) continue;
+
+                var providerId = item.GetProviderId(previousProviderIdName);
+                item.SetProviderId(Plugin.Instance.Name, providerId);
+
+                _logger.Info("Transfer ProviderId: {0}", providerId);
+
+#if __EMBY__
+                _libraryManager.UpdateItem(item, item, ItemUpdateType.MetadataEdit, null);
+#else
+                await _libraryManager
+                    .UpdateItemAsync(item, item, ItemUpdateType.MetadataEdit, cancellationToken)
+                    .ConfigureAwait(false);
+#endif
+            }
+        }
+
         var items = _libraryManager.GetItemList(new InternalItemsQuery
         {
             MediaTypes = new[] { MediaType.Video },
