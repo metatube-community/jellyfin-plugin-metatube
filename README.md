@@ -50,14 +50,14 @@ _NOTE: This project will only support stable versions._
 
 ## Documentation
 
-- [Plugin installation](https://github.com/metatube-community/jellyfin-plugin-metatube/wiki/%E6%8F%92%E4%BB%B6%E5%AE%89%E8%A3%85)
-- [Server deployment](https://github.com/metatube-community/jellyfin-plugin-metatube/wiki/%E5%90%8E%E7%AB%AF%E9%83%A8%E7%BD%B2)
-- [File naming rules](https://github.com/metatube-community/jellyfin-plugin-metatube/wiki/%E5%91%BD%E5%90%8D%E8%A7%84%E8%8C%83)
-- [Auto translation](https://github.com/metatube-community/jellyfin-plugin-metatube/wiki/%E8%87%AA%E5%8A%A8%E7%BF%BB%E8%AF%91)
-- [Build from source](https://github.com/metatube-community/jellyfin-plugin-metatube/wiki/%E8%87%AA%E8%A1%8C%E7%BC%96%E8%AF%91)
-- [Metadata providers](https://github.com/metatube-community/jellyfin-plugin-metatube/wiki/%E6%95%B0%E6%8D%AE%E6%9D%A5%E6%BA%90)
+- [Plugin installation](https://metatube-community.github.io/wiki/plugin-installation/)
+- [Server deployment](https://metatube-community.github.io/wiki/server-deployment/)
+- [File naming rules](https://metatube-community.github.io/wiki/naming-rules/)
+- [Auto translation](https://metatube-community.github.io/wiki/auto-translation/)
+- [Build from source](https://metatube-community.github.io/wiki/build-from-source/)
+- [Metadata providers](https://metatube-community.github.io/wiki/metadata-providers/)
 
-Full documentation and examples can be found at [Wiki](https://github.com/metatube-community/jellyfin-plugin-metatube/wiki).
+Full documentation and examples can be found at [Wiki](https://metatube-community.github.io/wiki/).
 
 ## Community
 

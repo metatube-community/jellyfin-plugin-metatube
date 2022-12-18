@@ -50,14 +50,14 @@ _注意：本项目仅支持 Jellyfin/Emby 稳定版。_
 
 ## 文档
 
-- [插件安装](https://github.com/metatube-community/jellyfin-plugin-metatube/wiki/%E6%8F%92%E4%BB%B6%E5%AE%89%E8%A3%85)
-- [后端部署](https://github.com/metatube-community/jellyfin-plugin-metatube/wiki/%E5%90%8E%E7%AB%AF%E9%83%A8%E7%BD%B2)
-- [命名规范](https://github.com/metatube-community/jellyfin-plugin-metatube/wiki/%E5%91%BD%E5%90%8D%E8%A7%84%E8%8C%83)
-- [自动翻译](https://github.com/metatube-community/jellyfin-plugin-metatube/wiki/%E8%87%AA%E5%8A%A8%E7%BF%BB%E8%AF%91)
-- [源码编译](https://github.com/metatube-community/jellyfin-plugin-metatube/wiki/%E6%BA%90%E7%A0%81%E7%BC%96%E8%AF%91)
-- [数据来源](https://github.com/metatube-community/jellyfin-plugin-metatube/wiki/%E6%95%B0%E6%8D%AE%E6%9D%A5%E6%BA%90)
+- [插件安装](https://metatube-community.github.io/wiki/plugin-installation/)
+- [后端部署](https://metatube-community.github.io/wiki/server-deployment/)
+- [命名规范](https://metatube-community.github.io/wiki/naming-rules/)
+- [自动翻译](https://metatube-community.github.io/wiki/auto-translation/)
+- [源码编译](https://metatube-community.github.io/wiki/build-from-source/)
+- [数据来源](https://metatube-community.github.io/wiki/metadata-providers/)
 
-完整的文档以及使用方法，请参阅 [Wiki](https://github.com/metatube-community/jellyfin-plugin-metatube/wiki)。
+完整的文档以及使用方法，请参阅 [Wiki](https://metatube-community.github.io/wiki/)。
 
 ## 社区
 
