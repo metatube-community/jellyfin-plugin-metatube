@@ -1,4 +1,5 @@
 using System.Text;
+using Jellyfin.Plugin.MetaTube.Configuration;
 using Jellyfin.Plugin.MetaTube.Extensions;
 using Jellyfin.Plugin.MetaTube.Metadata;
 using Jellyfin.Plugin.MetaTube.Translation;
@@ -93,8 +94,14 @@ public class MovieProvider : BaseProvider, IRemoteMetadataProvider<Movie, MovieI
         {
             Item = new Movie
             {
-                Name = RenderTemplate(Configuration.NameTemplate, parameters),
-                Tagline = RenderTemplate(Configuration.TaglineTemplate, parameters),
+                Name = RenderTemplate(
+                    Configuration.EnableTemplate
+                        ? Configuration.NameTemplate
+                        : PluginConfiguration.DefaultNameTemplate, parameters),
+                Tagline = RenderTemplate(
+                    Configuration.EnableTemplate
+                        ? Configuration.TaglineTemplate
+                        : PluginConfiguration.DefaultTaglineTemplate, parameters),
                 OriginalTitle = originalTitle,
                 Overview = m.Summary,
                 OfficialRating = Rating,

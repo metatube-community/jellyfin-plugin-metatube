@@ -42,9 +42,15 @@ public class PluginConfiguration : BasePluginConfiguration
 
     #region Template
 
-    public string NameTemplate { get; set; } = "{number} {title}";
+    public bool EnableTemplate { get; set; } = false;
 
-    public string TaglineTemplate { get; set; } = "配信開始日 {date}";
+    public string NameTemplate { get; set; } = DefaultNameTemplate;
+
+    public string TaglineTemplate { get; set; } = DefaultTaglineTemplate;
+
+    public static string DefaultNameTemplate => "{number} {title}";
+
+    public static string DefaultTaglineTemplate => "配信開始日 {date}";
 
     #endregion
 

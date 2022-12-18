@@ -130,6 +130,14 @@
                 <div class="verticalSection">
                     <h2 class="sectionTitle">Template</h2>
 
+                    <div class="checkboxContainer checkboxContainer-withDescription">
+                        <label class="emby-checkbox-label">
+                            <input id="chkEnableTemplate" is="emby-checkbox" name="chkEnableTemplate" type="checkbox"/>
+                            <span>Enable template</span>
+                        </label>
+                        <div class="fieldDescription checkboxFieldDescription">Predefined template variables can be found <a class="button-link emby-button" href="https://metatube-community.github.io/wiki/text-template/" is="emby-linkbutton" target="_blank">here</a>.</div>
+                    </div>
+
                     <div class="inputContainer">
                         <label class="inputLabel inputLabelUnfocused" for="txtNameTemplate">Name template:</label>
                         <input id="txtNameTemplate" is="emby-input" name="txtNameTemplate" type="text"/>
@@ -139,7 +147,7 @@
                     <div class="inputContainer">
                         <label class="inputLabel inputLabelUnfocused" for="txtTaglineTemplate">Tagline template:</label>
                         <input id="txtTaglineTemplate" is="emby-input" name="txtTaglineTemplate" type="text"/>
-                        <div class="fieldDescription">Predefined template variables can be found <a class="button-link emby-button" href="https://metatube-community.github.io/wiki/text-template/" is="emby-linkbutton" target="_blank">here</a>.</div>
+                        <div class="fieldDescription"></div>
                     </div>
                 </div>
 
@@ -307,6 +315,7 @@
                 $('#txtDefaultImageQuality', page).val(config.DefaultImageQuality).change();
                 page.querySelector('#chkEnableMovieProviderFilter').checked = config.EnableMovieProviderFilter;
                 $('#txtRawMovieProviderFilter', page).val(config.RawMovieProviderFilter).change();
+                page.querySelector('#chkEnableTemplate').checked = config.EnableTemplate;
                 $('#txtNameTemplate', page).val(config.NameTemplate).change();
                 $('#txtTaglineTemplate', page).val(config.TaglineTemplate).change();
                 $('#selectTranslationMode', page).val(config.TranslationMode).change();
@@ -342,6 +351,7 @@
                 config.DefaultImageQuality = $('#txtDefaultImageQuality', form).val();
                 config.EnableMovieProviderFilter = $('#chkEnableMovieProviderFilter', form).prop('checked');
                 config.RawMovieProviderFilter = $('#txtRawMovieProviderFilter', form).val();
+                config.EnableTemplate = $('#chkEnableTemplate', form).prop('checked');
                 config.NameTemplate = $('#txtNameTemplate', form).val();
                 config.TaglineTemplate = $('#txtTaglineTemplate', form).val();
                 config.TranslationMode = $('#selectTranslationMode', form).val();
