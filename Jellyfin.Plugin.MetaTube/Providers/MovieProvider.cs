@@ -45,17 +45,20 @@ public class MovieProvider : BaseProvider, IRemoteMetadataProvider<Movie, MovieI
             var firstResult = (await GetSearchResults(info, cancellationToken)).FirstOrDefault();
             if (firstResult != null) pid = firstResult.GetPid(Name);
         }
-
+        var filePath = "";
         foreach(PropertyDescriptor descriptor in TypeDescriptor.GetProperties(info))
         {
             string name = descriptor.Name;
             object value = descriptor.GetValue(info);
             Logger.Info("movie info {0}={1}", name, value);
+            if (name.Equals("Path"))
+            {
+                filePath = value.ToString();
+            } 
         }
 
         Logger.Info("movie info Name: {0}", info.Name);
-        Logger.Info("movie info Path: {0}", info.Path);
-        // Logger.Info("movie info Path: {0}", GetFileNameWithoutExtension(info.Path));
+        Logger.Info("movie info Path: {0}", GetFileNameWithoutExtension(filePath));
         Logger.Info("Get movie info: {0}", pid.ToString());
 
         var m = await ApiClient.GetMovieInfoAsync(pid.Provider, pid.Id, cancellationToken);
@@ -86,7 +89,7 @@ public class MovieProvider : BaseProvider, IRemoteMetadataProvider<Movie, MovieI
         // Build parameters.
         var parameters = new Dictionary<string, string>
         {
-            { @"{file_name}", info.Name },
+            { @"{file_name}", GetFileNameWithoutExtension(filePath) },
             { @"{provider}", m.Provider },
             { @"{id}", m.Id },
             { @"{number}", m.Number },
