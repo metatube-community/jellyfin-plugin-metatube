@@ -1,4 +1,5 @@
 using System.Text;
+using System.ComponentModel;
 using Jellyfin.Plugin.MetaTube.Configuration;
 using Jellyfin.Plugin.MetaTube.Extensions;
 using Jellyfin.Plugin.MetaTube.Metadata;
@@ -43,6 +44,13 @@ public class MovieProvider : BaseProvider, IRemoteMetadataProvider<Movie, MovieI
             // Search movies and pick the first result.
             var firstResult = (await GetSearchResults(info, cancellationToken)).FirstOrDefault();
             if (firstResult != null) pid = firstResult.GetPid(Name);
+        }
+
+        foreach(PropertyDescriptor descriptor in TypeDescriptor.GetProperties(info))
+        {
+            string name = descriptor.Name;
+            object value = descriptor.GetValue(info);
+            Console.WriteLine("movie info {0}={1}", name, value);
         }
 
         Logger.Info("movie info: {0}", info);
