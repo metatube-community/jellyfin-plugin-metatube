@@ -50,7 +50,7 @@ public class MovieProvider : BaseProvider, IRemoteMetadataProvider<Movie, MovieI
         {
             string name = descriptor.Name;
             object value = descriptor.GetValue(info);
-            Console.WriteLine("movie info {0}={1}", name, value);
+            Logger.Info("movie info {0}={1}", name, value);
         }
 
         Logger.Info("movie info: {0}", info);
