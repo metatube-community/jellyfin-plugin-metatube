@@ -75,6 +75,7 @@ public class MovieProvider : BaseProvider, IRemoteMetadataProvider<Movie, MovieI
         // Build parameters.
         var parameters = new Dictionary<string, string>
         {
+            { @"{file_name}", info.Name },
             { @"{provider}", m.Provider },
             { @"{id}", m.Id },
             { @"{number}", m.Number },
