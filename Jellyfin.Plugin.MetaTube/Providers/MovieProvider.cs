@@ -45,6 +45,8 @@ public class MovieProvider : BaseProvider, IRemoteMetadataProvider<Movie, MovieI
             if (firstResult != null) pid = firstResult.GetPid(Name);
         }
 
+        Logger.Info("movie info: {0}", info);
+        Logger.Info("movie info Name: {0}", info.Name);
         Logger.Info("Get movie info: {0}", pid.ToString());
 
         var m = await ApiClient.GetMovieInfoAsync(pid.Provider, pid.Id, cancellationToken);
