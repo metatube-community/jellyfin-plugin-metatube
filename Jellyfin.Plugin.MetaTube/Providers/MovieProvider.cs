@@ -47,8 +47,8 @@ public class MovieProvider : BaseProvider, IRemoteMetadataProvider<Movie, MovieI
 
         Logger.Info("movie info: {0}", info);
         Logger.Info("movie info Name: {0}", info.Name);
-        Logger.Info("movie info Path: {0}", info.Path);
-        Logger.Info("movie info Path: {0}", GetFileNameWithoutExtension(info.Path));
+        Logger.Info("movie info Path: {0}", info.ToString());
+        // Logger.Info("movie info Path: {0}", GetFileNameWithoutExtension(info.Path));
         Logger.Info("Get movie info: {0}", pid.ToString());
 
         var m = await ApiClient.GetMovieInfoAsync(pid.Provider, pid.Id, cancellationToken);
@@ -79,7 +79,7 @@ public class MovieProvider : BaseProvider, IRemoteMetadataProvider<Movie, MovieI
         // Build parameters.
         var parameters = new Dictionary<string, string>
         {
-            { @"{file_name}", GetFileNameWithoutExtension(info.Path) },
+            { @"{file_name}", info.Name },
             { @"{provider}", m.Provider },
             { @"{id}", m.Id },
             { @"{number}", m.Number },
