@@ -47,10 +47,10 @@ public static class TranslationHelper
                 });
                 break;
             case TranslationEngine.OpenAI:
-                millisecondsDelay = 100;
+                millisecondsDelay = 1000;
                 nv.Add(new NameValueCollection
                 {
-                    { "openai-api-key", Configuration.OpenAIApiKey }
+                    { "openai-api-key", Configuration.OpenAiApiKey }
                 });
                 break;
             default:
