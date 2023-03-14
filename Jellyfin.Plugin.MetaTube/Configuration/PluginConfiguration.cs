@@ -68,8 +68,6 @@ public class PluginConfiguration : BasePluginConfiguration
 
     public string DeepLApiKey { get; set; } = string.Empty;
 
-    public string OpenAiApiKey { get; set; } = string.Empty;
-
     #endregion
 
     #region Provider

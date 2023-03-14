@@ -5,6 +5,5 @@ public enum TranslationEngine
     Baidu,
     Google,
     GoogleFree,
-    DeepL,
-    OpenAI
+    DeepL
 }
