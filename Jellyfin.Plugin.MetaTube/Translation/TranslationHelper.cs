@@ -46,6 +46,13 @@ public static class TranslationHelper
                     { "deepl-api-key", Configuration.DeepLApiKey }
                 });
                 break;
+            case TranslationEngine.OpenAI:
+                millisecondsDelay = 1000;
+                nv.Add(new NameValueCollection
+                {
+                    { "openai-api-key", Configuration.OpenAiApiKey }
+                });
+                break;
             default:
                 throw new ArgumentException($"Invalid translation engine: {Configuration.TranslationEngine}");
         }
