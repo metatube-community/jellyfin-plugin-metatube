@@ -46,7 +46,7 @@ public static class TranslationHelper
                     { "deepl-api-key", Configuration.DeepLApiKey }
                 });
                 break;
-            case TranslationEngine.OpenAI:
+            case TranslationEngine.OpenAi:
                 millisecondsDelay = 1000;
                 nv.Add(new NameValueCollection
                 {

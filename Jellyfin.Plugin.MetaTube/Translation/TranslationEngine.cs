@@ -6,5 +6,5 @@ public enum TranslationEngine
     Google,
     GoogleFree,
     DeepL,
-    OpenAI
+    OpenAi
 }
