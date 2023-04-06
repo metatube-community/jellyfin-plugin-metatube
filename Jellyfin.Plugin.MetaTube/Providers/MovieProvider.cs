@@ -86,6 +86,11 @@ public class MovieProvider : BaseProvider, IRemoteMetadataProvider<Movie, MovieI
         if (Configuration.TranslationMode != TranslationMode.Disabled)
             await TranslateMovieInfo(m, info.MetadataLanguage, cancellationToken);
 
+        // Distinct and clean blank list
+        m.Genres = m.Genres?.Where(x => !string.IsNullOrWhiteSpace(x)).Distinct().ToArray() ?? Array.Empty<string>();
+        m.Actors = m.Actors?.Where(x => !string.IsNullOrWhiteSpace(x)).Distinct().ToArray() ?? Array.Empty<string>();
+        m.PreviewImages = m.PreviewImages?.Where(x => !string.IsNullOrWhiteSpace(x)).Distinct().ToArray() ?? Array.Empty<string>();
+
         // Build parameters.
         var parameters = new Dictionary<string, string>
         {
