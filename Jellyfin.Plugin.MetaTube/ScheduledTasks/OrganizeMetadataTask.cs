@@ -157,7 +157,7 @@ public class OrganizeMetadataTask : IScheduledTask
         if (string.IsNullOrWhiteSpace(filename))
             return false;
 
-        return filename.Contains(ChineseSubtitle) || HasTag(filename, "C", "ch");
+        return filename.Contains(ChineseSubtitle) || HasTag(filename, "C", "UC", "ch");
     }
 
     private static bool HasExternalChineseSubtitle(string path)
