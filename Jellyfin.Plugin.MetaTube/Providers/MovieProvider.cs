@@ -20,11 +20,11 @@ namespace Jellyfin.Plugin.MetaTube.Providers;
 
 public class MovieProvider : BaseProvider, IRemoteMetadataProvider<Movie, MovieInfo>, IHasOrder
 {
-    private const string AvWiki = "AVWIKI";
+    private const string AvBase = "AVBASE";
     private const string GFriends = "GFriends";
     private const string Rating = "JP-18+";
 
-    private static readonly string[] AvWikiSupportedProviderNames = { "DUGA", "FANZA", "Getchu", "MGS", "Pcolle" };
+    private static readonly string[] AvBaseSupportedProviderNames = { "DUGA", "FANZA", "Getchu", "MGS", "Pcolle" };
 
 #if __EMBY__
     public MovieProvider(ILogManager logManager) : base(logManager.CreateLogger<MovieProvider>())
@@ -244,19 +244,19 @@ public class MovieProvider : BaseProvider, IRemoteMetadataProvider<Movie, MovieI
 
     private async Task ConvertToRealActorNames(MovieSearchResult m, CancellationToken cancellationToken)
     {
-        if (!AvWikiSupportedProviderNames.Contains(m.Provider, StringComparer.OrdinalIgnoreCase)) return;
+        if (!AvBaseSupportedProviderNames.Contains(m.Provider, StringComparer.OrdinalIgnoreCase)) return;
 
         try
         {
-            var searchResults = await ApiClient.SearchMovieAsync(m.Id, AvWiki, cancellationToken);
+            var searchResults = await ApiClient.SearchMovieAsync(m.Id, AvBase, cancellationToken);
             if (!searchResults.Any())
             {
-                Logger.Warn("Movie not found on AVWIKI: {0}", m.Id);
+                Logger.Warn("Movie not found on AVBASE: {0}", m.Id);
             }
             else if (searchResults.Count > 1)
             {
                 // Ignore multiple results to avoid ambiguity.
-                Logger.Warn("Multiple movies found on AVWIKI: {0}", m.Id);
+                Logger.Warn("Multiple movies found on AVBASE: {0}", m.Id);
             }
             else
             {
