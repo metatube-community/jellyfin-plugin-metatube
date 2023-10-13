@@ -9,7 +9,7 @@
         <Authors>MetaTube</Authors>
         <Description>Meta Tube Plugin for Jellyfin/Emby</Description>
         <Version>$([System.DateTime]::UtcNow.ToString(yyyy.Mdd.Hmm.0))</Version>
-        <Copyright>Copyright © 2022 MetaTube</Copyright>
+        <Copyright>Copyright © 2023 MetaTube</Copyright>
         <RepositoryType>Git</RepositoryType>
         <RepositoryUrl>https://github.com/metatube-community/jellyfin-plugin-metatube.git</RepositoryUrl>
         <PackageProjectUrl>https://github.com/metatube-community/jellyfin-plugin-metatube</PackageProjectUrl>
