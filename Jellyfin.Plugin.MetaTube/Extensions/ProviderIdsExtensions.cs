@@ -17,7 +17,7 @@ public static class ProviderIdsExtensions
         var pid = new ProviderId
         {
             Provider = provider,
-            Id = id,
+            Id = Uri.EscapeDataString(id),
             Position = position,
             Update = update
         };
