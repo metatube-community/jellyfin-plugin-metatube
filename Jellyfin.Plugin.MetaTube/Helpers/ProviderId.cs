@@ -16,7 +16,7 @@ public class ProviderId
         return new ProviderId
         {
             Provider = values?.Length > 0 ? values[0] : string.Empty,
-            Id = values?.Length > 1 ? values[1] : string.Empty,
+            Id = values?.Length > 1 ? Uri.UnescapeDataString(values[1]) : string.Empty,
             Position = values?.Length > 2 ? ToDouble(values[2]) : null,
             Update = values?.Length > 3 ? ToBool(values[3]) : null
         };
