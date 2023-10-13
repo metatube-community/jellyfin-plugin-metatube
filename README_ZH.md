@@ -75,4 +75,4 @@ _注意：本项目仅支持 Jellyfin/Emby 稳定版。_
 
 ## 星星
 
-[![Stargazers over time](https://starchart.cc/metatube-community/jellyfin-plugin-metatube.svg)](https://starchart.cc/metatube-community/jellyfin-plugin-metatube)
+[![Star History Chart](https://api.star-history.com/svg?repos=metatube-community/jellyfin-plugin-metatube&type=Date)](https://star-history.com/#metatube-community/jellyfin-plugin-metatube&Date)
