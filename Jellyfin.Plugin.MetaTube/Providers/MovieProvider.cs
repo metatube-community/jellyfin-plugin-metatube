@@ -75,7 +75,8 @@ public class MovieProvider : BaseProvider, IRemoteMetadataProvider<Movie, MovieI
         // Distinct and clean blank list
         m.Genres = m.Genres?.Where(x => !string.IsNullOrWhiteSpace(x)).Distinct().ToArray() ?? Array.Empty<string>();
         m.Actors = m.Actors?.Where(x => !string.IsNullOrWhiteSpace(x)).Distinct().ToArray() ?? Array.Empty<string>();
-        m.PreviewImages = m.PreviewImages?.Where(x => !string.IsNullOrWhiteSpace(x)).Distinct().ToArray() ?? Array.Empty<string>();
+        m.PreviewImages = m.PreviewImages?.Where(
+            x => !string.IsNullOrWhiteSpace(x)).Distinct().ToArray() ?? Array.Empty<string>();
 
         // Build parameters.
         var parameters = new Dictionary<string, string>
@@ -201,11 +202,14 @@ public class MovieProvider : BaseProvider, IRemoteMetadataProvider<Movie, MovieI
         if (Configuration.EnableMovieProviderFilter)
         {
             var filter = Configuration.GetMovieProviderFilter();
-            // Filter out mismatched results.
-            searchResults.RemoveAll(m => !filter.Contains(m.Provider, StringComparer.OrdinalIgnoreCase));
-            // Reorder results by stable sort.
-            searchResults = searchResults
-                .OrderBy(m => filter.FindIndex(s => s.Equals(m.Provider, StringComparison.OrdinalIgnoreCase))).ToList();
+            if (filter.Any()) // Apply only if filter is not empty.
+            {
+                // Filter out mismatched results.
+                searchResults.RemoveAll(m => !filter.Contains(m.Provider, StringComparer.OrdinalIgnoreCase));
+                // Reorder results by stable sort.
+                searchResults = searchResults.OrderBy(
+                    m => filter.FindIndex(s => s.Equals(m.Provider, StringComparison.OrdinalIgnoreCase))).ToList();
+            }
         }
 
         foreach (var m in searchResults)
