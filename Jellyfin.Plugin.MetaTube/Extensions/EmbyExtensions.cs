@@ -105,7 +105,8 @@ public static class EmbyExtensions
                 }
                 else
                 {
-                    num = string.Compare(stringBuilder1.ToString(), stringBuilder2.ToString(), StringComparison.CurrentCulture);
+                    num = string.Compare(stringBuilder1.ToString(), stringBuilder2.ToString(),
+                        StringComparison.CurrentCulture);
                 }
 
                 if (num != 0)
