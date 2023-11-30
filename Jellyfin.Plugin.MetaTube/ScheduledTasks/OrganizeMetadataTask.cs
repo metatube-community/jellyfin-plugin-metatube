@@ -2,7 +2,6 @@ using System.Text.RegularExpressions;
 using Jellyfin.Plugin.MetaTube.Extensions;
 using MediaBrowser.Controller.Entities;
 using MediaBrowser.Controller.Library;
-using MediaBrowser.Controller.Sorting;
 using MediaBrowser.Model.Entities;
 using MediaBrowser.Model.Tasks;
 #if __EMBY__
@@ -10,6 +9,7 @@ using MediaBrowser.Controller.Entities.Movies;
 using MediaBrowser.Model.Logging;
 
 #else
+using MediaBrowser.Controller.Sorting;
 using Microsoft.Extensions.Logging;
 using Jellyfin.Data.Enums;
 #endif
