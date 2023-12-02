@@ -30,7 +30,7 @@
 
 ## About
 
-Metadata Tube Plugin for Jellyfin/Emby.
+MetaTube Plugin for Jellyfin/Emby.
 
 ## Features
 
