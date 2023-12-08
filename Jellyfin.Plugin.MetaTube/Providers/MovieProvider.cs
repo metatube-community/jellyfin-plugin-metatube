@@ -201,14 +201,18 @@ public class MovieProvider : BaseProvider, IRemoteMetadataProvider<Movie, MovieI
 
         if (Configuration.EnableMovieProviderFilter)
         {
-            var filter = Configuration.GetMovieProviderFilter();
-            if (filter.Any()) // Apply only if filter is not empty.
+            if (Configuration.GetMovieProviderFilter() is { } filter &&
+                filter.Any()) // Apply only if filter is not empty.
             {
                 // Filter out mismatched results.
                 searchResults.RemoveAll(m => !filter.Contains(m.Provider, StringComparer.OrdinalIgnoreCase));
                 // Reorder results by stable sort.
                 searchResults = searchResults.OrderBy(
                     m => filter.FindIndex(s => s.Equals(m.Provider, StringComparison.OrdinalIgnoreCase))).ToList();
+            }
+            else
+            {
+                Logger.Warn("Movie provider filter enabled but never used");
             }
         }
 
