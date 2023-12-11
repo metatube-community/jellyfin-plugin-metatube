@@ -6,13 +6,25 @@
 <br/>
 <br/>
 
-<a href="https://github.com/metatube-community/jellyfin-plugin-metatube/actions"><img alt="GitHub Workflow Status" src="https://img.shields.io/github/actions/workflow/status/metatube-community/jellyfin-plugin-metatube/dotnetcore.yml?branch=main&logo=github"></a>
-<a href="https://github.com/metatube-community/jellyfin-plugin-metatube/search?l=c%23"><img alt="GitHub top language" src="https://img.shields.io/github/languages/top/metatube-community/jellyfin-plugin-metatube?color=%23239120&label=.NET&logo=csharp"></a>
-<a href="https://github.com/metatube-community/jellyfin-plugin-metatube/blob/main/LICENSE"><img alt="License" src="https://img.shields.io/github/license/metatube-community/jellyfin-plugin-metatube"></a>
-<a href="https://t.me/MetaTubePlugin"><img alt="Telegram Group" src="https://img.shields.io/badge/Telegram-2CA5E0?logo=telegram&logoColor=white"></a>
-<a href="https://github.com/metatube-community/jellyfin-plugin-metatube"><img alt="Downloads" src="https://img.shields.io/github/downloads/metatube-community/jellyfin-plugin-metatube/total"></a>
-<a href="https://hub.docker.com/r/metatube/metatube-server"><img alt="Docker Pulls" src="https://img.shields.io/docker/pulls/metatube/metatube-server?logo=docker"></a>
-<a href="https://github.com/metatube-community/jellyfin-plugin-metatube/releases"><img alt="Releases" src="https://img.shields.io/github/v/release/metatube-community/jellyfin-plugin-metatube?include_prereleases&logo=smartthings"></a>
+<a href="https://github.com/metatube-community/jellyfin-plugin-metatube/actions">
+<img alt="GitHub Workflow Status" src="https://img.shields.io/github/actions/workflow/status/metatube-community/jellyfin-plugin-metatube/dotnetcore.yml?branch=main&logo=github">
+</a>
+<a href="https://github.com/metatube-community/jellyfin-plugin-metatube/search?l=c%23">
+<img alt="GitHub top language" src="https://img.shields.io/github/languages/top/metatube-community/jellyfin-plugin-metatube?color=%23239120&label=.NET&logo=csharp">
+</a>
+<a href="https://github.com/metatube-community/jellyfin-plugin-metatube/blob/main/LICENSE">
+<img alt="License" src="https://img.shields.io/github/license/metatube-community/jellyfin-plugin-metatube">
+</a>
+<a href="https://t.me/MetaTubePlugin">
+<img alt="Telegram Group" src="https://img.shields.io/badge/Telegram-2CA5E0?logo=telegram&logoColor=white">
+</a>
+<a href="https://github.com/metatube-community/jellyfin-plugin-metatube">
+<img alt="Downloads" src="https://img.shields.io/github/downloads/metatube-community/jellyfin-plugin-metatube/total"></a>
+<a href="https://hub.docker.com/r/metatube/metatube-server"><img alt="Docker Pulls" src="https://img.shields.io/docker/pulls/metatube/metatube-server?logo=docker">
+</a>
+<a href="https://github.com/metatube-community/jellyfin-plugin-metatube/releases">
+<img alt="Releases" src="https://img.shields.io/github/v/release/metatube-community/jellyfin-plugin-metatube?include_prereleases&logo=smartthings">
+</a>
 </p>
 
 ## About
