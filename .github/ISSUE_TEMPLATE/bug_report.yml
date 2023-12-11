@@ -11,7 +11,7 @@ body:
         - label: Is this something you can **debug and fix**? Send a pull request! Bug fixes and documentation fixes are welcome.
           required: true
 
-        - label: I have read the [Wiki](https://github.com/metatube-community/jellyfin-plugin-metatube/wiki), especially the [FAQ](https://github.com/metatube-community/jellyfin-plugin-metatube/wiki/%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98) page.
+        - label: I have read the [Wiki](https://metatube-community.github.io/wiki/), especially the [FAQ](https://metatube-community.github.io/faq/) page.
           required: true
 
         - label: I have searched on the [issue tracker](……/) for a related issue.
