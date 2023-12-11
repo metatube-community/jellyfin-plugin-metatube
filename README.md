@@ -27,6 +27,7 @@
 <a href="https://github.com/metatube-community/jellyfin-plugin-metatube/releases">
 <img alt="Releases" src="https://img.shields.io/github/v/release/metatube-community/jellyfin-plugin-metatube?include_prereleases&logo=smartthings">
 </a>
+</p>
 
 ## About
 
