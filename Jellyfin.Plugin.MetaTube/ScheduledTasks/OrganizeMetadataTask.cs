@@ -168,7 +168,7 @@ public class OrganizeMetadataTask : IScheduledTask
 
     private static bool HasExternalChineseSubtitle(string basename, IEnumerable<string> files)
     {
-        var r = new Regex(@"\.(chinese|ch[ist]|zh(-(cn|hk|tw|hans|hant))?)\.(ass|srt|ssa|stl|sub|vid|vtt)$",
+        var r = new Regex(@"\.(ch[ist]|zho?(-(cn|hk|sg|tw))?)\.(ass|srt|ssa|smi|sub|idx|psb|vtt)$",
             RegexOptions.IgnoreCase | RegexOptions.CultureInvariant | RegexOptions.Compiled);
         return files.Any(name => r.IsMatch(name) &&
                                  r.Replace(name, string.Empty)
