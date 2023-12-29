@@ -56,13 +56,12 @@ public static class ApiClient
         });
     }
 
-    private static string ComposeSearchApiUrl(string path, string q, string provider, string lang, bool fallback)
+    private static string ComposeSearchApiUrl(string path, string q, string provider, bool fallback)
     {
         return ComposeUrl(path, new NameValueCollection
         {
             { "q", q },
             { "provider", provider },
-            { "lang", lang },
             { "fallback", fallback.ToString() }
         });
     }
@@ -179,7 +178,7 @@ public static class ApiClient
     public static async Task<List<ActorSearchResult>> SearchActorAsync(string q, string provider,
         bool fallback, CancellationToken cancellationToken)
     {
-        var apiUrl = ComposeSearchApiUrl(ActorSearchApi, q, provider, string.Empty, fallback);
+        var apiUrl = ComposeSearchApiUrl(ActorSearchApi, q, provider, fallback);
         return await GetDataAsync<List<ActorSearchResult>>(apiUrl, true, cancellationToken);
     }
 
@@ -192,19 +191,13 @@ public static class ApiClient
     public static async Task<List<MovieSearchResult>> SearchMovieAsync(string q, string provider,
         CancellationToken cancellationToken)
     {
-        return await SearchMovieAsync(q, provider, string.Empty, true /* default */, cancellationToken);
+        return await SearchMovieAsync(q, provider, true /* default */, cancellationToken);
     }
 
-    public static async Task<List<MovieSearchResult>> SearchMovieAsync(string q, string provider, string lang,
-        CancellationToken cancellationToken)
-    {
-        return await SearchMovieAsync(q, provider, lang, true /* default */, cancellationToken);
-    }
-
-    public static async Task<List<MovieSearchResult>> SearchMovieAsync(string q, string provider, string lang,
+    public static async Task<List<MovieSearchResult>> SearchMovieAsync(string q, string provider,
         bool fallback, CancellationToken cancellationToken)
     {
-        var apiUrl = ComposeSearchApiUrl(MovieSearchApi, q, provider, lang, fallback);
+        var apiUrl = ComposeSearchApiUrl(MovieSearchApi, q, provider, fallback);
         return await GetDataAsync<List<MovieSearchResult>>(apiUrl, true, cancellationToken);
     }
 

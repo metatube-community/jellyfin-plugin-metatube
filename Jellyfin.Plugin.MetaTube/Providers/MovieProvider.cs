@@ -69,7 +69,7 @@ public class MovieProvider : BaseProvider, IRemoteMetadataProvider<Movie, MovieI
             m.Genres = Configuration.GetGenreSubstitutionTable().Substitute(m.Genres).ToArray();
 
         // Translate movie info.
-        if (Configuration.TranslationMode != TranslationMode.Disabled && info.MetadataCountryCode != "CN")
+        if (Configuration.TranslationMode != TranslationMode.Disabled)
             await TranslateMovieInfo(m, info.MetadataLanguage, cancellationToken);
 
         // Distinct and clean blank list
@@ -177,19 +177,12 @@ public class MovieProvider : BaseProvider, IRemoteMetadataProvider<Movie, MovieI
     {
         var pid = info.GetPid(Name);
 
-        var lang = info.MetadataCountryCode switch
-        {
-            "CN" => "zh",
-            "JP" => "ja",
-            _ => string.Empty
-        };
-
         var searchResults = new List<MovieSearchResult>();
         if (string.IsNullOrWhiteSpace(pid.Id) || string.IsNullOrWhiteSpace(pid.Provider))
         {
             // Search movie by name.
             Logger.Info("Search for movie: {0}", info.Name);
-            searchResults.AddRange(await ApiClient.SearchMovieAsync(info.Name, pid.Provider, lang, cancellationToken));
+            searchResults.AddRange(await ApiClient.SearchMovieAsync(info.Name, pid.Provider, cancellationToken));
         }
         else
         {
