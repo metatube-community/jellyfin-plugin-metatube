@@ -24,7 +24,7 @@ public class MovieProvider : BaseProvider, IRemoteMetadataProvider<Movie, MovieI
     private const string GFriends = "GFriends";
     private const string Rating = "JP-18+";
 
-    private static readonly string[] AvBaseSupportedProviderNames = { "DUGA", "FANZA", "Getchu", "MGS", "Pcolle" };
+    private static readonly string[] AvBaseSupportedProviderNames = { "DUGA", "FANZA", "Getchu", "MGS" };
 
 #if __EMBY__
     public MovieProvider(ILogManager logManager) : base(logManager.CreateLogger<MovieProvider>())
