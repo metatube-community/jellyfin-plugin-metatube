@@ -30,7 +30,6 @@ public class PluginConfiguration : BasePluginConfiguration
 #if __EMBY__
     [DisplayName("Token")]
     [Description("Access token for the MetaTube Server, or blank if no token is set by the backend.")]
-    [IsPassword]
 #endif
     public string Token { get; set; } = string.Empty;
 
