@@ -1,25 +1,34 @@
 using Jellyfin.Plugin.MetaTube.Configuration;
-using MediaBrowser.Common.Configuration;
 using MediaBrowser.Common.Plugins;
+#if __EMBY__
+using MediaBrowser.Common;
+using MediaBrowser.Controller.Plugins;
+using MediaBrowser.Model.Drawing;
+
+#else
 using MediaBrowser.Model.Plugins;
 using MediaBrowser.Model.Serialization;
-#if __EMBY__
-using MediaBrowser.Model.Drawing;
+using MediaBrowser.Common.Configuration;
 #endif
 
 namespace Jellyfin.Plugin.MetaTube;
 
 #if __EMBY__
-public class Plugin : BasePlugin<PluginConfiguration>, IHasWebPages, IHasThumbImage
+public class Plugin : BasePluginSimpleUI<PluginConfiguration>, IHasThumbImage
+{
+    public Plugin(IApplicationHost applicationHost) : base(applicationHost)
+    {
+        Instance = this;
+    }
 #else
 public class Plugin : BasePlugin<PluginConfiguration>, IHasWebPages
-#endif
 {
     public Plugin(IApplicationPaths applicationPaths, IXmlSerializer xmlSerializer) : base(applicationPaths,
         xmlSerializer)
     {
         Instance = this;
     }
+#endif
 
     public override string Name => "MetaTube";
 
@@ -29,6 +38,7 @@ public class Plugin : BasePlugin<PluginConfiguration>, IHasWebPages
 
     public static Plugin Instance { get; private set; }
 
+#if !__EMBY__
     public IEnumerable<PluginPageInfo> GetPages()
     {
         return new[]
@@ -40,8 +50,11 @@ public class Plugin : BasePlugin<PluginConfiguration>, IHasWebPages
             }
         };
     }
+#endif
 
 #if __EMBY__
+    public PluginConfiguration Configuration => GetOptions();
+
     public Stream GetThumbImage()
     {
         return GetType().Assembly.GetManifestResourceStream($"{GetType().Namespace}.thumb.png");

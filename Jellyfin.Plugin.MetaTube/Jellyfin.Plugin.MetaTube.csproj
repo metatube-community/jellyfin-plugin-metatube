@@ -34,10 +34,10 @@
     </ItemGroup>
 
     <ItemGroup Condition="'$(Configuration)'=='Debug.Emby' or '$(Configuration)'=='Release.Emby'">
-        <PackageReference Include="MediaBrowser.Server.Core" Version="4.7.1"/>
+        <PackageReference Include="MediaBrowser.Server.Core" Version="4.8.0.80"/>
     </ItemGroup>
 
-    <ItemGroup>
+    <ItemGroup Condition="'$(Configuration)'=='Debug' or '$(Configuration)'=='Release'">
         <None Remove="Configuration\configPage.html"/>
         <EmbeddedResource Include="Configuration\configPage.html"/>
     </ItemGroup>
