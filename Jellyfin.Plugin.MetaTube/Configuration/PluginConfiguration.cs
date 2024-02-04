@@ -25,7 +25,7 @@ public class PluginConfiguration : BasePluginConfiguration
     [Description("Full url of the MetaTube Server, HTTPS protocol is recommended.")]
     [Required]
 #endif
-    public string Server { get; set; } = "https://api.metatube.internal";
+    public string Server { get; set; } = string.Empty;
 
 #if __EMBY__
     [DisplayName("Token")]
