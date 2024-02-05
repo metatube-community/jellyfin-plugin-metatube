@@ -175,6 +175,12 @@ public class PluginConfiguration : BasePluginConfiguration
     public string OpenAiApiKey { get; set; } = string.Empty;
 
 #if __EMBY__
+    [DisplayName("OpenAI Prompt")]
+    [Description("Custom prompt for OpenAI.")]
+#endif
+    public string OpenAiPrompt { get; set; } = string.Empty;
+
+#if __EMBY__
     [DisplayName("Enable title substitution")]
 #endif
     public bool EnableTitleSubstitution { get; set; } = false;

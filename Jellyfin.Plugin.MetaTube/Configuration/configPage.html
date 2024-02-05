@@ -289,31 +289,37 @@
                 $('.selectTranslationEngineGoogle').css('display', 'none');
                 $('.selectTranslationEngineDeepL').css('display', 'none');
                 $('.selectTranslationEngineOpenAi').css('display', 'none');
+                $('#txtOpenAiPrompt').parent().hide();
             } else if (this.value === "Google") {
                 $('.selectTranslationEngineBaidu').css('display', 'none');
                 $('.selectTranslationEngineGoogle').css('display', 'inherit');
                 $('.selectTranslationEngineDeepL').css('display', 'none');
                 $('.selectTranslationEngineOpenAi').css('display', 'none');
+                $('#txtOpenAiPrompt').parent().hide();
             } else if (this.value === "GoogleFree") {
                 $('.selectTranslationEngineBaidu').css('display', 'none');
                 $('.selectTranslationEngineGoogle').css('display', 'none');
                 $('.selectTranslationEngineDeepL').css('display', 'none');
                 $('.selectTranslationEngineOpenAi').css('display', 'none');
+                $('#txtOpenAiPrompt').parent().hide();
             } else if (this.value === "DeepL") {
                 $('.selectTranslationEngineBaidu').css('display', 'none');
                 $('.selectTranslationEngineGoogle').css('display', 'none');
                 $('.selectTranslationEngineDeepL').css('display', 'inherit');
                 $('.selectTranslationEngineOpenAi').css('display', 'none');
+                $('#txtOpenAiPrompt').parent().hide();
             } else if (this.value === "OpenAi") {
                 $('.selectTranslationEngineBaidu').css('display', 'none');
                 $('.selectTranslationEngineGoogle').css('display', 'none');
                 $('.selectTranslationEngineDeepL').css('display', 'none');
                 $('.selectTranslationEngineOpenAi').css('display', 'inherit');
+                $('#txtOpenAiPrompt').parent().show();
             } else {
                 $('.selectTranslationEngineBaidu').css('display', 'none');
                 $('.selectTranslationEngineGoogle').css('display', 'none');
                 $('.selectTranslationEngineDeepL').css('display', 'none');
                 $('.selectTranslationEngineOpenAi').css('display', 'none');
+                $('#txtOpenAiPrompt').parent().hide();
             }
         });
 
@@ -344,6 +350,7 @@
                 $('#txtGoogleApiKey', page).val(config.GoogleApiKey).change();
                 $('#txtDeepLApiKey', page).val(config.DeepLApiKey).change();
                 $('#txtOpenAiApiKey', page).val(config.OpenAiApiKey).change();
+                $('#txtOpenAiPrompt', page).val(config.OpenAiPrompt).change();
                 page.querySelector('#chkEnableTitleSubstitution').checked = config.EnableTitleSubstitution;
                 $('#txtTitleRawSubstitutionTable', page).val(config.TitleRawSubstitutionTable).change();
                 page.querySelector('#chkEnableActorSubstitution').checked = config.EnableActorSubstitution;
@@ -381,6 +388,7 @@
                 config.GoogleApiKey = $('#txtGoogleApiKey', form).val();
                 config.DeepLApiKey = $('#txtDeepLApiKey', form).val();
                 config.OpenAiApiKey = $('#txtOpenAiApiKey', form).val();
+                config.OpenAiPrompt = $('#txtOpenAiPrompt', form).val();
                 config.EnableTitleSubstitution = $('#chkEnableTitleSubstitution', form).prop('checked');
                 config.TitleRawSubstitutionTable = $('#txtTitleRawSubstitutionTable', form).val();
                 config.EnableActorSubstitution = $('#chkEnableActorSubstitution', form).prop('checked');
