@@ -1,4 +1,5 @@
 using System.Text;
+using Jellyfin.Data.Enums;
 using Jellyfin.Plugin.MetaTube.Configuration;
 using Jellyfin.Plugin.MetaTube.Extensions;
 using Jellyfin.Plugin.MetaTube.Metadata;
@@ -155,7 +156,7 @@ public class MovieProvider : BaseProvider, IRemoteMetadataProvider<Movie, MovieI
             result.AddPerson(new PersonInfo
             {
                 Name = m.Director,
-                Type = PersonType.Director
+                Type = PersonKind.Director
             });
 
         // Add actors.
@@ -164,7 +165,7 @@ public class MovieProvider : BaseProvider, IRemoteMetadataProvider<Movie, MovieI
             result.AddPerson(new PersonInfo
             {
                 Name = name,
-                Type = PersonType.Actor,
+                Type = PersonKind.Actor,
                 ImageUrl = await GetActorImageUrl(name, cancellationToken)
             });
         }
