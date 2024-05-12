@@ -13,6 +13,7 @@ using MovieInfo = MediaBrowser.Controller.Providers.MovieInfo;
 using MediaBrowser.Model.Logging;
 
 #else
+using Jellyfin.Data.Enums;
 using Microsoft.Extensions.Logging;
 #endif
 
@@ -155,7 +156,11 @@ public class MovieProvider : BaseProvider, IRemoteMetadataProvider<Movie, MovieI
             result.AddPerson(new PersonInfo
             {
                 Name = m.Director,
+#if __EMBY__
                 Type = PersonType.Director
+#else
+                Type = PersonKind.Director
+#endif
             });
 
         // Add actors.
@@ -164,7 +169,11 @@ public class MovieProvider : BaseProvider, IRemoteMetadataProvider<Movie, MovieI
             result.AddPerson(new PersonInfo
             {
                 Name = name,
+#if __EMBY__
                 Type = PersonType.Actor,
+#else
+                Type = PersonKind.Actor,
+#endif
                 ImageUrl = await GetActorImageUrl(name, cancellationToken)
             });
         }

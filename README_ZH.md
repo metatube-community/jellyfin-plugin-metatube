@@ -44,7 +44,7 @@
 
 ## 平台
 
-[![Jellyfin](https://img.shields.io/static/v1?color=%2300A4DC&style=for-the-badge&label=Jellyfin&logo=jellyfin&message=10.8.x)](https://jellyfin.org/)
+[![Jellyfin](https://img.shields.io/static/v1?color=%2300A4DC&style=for-the-badge&label=Jellyfin&logo=jellyfin&message=10.9.x)](https://jellyfin.org/)
 [![Emby](https://img.shields.io/static/v1?color=%2352B54B&style=for-the-badge&label=Emby&logo=emby&message=4.8.x)](https://emby.media/)
 
 _注意：本项目仅支持 Jellyfin/Emby 稳定版。_

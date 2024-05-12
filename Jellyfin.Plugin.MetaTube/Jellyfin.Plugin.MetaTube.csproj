@@ -1,7 +1,6 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
     <PropertyGroup>
-        <TargetFramework>net6.0</TargetFramework>
         <ImplicitUsings>enable</ImplicitUsings>
         <Configurations>Debug;Release;Debug.Emby;Release.Emby</Configurations>
         <Platforms>AnyCPU</Platforms>
@@ -20,6 +19,14 @@
         <Product>MetaTube</Product>
     </PropertyGroup>
 
+    <PropertyGroup Condition="'$(Configuration)'=='Debug' or '$(Configuration)'=='Release'">
+        <TargetFramework>net8.0</TargetFramework>
+    </PropertyGroup>
+
+    <PropertyGroup Condition="'$(Configuration)'=='Debug.Emby' or '$(Configuration)'=='Release.Emby'">
+        <TargetFramework>net6.0</TargetFramework>
+    </PropertyGroup>
+
     <PropertyGroup Condition="'$(Configuration)'=='Debug.Emby' or '$(Configuration)'=='Release.Emby'">
         <DefineConstants>__EMBY__</DefineConstants>
     </PropertyGroup>
@@ -29,8 +36,8 @@
     </ItemGroup>
 
     <ItemGroup Condition="'$(Configuration)'=='Debug' or '$(Configuration)'=='Release'">
-        <PackageReference Include="Jellyfin.Controller" Version="10.8.0"/>
-        <PackageReference Include="Jellyfin.Model" Version="10.8.0"/>
+        <PackageReference Include="Jellyfin.Controller" Version="10.9.0"/>
+        <PackageReference Include="Jellyfin.Model" Version="10.9.0"/>
     </ItemGroup>
 
     <ItemGroup Condition="'$(Configuration)'=='Debug.Emby' or '$(Configuration)'=='Release.Emby'">

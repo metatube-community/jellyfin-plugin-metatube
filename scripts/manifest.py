@@ -15,7 +15,7 @@ def generate(filename, version):
     return {
         'checksum': md5sum(filename),
         'changelog': 'Auto Released by Actions',
-        'targetAbi': '10.8.0.0',
+        'targetAbi': '10.9.0.0',
         'sourceUrl': 'https://github.com/metatube-community/jellyfin-plugin-metatube/releases/download/'
                      f'v{version}/Jellyfin.MetaTube@v{version}.zip',
         'timestamp': datetime.now().strftime('%Y-%m-%dT%H:%M:%SZ'),
