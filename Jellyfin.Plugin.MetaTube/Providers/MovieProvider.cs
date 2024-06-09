@@ -250,15 +250,10 @@ public class MovieProvider : BaseProvider, IRemoteMetadataProvider<Movie, MovieI
             var results = await ApiClient.SearchActorAsync(actor.Name, cancellationToken);
             // Use GFriends as actor image provider.
             foreach (var result in results.Where(result => result.Provider == GFriends && result.Images?.Any() == true))
-            {
                 actor.ImageUrl = result.Images.First();
-            }
 
             // Use the first Result as PID.
-            if (results.Any())
-            {
-                actor.SetPid(Name, results.First().Provider, results.First().Id);
-            }
+            if (results.Any()) actor.SetPid(Name, results.First().Provider, results.First().Id);
         }
         catch (Exception e)
         {
