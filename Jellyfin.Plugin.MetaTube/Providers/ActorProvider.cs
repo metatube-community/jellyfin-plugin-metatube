@@ -1,4 +1,3 @@
-using System.Globalization;
 using Jellyfin.Plugin.MetaTube.Extensions;
 using Jellyfin.Plugin.MetaTube.Metadata;
 using MediaBrowser.Controller.Entities;
@@ -115,7 +114,7 @@ public class ActorProvider : BaseProvider, IRemoteMetadataProvider<Person, Perso
             ("血液型", !string.IsNullOrEmpty(a.BloodType) ? $"{a.BloodType}型" : string.Empty),
             ("カップサイズ", a.CupSize),
             ("3サイズ", a.Measurements),
-            ("デビュー", a.DebutDate.GetValidDateTime()?.ToString(new CultureInfo("ja-JP"))),
+            ("デビュー", a.DebutDate.GetValidDateTime()?.ToString("yyyy年M月d日"))
         };
 
         return string.Join("\n<br>\n",
