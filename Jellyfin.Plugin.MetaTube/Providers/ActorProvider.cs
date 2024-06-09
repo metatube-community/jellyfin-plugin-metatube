@@ -1,3 +1,4 @@
+using System.Globalization;
 using Jellyfin.Plugin.MetaTube.Extensions;
 using Jellyfin.Plugin.MetaTube.Metadata;
 using MediaBrowser.Controller.Entities;
@@ -110,12 +111,11 @@ public class ActorProvider : BaseProvider, IRemoteMetadataProvider<Person, Perso
         var info = new List<(string, string)>
         {
             ("別名", string.Join(", ", aliases ?? Enumerable.Empty<string>())),
-            ("身長", a.Height > 0 ? a.Height.ToString() : string.Empty),
-            ("趣味", a.Hobby),
-            ("特技", a.Skill),
-            ("血液型", a.BloodType),
+            ("身長", a.Height > 0 ? $"{a.Height}cm" : string.Empty),
+            ("血液型", !string.IsNullOrEmpty(a.BloodType) ? $"{a.BloodType}型" : string.Empty),
             ("カップサイズ", a.CupSize),
-            ("スリーサイズ", a.Measurements)
+            ("3サイズ", a.Measurements),
+            ("デビュー", a.DebutDate.GetValidDateTime()?.ToString(new CultureInfo("ja-JP"))),
         };
 
         return string.Join("\n<br>\n",
