@@ -248,12 +248,16 @@ public class MovieProvider : BaseProvider, IRemoteMetadataProvider<Movie, MovieI
         try
         {
             var results = await ApiClient.SearchActorAsync(actor.Name, cancellationToken);
-            // Use GFriends as actor image provider.
+            // Use the first result as the primary actor selection.
+            if (results.Any())
+            {
+                actor.ImageUrl = results.First().Images?.FirstOrDefault();
+                actor.SetPid(Name, results.First().Provider, results.First().Id);
+            }
+
+            // Use the GFriends to update the actor profile image.
             foreach (var result in results.Where(result => result.Provider == GFriends && result.Images?.Any() == true))
                 actor.ImageUrl = result.Images.First();
-
-            // Use the first Result as PID.
-            if (results.Any()) actor.SetPid(Name, results.First().Provider, results.First().Id);
         }
         catch (Exception e)
         {
