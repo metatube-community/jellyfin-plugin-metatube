@@ -248,16 +248,27 @@ public class MovieProvider : BaseProvider, IRemoteMetadataProvider<Movie, MovieI
         try
         {
             var results = await ApiClient.SearchActorAsync(actor.Name, cancellationToken);
-            // Use the first result as the primary actor selection.
-            if (results.Any())
+            if (results?.Any() != true)
             {
-                actor.ImageUrl = results.First().Images?.FirstOrDefault();
-                actor.SetPid(Name, results.First().Provider, results.First().Id);
+                Logger.Warn("Actor not found: {0}", actor.Name);
+                return;
+            }
+
+            {
+                // Use the first result as the primary actor selection.
+                var firstResult = results.First();
+                if (firstResult.Images?.Any() == true)
+                    actor.ImageUrl = ApiClient.GetPrimaryImageApiUrl(
+                        firstResult.Provider, firstResult.Id, firstResult.Images.First(), 0.5, true);
+                actor.SetPid(Name, firstResult.Provider, firstResult.Id);
             }
 
             // Use the GFriends to update the actor profile image.
             foreach (var result in results.Where(result => result.Provider == GFriends && result.Images?.Any() == true))
-                actor.ImageUrl = result.Images.First();
+            {
+                actor.ImageUrl = ApiClient.GetPrimaryImageApiUrl(
+                    result.Provider, result.Id, result.Images.First(), 0.5, true);
+            }
         }
         catch (Exception e)
         {
@@ -272,7 +283,7 @@ public class MovieProvider : BaseProvider, IRemoteMetadataProvider<Movie, MovieI
         try
         {
             var searchResults = await ApiClient.SearchMovieAsync(m.Id, AvBase, cancellationToken);
-            if (!searchResults.Any())
+            if (searchResults?.Any() != true)
             {
                 Logger.Warn("Movie not found on AVBASE: {0}", m.Id);
             }
