@@ -247,27 +247,21 @@ public class MovieProvider : BaseProvider, IRemoteMetadataProvider<Movie, MovieI
     {
         try
         {
-            var results = await ApiClient.SearchActorAsync(actor.Name, cancellationToken);
+            // Use Gfriends as actor image provider.
+            var results = await ApiClient.SearchActorAsync(actor.Name, Gfriends, false, cancellationToken);
             if (results?.Any() != true)
             {
-                Logger.Warn("Actor not found: {0}", actor.Name);
+                Logger.Warn("Actor not found on {0}: {1}", Gfriends, actor.Name);
                 return;
             }
 
-            {
-                // Use the first result as the primary actor selection.
-                var firstResult = results.First();
-                if (firstResult.Images?.Any() == true)
-                    actor.ImageUrl = ApiClient.GetPrimaryImageApiUrl(
-                        firstResult.Provider, firstResult.Id, firstResult.Images.First(), 0.5, true);
-                actor.SetPid(Name, firstResult.Provider, firstResult.Id);
-            }
-
-            // Use the Gfriends to update the actor profile image.
-            foreach (var result in results.Where(result => result.Provider == Gfriends && result.Images?.Any() == true))
+            // Use the first result as the primary actor selection.
+            var firstResult = results.First();
+            if (firstResult.Images?.Any() == true)
             {
                 actor.ImageUrl = ApiClient.GetPrimaryImageApiUrl(
-                    result.Provider, result.Id, result.Images.First(), 0.5, true);
+                    firstResult.Provider, firstResult.Id, firstResult.Images.First(), 0.5, true);
+                // actor.SetUniqueId(actor.Name);
             }
         }
         catch (Exception e)
