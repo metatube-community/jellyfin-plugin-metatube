@@ -22,7 +22,7 @@ namespace Jellyfin.Plugin.MetaTube.Providers;
 public class MovieProvider : BaseProvider, IRemoteMetadataProvider<Movie, MovieInfo>, IHasOrder
 {
     private const string AvBase = "AVBASE";
-    private const string GFriends = "GFriends";
+    private const string Gfriends = "Gfriends";
     private const string Rating = "JP-18+";
 
     private static readonly string[] AvBaseSupportedProviderNames = { "DUGA", "FANZA", "Getchu", "MGS" };
@@ -263,8 +263,8 @@ public class MovieProvider : BaseProvider, IRemoteMetadataProvider<Movie, MovieI
                 actor.SetPid(Name, firstResult.Provider, firstResult.Id);
             }
 
-            // Use the GFriends to update the actor profile image.
-            foreach (var result in results.Where(result => result.Provider == GFriends && result.Images?.Any() == true))
+            // Use the Gfriends to update the actor profile image.
+            foreach (var result in results.Where(result => result.Provider == Gfriends && result.Images?.Any() == true))
             {
                 actor.ImageUrl = ApiClient.GetPrimaryImageApiUrl(
                     result.Provider, result.Id, result.Images.First(), 0.5, true);
