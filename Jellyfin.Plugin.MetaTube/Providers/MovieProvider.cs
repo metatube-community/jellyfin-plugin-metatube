@@ -261,7 +261,6 @@ public class MovieProvider : BaseProvider, IRemoteMetadataProvider<Movie, MovieI
             {
                 actor.ImageUrl = ApiClient.GetPrimaryImageApiUrl(
                     firstResult.Provider, firstResult.Id, firstResult.Images.First(), 0.5, true);
-                // actor.SetUniqueId(actor.Name);
             }
         }
         catch (Exception e)
