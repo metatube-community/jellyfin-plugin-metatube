@@ -124,11 +124,6 @@ public class PluginConfiguration : BasePluginConfiguration
     [DisplayName("Name template")]
 #endif
     public string NameTemplate { get; set; } = DefaultNameTemplate;
-    
-#if __EMBY__
-    [DisplayName("GPT翻译后端地址")]
-#endif
-public string GPTTranslationUrl { get; set; }
 
 #if __EMBY__
     [DisplayName("Tagline template")]
