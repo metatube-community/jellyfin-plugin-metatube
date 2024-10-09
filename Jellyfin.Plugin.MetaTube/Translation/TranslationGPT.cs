@@ -1,4 +1,5 @@
 using System.Text;
+using System.Text.RegularExpressions;
 using Jellyfin.Plugin.MetaTube.Configuration;
 using Jellyfin.Plugin.MetaTube.Providers;
 
@@ -13,7 +14,7 @@ namespace Jellyfin.Plugin.MetaTube.Translation
             if (string.IsNullOrWhiteSpace(sourceStr))
                 return sourceStr;
             string apiUrl = Cfg.GPTTranslationUrl;
-            string data = $"{{\"str\":\"{sourceStr}\",}}";
+            string data = "{\"str\":\""+sourceStr+"\"}";
             string transStr = sourceStr;
             try
             {
@@ -24,6 +25,18 @@ namespace Jellyfin.Plugin.MetaTube.Translation
                     if (res.IsSuccessStatusCode)
                     {
                         transStr = await res.Content.ReadAsStringAsync(cancellationToken);
+
+                        Regex regex = new Regex("\"msg\":\\s*\"(.*?)\"");
+                        Match match = regex.Match(transStr);
+                        if (match.Success)
+                        {
+                            transStr = match.Groups[1].Value;
+                            transStr = Regex.Unescape(transStr);  
+                        }
+                        else
+                        {
+                            transStr = sourceStr;
+                        }
                     }
                 }
             }
@@ -35,4 +48,4 @@ namespace Jellyfin.Plugin.MetaTube.Translation
             return transStr;
         }
     }
-    }
+}
