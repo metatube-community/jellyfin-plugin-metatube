@@ -123,9 +123,11 @@ public class MovieProvider : BaseProvider, IRemoteMetadataProvider<Movie, MovieI
         result.Item.SetPid(Name, m.Provider, m.Id, pid.Position);
 
         // Set trailer url.
-        result.Item.SetTrailerUrl(!string.IsNullOrWhiteSpace(m.PreviewVideoUrl)
+        var trailerUrl = !string.IsNullOrWhiteSpace(m.PreviewVideoUrl)
             ? m.PreviewVideoUrl
-            : m.PreviewVideoHlsUrl);
+            : m.PreviewVideoHlsUrl;
+        if (!string.IsNullOrWhiteSpace(trailerUrl))
+            result.Item.SetTrailerUrl(trailerUrl);
 
         // Set community rating.
         if (Configuration.EnableRatings)
