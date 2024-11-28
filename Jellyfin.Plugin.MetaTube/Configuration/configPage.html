@@ -172,7 +172,9 @@
                                 <option value="Google">Google</option>
                                 <option value="GoogleFree">Google (Free)</option>
                                 <option value="DeepL">DeepL (Free)</option>
+                                <option value="DeepLX">DeepLX (Custom)</option>
                                 <option value="OpenAi">OpenAI</option>
+                                <option value="OpenAiX">OpenAI (Custom)</option>
                             </select>
                         </div>
 
@@ -206,6 +208,19 @@
                             </div>
                         </div>
 
+                        <div class="selectTranslationEngineDeepLX">
+                            <div class="inputContainer">
+                                <label class="inputLabel inputLabelUnfocused" for="txtDeepLXBaseUrl">DeepL base url:</label>
+                                <input id="txtDeepLXBaseUrl" is="emby-input" name="txtDeepLXBaseUrl" type="text" required />
+                                <div class="fieldDescription">Custom base url for DeepL API (required)</div>
+                            </div>
+                            <div class="inputContainer">
+                                <label class="inputLabel inputLabelUnfocused" for="txtDeepLXApiKey">DeepL api key:</label>
+                                <input id="txtDeepLXApiKey" is="emby-input" name="txtDeepLXApiKey" type="text" />
+                                <div class="fieldDescription"></div>
+                            </div>
+                        </div>
+
                         <div class="selectTranslationEngineOpenAi">
                             <div class="inputContainer">
                                 <label class="inputLabel inputLabelUnfocused" for="txtOpenAiApiKey">OpenAI api key:</label>
@@ -213,29 +228,17 @@
                                 <div class="fieldDescription"></div>
                             </div>
                         </div>
-                        <div class="selectTranslationEngineDeepLX">
-                            <div class="inputContainer">
-                                <label class="inputLabel inputLabelUnfocused" for="txtDeepLXApiKey">DeepL api key:</label>
-                                <input id="txtDeepLXApiKey" is="emby-input" name="txtDeepLXApiKey" type="text" />
-                                <div class="fieldDescription"></div>
-                            </div>
-                            <div class="inputContainer">
-                                <label class="inputLabel inputLabelUnfocused" for="txtDeepLXBaseUrl">DeepL base url:</label>
-                                <input id="txtDeepLXBaseUrl" is="emby-input" name="txtDeepLXBaseUrl" type="text" required />
-                                <div class="fieldDescription">Custom base url for DeepL API (required)</div>
-                            </div>
-                        </div>
-                        
+
                         <div class="selectTranslationEngineOpenAiX">
-                            <div class="inputContainer">
-                                <label class="inputLabel inputLabelUnfocused" for="txtOpenAiXApiKey">OpenAI api key:</label>
-                                <input id="txtOpenAiXApiKey" is="emby-input" name="txtOpenAiXApiKey" type="text" />
-                                <div class="fieldDescription"></div>
-                            </div>
                             <div class="inputContainer">
                                 <label class="inputLabel inputLabelUnfocused" for="txtOpenAiXBaseUrl">OpenAI base url:</label>
                                 <input id="txtOpenAiXBaseUrl" is="emby-input" name="txtOpenAiXBaseUrl" type="text" required />
                                 <div class="fieldDescription">Custom base url for OpenAI API or compatible API (required)</div>
+                            </div>
+                            <div class="inputContainer">
+                                <label class="inputLabel inputLabelUnfocused" for="txtOpenAiXApiKey">OpenAI api key:</label>
+                                <input id="txtOpenAiXApiKey" is="emby-input" name="txtOpenAiXApiKey" type="text" />
+                                <div class="fieldDescription"></div>
                             </div>
                             <div class="inputContainer">
                                 <label class="inputLabel inputLabelUnfocused" for="txtOpenAiXModel">OpenAI model:</label>
@@ -318,33 +321,43 @@
                 $('.selectTranslationEngineBaidu').css('display', 'inherit');
                 $('.selectTranslationEngineGoogle').css('display', 'none');
                 $('.selectTranslationEngineDeepL').css('display', 'none');
+                $('.selectTranslationEngineDeepLX').css('display', 'none');
                 $('.selectTranslationEngineOpenAi').css('display', 'none');
+                $('.selectTranslationEngineOpenAiX').css('display', 'none');
             } else if (this.value === "Google") {
                 $('.selectTranslationEngineBaidu').css('display', 'none');
                 $('.selectTranslationEngineGoogle').css('display', 'inherit');
                 $('.selectTranslationEngineDeepL').css('display', 'none');
+                $('.selectTranslationEngineDeepLX').css('display', 'none');
                 $('.selectTranslationEngineOpenAi').css('display', 'none');
+                $('.selectTranslationEngineOpenAiX').css('display', 'none');
             } else if (this.value === "GoogleFree") {
                 $('.selectTranslationEngineBaidu').css('display', 'none');
                 $('.selectTranslationEngineGoogle').css('display', 'none');
                 $('.selectTranslationEngineDeepL').css('display', 'none');
+                $('.selectTranslationEngineDeepLX').css('display', 'none');
                 $('.selectTranslationEngineOpenAi').css('display', 'none');
+                $('.selectTranslationEngineOpenAiX').css('display', 'none');
             } else if (this.value === "DeepL") {
                 $('.selectTranslationEngineBaidu').css('display', 'none');
                 $('.selectTranslationEngineGoogle').css('display', 'none');
                 $('.selectTranslationEngineDeepL').css('display', 'inherit');
+                $('.selectTranslationEngineDeepLX').css('display', 'none');
                 $('.selectTranslationEngineOpenAi').css('display', 'none');
-            } else if (this.value === "OpenAi") {
-                $('.selectTranslationEngineBaidu').css('display', 'none');
-                $('.selectTranslationEngineGoogle').css('display', 'none');
-                $('.selectTranslationEngineDeepL').css('display', 'none');
-                $('.selectTranslationEngineOpenAi').css('display', 'inherit');
+                $('.selectTranslationEngineOpenAiX').css('display', 'none');
             } else if (this.value === "DeepLX") {
                 $('.selectTranslationEngineBaidu').css('display', 'none');
                 $('.selectTranslationEngineGoogle').css('display', 'none');
                 $('.selectTranslationEngineDeepL').css('display', 'none');
                 $('.selectTranslationEngineDeepLX').css('display', 'inherit');
                 $('.selectTranslationEngineOpenAi').css('display', 'none');
+                $('.selectTranslationEngineOpenAiX').css('display', 'none');
+            } else if (this.value === "OpenAi") {
+                $('.selectTranslationEngineBaidu').css('display', 'none');
+                $('.selectTranslationEngineGoogle').css('display', 'none');
+                $('.selectTranslationEngineDeepL').css('display', 'none');
+                $('.selectTranslationEngineDeepLX').css('display', 'none');
+                $('.selectTranslationEngineOpenAi').css('display', 'inherit');
                 $('.selectTranslationEngineOpenAiX').css('display', 'none');
             } else if (this.value === "OpenAiX") {
                 $('.selectTranslationEngineBaidu').css('display', 'none');
@@ -383,10 +396,10 @@
                 $('#txtGoogleApiKey', page).val(config.GoogleApiKey).change();
                 $('#txtDeepLApiKey', page).val(config.DeepLApiKey).change();
                 $('#txtOpenAiApiKey', page).val(config.OpenAiApiKey).change();
-                $('#txtDeepLXApiKey', page).val(config.DeepLXApiKey).change();
                 $('#txtDeepLXBaseUrl', page).val(config.DeepLXBaseUrl).change();
-                $('#txtOpenAiXApiKey', page).val(config.OpenAiXApiKey).change();
+                $('#txtDeepLXApiKey', page).val(config.DeepLXApiKey).change();
                 $('#txtOpenAiXBaseUrl', page).val(config.OpenAiXBaseUrl).change();
+                $('#txtOpenAiXApiKey', page).val(config.OpenAiXApiKey).change();
                 $('#txtOpenAiXModel', page).val(config.OpenAiXModel).change();
                 page.querySelector('#chkEnableTitleSubstitution').checked = config.EnableTitleSubstitution;
                 $('#txtTitleRawSubstitutionTable', page).val(config.TitleRawSubstitutionTable).change();
@@ -425,10 +438,10 @@
                 config.GoogleApiKey = $('#txtGoogleApiKey', form).val();
                 config.DeepLApiKey = $('#txtDeepLApiKey', form).val();
                 config.OpenAiApiKey = $('#txtOpenAiApiKey', form).val();
-                config.DeepLXApiKey = $('#txtDeepLXApiKey', form).val();
                 config.DeepLXBaseUrl = $('#txtDeepLXBaseUrl', form).val();
-                config.OpenAiXApiKey = $('#txtOpenAiXApiKey', form).val();
+                config.DeepLXApiKey = $('#txtDeepLXApiKey', form).val();
                 config.OpenAiXBaseUrl = $('#txtOpenAiXBaseUrl', form).val();
+                config.OpenAiXApiKey = $('#txtOpenAiXApiKey', form).val();
                 config.OpenAiXModel = $('#txtOpenAiXModel', form).val();
                 config.EnableTitleSubstitution = $('#chkEnableTitleSubstitution', form).prop('checked');
                 config.TitleRawSubstitutionTable = $('#txtTitleRawSubstitutionTable', form).val();

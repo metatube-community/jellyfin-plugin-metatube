@@ -16,7 +16,7 @@ public enum TranslationEngine
     [Description("DeepL (Free)")]
     DeepL,
 
-    [Description("DeepL (Custom)")]
+    [Description("DeepLX (Custom)")]
     DeepLX,
 
     [Description("OpenAI")]
