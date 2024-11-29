@@ -169,6 +169,18 @@ public class PluginConfiguration : BasePluginConfiguration
     public string DeepLApiKey { get; set; } = string.Empty;
 
 #if __EMBY__
+    [DisplayName("DeepLX base url")]
+    [VisibleCondition(nameof(TranslationEngine), ValueCondition.IsEqual, TranslationEngine.DeepLX)]
+#endif
+    public string DeepLXBaseUrl { get; set; } = string.Empty;
+
+#if __EMBY__
+    [DisplayName("DeepLX api key")]
+    [VisibleCondition(nameof(TranslationEngine), ValueCondition.IsEqual, TranslationEngine.DeepLX)]
+#endif
+    public string DeepLXApiKey { get; set; } = string.Empty;
+
+#if __EMBY__
     [DisplayName("OpenAI api key")]
     [VisibleCondition(nameof(TranslationEngine), ValueCondition.IsEqual, TranslationEngine.OpenAi)]
 #endif
