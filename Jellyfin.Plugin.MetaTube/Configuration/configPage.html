@@ -218,6 +218,28 @@
                                 <div class="fieldDescription"></div>
                             </div>
                         </div>
+
+                        <div class="selectTranslationEngineOpenAiX">
+                            <div class="inputContainer">
+                                <label class="inputLabel inputLabelUnfocused" for="txtOpenAiXBaseUrl">OpenAI base url:</label>
+                                <input id="txtOpenAiXBaseUrl" is="emby-input" name="txtOpenAiXBaseUrl" type="text" required />
+                                <div class="fieldDescription">Custom base url for OpenAI API or compatible API (required)</div>
+                            </div>
+                            <div class="inputContainer">
+                                <label class="inputLabel inputLabelUnfocused" for="txtOpenAiXApiKey">OpenAI api key:</label>
+                                <input id="txtOpenAiXApiKey" is="emby-input" name="txtOpenAiXApiKey" type="text" />
+                                <div class="fieldDescription"></div>
+                            </div>
+                            <div class="inputContainer">
+                                <label class="inputLabel inputLabelUnfocused" for="txtOpenAiXModel">OpenAI model:</label>
+                                <input id="txtOpenAiXModel" is="emby-input" name="txtOpenAiXModel" type="text" />
+                                <div class="fieldDescription">Custom model for OpenAI API (default: gpt-3.5-turbo)</div>
+                            </div>
+                            <div class="inputContainer">
+                                <textarea class="emby-input" id="txtOpenAiXSystemPrompt" label="OpenAI system prompt" rows="6"></textarea>
+                                <div class="fieldDescription">Custom system prompt for translation. Leave empty to use default prompt.</div>
+                            </div>
+                        </div>
                     </div>
                 </div>
 
@@ -294,31 +316,44 @@
                 $('.selectTranslationEngineGoogle').css('display', 'none');
                 $('.selectTranslationEngineDeepL').css('display', 'none');
                 $('.selectTranslationEngineOpenAi').css('display', 'none');
+                $('.selectTranslationEngineOpenAiX').css('display', 'none');
             } else if (this.value === "Google") {
                 $('.selectTranslationEngineBaidu').css('display', 'none');
                 $('.selectTranslationEngineGoogle').css('display', 'inherit');
                 $('.selectTranslationEngineDeepL').css('display', 'none');
                 $('.selectTranslationEngineOpenAi').css('display', 'none');
+                $('.selectTranslationEngineOpenAiX').css('display', 'none');
             } else if (this.value === "GoogleFree") {
                 $('.selectTranslationEngineBaidu').css('display', 'none');
                 $('.selectTranslationEngineGoogle').css('display', 'none');
                 $('.selectTranslationEngineDeepL').css('display', 'none');
                 $('.selectTranslationEngineOpenAi').css('display', 'none');
+                $('.selectTranslationEngineOpenAiX').css('display', 'none');
             } else if (this.value === "DeepL") {
                 $('.selectTranslationEngineBaidu').css('display', 'none');
                 $('.selectTranslationEngineGoogle').css('display', 'none');
                 $('.selectTranslationEngineDeepL').css('display', 'inherit');
                 $('.selectTranslationEngineOpenAi').css('display', 'none');
+                $('.selectTranslationEngineOpenAiX').css('display', 'none');
             } else if (this.value === "OpenAi") {
                 $('.selectTranslationEngineBaidu').css('display', 'none');
                 $('.selectTranslationEngineGoogle').css('display', 'none');
                 $('.selectTranslationEngineDeepL').css('display', 'none');
                 $('.selectTranslationEngineOpenAi').css('display', 'inherit');
+                $('.selectTranslationEngineOpenAiX').css('display', 'none');
+            } else if (this.value === "OpenAiX") {
+                $('.selectTranslationEngineBaidu').css('display', 'none');
+                $('.selectTranslationEngineGoogle').css('display', 'none');
+                $('.selectTranslationEngineDeepL').css('display', 'none');
+                $('.selectTranslationEngineDeepLX').css('display', 'none');
+                $('.selectTranslationEngineOpenAi').css('display', 'none');
+                $('.selectTranslationEngineOpenAiX').css('display', 'inherit');
             } else {
                 $('.selectTranslationEngineBaidu').css('display', 'none');
                 $('.selectTranslationEngineGoogle').css('display', 'none');
                 $('.selectTranslationEngineDeepL').css('display', 'none');
                 $('.selectTranslationEngineOpenAi').css('display', 'none');
+                $('.selectTranslationEngineOpenAiX').css('display', 'none');
             }
         });
 
@@ -350,6 +385,10 @@
                 $('#txtDeepLApiKey', page).val(config.DeepLApiKey).change();
                 $('#txtDeepLAltUrl', page).val(config.DeepLAltUrl).change();
                 $('#txtOpenAiApiKey', page).val(config.OpenAiApiKey).change();
+                $('#txtOpenAiXBaseUrl', page).val(config.OpenAiXBaseUrl).change();
+                $('#txtOpenAiXApiKey', page).val(config.OpenAiXApiKey).change();
+                $('#txtOpenAiXModel', page).val(config.OpenAiXModel).change();
+                $('#txtOpenAiXSystemPrompt', page).val(config.OpenAiXSystemPrompt).change();
                 page.querySelector('#chkEnableTitleSubstitution').checked = config.EnableTitleSubstitution;
                 $('#txtTitleRawSubstitutionTable', page).val(config.TitleRawSubstitutionTable).change();
                 page.querySelector('#chkEnableActorSubstitution').checked = config.EnableActorSubstitution;
@@ -388,6 +427,10 @@
                 config.DeepLApiKey = $('#txtDeepLApiKey', form).val();
                 config.DeepLXAltUrl = $('#txtDeepLAltUrl', form).val();
                 config.OpenAiApiKey = $('#txtOpenAiApiKey', form).val();
+                config.OpenAiXBaseUrl = $('#txtOpenAiXBaseUrl', form).val();
+                config.OpenAiXApiKey = $('#txtOpenAiXApiKey', form).val();
+                config.OpenAiXModel = $('#txtOpenAiXModel', form).val();
+                config.OpenAiXSystemPrompt = $('#txtOpenAiXSystemPrompt', form).val();
                 config.EnableTitleSubstitution = $('#chkEnableTitleSubstitution', form).prop('checked');
                 config.TitleRawSubstitutionTable = $('#txtTitleRawSubstitutionTable', form).val();
                 config.EnableActorSubstitution = $('#chkEnableActorSubstitution', form).prop('checked');

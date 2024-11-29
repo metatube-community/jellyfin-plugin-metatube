@@ -181,6 +181,30 @@ public class PluginConfiguration : BasePluginConfiguration
     public string OpenAiApiKey { get; set; } = string.Empty;
 
 #if __EMBY__
+    [DisplayName("OpenAI base url")]
+    [VisibleCondition(nameof(TranslationEngine), ValueCondition.IsEqual, TranslationEngine.OpenAiX)]
+#endif
+    public string OpenAiXBaseUrl { get; set; } = string.Empty;
+
+#if __EMBY__
+    [DisplayName("OpenAI api key")]
+    [VisibleCondition(nameof(TranslationEngine), ValueCondition.IsEqual, TranslationEngine.OpenAiX)]
+#endif
+    public string OpenAiXApiKey { get; set; } = string.Empty;
+
+#if __EMBY__
+    [DisplayName("OpenAI model")]
+    [VisibleCondition(nameof(TranslationEngine), ValueCondition.IsEqual, TranslationEngine.OpenAiX)]
+#endif
+    public string OpenAiXModel { get; set; } = "gpt-3.5-turbo";
+
+#if __EMBY__
+    [DisplayName("OpenAI system prompt")]
+    [VisibleCondition(nameof(TranslationEngine), ValueCondition.IsEqual, TranslationEngine.OpenAiX)]
+#endif
+    public string OpenAiXSystemPrompt { get; set; } = string.Empty;
+
+#if __EMBY__
     [DisplayName("Enable title substitution")]
 #endif
     public bool EnableTitleSubstitution { get; set; } = false;
