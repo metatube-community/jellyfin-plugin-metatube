@@ -245,6 +245,10 @@
                                 <input id="txtOpenAiXModel" is="emby-input" name="txtOpenAiXModel" type="text" />
                                 <div class="fieldDescription">Custom model for OpenAI API (default: gpt-3.5-turbo)</div>
                             </div>
+                            <div class="inputContainer">
+                                <textarea class="emby-input" id="txtOpenAiXSystemPrompt" label="OpenAI system prompt" rows="6"></textarea>
+                                <div class="fieldDescription">Custom system prompt for translation. Leave empty to use default prompt.</div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -401,6 +405,7 @@
                 $('#txtOpenAiXBaseUrl', page).val(config.OpenAiXBaseUrl).change();
                 $('#txtOpenAiXApiKey', page).val(config.OpenAiXApiKey).change();
                 $('#txtOpenAiXModel', page).val(config.OpenAiXModel).change();
+                $('#txtOpenAiXSystemPrompt', page).val(config.OpenAiXSystemPrompt).change();
                 page.querySelector('#chkEnableTitleSubstitution').checked = config.EnableTitleSubstitution;
                 $('#txtTitleRawSubstitutionTable', page).val(config.TitleRawSubstitutionTable).change();
                 page.querySelector('#chkEnableActorSubstitution').checked = config.EnableActorSubstitution;
@@ -443,6 +448,7 @@
                 config.OpenAiXBaseUrl = $('#txtOpenAiXBaseUrl', form).val();
                 config.OpenAiXApiKey = $('#txtOpenAiXApiKey', form).val();
                 config.OpenAiXModel = $('#txtOpenAiXModel', form).val();
+                config.OpenAiXSystemPrompt = $('#txtOpenAiXSystemPrompt', form).val();
                 config.EnableTitleSubstitution = $('#chkEnableTitleSubstitution', form).prop('checked');
                 config.TitleRawSubstitutionTable = $('#txtTitleRawSubstitutionTable', form).val();
                 config.EnableActorSubstitution = $('#chkEnableActorSubstitution', form).prop('checked');

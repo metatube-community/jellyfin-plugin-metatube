@@ -67,7 +67,8 @@ public static class TranslationHelper
                 {
                     { "openai-api-key", Configuration.OpenAiXApiKey },
                     { "base-url", Configuration.OpenAiXBaseUrl },
-                    { "model", Configuration.OpenAiXModel }
+                    { "model", Configuration.OpenAiXModel },
+                    { "system-prompt", Configuration.OpenAiXSystemPrompt }
                 });
                 break;
             default:

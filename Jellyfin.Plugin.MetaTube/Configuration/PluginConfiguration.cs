@@ -205,6 +205,12 @@ public class PluginConfiguration : BasePluginConfiguration
     public string OpenAiXModel { get; set; } = "gpt-3.5-turbo";
 
 #if __EMBY__
+    [DisplayName("OpenAI system prompt")]
+    [VisibleCondition(nameof(TranslationEngine), ValueCondition.IsEqual, TranslationEngine.OpenAiX)]
+#endif
+    public string OpenAiXSystemPrompt { get; set; } = string.Empty;
+
+#if __EMBY__
     [DisplayName("Enable title substitution")]
 #endif
     public bool EnableTitleSubstitution { get; set; } = false;
