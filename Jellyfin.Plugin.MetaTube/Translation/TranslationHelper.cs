@@ -43,15 +43,8 @@ public static class TranslationHelper
                 millisecondsDelay = 100;
                 nv.Add(new NameValueCollection
                 {
-                    { "deepl-api-key", Configuration.DeepLApiKey }
-                });
-                break;
-            case TranslationEngine.DeepLX:
-                millisecondsDelay = 100;
-                nv.Add(new NameValueCollection
-                {
-                    { "deeplx-api-key", Configuration.DeepLXApiKey },
-                    { "deeplx-base-url", Configuration.DeepLXBaseUrl }
+                    { "deepl-api-key", Configuration.DeepLApiKey },
+                    { "deepl-base-url", Configuration.DeepLBaseUrl }  // Use the base URL if provided
                 });
                 break;
             case TranslationEngine.OpenAi:
