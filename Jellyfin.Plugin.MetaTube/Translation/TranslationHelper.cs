@@ -43,7 +43,8 @@ public static class TranslationHelper
                 millisecondsDelay = 100;
                 nv.Add(new NameValueCollection
                 {
-                    { "deepl-api-key", Configuration.DeepLApiKey }
+                    { "deepl-api-key", Configuration.DeepLApiKey },
+                    { "deepl-alt-url", Configuration.DeepLAltUrl }
                 });
                 break;
             case TranslationEngine.OpenAi:

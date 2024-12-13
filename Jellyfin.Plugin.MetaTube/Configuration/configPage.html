@@ -204,6 +204,11 @@
                                 <input id="txtDeepLApiKey" is="emby-input" name="txtDeepLApiKey" type="text"/>
                                 <div class="fieldDescription"></div>
                             </div>
+                            <div class="inputContainer">
+                                <label class="inputLabel inputLabelUnfocused" for="txtDeepLAltUrl">DeepL alt url (optional):</label>
+                                <input id="txtDeepLAltUrl" is="emby-input" name="txtDeepLAltUrl" type="text" />
+                                <div class="fieldDescription"></div>
+                            </div>
                         </div>
 
                         <div class="selectTranslationEngineOpenAi">
@@ -343,6 +348,7 @@
                 $('#txtBaiduAppKey', page).val(config.BaiduAppKey).change();
                 $('#txtGoogleApiKey', page).val(config.GoogleApiKey).change();
                 $('#txtDeepLApiKey', page).val(config.DeepLApiKey).change();
+                $('#txtDeepLAltUrl', page).val(config.DeepLAltUrl).change();
                 $('#txtOpenAiApiKey', page).val(config.OpenAiApiKey).change();
                 page.querySelector('#chkEnableTitleSubstitution').checked = config.EnableTitleSubstitution;
                 $('#txtTitleRawSubstitutionTable', page).val(config.TitleRawSubstitutionTable).change();
@@ -380,6 +386,7 @@
                 config.BaiduAppKey = $('#txtBaiduAppKey', form).val();
                 config.GoogleApiKey = $('#txtGoogleApiKey', form).val();
                 config.DeepLApiKey = $('#txtDeepLApiKey', form).val();
+                config.DeepLXAltUrl = $('#txtDeepLAltUrl', form).val();
                 config.OpenAiApiKey = $('#txtOpenAiApiKey', form).val();
                 config.EnableTitleSubstitution = $('#chkEnableTitleSubstitution', form).prop('checked');
                 config.TitleRawSubstitutionTable = $('#txtTitleRawSubstitutionTable', form).val();
