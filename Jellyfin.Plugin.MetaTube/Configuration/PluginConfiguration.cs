@@ -163,16 +163,16 @@ public class PluginConfiguration : BasePluginConfiguration
     public string GoogleApiKey { get; set; } = string.Empty;
 
 #if __EMBY__
-    [DisplayName("DeepL base url")]
-    [VisibleCondition(nameof(TranslationEngine), ValueCondition.IsEqual, TranslationEngine.DeepL)]
-#endif
-    public string DeepLBaseUrl { get; set; } = string.Empty;
-
-#if __EMBY__
     [DisplayName("DeepL api key")]
     [VisibleCondition(nameof(TranslationEngine), ValueCondition.IsEqual, TranslationEngine.DeepL)]
 #endif
     public string DeepLApiKey { get; set; } = string.Empty;
+
+#if __EMBY__
+    [DisplayName("DeepL alt url (optional)")]
+    [VisibleCondition(nameof(TranslationEngine), ValueCondition.IsEqual, TranslationEngine.DeepL)]
+#endif
+    public string DeepLAltUrl { get; set; } = string.Empty;
 
 #if __EMBY__
     [DisplayName("OpenAI api key")]
