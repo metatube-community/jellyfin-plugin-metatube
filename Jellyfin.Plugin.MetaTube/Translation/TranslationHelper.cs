@@ -54,6 +54,16 @@ public static class TranslationHelper
                     { "openai-api-key", Configuration.OpenAiApiKey }
                 });
                 break;
+            case TranslationEngine.OpenAiX:
+                millisecondsDelay = 1000;
+                nv.Add(new NameValueCollection
+                {
+                    { "openaix-api-key", Configuration.OpenAiXApiKey },
+                    { "openaix-base-url", Configuration.OpenAiXBaseUrl },
+                    { "openaix-model", Configuration.OpenAiXModel },
+                    { "openaix-system-prompt", Configuration.OpenAiXSystemPrompt }
+                });
+                break;
             default:
                 throw new ArgumentException($"Invalid translation engine: {Configuration.TranslationEngine}");
         }
