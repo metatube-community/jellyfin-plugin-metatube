@@ -15,8 +15,8 @@
 <a href="https://github.com/metatube-community/jellyfin-plugin-metatube/blob/main/LICENSE">
 <img alt="License" src="https://img.shields.io/github/license/metatube-community/jellyfin-plugin-metatube">
 </a>
-<a href="https://t.me/MetaTubePlugin">
-<img alt="Telegram Group" src="https://img.shields.io/badge/Telegram-2CA5E0?logo=telegram&logoColor=white">
+<a href="https://github.com/metatube-community/jellyfin-plugin-metatube">
+<img alt="gitHub Stars" src="https://img.shields.io/github/stars/metatube-community/jellyfin-plugin-metatube?style=flat">
 </a>
 <a href="https://github.com/metatube-community/jellyfin-plugin-metatube">
 <img alt="Downloads" src="https://img.shields.io/github/downloads/metatube-community/jellyfin-plugin-metatube/total">
@@ -62,7 +62,7 @@ _注意：本项目仅支持 Jellyfin/Emby 稳定版。_
 
 ## 社区
 
-有任何问题欢迎来 [Discussions](https://github.com/metatube-community/jellyfin-plugin-metatube/discussions) 提问讨论，或者加入 [TG群](https://t.me/MetaTubePlugin)。
+有任何问题欢迎来 [Discussions](https://github.com/metatube-community/jellyfin-plugin-metatube/discussions) 提问讨论。
 
 ## 许可
 
