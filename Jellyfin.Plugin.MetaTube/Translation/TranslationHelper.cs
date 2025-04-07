@@ -51,7 +51,9 @@ public static class TranslationHelper
                 millisecondsDelay = 1000;
                 nv.Add(new NameValueCollection
                 {
-                    { "openai-api-key", Configuration.OpenAiApiKey }
+                    { "openai-api-key", Configuration.OpenAiApiKey },
+                    { "openai-api-url", Configuration.OpenAiApiUrl },
+                    { "openai-model", Configuration.OpenAiModel }
                 });
                 break;
             default:

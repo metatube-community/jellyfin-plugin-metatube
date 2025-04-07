@@ -181,6 +181,20 @@ public class PluginConfiguration : BasePluginConfiguration
     public string OpenAiApiKey { get; set; } = string.Empty;
 
 #if __EMBY__
+    [DisplayName("OpenAI api url")]
+    [Description("Custom OpenAI-compatible api url. (optional)")]
+    [VisibleCondition(nameof(TranslationEngine), ValueCondition.IsEqual, TranslationEngine.OpenAi)]
+#endif
+    public string OpenAiApiUrl { get; set; } = string.Empty;
+
+#if __EMBY__
+    [DisplayName("OpenAI model")]
+    [Description("Custom OpenAI-compatible api model. (optional)")]
+    [VisibleCondition(nameof(TranslationEngine), ValueCondition.IsEqual, TranslationEngine.OpenAi)]
+#endif
+    public string OpenAiModel { get; set; } = string.Empty;
+
+#if __EMBY__
     [DisplayName("Enable title substitution")]
 #endif
     public bool EnableTitleSubstitution { get; set; } = false;

@@ -217,6 +217,16 @@
                                 <input id="txtOpenAiApiKey" is="emby-input" name="txtOpenAiApiKey" type="text"/>
                                 <div class="fieldDescription"></div>
                             </div>
+                            <div class="inputContainer">
+                                <label class="inputLabel inputLabelUnfocused" for="txtOpenAiApiUrl">OpenAI api url:</label>
+                                <input id="txtOpenAiApiUrl" is="emby-input" name="txtOpenAiApiUrl" required type="text"/>
+                                <div class="fieldDescription">Custom OpenAI-compatible api url. (optional)</div>
+                            </div>
+                            <div class="inputContainer">
+                                <label class="inputLabel inputLabelUnfocused" for="txtOpenAiModel">OpenAI model:</label>
+                                <input id="txtOpenAiModel" is="emby-input" name="txtOpenAiModel" type="text"/>
+                                <div class="fieldDescription">Custom OpenAI-compatible api model. (optional)</div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -350,6 +360,8 @@
                 $('#txtDeepLApiKey', page).val(config.DeepLApiKey).change();
                 $('#txtDeepLAltUrl', page).val(config.DeepLAltUrl).change();
                 $('#txtOpenAiApiKey', page).val(config.OpenAiApiKey).change();
+                $('#txtOpenAiApiUrl', page).val(config.OpenAiApiUrl).change();
+                $('#txtOpenAiModel', page).val(config.OpenAiModel).change();
                 page.querySelector('#chkEnableTitleSubstitution').checked = config.EnableTitleSubstitution;
                 $('#txtTitleRawSubstitutionTable', page).val(config.TitleRawSubstitutionTable).change();
                 page.querySelector('#chkEnableActorSubstitution').checked = config.EnableActorSubstitution;
@@ -388,6 +400,8 @@
                 config.DeepLApiKey = $('#txtDeepLApiKey', form).val();
                 config.DeepLXAltUrl = $('#txtDeepLAltUrl', form).val();
                 config.OpenAiApiKey = $('#txtOpenAiApiKey', form).val();
+                config.OpenAiApiUrl = $('#txtOpenAiApiUrl', form).val();
+                config.OpenAiModel = $('#txtOpenAiModel', form).val();
                 config.EnableTitleSubstitution = $('#chkEnableTitleSubstitution', form).prop('checked');
                 config.TitleRawSubstitutionTable = $('#txtTitleRawSubstitutionTable', form).val();
                 config.EnableActorSubstitution = $('#chkEnableActorSubstitution', form).prop('checked');
