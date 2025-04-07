@@ -205,8 +205,8 @@
                                 <div class="fieldDescription"></div>
                             </div>
                             <div class="inputContainer">
-                                <label class="inputLabel inputLabelUnfocused" for="txtDeepLAltUrl">DeepL alt url:</label>
-                                <input id="txtDeepLAltUrl" is="emby-input" name="txtDeepLAltUrl" type="text"/>
+                                <label class="inputLabel inputLabelUnfocused" for="txtDeepLApiUrl">DeepL api url:</label>
+                                <input id="txtDeepLApiUrl" is="emby-input" name="txtDeepLApiUrl" type="text"/>
                                 <div class="fieldDescription">Custom DeepL-compatible api url. (optional)</div>
                             </div>
                         </div>
@@ -358,7 +358,7 @@
                 $('#txtBaiduAppKey', page).val(config.BaiduAppKey).change();
                 $('#txtGoogleApiKey', page).val(config.GoogleApiKey).change();
                 $('#txtDeepLApiKey', page).val(config.DeepLApiKey).change();
-                $('#txtDeepLAltUrl', page).val(config.DeepLAltUrl).change();
+                $('#txtDeepLApiUrl', page).val(config.DeepLApiUrl).change();
                 $('#txtOpenAiApiKey', page).val(config.OpenAiApiKey).change();
                 $('#txtOpenAiApiUrl', page).val(config.OpenAiApiUrl).change();
                 $('#txtOpenAiModel', page).val(config.OpenAiModel).change();
@@ -398,7 +398,7 @@
                 config.BaiduAppKey = $('#txtBaiduAppKey', form).val();
                 config.GoogleApiKey = $('#txtGoogleApiKey', form).val();
                 config.DeepLApiKey = $('#txtDeepLApiKey', form).val();
-                config.DeepLXAltUrl = $('#txtDeepLAltUrl', form).val();
+                config.DeepLXAltUrl = $('#txtDeepLApiUrl', form).val();
                 config.OpenAiApiKey = $('#txtOpenAiApiKey', form).val();
                 config.OpenAiApiUrl = $('#txtOpenAiApiUrl', form).val();
                 config.OpenAiModel = $('#txtOpenAiModel', form).val();

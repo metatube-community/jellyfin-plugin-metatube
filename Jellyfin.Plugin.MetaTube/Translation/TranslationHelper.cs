@@ -44,7 +44,7 @@ public static class TranslationHelper
                 nv.Add(new NameValueCollection
                 {
                     { "deepl-api-key", Configuration.DeepLApiKey },
-                    { "deepl-alt-url", Configuration.DeepLAltUrl }
+                    { "deepl-api-url", Configuration.DeepLApiUrl }
                 });
                 break;
             case TranslationEngine.OpenAi:
