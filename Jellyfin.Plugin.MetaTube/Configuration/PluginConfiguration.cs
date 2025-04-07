@@ -169,7 +169,8 @@ public class PluginConfiguration : BasePluginConfiguration
     public string DeepLApiKey { get; set; } = string.Empty;
 
 #if __EMBY__
-    [DisplayName("DeepL alt url (optional)")]
+    [DisplayName("DeepL alt url")]
+    [Description("Custom DeepL-compatible api url. (optional)")]
     [VisibleCondition(nameof(TranslationEngine), ValueCondition.IsEqual, TranslationEngine.DeepL)]
 #endif
     public string DeepLAltUrl { get; set; } = string.Empty;
