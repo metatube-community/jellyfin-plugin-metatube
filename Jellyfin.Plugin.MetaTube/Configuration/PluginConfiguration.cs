@@ -182,7 +182,7 @@ public class PluginConfiguration : BasePluginConfiguration
 
 #if __EMBY__
     [DisplayName("OpenAI api url")]
-    [Description("Custom OpenAI-compatible api endpoint url. (optional)")]
+    [Description("Custom OpenAI-compatible api url. (optional)")]
     [VisibleCondition(nameof(TranslationEngine), ValueCondition.IsEqual, TranslationEngine.OpenAi)]
 #endif
     public string OpenAiApiUrl { get; set; } = string.Empty;
