@@ -217,27 +217,15 @@
                                 <input id="txtOpenAiApiKey" is="emby-input" name="txtOpenAiApiKey" type="text"/>
                                 <div class="fieldDescription"></div>
                             </div>
-                        </div>
-
-                        <div class="selectTranslationEngineOpenAiX">
                             <div class="inputContainer">
-                                <label class="inputLabel inputLabelUnfocused" for="txtOpenAiXBaseUrl">OpenAI base url:</label>
-                                <input id="txtOpenAiXBaseUrl" is="emby-input" name="txtOpenAiXBaseUrl" type="text" required />
-                                <div class="fieldDescription">Custom base url for OpenAI API or compatible API (required)</div>
+                                <label class="inputLabel inputLabelUnfocused" for="txtOpenAiApiUrl">OpenAI api url:</label>
+                                <input id="txtOpenAiApiUrl" is="emby-input" name="txtOpenAiApiUrl" required type="text"/>
+                                <div class="fieldDescription">Custom OpenAI-compatible api endpoint url. (optional)</div>
                             </div>
                             <div class="inputContainer">
-                                <label class="inputLabel inputLabelUnfocused" for="txtOpenAiXApiKey">OpenAI api key:</label>
-                                <input id="txtOpenAiXApiKey" is="emby-input" name="txtOpenAiXApiKey" type="text" />
-                                <div class="fieldDescription"></div>
-                            </div>
-                            <div class="inputContainer">
-                                <label class="inputLabel inputLabelUnfocused" for="txtOpenAiXModel">OpenAI model:</label>
-                                <input id="txtOpenAiXModel" is="emby-input" name="txtOpenAiXModel" type="text" />
-                                <div class="fieldDescription">Custom model for OpenAI API (default: gpt-3.5-turbo)</div>
-                            </div>
-                            <div class="inputContainer">
-                                <textarea class="emby-input" id="txtOpenAiXSystemPrompt" label="OpenAI system prompt" rows="6"></textarea>
-                                <div class="fieldDescription">Custom system prompt for translation. Leave empty to use default prompt.</div>
+                                <label class="inputLabel inputLabelUnfocused" for="txtOpenAiModel">OpenAI model:</label>
+                                <input id="txtOpenAiModel" is="emby-input" name="txtOpenAiModel" type="text"/>
+                                <div class="fieldDescription">Custom OpenAI-compatible api model. (optional)</div>
                             </div>
                         </div>
                     </div>
@@ -385,10 +373,8 @@
                 $('#txtDeepLApiKey', page).val(config.DeepLApiKey).change();
                 $('#txtDeepLAltUrl', page).val(config.DeepLAltUrl).change();
                 $('#txtOpenAiApiKey', page).val(config.OpenAiApiKey).change();
-                $('#txtOpenAiXBaseUrl', page).val(config.OpenAiXBaseUrl).change();
-                $('#txtOpenAiXApiKey', page).val(config.OpenAiXApiKey).change();
-                $('#txtOpenAiXModel', page).val(config.OpenAiXModel).change();
-                $('#txtOpenAiXSystemPrompt', page).val(config.OpenAiXSystemPrompt).change();
+                $('#txtOpenAiApiUrl', page).val(config.OpenAiApiUrl).change();
+                $('#txtOpenAiModel', page).val(config.OpenAiModel).change();
                 page.querySelector('#chkEnableTitleSubstitution').checked = config.EnableTitleSubstitution;
                 $('#txtTitleRawSubstitutionTable', page).val(config.TitleRawSubstitutionTable).change();
                 page.querySelector('#chkEnableActorSubstitution').checked = config.EnableActorSubstitution;
@@ -427,10 +413,8 @@
                 config.DeepLApiKey = $('#txtDeepLApiKey', form).val();
                 config.DeepLXAltUrl = $('#txtDeepLAltUrl', form).val();
                 config.OpenAiApiKey = $('#txtOpenAiApiKey', form).val();
-                config.OpenAiXBaseUrl = $('#txtOpenAiXBaseUrl', form).val();
-                config.OpenAiXApiKey = $('#txtOpenAiXApiKey', form).val();
-                config.OpenAiXModel = $('#txtOpenAiXModel', form).val();
-                config.OpenAiXSystemPrompt = $('#txtOpenAiXSystemPrompt', form).val();
+                config.OpenAiApiUrl = $('#txtOpenAiApiUrl', form).val();
+                config.OpenAiModel = $('#txtOpenAiModel', form).val();
                 config.EnableTitleSubstitution = $('#chkEnableTitleSubstitution', form).prop('checked');
                 config.TitleRawSubstitutionTable = $('#txtTitleRawSubstitutionTable', form).val();
                 config.EnableActorSubstitution = $('#chkEnableActorSubstitution', form).prop('checked');

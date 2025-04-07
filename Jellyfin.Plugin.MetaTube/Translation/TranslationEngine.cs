@@ -17,8 +17,5 @@ public enum TranslationEngine
     DeepL,
 
     [Description("OpenAI")]
-    OpenAi,
-
-    [Description("OpenAI (Custom)")]
-    OpenAiX
+    OpenAi
 }

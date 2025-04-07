@@ -181,28 +181,18 @@ public class PluginConfiguration : BasePluginConfiguration
     public string OpenAiApiKey { get; set; } = string.Empty;
 
 #if __EMBY__
-    [DisplayName("OpenAI base url")]
-    [VisibleCondition(nameof(TranslationEngine), ValueCondition.IsEqual, TranslationEngine.OpenAiX)]
+    [DisplayName("OpenAI api url")]
+    [Description("Custom OpenAI-compatible api endpoint url. (optional)")]
+    [VisibleCondition(nameof(TranslationEngine), ValueCondition.IsEqual, TranslationEngine.OpenAi)]
 #endif
-    public string OpenAiXBaseUrl { get; set; } = string.Empty;
-
-#if __EMBY__
-    [DisplayName("OpenAI api key")]
-    [VisibleCondition(nameof(TranslationEngine), ValueCondition.IsEqual, TranslationEngine.OpenAiX)]
-#endif
-    public string OpenAiXApiKey { get; set; } = string.Empty;
+    public string OpenAiApiUrl { get; set; } = string.Empty;
 
 #if __EMBY__
     [DisplayName("OpenAI model")]
-    [VisibleCondition(nameof(TranslationEngine), ValueCondition.IsEqual, TranslationEngine.OpenAiX)]
+    [Description("Custom OpenAI-compatible api model. (optional)")]
+    [VisibleCondition(nameof(TranslationEngine), ValueCondition.IsEqual, TranslationEngine.OpenAi)]
 #endif
-    public string OpenAiXModel { get; set; } = "gpt-3.5-turbo";
-
-#if __EMBY__
-    [DisplayName("OpenAI system prompt")]
-    [VisibleCondition(nameof(TranslationEngine), ValueCondition.IsEqual, TranslationEngine.OpenAiX)]
-#endif
-    public string OpenAiXSystemPrompt { get; set; } = string.Empty;
+    public string OpenAiModel { get; set; } = string.Empty;
 
 #if __EMBY__
     [DisplayName("Enable title substitution")]

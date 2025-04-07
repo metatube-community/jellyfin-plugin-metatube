@@ -51,17 +51,9 @@ public static class TranslationHelper
                 millisecondsDelay = 1000;
                 nv.Add(new NameValueCollection
                 {
-                    { "openai-api-key", Configuration.OpenAiApiKey }
-                });
-                break;
-            case TranslationEngine.OpenAiX:
-                millisecondsDelay = 1000;
-                nv.Add(new NameValueCollection
-                {
-                    { "openaix-api-key", Configuration.OpenAiXApiKey },
-                    { "openaix-base-url", Configuration.OpenAiXBaseUrl },
-                    { "openaix-model", Configuration.OpenAiXModel },
-                    { "openaix-system-prompt", Configuration.OpenAiXSystemPrompt }
+                    { "openai-api-key", Configuration.OpenAiApiKey },
+                    { "openai-api-url", Configuration.OpenAiApiUrl },
+                    { "openai-model", Configuration.OpenAiModel }
                 });
                 break;
             default:
