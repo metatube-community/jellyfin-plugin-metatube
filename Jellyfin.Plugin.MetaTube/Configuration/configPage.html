@@ -196,6 +196,11 @@
                                 <input id="txtGoogleApiKey" is="emby-input" name="txtGoogleApiKey" type="text"/>
                                 <div class="fieldDescription"></div>
                             </div>
+                            <div class="inputContainer">
+                                <label class="inputLabel inputLabelUnfocused" for="txtGoogleAltUrl">Google alt url (optional):</label>
+                                <input id="txtGoogleAltUrl" is="emby-input" name="txtGoogleAltUrl" type="text"/>
+                                <div class="fieldDescription"></div>
+                            </div>
                         </div>
 
                         <div class="selectTranslationEngineDeepL">
@@ -357,6 +362,7 @@
                 $('#txtBaiduAppId', page).val(config.BaiduAppId).change();
                 $('#txtBaiduAppKey', page).val(config.BaiduAppKey).change();
                 $('#txtGoogleApiKey', page).val(config.GoogleApiKey).change();
+                $('#txtGoogleAltUrl', page).val(config.GoogleAltUrl).change();
                 $('#txtDeepLApiKey', page).val(config.DeepLApiKey).change();
                 $('#txtDeepLApiUrl', page).val(config.DeepLApiUrl).change();
                 $('#txtOpenAiApiKey', page).val(config.OpenAiApiKey).change();
@@ -397,6 +403,7 @@
                 config.BaiduAppId = $('#txtBaiduAppId', form).val();
                 config.BaiduAppKey = $('#txtBaiduAppKey', form).val();
                 config.GoogleApiKey = $('#txtGoogleApiKey', form).val();
+                config.GoogleAltUrl = $('#txtGoogleAltUrl', form).val();
                 config.DeepLApiKey = $('#txtDeepLApiKey', form).val();
                 config.DeepLXAltUrl = $('#txtDeepLApiUrl', form).val();
                 config.OpenAiApiKey = $('#txtOpenAiApiKey', form).val();
