@@ -13,7 +13,7 @@ public enum TranslationEngine
     [Description("Google (Free)")]
     GoogleFree,
 
-    [Description("DeepL (Free)")]
+    [Description("DeepL")]
     DeepL,
 
     [Description("OpenAI")]
