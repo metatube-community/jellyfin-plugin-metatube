@@ -33,7 +33,7 @@ public static class TranslationHelper
                 nv.Add(new NameValueCollection
                 {
                     { "google-api-key", Configuration.GoogleApiKey },
-                    { "google-alt-url", Configuration.GoogleAltUrl }
+                    { "google-api-url", Configuration.GoogleApiUrl }
                 });
                 break;
             case TranslationEngine.GoogleFree:
