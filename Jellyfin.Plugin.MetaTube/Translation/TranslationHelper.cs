@@ -32,7 +32,8 @@ public static class TranslationHelper
                 millisecondsDelay = 100; // Limit Google API request rate to 10 rps.
                 nv.Add(new NameValueCollection
                 {
-                    { "google-api-key", Configuration.GoogleApiKey }
+                    { "google-api-key", Configuration.GoogleApiKey },
+                    { "google-api-url", Configuration.GoogleApiUrl }
                 });
                 break;
             case TranslationEngine.GoogleFree:
