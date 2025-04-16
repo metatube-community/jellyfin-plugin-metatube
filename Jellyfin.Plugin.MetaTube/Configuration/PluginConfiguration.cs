@@ -163,6 +163,12 @@ public class PluginConfiguration : BasePluginConfiguration
     public string GoogleApiKey { get; set; } = string.Empty;
 
 #if __EMBY__
+    [DisplayName("Google api url")]
+    [VisibleCondition(nameof(TranslationEngine), ValueCondition.IsEqual, TranslationEngine.Google)]
+#endif
+    public string GoogleApiUrl { get; set; } = string.Empty;
+
+#if __EMBY__
     [DisplayName("DeepL api key")]
     [VisibleCondition(nameof(TranslationEngine), ValueCondition.IsEqual, TranslationEngine.DeepL)]
 #endif
