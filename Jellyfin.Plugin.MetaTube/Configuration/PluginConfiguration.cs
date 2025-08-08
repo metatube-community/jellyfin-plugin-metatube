@@ -273,4 +273,29 @@ public class PluginConfiguration : BasePluginConfiguration
     }
 
     private SubstitutionTable _genreSubstitutionTable;
+
+#if __EMBY__
+    [DisplayName("Enable title prefix filter")]
+    [Description("Filter out movies with specific title prefixes, these movies will only use local NFO files.")]
+#endif
+    public bool EnableTitlePrefixFilter { get; set; } = false;
+
+#if __EMBY__
+    [DisplayName("Title prefix filter")]
+    [Description("Title prefixes to filter out, case-insensitive, separated by commas. Example: FANTIA,OTHER_PREFIX")]
+    [EditMultiline(3)]
+#endif
+    public string RawTitlePrefixFilter
+    {
+        get => _titlePrefixFilter?.Any() == true ? string.Join(',', _titlePrefixFilter) : string.Empty;
+        set => _titlePrefixFilter = value?.Split(',').Select(s => s.Trim()).Where(s => s.Any())
+            .Distinct(StringComparer.OrdinalIgnoreCase).ToList();
+    }
+
+    public List<string> GetTitlePrefixFilter()
+    {
+        return _titlePrefixFilter;
+    }
+
+    private List<string> _titlePrefixFilter;
 }

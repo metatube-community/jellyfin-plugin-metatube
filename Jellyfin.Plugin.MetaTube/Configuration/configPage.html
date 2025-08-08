@@ -125,6 +125,20 @@
                         <input id="txtRawMovieProviderFilter" is="emby-input" name="txtRawMovieProviderFilter" type="text"/>
                         <div class="fieldDescription">Provider names are case-insensitive, with decreasing precedence from left to right, separated by commas.</div>
                     </div>
+
+                    <div class="checkboxContainer checkboxContainer-withDescription">
+                        <label class="emby-checkbox-label">
+                            <input id="chkEnableTitlePrefixFilter" is="emby-checkbox" name="chkEnableTitlePrefixFilter" type="checkbox"/>
+                            <span>Enable title prefix filter</span>
+                        </label>
+                        <div class="fieldDescription checkboxFieldDescription">Filter out movies with specific title prefixes, these movies will only use local NFO files.</div>
+                    </div>
+
+                    <div class="inputContainer">
+                        <label class="inputLabel inputLabel-float inputLabelUnfocused" for="txtRawTitlePrefixFilter">Title prefix filter:</label>
+                        <textarea class="emby-input" id="txtRawTitlePrefixFilter" is="emby-input" name="txtRawTitlePrefixFilter" rows="3"></textarea>
+                        <div class="fieldDescription">Title prefixes to filter out, case-insensitive, separated by commas. Example: FANTIA,OTHER_PREFIX</div>
+                    </div>
                 </div>
 
                 <div class="verticalSection">
@@ -354,6 +368,8 @@
                 $('#txtDefaultImageQuality', page).val(config.DefaultImageQuality).change();
                 page.querySelector('#chkEnableMovieProviderFilter').checked = config.EnableMovieProviderFilter;
                 $('#txtRawMovieProviderFilter', page).val(config.RawMovieProviderFilter).change();
+                page.querySelector('#chkEnableTitlePrefixFilter').checked = config.EnableTitlePrefixFilter;
+                $('#txtRawTitlePrefixFilter', page).val(config.RawTitlePrefixFilter).change();
                 page.querySelector('#chkEnableTemplate').checked = config.EnableTemplate;
                 $('#txtNameTemplate', page).val(config.NameTemplate).change();
                 $('#txtTaglineTemplate', page).val(config.TaglineTemplate).change();
@@ -395,6 +411,8 @@
                 config.DefaultImageQuality = $('#txtDefaultImageQuality', form).val();
                 config.EnableMovieProviderFilter = $('#chkEnableMovieProviderFilter', form).prop('checked');
                 config.RawMovieProviderFilter = $('#txtRawMovieProviderFilter', form).val();
+                config.EnableTitlePrefixFilter = $('#chkEnableTitlePrefixFilter', form).prop('checked');
+                config.RawTitlePrefixFilter = $('#txtRawTitlePrefixFilter', form).val();
                 config.EnableTemplate = $('#chkEnableTemplate', form).prop('checked');
                 config.NameTemplate = $('#txtNameTemplate', form).val();
                 config.TaglineTemplate = $('#txtTaglineTemplate', form).val();

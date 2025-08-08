@@ -1,4 +1,5 @@
 using System.Text;
+using System.Linq;
 using Jellyfin.Plugin.MetaTube.Configuration;
 using Jellyfin.Plugin.MetaTube.Extensions;
 using Jellyfin.Plugin.MetaTube.Metadata;
@@ -46,6 +47,27 @@ public class MovieProvider : BaseProvider, IRemoteMetadataProvider<Movie, MovieI
     public async Task<MetadataResult<Movie>> GetMetadata(MovieInfo info,
         CancellationToken cancellationToken)
     {
+        // Check if title prefix filter is enabled and if the movie title matches any filtered prefixes
+        if (Configuration.EnableTitlePrefixFilter && !string.IsNullOrWhiteSpace(info.Name))
+        {
+            var titlePrefixFilter = Configuration.GetTitlePrefixFilter();
+            if (titlePrefixFilter?.Any() == true)
+            {
+                var movieTitle = info.Name.Trim();
+                foreach (var prefix in titlePrefixFilter)
+                {
+                    if (!string.IsNullOrWhiteSpace(prefix) && 
+                        movieTitle.StartsWith(prefix.Trim(), StringComparison.OrdinalIgnoreCase))
+                    {
+                        Logger.Info("Movie '{0}' matches filtered prefix '{1}', skipping metadata retrieval", movieTitle, prefix);
+                        // Return empty result to ensure no MetaTube metadata is added
+                        // This will prevent any MetaTube IDs from being added, even during "Replace All Metadata"
+                        return new MetadataResult<Movie> { HasMetadata = false };
+                    }
+                }
+            }
+        }
+
         var pid = info.GetPid(Name);
         if (string.IsNullOrWhiteSpace(pid.Id) || string.IsNullOrWhiteSpace(pid.Provider))
         {
@@ -199,6 +221,25 @@ public class MovieProvider : BaseProvider, IRemoteMetadataProvider<Movie, MovieI
     public async Task<IEnumerable<RemoteSearchResult>> GetSearchResults(MovieInfo info,
         CancellationToken cancellationToken)
     {
+        // Check if title prefix filter is enabled and if the movie title matches any filtered prefixes
+        if (Configuration.EnableTitlePrefixFilter && !string.IsNullOrWhiteSpace(info.Name))
+        {
+            var titlePrefixFilter = Configuration.GetTitlePrefixFilter();
+            if (titlePrefixFilter?.Any() == true)
+            {
+                var movieTitle = info.Name.Trim();
+                foreach (var prefix in titlePrefixFilter)
+                {
+                    if (!string.IsNullOrWhiteSpace(prefix) && 
+                        movieTitle.StartsWith(prefix.Trim(), StringComparison.OrdinalIgnoreCase))
+                    {
+                        Logger.Info("Movie '{0}' matches filtered prefix '{1}', skipping search", movieTitle, prefix);
+                        return Enumerable.Empty<RemoteSearchResult>();
+                    }
+                }
+            }
+        }
+
         var pid = info.GetPid(Name);
 
         var searchResults = new List<MovieSearchResult>();
