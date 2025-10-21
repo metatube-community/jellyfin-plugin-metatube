@@ -62,7 +62,7 @@ public class OrganizeMetadataTask : IScheduledTask
 
         progress?.Report(0);
 
-        var items = _libraryManager.GetItemList(new InternalItemsQuery
+        var result = _libraryManager.QueryItems(new InternalItemsQuery
         {
             MediaTypes = new[] { MediaType.Video },
 #if __EMBY__
@@ -72,7 +72,8 @@ public class OrganizeMetadataTask : IScheduledTask
             HasAnyProviderId = new Dictionary<string, string> { { Plugin.Instance.Name, string.Empty } },
             IncludeItemTypes = new[] { BaseItemKind.Movie }
 #endif
-        }).ToList();
+        });
+        var items = result.Items.ToList();
 
         foreach (var (idx, item) in items.WithIndex())
         {
