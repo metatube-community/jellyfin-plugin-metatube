@@ -17,7 +17,11 @@
         <PackageId>MetaTube</PackageId>
         <Company>MetaTube</Company>
         <Product>MetaTube</Product>
-        <TargetFramework>net8.0</TargetFramework>
+    </PropertyGroup>
+
+    <PropertyGroup>
+        <TargetFramework Condition="'$(Configuration)'=='Debug' or '$(Configuration)'=='Release'">net9.0</TargetFramework>
+        <TargetFramework Condition="'$(Configuration)'=='Debug.Emby' or '$(Configuration)'=='Release.Emby'">net8.0</TargetFramework>
     </PropertyGroup>
 
     <PropertyGroup Condition="'$(Configuration)'=='Debug.Emby' or '$(Configuration)'=='Release.Emby'">
@@ -29,8 +33,8 @@
     </ItemGroup>
 
     <ItemGroup Condition="'$(Configuration)'=='Debug' or '$(Configuration)'=='Release'">
-        <PackageReference Include="Jellyfin.Controller" Version="10.9.0"/>
-        <PackageReference Include="Jellyfin.Model" Version="10.9.0"/>
+        <PackageReference Include="Jellyfin.Controller" Version="10.11.0"/>
+        <PackageReference Include="Jellyfin.Model" Version="10.11.0"/>
     </ItemGroup>
 
     <ItemGroup Condition="'$(Configuration)'=='Debug.Emby' or '$(Configuration)'=='Release.Emby'">

@@ -7,7 +7,6 @@ using MediaBrowser.Model.Tasks;
 #if __EMBY__
 using MediaBrowser.Controller.Entities.Movies;
 using MediaBrowser.Model.Logging;
-
 #else
 using Microsoft.Extensions.Logging;
 using Jellyfin.Data.Enums;
@@ -57,7 +56,11 @@ public class GenerateTrailersTask : IScheduledTask
     {
         yield return new TaskTriggerInfo
         {
+#if __EMBY__
             Type = TaskTriggerInfo.TriggerDaily,
+#else
+            Type = TaskTriggerInfoType.DailyTrigger,
+#endif
             TimeOfDayTicks = TimeSpan.FromHours(1).Ticks
         };
     }
