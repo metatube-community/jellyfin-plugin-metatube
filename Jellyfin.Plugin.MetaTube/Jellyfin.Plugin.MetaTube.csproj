@@ -17,11 +17,7 @@
         <PackageId>MetaTube</PackageId>
         <Company>MetaTube</Company>
         <Product>MetaTube</Product>
-    </PropertyGroup>
-
-    <PropertyGroup>
-        <TargetFramework Condition="'$(Configuration)'=='Debug' or '$(Configuration)'=='Release'">net8.0</TargetFramework>
-        <TargetFramework Condition="'$(Configuration)'=='Debug.Emby' or '$(Configuration)'=='Release.Emby'">net6.0</TargetFramework>
+        <TargetFramework>net8.0</TargetFramework>
     </PropertyGroup>
 
     <PropertyGroup Condition="'$(Configuration)'=='Debug.Emby' or '$(Configuration)'=='Release.Emby'">
@@ -38,7 +34,7 @@
     </ItemGroup>
 
     <ItemGroup Condition="'$(Configuration)'=='Debug.Emby' or '$(Configuration)'=='Release.Emby'">
-        <PackageReference Include="MediaBrowser.Server.Core" Version="4.8.0.80"/>
+        <PackageReference Include="MediaBrowser.Server.Core" Version="4.9.1.80"/>
     </ItemGroup>
 
     <ItemGroup Condition="'$(Configuration)'=='Debug' or '$(Configuration)'=='Release'">
