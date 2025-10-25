@@ -1,11 +1,11 @@
 #if !__EMBY__
-using Jellyfin.Plugin.MyTube.ExternalIds;
+using Jellyfin.Plugin.MetaTube.ExternalIds;
 using MediaBrowser.Controller.Entities;
 using MediaBrowser.Controller.Entities.Movies;
 using MediaBrowser.Controller.Providers;
 using MediaBrowser.Model.Entities;
 
-namespace Jellyfin.Plugin.MyTube.Providers
+namespace Jellyfin.Plugin.MetaTube.Providers
 {
     public class ExternalUrlProvider : IExternalUrlProvider
     {
