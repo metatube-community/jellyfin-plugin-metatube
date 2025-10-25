@@ -28,12 +28,12 @@ public abstract class BaseProvider
 
     public virtual int Order => 1;
 
-    public virtual string Name => Plugin.Instance.Name;
+    public virtual string Name => Plugin.ProviderName;
 
 #if __EMBY__
     public string[] GetSupportedExternalIdentifiers()
     {
-        return [Plugin.Instance.Name];
+        return new[] { Plugin.ProviderName };
     }
 #endif
 

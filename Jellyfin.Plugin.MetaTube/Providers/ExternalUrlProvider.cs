@@ -9,18 +9,17 @@ namespace Jellyfin.Plugin.MetaTube.Providers;
 
 public class ExternalUrlProvider : IExternalUrlProvider
 {
-    public string Name => Plugin.Instance.Name;
+    public string Name => Plugin.ProviderName;
 
     public IEnumerable<string> GetExternalUrls(BaseItem item)
     {
-        if (item.TryGetProviderId(Plugin.Instance.Name, out var pid))
+        if (item.TryGetProviderId(Plugin.ProviderId, out var pid))
         {
             switch (item)
             {
                 case Movie:
                     yield return string.Format(new MovieExternalId().UrlFormatString, pid);
                     break;
-
                 case Person:
                     yield return string.Format(new ActorExternalId().UrlFormatString, pid);
                     break;

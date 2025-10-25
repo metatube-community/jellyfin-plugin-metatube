@@ -30,7 +30,11 @@ public class Plugin : BasePlugin<PluginConfiguration>, IHasWebPages
     }
 #endif
 
-    public override string Name => "MetaTube";
+    public const string ProviderName = "MetaTube";
+
+    public const string ProviderId = "MetaTube";
+
+    public override string Name => ProviderName;
 
     public override string Description => "MetaTube Plugin for Jellyfin/Emby";
 

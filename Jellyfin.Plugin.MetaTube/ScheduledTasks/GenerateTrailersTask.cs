@@ -7,6 +7,7 @@ using MediaBrowser.Model.Tasks;
 #if __EMBY__
 using MediaBrowser.Controller.Entities.Movies;
 using MediaBrowser.Model.Logging;
+
 #else
 using Microsoft.Extensions.Logging;
 using Jellyfin.Data.Enums;
@@ -44,13 +45,13 @@ public class GenerateTrailersTask : IScheduledTask
     }
 #endif
 
-    public string Key => $"{Plugin.Instance.Name}GenerateTrailers";
+    public string Key => $"{Plugin.ProviderName}GenerateTrailers";
 
     public string Name => "Generate Trailers";
 
-    public string Description => $"Generates video trailers provided by {Plugin.Instance.Name} in library.";
+    public string Description => $"Generates video trailers provided by {Plugin.ProviderName} in library.";
 
-    public string Category => Plugin.Instance.Name;
+    public string Category => Plugin.ProviderName;
 
     public IEnumerable<TaskTriggerInfo> GetDefaultTriggers()
     {
@@ -83,10 +84,10 @@ public class GenerateTrailersTask : IScheduledTask
         {
             MediaTypes = new[] { MediaType.Video },
 #if __EMBY__
-            HasAnyProviderId = new[] { Plugin.Instance.Name },
+            HasAnyProviderId = new[] { Plugin.ProviderId },
             IncludeItemTypes = new[] { nameof(Movie) },
 #else
-            HasAnyProviderId = new Dictionary<string, string> { { Plugin.Instance.Name, string.Empty } },
+            HasAnyProviderId = new Dictionary<string, string> { { Plugin.ProviderId, string.Empty } },
             IncludeItemTypes = new[] { BaseItemKind.Movie }
 #endif
         }).ToList();

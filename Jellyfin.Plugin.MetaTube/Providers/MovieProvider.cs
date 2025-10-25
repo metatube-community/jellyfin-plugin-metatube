@@ -46,12 +46,12 @@ public class MovieProvider : BaseProvider, IRemoteMetadataProvider<Movie, MovieI
     public async Task<MetadataResult<Movie>> GetMetadata(MovieInfo info,
         CancellationToken cancellationToken)
     {
-        var pid = info.GetPid(Name);
+        var pid = info.GetPid(Plugin.ProviderId);
         if (string.IsNullOrWhiteSpace(pid.Id) || string.IsNullOrWhiteSpace(pid.Provider))
         {
             // Search movies and pick the first result.
             var firstResult = (await GetSearchResults(info, cancellationToken)).FirstOrDefault();
-            if (firstResult != null) pid = firstResult.GetPid(Name);
+            if (firstResult != null) pid = firstResult.GetPid(Plugin.ProviderId);
         }
 
         Logger.Info("Get movie info: {0}", pid.ToString());
@@ -84,8 +84,8 @@ public class MovieProvider : BaseProvider, IRemoteMetadataProvider<Movie, MovieI
         // Distinct and clean blank list
         m.Genres = m.Genres?.Where(x => !string.IsNullOrWhiteSpace(x)).Distinct().ToArray() ?? Array.Empty<string>();
         m.Actors = m.Actors?.Where(x => !string.IsNullOrWhiteSpace(x)).Distinct().ToArray() ?? Array.Empty<string>();
-        m.PreviewImages = m.PreviewImages?.Where(
-            x => !string.IsNullOrWhiteSpace(x)).Distinct().ToArray() ?? Array.Empty<string>();
+        m.PreviewImages = m.PreviewImages?.Where(x => !string.IsNullOrWhiteSpace(x)).Distinct().ToArray() ??
+                          Array.Empty<string>();
 
         // Build parameters.
         var parameters = new Dictionary<string, string>
@@ -199,7 +199,7 @@ public class MovieProvider : BaseProvider, IRemoteMetadataProvider<Movie, MovieI
     public async Task<IEnumerable<RemoteSearchResult>> GetSearchResults(MovieInfo info,
         CancellationToken cancellationToken)
     {
-        var pid = info.GetPid(Name);
+        var pid = info.GetPid(Plugin.ProviderId);
 
         var searchResults = new List<MovieSearchResult>();
         if (string.IsNullOrWhiteSpace(pid.Id) || string.IsNullOrWhiteSpace(pid.Provider))
@@ -224,8 +224,8 @@ public class MovieProvider : BaseProvider, IRemoteMetadataProvider<Movie, MovieI
                 // Filter out mismatched results.
                 searchResults.RemoveAll(m => !filter.Contains(m.Provider, StringComparer.OrdinalIgnoreCase));
                 // Reorder results by stable sort.
-                searchResults = searchResults.OrderBy(
-                    m => filter.FindIndex(s => s.Equals(m.Provider, StringComparison.OrdinalIgnoreCase))).ToList();
+                searchResults = searchResults.OrderBy(m =>
+                    filter.FindIndex(s => s.Equals(m.Provider, StringComparison.OrdinalIgnoreCase))).ToList();
             }
             else
             {

@@ -247,7 +247,7 @@ public static class ApiClient
     #region Http
 
     private static readonly HttpClient HttpClient;
-    private static string DefaultUserAgent => $"{Plugin.Instance.Name}/{Plugin.Instance.Version}";
+    private static string DefaultUserAgent => $"{Plugin.ProviderName}/{Plugin.Instance.Version}";
 
     static ApiClient()
     {
