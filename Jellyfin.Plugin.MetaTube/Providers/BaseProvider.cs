@@ -33,7 +33,7 @@ public abstract class BaseProvider
 #if __EMBY__
     public string[] GetSupportedExternalIdentifiers()
     {
-        return [Plugin.ProviderName];
+        return new[] { Plugin.ProviderName };
     }
 #endif
 
