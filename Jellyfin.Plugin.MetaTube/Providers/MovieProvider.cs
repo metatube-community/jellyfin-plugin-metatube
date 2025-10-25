@@ -46,12 +46,12 @@ public class MovieProvider : BaseProvider, IRemoteMetadataProvider<Movie, MovieI
     public async Task<MetadataResult<Movie>> GetMetadata(MovieInfo info,
         CancellationToken cancellationToken)
     {
-        var pid = info.GetPid(Name);
+        var pid = info.GetPid(Plugin.ProviderId);
         if (string.IsNullOrWhiteSpace(pid.Id) || string.IsNullOrWhiteSpace(pid.Provider))
         {
             // Search movies and pick the first result.
             var firstResult = (await GetSearchResults(info, cancellationToken)).FirstOrDefault();
-            if (firstResult != null) pid = firstResult.GetPid(Name);
+            if (firstResult != null) pid = firstResult.GetPid(Plugin.ProviderId);
         }
 
         Logger.Info("Get movie info: {0}", pid.ToString());
@@ -199,7 +199,7 @@ public class MovieProvider : BaseProvider, IRemoteMetadataProvider<Movie, MovieI
     public async Task<IEnumerable<RemoteSearchResult>> GetSearchResults(MovieInfo info,
         CancellationToken cancellationToken)
     {
-        var pid = info.GetPid(Name);
+        var pid = info.GetPid(Plugin.ProviderId);
 
         var searchResults = new List<MovieSearchResult>();
         if (string.IsNullOrWhiteSpace(pid.Id) || string.IsNullOrWhiteSpace(pid.Provider))

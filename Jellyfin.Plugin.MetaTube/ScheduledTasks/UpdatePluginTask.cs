@@ -33,13 +33,13 @@ public class UpdatePluginTask : IScheduledTask
 
     private static string CurrentVersion => Assembly.GetExecutingAssembly().GetName().Version?.ToString();
 
-    public string Key => $"{Plugin.Instance.Name}UpdatePlugin";
+    public string Key => $"{Plugin.ProviderName}UpdatePlugin";
 
     public string Name => "Update Plugin";
 
-    public string Description => $"Updates {Plugin.Instance.Name} plugin to latest version.";
+    public string Description => $"Updates {Plugin.ProviderName} plugin to latest version.";
 
-    public string Category => Plugin.Instance.Name;
+    public string Category => Plugin.ProviderName;
 
     public IEnumerable<TaskTriggerInfo> GetDefaultTriggers()
     {
@@ -113,17 +113,14 @@ public class UpdatePluginTask : IScheduledTask
 
     private class ApiResponseInfo
     {
-        [JsonPropertyName("tag_name")]
-        public string TagName { get; set; }
+        [JsonPropertyName("tag_name")] public string TagName { get; set; }
 
-        [JsonPropertyName("assets")]
-        public ApiAssetInfo[] Assets { get; set; }
+        [JsonPropertyName("assets")] public ApiAssetInfo[] Assets { get; set; }
     }
 
     private class ApiAssetInfo
     {
-        [JsonPropertyName("name")]
-        public string Name { get; set; }
+        [JsonPropertyName("name")] public string Name { get; set; }
 
         [JsonPropertyName("browser_download_url")]
         public string BrowserDownloadUrl { get; set; }

@@ -11,7 +11,7 @@ public static class EmbyExtensions
 
     public static ILogger CreateLogger<T>(this ILogManager logManager)
     {
-        return logManager.GetLogger($"{Plugin.Instance.Name}.{typeof(T).Name}");
+        return logManager.GetLogger($"{Plugin.ProviderName}.{typeof(T).Name}");
     }
 
     #endregion

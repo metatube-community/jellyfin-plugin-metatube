@@ -30,7 +30,7 @@ public class ActorImageProvider : BaseProvider, IRemoteImageProvider, IHasOrder
     public async Task<IEnumerable<RemoteImageInfo>> GetImages(BaseItem item, CancellationToken cancellationToken)
 #endif
     {
-        var pid = item.GetPid(Name);
+        var pid = item.GetPid(Plugin.ProviderId);
         if (string.IsNullOrWhiteSpace(pid.Id) || string.IsNullOrWhiteSpace(pid.Provider))
             return Enumerable.Empty<RemoteImageInfo>();
 
