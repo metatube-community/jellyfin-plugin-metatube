@@ -113,14 +113,17 @@ public class UpdatePluginTask : IScheduledTask
 
     private class ApiResponseInfo
     {
-        [JsonPropertyName("tag_name")] public string TagName { get; set; }
+        [JsonPropertyName("tag_name")]
+        public string TagName { get; set; }
 
-        [JsonPropertyName("assets")] public ApiAssetInfo[] Assets { get; set; }
+        [JsonPropertyName("assets")]
+        public ApiAssetInfo[] Assets { get; set; }
     }
 
     private class ApiAssetInfo
     {
-        [JsonPropertyName("name")] public string Name { get; set; }
+        [JsonPropertyName("name")]
+        public string Name { get; set; }
 
         [JsonPropertyName("browser_download_url")]
         public string BrowserDownloadUrl { get; set; }
