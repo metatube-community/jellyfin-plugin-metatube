@@ -53,6 +53,13 @@ public class UpdatePluginTask : IScheduledTask
     public async Task Execute(CancellationToken cancellationToken, IProgress<double> progress)
     {
         await Task.Yield();
+
+        if (!Plugin.Instance.Configuration.EnableAutoUpdate)
+        {
+            _logger.Info("Auto update is disabled");
+            return;
+        }
+
         progress?.Report(0);
 
         try
