@@ -1,0 +1,85 @@
+[
+  {
+    "guid": "01cc53ec-c415-4108-bbd4-a684a9801a32",
+    "name": "MetaTube",
+    "description": "MetaTube Plugin for Jellyfin/Emby.",
+    "overview": "MetaTube Plugin for Jellyfin/Emby.",
+    "owner": "MetaTube",
+    "category": "Metadata",
+    "imageUrl": "https://raw.githubusercontent.com/metatube-community/jellyfin-plugin-metatube/main/Jellyfin.Plugin.MetaTube/thumb.png",
+    "versions": [
+      {
+        "checksum": "3ca56b00fa6e52106a0db7848ec0f20c",
+        "changelog": "Auto Released by Actions",
+        "targetAbi": "10.11.0.0",
+        "sourceUrl": "https://github.com/metatube-community/jellyfin-plugin-metatube/releases/download/v2025.1102.2200.0/Jellyfin.MetaTube@v2025.1102.2200.0.zip",
+        "timestamp": "2025-11-02T22:00:34Z",
+        "version": "2025.1102.2200.0"
+      },
+      {
+        "checksum": "e73b0c9a2a1f9703370488b99db2f2f0",
+        "changelog": "Auto Released by Actions",
+        "targetAbi": "10.11.0.0",
+        "sourceUrl": "https://github.com/metatube-community/jellyfin-plugin-metatube/releases/download/v2025.1025.2000.0/Jellyfin.MetaTube@v2025.1025.2000.0.zip",
+        "timestamp": "2025-10-25T20:01:12Z",
+        "version": "2025.1025.2000.0"
+      },
+      {
+        "checksum": "34160774efe937116a5eba92132875c3",
+        "changelog": "Auto Released by Actions",
+        "targetAbi": "10.11.0.0",
+        "sourceUrl": "https://github.com/metatube-community/jellyfin-plugin-metatube/releases/download/v2025.1025.400.0/Jellyfin.MetaTube@v2025.1025.400.0.zip",
+        "timestamp": "2025-10-25T04:01:07Z",
+        "version": "2025.1025.400.0"
+      },
+      {
+        "checksum": "926fdc5ccd18c8c5a19b66381abf5c71",
+        "changelog": "Auto Released by Actions",
+        "targetAbi": "10.11.0.0",
+        "sourceUrl": "https://github.com/metatube-community/jellyfin-plugin-metatube/releases/download/v2025.1022.2118.0/Jellyfin.MetaTube@v2025.1022.2118.0.zip",
+        "timestamp": "2025-10-22T21:19:17Z",
+        "version": "2025.1022.2118.0"
+      },
+      {
+        "checksum": "c158e46ad3360519feec4fe0a978ad57",
+        "changelog": "Auto Released by Actions",
+        "targetAbi": "10.9.0.0",
+        "sourceUrl": "https://github.com/metatube-community/jellyfin-plugin-metatube/releases/download/v2025.410.110.0/Jellyfin.MetaTube@v2025.410.110.0.zip",
+        "timestamp": "2025-04-10T01:10:32Z",
+        "version": "2025.410.110.0"
+      },
+      {
+        "checksum": "0ed70d96744948a8531bd0cd15b2fde5",
+        "changelog": "Auto Released by Actions",
+        "targetAbi": "10.9.0.0",
+        "sourceUrl": "https://github.com/metatube-community/jellyfin-plugin-metatube/releases/download/v2025.407.2120.0/Jellyfin.MetaTube@v2025.407.2120.0.zip",
+        "timestamp": "2025-04-07T21:20:29Z",
+        "version": "2025.407.2120.0"
+      },
+      {
+        "checksum": "06dcb258aacdd0aac4215ea228929cf7",
+        "changelog": "Auto Released by Actions",
+        "targetAbi": "10.9.0.0",
+        "sourceUrl": "https://github.com/metatube-community/jellyfin-plugin-metatube/releases/download/v2025.222.2100.0/Jellyfin.MetaTube@v2025.222.2100.0.zip",
+        "timestamp": "2025-02-22T21:00:28Z",
+        "version": "2025.222.2100.0"
+      },
+      {
+        "checksum": "19ac5febbe22b21eacdb3dde3a588c89",
+        "changelog": "Auto Released by Actions",
+        "targetAbi": "10.9.0.0",
+        "sourceUrl": "https://github.com/metatube-community/jellyfin-plugin-metatube/releases/download/v2024.1031.200.0/Jellyfin.MetaTube@v2024.1031.200.0.zip",
+        "timestamp": "2024-10-31T02:00:35Z",
+        "version": "2024.1031.200.0"
+      },
+      {
+        "checksum": "d815c45c124641a225e113ba6612250e",
+        "changelog": "Auto Released by Actions",
+        "targetAbi": "10.8.0.0",
+        "sourceUrl": "https://github.com/metatube-community/jellyfin-plugin-metatube/releases/download/v2024.205.435.0/Jellyfin.MetaTube@v2024.205.435.0.zip",
+        "timestamp": "2024-02-05T04:35:33Z",
+        "version": "2024.205.435.0"
+      }
+    ]
+  }
+]
