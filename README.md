@@ -1,5 +1,5 @@
 <h1 align="center">Jellyfin Plugin MetaTube</h1>
-<p align="center"><b>English | <a href="README_ZH.md">简体中文</a></b></p>
+<p align="center"><b>English | <a href="README.ja.md">日本語</a></b></p>
 
 <p align="center">
 <img alt="Plugin Banner" src="https://metatube-community.github.io/images/banner-dark.png"/>

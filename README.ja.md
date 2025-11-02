@@ -1,5 +1,5 @@
 <h1 align="center">Jellyfin Plugin MetaTube</h1>
-<p align="center"><b><a href="README.md">English</a> | 简体中文</b></p>
+<p align="center"><b><a href="README.md">English</a> | 日本語</b></p>
 
 <p align="center">
 <img alt="Plugin Banner" src="https://metatube-community.github.io/images/banner-dark.png"/>
@@ -26,51 +26,45 @@
 </a>
 </p>
 
-## 关于
+## 概要
 
-为 Jellyfin/Emby 开发的超级好用的元数据插件。
+Jellyfin／Emby 向けに開発された、とても便利なメタデータプラグインです。
 
-## 特性
+## 特徴
 
-- 完整数据：包括标题、**简介**、演员、标签、**评分**等内容。
-- 完整搜索：支持通过众多的刮削源搜索影片和演员信息。
-- 预告功能：无需下载完整预告视频即可**在线观看预告片**。
-- 计划任务：自动整理影片标签以及在后台自动更新插件。
-- 人脸识别：内置的人脸识别以人脸为中心裁剪海报图像。
-- 自动翻译：支持将特定的元数据内容翻译成需要的语言。
+- 完全なデータ：タイトル、概要、出演者、タグ、評価 などを含む豊富な情報を提供。
+- 強力な検索機能：多数のスクレイピングソースから作品や俳優情報を検索可能。
+- トレーラー機能：動画をダウンロードせずに オンラインで予告編を視聴。
+- スケジュールタスク：自動的に作品タグを整理し、バックグラウンドでプラグインを更新。
+- 顔認識機能：内蔵の顔認識により、顔を中心にポスター画像を自動トリミング。
+- 自動翻訳：特定のメタデータ内容を必要な言語に翻訳可能。
 
-## 平台
+## 対応プラットフォーム
 
 [![Jellyfin](https://img.shields.io/static/v1?color=%2300A4DC&style=for-the-badge&label=Jellyfin&logo=jellyfin&message=10.11.x)](https://jellyfin.org/)
 [![Emby](https://img.shields.io/static/v1?color=%2352B54B&style=for-the-badge&label=Emby&logo=emby&message=4.9.x)](https://emby.media/)
 
-_注意：本项目仅支持 Jellyfin/Emby 稳定版。_
+_※本プロジェクトは Jellyfin／Emby の安定版のみをサポートしています。_
 
-## 文档
+## ドキュメント
 
-- [插件安装](https://metatube-community.github.io/wiki/plugin-installation/)
-- [后端部署](https://metatube-community.github.io/wiki/server-deployment/)
-- [命名规范](https://metatube-community.github.io/wiki/naming-rules/)
-- [自动翻译](https://metatube-community.github.io/wiki/auto-translation/)
-- [源码编译](https://metatube-community.github.io/wiki/build-from-source/)
-- [数据来源](https://metatube-community.github.io/wiki/metadata-providers/)
+- [プラグインのインストール](https://metatube-community.github.io/wiki/plugin-installation/)
+- [バックエンドのデプロイ](https://metatube-community.github.io/wiki/server-deployment/)
+- [命名規則](https://metatube-community.github.io/wiki/naming-rules/)
+- [自動翻訳](https://metatube-community.github.io/wiki/auto-translation/)
+- [ソースからのビルド](https://metatube-community.github.io/wiki/build-from-source/)
+- [データソース](https://metatube-community.github.io/wiki/metadata-providers/)
 
-完整的文档以及使用方法，请参阅 [Wiki](https://metatube-community.github.io/wiki/)。
+詳細な使い方や解説は [Wiki](https://metatube-community.github.io/wiki/) をご参照ください。
 
-## 社区
+## コミュニティ
 
-有任何问题欢迎来 [Discussions](https://github.com/metatube-community/jellyfin-plugin-metatube/discussions) 提问讨论。
+質問や提案などは、[Discussions](https://github.com/metatube-community/jellyfin-plugin-metatube/discussions) にてお気軽にどうぞ。
 
-## 许可
+## ライセンス
 
-本插件项目在 [MIT](https://github.com/metatube-community/jellyfin-plugin-metatube/blob/main/LICENSE) 许可授权下发行。此外，如果使用本项目表明还额外接受以下条款：
+本プラグインは [MIT](https://github.com/metatube-community/jellyfin-plugin-metatube/blob/main/LICENSE) ライセンスの下で公開されています。
 
-- 本插件仅供学习以及技术交流使用
-- 请勿在公共社交平台上宣传此项目
-- 使用本软件时请遵守当地法律法规
-- 法律及使用后果由使用者自己承担
-- 禁止将本软件用于任何的商业用途
-
-## 星星
+## スター履歴
 
 [![Star History Chart](https://api.star-history.com/svg?repos=metatube-community/jellyfin-plugin-metatube&type=Date)](https://star-history.com/#metatube-community/jellyfin-plugin-metatube&Date)
