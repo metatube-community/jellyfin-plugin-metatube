@@ -309,10 +309,7 @@ public class MovieProvider : BaseProvider, IRemoteMetadataProvider<Movie, MovieI
                 var similarity = CalculateTitleSimilarity(m, result);
 
                 Logger.Info("Calculate movie title similarity for {0} ({1}) and {2} ({3}): {4:0.00%}",
-                    m.Id, m.Provider,
-                    result.Id, result.Provider,
-                    similarity
-                );
+                    m.Id, m.Provider, result.Id, result.Provider, similarity);
 
                 if (similarity >= 0.8)
                 {
