@@ -304,29 +304,22 @@ public class MovieProvider : BaseProvider, IRemoteMetadataProvider<Movie, MovieI
                 return;
             }
 
-            var matched = false;
-
             foreach (var result in searchResults)
             {
                 var similarity = CalculateTitleSimilarity(m, result);
 
-                Logger.Info("Calculate movie title similarity for {0} and {1}: {2:P2}",
-                    m.Id, result.Id, similarity);
+                Logger.Info("Calculate movie title similarity for {0} ({1}) and {2} ({3}): {4:0.00%}",
+                    m.Id, m.Provider, result.Id, result.Provider, similarity);
 
                 if (similarity >= 0.8)
                 {
                     if (result.Actors?.Any() == true)
                         m.Actors = result.Actors;
-
-                    matched = true;
-                    break;
+                    return;
                 }
             }
 
-            if (!matched)
-            {
-                Logger.Warn("No matching movie found on AVBASE for {0}", m.Id);
-            }
+            Logger.Warn("No matching movie found on AVBASE for {0}", m.Id);
         }
         catch (Exception e)
         {
