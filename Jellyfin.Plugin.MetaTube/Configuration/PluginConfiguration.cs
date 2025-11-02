@@ -34,6 +34,12 @@ public class PluginConfiguration : BasePluginConfiguration
     public string Token { get; set; } = string.Empty;
 
 #if __EMBY__
+    [DisplayName("Enable auto update")]
+    [Description("Automatically update the plugin through scheduled tasks.")]
+    public bool EnableAutoUpdate { get; set; } = true;
+#endif
+
+#if __EMBY__
     [DisplayName("Enable collections")]
     [Description("Automatically create collections by series.")]
 #endif
