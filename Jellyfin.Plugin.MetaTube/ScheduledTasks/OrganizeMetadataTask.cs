@@ -186,12 +186,23 @@ public class OrganizeMetadataTask : IScheduledTask
             return;
 
         var m = await ApiClient.GetMovieInfoAsync(pid.Provider, pid.Id, cancellationToken);
-        // Set first primary image.
+        
+        // Set the primary image (index 0). This will have the badge if provided.
         item.SetImage(new ItemImageInfo
         {
             Path = ApiClient.GetPrimaryImageApiUrl(m.Provider, m.Id, pid.Position ?? -1, badge),
             Type = ImageType.Primary
         }, 0);
+
+        // If a badge is applied and backup is enabled, keep the original primary image as a backup at index 1.
+        if (!string.IsNullOrEmpty(badge) && Plugin.Instance.Configuration.KeepOriginalCoverAsBackup)
+        {
+            item.SetImage(new ItemImageInfo
+            {
+                Path = ApiClient.GetPrimaryImageApiUrl(m.Provider, m.Id, pid.Position ?? -1, string.Empty),
+                Type = ImageType.Primary
+            }, 1);
+        }
     }
 
     #endregion

@@ -74,6 +74,13 @@ public class PluginConfiguration : BasePluginConfiguration
     [Description("Add Chinese subtitle badges to primary images.")]
 #endif
     public bool EnableBadges { get; set; } = false;
+    
+#if __EMBY__
+    [DisplayName("Keep original cover as backup")]
+    [Description("Keep the original cover without badge as a backup.")]
+    [VisibleCondition(nameof(EnableBadges), ValueCondition.IsEqual, true)]
+#endif
+    public bool KeepOriginalCoverAsBackup { get; set; } = true;
 
 #if __EMBY__
     [DisplayName("Badge url")]

@@ -86,6 +86,14 @@
                         <div class="fieldDescription checkboxFieldDescription">Add Chinese subtitle badges to primary images.</div>
                     </div>
 
+                    <div class="checkboxContainer checkboxContainer-withDescription">
+                        <label class="emby-checkbox-label">
+                            <input id="chkKeepOriginalCoverAsBackup" is="emby-checkbox" name="chkKeepOriginalCoverAsBackup" type="checkbox"/>
+                            <span>Keep original cover as backup</span>
+                        </label>
+                        <div class="fieldDescription checkboxFieldDescription">Keep the original cover without badge as a backup.</div>
+                    </div>
+
                     <div class="inputContainer">
                         <label class="inputLabel inputLabelUnfocused" for="txtBadgeUrl">Badge url:</label>
                         <input id="txtBadgeUrl" is="emby-input" name="txtBadgeUrl" type="text"/>
@@ -349,6 +357,7 @@
                 page.querySelector('#chkEnableTrailers').checked = config.EnableTrailers;
                 page.querySelector('#chkEnableRealActorNames').checked = config.EnableRealActorNames;
                 page.querySelector('#chkEnableBadges').checked = config.EnableBadges;
+                page.querySelector('#chkKeepOriginalCoverAsBackup').checked = config.KeepOriginalCoverAsBackup;
                 $('#txtBadgeUrl', page).val(config.BadgeUrl).change();
                 $('#txtPrimaryImageRatio', page).val(config.PrimaryImageRatio).change();
                 $('#txtDefaultImageQuality', page).val(config.DefaultImageQuality).change();
@@ -390,6 +399,7 @@
                 config.EnableTrailers = $('#chkEnableTrailers', form).prop('checked');
                 config.EnableRealActorNames = $('#chkEnableRealActorNames', form).prop('checked');
                 config.EnableBadges = $('#chkEnableBadges', form).prop('checked');
+                config.KeepOriginalCoverAsBackup = $('#chkKeepOriginalCoverAsBackup', form).prop('checked');
                 config.BadgeUrl = $('#txtBadgeUrl', form).val();
                 config.PrimaryImageRatio = $('#txtPrimaryImageRatio', form).val();
                 config.DefaultImageQuality = $('#txtDefaultImageQuality', form).val();
