@@ -234,6 +234,35 @@ public class MovieProvider : BaseProvider, IRemoteMetadataProvider<Movie, MovieI
             }
         }
 
+        // Deduplicate search results by normalized ID for FANZA provider.
+        // FANZA may return duplicate results with zero-padded IDs (e.g., mide00407 vs mide407).
+        {
+            var deduped = new Dictionary<string, MovieSearchResult>(StringComparer.OrdinalIgnoreCase);
+            foreach (var m in searchResults)
+            {
+                var normalizedId = NormalizeId(m.Provider, m.Id);
+                var key = $"{m.Provider}:{normalizedId}";
+                if (deduped.TryGetValue(key, out var existing))
+                {
+                    // Keep the result with the shorter ID (non-zero-padded version).
+                    if (m.Id.Length < existing.Id.Length)
+                    {
+                        Logger.Info("Dedup: replacing duplicate {0} with {1} (shorter ID)", existing.Id, m.Id);
+                        deduped[key] = m;
+                    }
+                    else
+                    {
+                        Logger.Info("Dedup: removing duplicate {0}, keeping {1}", m.Id, existing.Id);
+                    }
+                }
+                else
+                {
+                    deduped[key] = m;
+                }
+            }
+            searchResults = deduped.Values.ToList();
+        }
+
         var results = new List<RemoteSearchResult>();
         if (!searchResults.Any())
         {
@@ -350,6 +379,27 @@ public class MovieProvider : BaseProvider, IRemoteMetadataProvider<Movie, MovieI
             s = Regex.Replace(s, @"[\s\[\]\(\)【】（）]", "");
             return s.Trim();
         }
+    }
+
+    /// <summary>
+    /// Normalize a movie provider ID by stripping leading zeros from the numeric suffix.
+    /// Only applies to FANZA provider IDs. For example: mide00407 → mide407, abp00123 → abp123.
+    /// </summary>
+    private static string NormalizeId(string provider, string id)
+    {
+        if (!string.Equals(provider, "FANZA", StringComparison.OrdinalIgnoreCase))
+            return id;
+
+        var match = Regex.Match(id, @"^([a-zA-Z]+)(\d+)$");
+        if (!match.Success)
+            return id;
+
+        var prefix = match.Groups[1].Value;
+        var number = match.Groups[2].Value.TrimStart('0');
+        if (number.Length == 0)
+            number = "0";
+
+        return prefix + number;
     }
 
     private async Task TranslateMovieInfo(Metadata.MovieInfo m, string language, CancellationToken cancellationToken)
