@@ -11,10 +11,12 @@ jobs:
         with:
           fetch-depth: 0
 
-      - name: Setup .NET Core
+      - name: Setup .NET
         uses: actions/setup-dotnet@v4
         with:
-          dotnet-version: '8.x'
+          dotnet-version: |
+            8.0.x
+            10.0.x
 
       - name: Setup Python
         uses: actions/setup-python@v5
