@@ -41,7 +41,7 @@ Jellyfin／Emby 向けに開発された、とても便利なメタデータプ�
 
 ## 対応プラットフォーム
 
-[![Jellyfin](https://img.shields.io/static/v1?color=%2300A4DC&style=for-the-badge&label=Jellyfin&logo=jellyfin&message=10.11.x)](https://jellyfin.org/)
+[![Jellyfin](https://img.shields.io/static/v1?color=%2300A4DC&style=for-the-badge&label=Jellyfin&logo=jellyfin&message=12.x)](https://jellyfin.org/)
 [![Emby](https://img.shields.io/static/v1?color=%2352B54B&style=for-the-badge&label=Emby&logo=emby&message=4.9.x)](https://emby.media/)
 
 _※本プロジェクトは Jellyfin／Emby の安定版のみをサポートしています。_

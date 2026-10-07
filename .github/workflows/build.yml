@@ -1,0 +1,39 @@
+name: Build
+
+on:
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [ubuntu-latest, windows-latest]
+        configuration: [Release, Release.Emby]
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: |
+            8.0.x
+            10.0.x
+
+      - name: Build plugin
+        run: dotnet build --configuration ${{ matrix.configuration }} -p:Version=1.0.0.0
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Install manifest dependency
+        run: python -m pip install packaging
+
+      - name: Validate release archive and manifest ABI
+        run: python scripts/check_release.py --configuration ${{ matrix.configuration }} --version 1.0.0.0
