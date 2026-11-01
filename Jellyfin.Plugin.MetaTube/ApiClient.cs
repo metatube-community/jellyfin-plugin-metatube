@@ -253,6 +253,8 @@ public static class ApiClient
     {
         HttpClient = new HttpClient(new SocketsHttpHandler
         {
+            // MetaTube backend is accessed directly; its container handles proxying.
+            UseProxy = false,
             // Connect Timeout.
             ConnectTimeout = TimeSpan.FromSeconds(30),
 
