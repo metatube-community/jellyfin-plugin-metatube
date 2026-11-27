@@ -262,7 +262,7 @@ public class PluginConfiguration : BasePluginConfiguration
     public bool EnableGenreSubstitution { get; set; } = false;
 
 #if __EMBY__
-    [DisplayName("Title substitution table")]
+    [DisplayName("Genre substitution table")]
     [Description(
         "One record per line, separated by equal signs. Leave the target genre blank to delete the source genre.")]
     [EditMultiline(5)]
