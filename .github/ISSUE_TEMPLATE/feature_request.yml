@@ -1,6 +1,7 @@
 name: Feature request
 description: Suggest an idea or improvement
 title: "[Feature] "
+labels: ["enhancement"]
 body:
   - type: textarea
     id: description
@@ -14,7 +15,7 @@ body:
     id: related
     attributes:
       label: Is this feature related to a specific bug?
-      description: Please include a bug references if yes.
+      description: Please include a reference to the bug if yes.
 
   - type: textarea
     id: solution

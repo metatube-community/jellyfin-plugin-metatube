@@ -1,6 +1,7 @@
 name: Bug report
 description: Create a report to help us improve
 title: "[Bug] "
+labels: ["bug"]
 body:
   - type: checkboxes
     id: ensure
@@ -14,18 +15,40 @@ body:
         - label: I have read the [Wiki](https://metatube-community.github.io/wiki/), especially the [FAQ](https://metatube-community.github.io/faq/) page.
           required: true
 
-        - label: I have searched on the [issue tracker](……/) for a related issue.
+        - label: I have searched on the [issue tracker](https://github.com/metatube-community/jellyfin-plugin-metatube/issues) for a related issue.
           required: true
 
-  - type: input
+  - type: dropdown
+    id: media-server
     attributes:
-      label: MetaTube Plugin Version
+      label: Media Server
+      options:
+        - Jellyfin
+        - Emby
     validations:
       required: true
 
   - type: input
+    id: media-server-version
+    attributes:
+      label: Media Server Version
+      placeholder: e.g. 10.11.0
+    validations:
+      required: true
+
+  - type: input
+    id: plugin-version
+    attributes:
+      label: MetaTube Plugin Version
+      placeholder: e.g. v2025.1102.2200.0
+    validations:
+      required: true
+
+  - type: input
+    id: server-version
     attributes:
       label: MetaTube Server Version
+      placeholder: e.g. v1.4.0
     validations:
       required: true
 
@@ -38,30 +61,40 @@ body:
         - Windows
         - Linux
         - macOS
+        - Docker
+        - NAS (Synology, Unraid, etc.)
         - Other
 
   - type: textarea
+    id: description
     attributes:
       label: Description
     validations:
       required: true
 
   - type: textarea
+    id: server-config
     attributes:
       label: MetaTube Server
-      description: Paste the command line parameters or environment below.
+      description: Paste the command line parameters or environment below. Please redact tokens and other sensitive information.
+      render: shell
 
   - type: textarea
+    id: media-server-logs
     attributes:
       label: Jellyfin/Emby Logs
       description: Paste the Jellyfin/Emby logs below.
+      render: shell
 
   - type: textarea
+    id: server-logs
     attributes:
       label: MetaTube Server Logs
       description: Paste the MetaTube server logs below.
+      render: shell
 
   - type: textarea
+    id: reproduce
     attributes:
       label: How to Reproduce
       description: Steps to reproduce the behavior, if any.
