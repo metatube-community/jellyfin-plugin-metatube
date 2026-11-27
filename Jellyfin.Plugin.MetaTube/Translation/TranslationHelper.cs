@@ -102,12 +102,11 @@ public static class TranslationHelper
             {
                 return await func();
             }
-            // Never retry once the caller has cancelled; let the cancellation propagate.
             catch when (attempt < maxAttempts && !cancellationToken.IsCancellationRequested)
             {
             }
 
-            // Exponential backoff between attempts: 0.5s, 1s, 2s, 4s, ...
+            // Exponential backoff.
             await Task.Delay(TimeSpan.FromMilliseconds(500 * (1 << (attempt - 1))), cancellationToken);
         }
     }
