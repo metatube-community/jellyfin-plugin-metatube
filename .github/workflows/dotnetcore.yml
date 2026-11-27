@@ -5,15 +5,11 @@ on:
     inputs:
       version:
         description: 'Release version'
-        required: false
-        type: string
 
 permissions:
   contents: write
 
-concurrency:
-  group: ${{ github.workflow }}
-  cancel-in-progress: false
+concurrency: ${{ github.workflow }}
 
 jobs:
   build:
@@ -21,18 +17,7 @@ jobs:
     steps:
       - uses: actions/checkout@v7
 
-      - name: Setup .NET Core
-        uses: actions/setup-dotnet@v6
-        with:
-          dotnet-version: '8.x'
-
-      - name: Setup Python
-        uses: actions/setup-python@v7
-        with:
-          python-version: '3.12'
-
       - name: Generate Version
-        id: version
         env:
           INPUT_VERSION: ${{ inputs.version }}
         run: |
@@ -54,26 +39,34 @@ jobs:
             echo "::error::Failed to check tag v$version"
             exit 1
           fi
-          echo "version=$version" >> "$GITHUB_OUTPUT"
+          echo "VERSION=$version" >> "$GITHUB_ENV"
+
+      - name: Setup .NET Core
+        uses: actions/setup-dotnet@v6
+        with:
+          dotnet-version: '8.x'
 
       - name: Build Plugins
         run: |
-          dotnet build --configuration Release -p:Version=${{ steps.version.outputs.version }}
-          dotnet build --configuration Release.Emby -p:Version=${{ steps.version.outputs.version }}
+          dotnet build --configuration Release -p:Version=$VERSION
+          dotnet build --configuration Release.Emby -p:Version=$VERSION
+
+      - name: Setup Python
+        uses: actions/setup-python@v7
+        with:
+          python-version: '3.12'
 
       - name: Generate Manifest
         run: |
           python3 -m pip install packaging
-          python3 scripts/manifest.py Jellyfin.Plugin.MetaTube/bin/Jellyfin.MetaTube@v${{ steps.version.outputs.version }}.zip
+          python3 scripts/manifest.py "Jellyfin.Plugin.MetaTube/bin/Jellyfin.MetaTube@v$VERSION.zip"
 
       - name: Upload Plugins
         uses: softprops/action-gh-release@v3
         with:
           body: _Auto Released by Actions_
-          tag_name: v${{ steps.version.outputs.version }}
-          files: |
-            Jellyfin.Plugin.MetaTube/bin/Jellyfin.MetaTube@v${{ steps.version.outputs.version }}.zip
-            Jellyfin.Plugin.MetaTube/bin/Emby.MetaTube@v${{ steps.version.outputs.version }}.zip
+          tag_name: v${{ env.VERSION }}
+          files: Jellyfin.Plugin.MetaTube/bin/*.MetaTube@v${{ env.VERSION }}.zip
 
       - name: Publish Manifest
         run: |
