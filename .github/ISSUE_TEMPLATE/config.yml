@@ -1,7 +1,7 @@
 blank_issues_enabled: false
 
 contact_links:
-  - name: MetaTube GitHub Wiki
+  - name: MetaTube Wiki
     url: https://metatube-community.github.io/wiki/
     about: Please see the wiki for configuration and examples
   - name: MetaTube GitHub Discussions
