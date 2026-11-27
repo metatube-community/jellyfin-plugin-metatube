@@ -3,13 +3,17 @@ name: .NET
 on:
   workflow_dispatch:
 
+concurrency:
+  group: ${{ github.workflow }}
+  cancel-in-progress: false
+
 jobs:
   build:
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
     steps:
       - uses: actions/checkout@v7
-        with:
-          fetch-depth: 0
 
       - name: Setup .NET Core
         uses: actions/setup-dotnet@v6
@@ -22,40 +26,36 @@ jobs:
           python-version: '3.12'
 
       - name: Generate Version
-        id: shell
+        id: version
         run: |
           echo "version=$(date -u '+%Y.%-m%d.%-H%M.0')" >> $GITHUB_OUTPUT
 
       - name: Build Plugins
         run: |
-          dotnet build --configuration Release -p:Version=${{ steps.shell.outputs.version }}
-          dotnet build --configuration Release.Emby -p:Version=${{ steps.shell.outputs.version }}
+          dotnet build --configuration Release -p:Version=${{ steps.version.outputs.version }}
+          dotnet build --configuration Release.Emby -p:Version=${{ steps.version.outputs.version }}
 
       - name: Generate Manifest
         run: |
           python3 -m pip install packaging
-          python3 scripts/manifest.py Jellyfin.Plugin.MetaTube/bin/Jellyfin.MetaTube@v${{ steps.shell.outputs.version }}.zip
+          python3 scripts/manifest.py Jellyfin.Plugin.MetaTube/bin/Jellyfin.MetaTube@v${{ steps.version.outputs.version }}.zip
+
+      - name: Upload Plugins
+        uses: softprops/action-gh-release@v3
+        with:
+          body: _Auto Released by Actions_
+          tag_name: v${{ steps.version.outputs.version }}
+          files: |
+            Jellyfin.Plugin.MetaTube/bin/Jellyfin.MetaTube@v${{ steps.version.outputs.version }}.zip
+            Jellyfin.Plugin.MetaTube/bin/Emby.MetaTube@v${{ steps.version.outputs.version }}.zip
 
       - name: Publish Manifest
         run: |
-          git config --global user.name  'github-actions[bot]'
-          git config --global user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          git remote set-url origin https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${GITHUB_REPOSITORY}
+          git config user.name  'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
 
           git checkout --orphan dist
           git rm -rf .
           git add manifest.json
           git commit -m "Auto Updated by Actions"
           git push -f -u origin dist
-
-      - name: Upload Plugins
-        uses: softprops/action-gh-release@v3
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          body: _Auto Released by Actions_
-          draft: false
-          tag_name: v${{ steps.shell.outputs.version }}
-          files: |
-            Jellyfin.Plugin.MetaTube/bin/Jellyfin.MetaTube@v${{ steps.shell.outputs.version }}.zip
-            Jellyfin.Plugin.MetaTube/bin/Emby.MetaTube@v${{ steps.shell.outputs.version }}.zip
