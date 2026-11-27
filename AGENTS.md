@@ -6,7 +6,7 @@
 
 ### Commits
 
-- Title commits and PRs `Type(scope): summary`, e.g., `Fix(manifest): read manifest from dist branch and reject duplicates`. Types are `Build`, `CI`, `Chore`, `Feature`, `Fix`, `Refactor`, and `Revert`. The scope is the area changed, e.g., `manifest`, `config`, or `Emby`, and may be dropped for repo-wide changes. Wrap code and provider names in backticks.
+- Title commits and PRs `Type(scope): summary`, e.g., `Fix(manifest): read manifest from dist branch`. Types are `Build`, `CI`, `Chore`, `Feature`, `Fix`, `Refactor`, and `Revert`. The scope is the area changed, e.g., `manifest`, `config`, or `Emby`, and may be dropped for repo-wide changes. Wrap code and provider names in backticks.
 - Keep commit and PR titles within about 50 characters. This is a guideline, not a hard limit, but follow it when you can.
 
 ### Pull requests
