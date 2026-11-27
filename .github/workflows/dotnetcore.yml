@@ -36,15 +36,22 @@ jobs:
         env:
           INPUT_VERSION: ${{ inputs.version }}
         run: |
-          version="${INPUT_VERSION#v}"
-          if [ -z "$version" ]; then
+          if [ -z "$INPUT_VERSION" ]; then
             version="$(date -u '+%Y.%-m%d.%-H%M.0')"
-          elif ! [[ "$version" =~ ^[0-9]+\.[0-9]+\.[0-9]+\.[0-9]+$ ]]; then
-            echo "::error::Invalid version: $INPUT_VERSION"
-            exit 1
+          else
+            version="${INPUT_VERSION#v}"
+            if ! [[ "$version" =~ ^[0-9]+\.[0-9]+\.[0-9]+\.[0-9]+$ ]]; then
+              echo "::error::Invalid version: $INPUT_VERSION"
+              exit 1
+            fi
           fi
-          if git ls-remote --exit-code --tags origin "refs/tags/v$version" >/dev/null; then
+          status=0
+          git ls-remote --exit-code --tags origin "refs/tags/v$version" >/dev/null || status=$?
+          if [ "$status" -eq 0 ]; then
             echo "::error::Tag v$version already exists"
+            exit 1
+          elif [ "$status" -ne 2 ]; then
+            echo "::error::Failed to check tag v$version"
             exit 1
           fi
           echo "version=$version" >> "$GITHUB_OUTPUT"
