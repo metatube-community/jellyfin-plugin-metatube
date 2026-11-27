@@ -2,6 +2,11 @@ name: .NET
 
 on:
   workflow_dispatch:
+    inputs:
+      version:
+        description: 'Release version (e.g. 2026.1127.1200.0). Leave empty to generate from the current UTC time.'
+        required: false
+        type: string
 
 concurrency:
   group: ${{ github.workflow }}
@@ -27,8 +32,21 @@ jobs:
 
       - name: Generate Version
         id: version
+        env:
+          INPUT_VERSION: ${{ inputs.version }}
         run: |
-          echo "version=$(date -u '+%Y.%-m%d.%-H%M.0')" >> $GITHUB_OUTPUT
+          version="${INPUT_VERSION#v}"
+          if [ -z "$version" ]; then
+            version="$(date -u '+%Y.%-m%d.%-H%M.0')"
+          elif ! [[ "$version" =~ ^[0-9]+\.[0-9]+\.[0-9]+\.[0-9]+$ ]]; then
+            echo "::error::Invalid version '$INPUT_VERSION': expected four numeric parts, e.g. 2026.1127.1200.0"
+            exit 1
+          fi
+          if git ls-remote --exit-code --tags origin "refs/tags/v$version" >/dev/null; then
+            echo "::error::Tag v$version already exists"
+            exit 1
+          fi
+          echo "version=$version" >> "$GITHUB_OUTPUT"
 
       - name: Build Plugins
         run: |
