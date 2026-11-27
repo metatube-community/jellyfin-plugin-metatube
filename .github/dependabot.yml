@@ -1,29 +1,14 @@
 version: 2
 updates:
-  - package-ecosystem: "nuget"
-    directory: "/"
-    schedule:
-      interval: "weekly"
-    commit-message:
-      prefix: "Chore"
-    ignore:
-      # Server SDK versions decide which Jellyfin/Emby releases the plugin
-      # supports, so only patch updates are taken automatically.
-      - dependency-name: "Jellyfin.*"
-        update-types: ["version-update:semver-major", "version-update:semver-minor"]
-      - dependency-name: "MediaBrowser.*"
-        update-types: ["version-update:semver-major", "version-update:semver-minor"]
-    groups:
-      jellyfin:
-        patterns:
-          - "Jellyfin.*"
-
   - package-ecosystem: "github-actions"
     directory: "/"
     schedule:
       interval: "weekly"
     commit-message:
       prefix: "Chore"
+    labels:
+      - "dependencies"
+      - "actions"
     groups:
       github-actions:
         patterns:
