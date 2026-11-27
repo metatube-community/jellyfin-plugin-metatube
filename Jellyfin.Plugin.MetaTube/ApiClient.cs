@@ -1,4 +1,5 @@
 using System.Collections.Specialized;
+using System.Globalization;
 using System.Net.Http.Headers;
 using System.Net.Http.Json;
 using System.Web;
@@ -40,11 +41,11 @@ public static class ApiClient
         return ComposeUrl(Path.Combine(path, provider, id), new NameValueCollection
         {
             { "url", url },
-            { "ratio", ratio.ToString("R") },
-            { "pos", position.ToString("R") },
+            { "ratio", ratio.ToString("R", CultureInfo.InvariantCulture) },
+            { "pos", position.ToString("R", CultureInfo.InvariantCulture) },
             { "auto", auto.ToString() },
             { "badge", badge },
-            { "quality", Plugin.Instance.Configuration.DefaultImageQuality.ToString() }
+            { "quality", Plugin.Instance.Configuration.DefaultImageQuality.ToString(CultureInfo.InvariantCulture) }
         });
     }
 

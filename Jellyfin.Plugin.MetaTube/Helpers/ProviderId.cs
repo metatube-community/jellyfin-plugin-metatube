@@ -1,3 +1,5 @@
+using System.Globalization;
+
 namespace Jellyfin.Plugin.MetaTube.Helpers;
 
 public class ProviderId
@@ -29,7 +31,7 @@ public class ProviderId
         {
             pid.Provider, pid.Id
         };
-        if (pid.Position.HasValue) values.Add(pid.Position.ToString());
+        if (pid.Position.HasValue) values.Add(pid.Position.Value.ToString(CultureInfo.InvariantCulture));
         if (pid.Update.HasValue) values.Add((values.Count == 2 ? ":" : string.Empty) + pid.Update);
         return string.Join(':', values);
     }
@@ -59,6 +61,6 @@ public class ProviderId
 
     private static double? ToDouble(string s)
     {
-        return double.TryParse(s, out var result) ? result : null;
+        return double.TryParse(s, NumberStyles.Float, CultureInfo.InvariantCulture, out var result) ? result : null;
     }
 }
