@@ -4,7 +4,7 @@ on:
   workflow_dispatch:
     inputs:
       version:
-        description: 'Release version (empty for auto)'
+        description: 'Release version'
         required: false
         type: string
 
