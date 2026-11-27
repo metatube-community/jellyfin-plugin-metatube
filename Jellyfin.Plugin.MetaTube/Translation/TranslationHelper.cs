@@ -73,7 +73,7 @@ public static class TranslationHelper
                     .ConfigureAwait(false)).TranslatedText;
             }
 
-            return await RetryAsync(TranslateWithDelay, 5);
+            return await RetryAsync(TranslateWithDelay, 5, cancellationToken);
         }
         finally
         {
@@ -93,17 +93,22 @@ public static class TranslationHelper
             m.Summary = await TranslateAsync(m.Summary, AutoLanguageCode, to, cancellationToken);
     }
 
-    private static async Task<T> RetryAsync<T>(Func<Task<T>> func, int retryCount)
+    private static async Task<T> RetryAsync<T>(Func<Task<T>> func, int maxAttempts,
+        CancellationToken cancellationToken)
     {
-        while (true)
+        for (var attempt = 1; ; attempt++)
         {
             try
             {
                 return await func();
             }
-            catch when (--retryCount > 0)
+            // Never retry once the caller has cancelled; let the cancellation propagate.
+            catch when (attempt < maxAttempts && !cancellationToken.IsCancellationRequested)
             {
             }
+
+            // Exponential backoff between attempts: 0.5s, 1s, 2s, 4s, ...
+            await Task.Delay(TimeSpan.FromMilliseconds(500 * (1 << (attempt - 1))), cancellationToken);
         }
     }
 }
