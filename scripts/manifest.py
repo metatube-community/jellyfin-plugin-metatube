@@ -2,11 +2,13 @@
 import hashlib
 import json
 import os
+import subprocess
 import sys
 import xml.etree.ElementTree as ET
 from datetime import datetime
-from urllib.request import urlopen
 from packaging.version import Version
+
+DIST_BRANCH = 'dist'
 
 
 def md5sum(filename) -> str:
@@ -37,6 +39,15 @@ def generate(filename, version, csproj) -> dict:
     }
 
 
+def load_manifest() -> list:
+    # Read from the dist branch via git instead of raw.githubusercontent.com,
+    # whose CDN cache can return a stale manifest and silently drop releases.
+    subprocess.run(['git', 'fetch', '--quiet', 'origin', f'refs/heads/{DIST_BRANCH}'], check=True)
+    content = subprocess.run(['git', 'show', 'FETCH_HEAD:manifest.json'],
+                             check=True, capture_output=True, text=True).stdout
+    return json.loads(content)
+
+
 def main() -> None:
     filename = sys.argv[1]
     version = filename.split('@', maxsplit=1)[1] \
@@ -46,11 +57,13 @@ def main() -> None:
     csproj = os.path.join(os.path.dirname(__file__),
                           "../Jellyfin.Plugin.MetaTube/Jellyfin.Plugin.MetaTube.csproj")
 
-    with urlopen(
-            'https://raw.githubusercontent.com/metatube-community/jellyfin-plugin-metatube/dist/manifest.json') as f:
-        manifest = json.load(f)
+    manifest = load_manifest()
+    versions = manifest[0]['versions']
 
-    manifest[0]['versions'].insert(0, generate(filename, version, csproj))
+    if any(v['version'] == version for v in versions):
+        sys.exit(f'Version {version} already exists in manifest')
+
+    versions.insert(0, generate(filename, version, csproj))
 
     with open('manifest.json', 'w') as f:
         json.dump(manifest, f, indent=2)
