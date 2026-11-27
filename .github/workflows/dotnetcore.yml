@@ -4,7 +4,7 @@ on:
   workflow_dispatch:
     inputs:
       version:
-        description: 'Release version (e.g. 2026.1127.1200.0). Leave empty to generate from the current UTC time.'
+        description: 'Version (empty for auto)'
         required: false
         type: string
 
@@ -39,7 +39,7 @@ jobs:
           if [ -z "$version" ]; then
             version="$(date -u '+%Y.%-m%d.%-H%M.0')"
           elif ! [[ "$version" =~ ^[0-9]+\.[0-9]+\.[0-9]+\.[0-9]+$ ]]; then
-            echo "::error::Invalid version '$INPUT_VERSION': expected four numeric parts, e.g. 2026.1127.1200.0"
+            echo "::error::Invalid version: $INPUT_VERSION"
             exit 1
           fi
           if git ls-remote --exit-code --tags origin "refs/tags/v$version" >/dev/null; then
