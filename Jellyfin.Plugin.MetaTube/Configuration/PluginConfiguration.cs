@@ -109,8 +109,8 @@ public class PluginConfiguration : BasePluginConfiguration
 #endif
     public string RawMovieProviderFilter
     {
-        get => _movieProviderFilter?.Any() == true ? string.Join(',', _movieProviderFilter) : string.Empty;
-        set => _movieProviderFilter = value?.Split(',').Select(s => s.Trim()).Where(s => s.Any())
+        get => string.Join(',', _movieProviderFilter);
+        set => _movieProviderFilter = (value ?? string.Empty).Split(',').Select(s => s.Trim()).Where(s => s.Any())
             .Distinct(StringComparer.OrdinalIgnoreCase).ToList();
     }
 
@@ -119,7 +119,7 @@ public class PluginConfiguration : BasePluginConfiguration
         return _movieProviderFilter;
     }
 
-    private List<string> _movieProviderFilter;
+    private List<string> _movieProviderFilter = new();
 
 #if __EMBY__
     [DisplayName("Enable template")]
@@ -221,7 +221,7 @@ public class PluginConfiguration : BasePluginConfiguration
 #endif
     public string TitleRawSubstitutionTable
     {
-        get => _titleSubstitutionTable?.ToString();
+        get => _titleSubstitutionTable.ToString();
         set => _titleSubstitutionTable = SubstitutionTable.Parse(value);
     }
 
@@ -230,7 +230,7 @@ public class PluginConfiguration : BasePluginConfiguration
         return _titleSubstitutionTable;
     }
 
-    private SubstitutionTable _titleSubstitutionTable;
+    private SubstitutionTable _titleSubstitutionTable = SubstitutionTable.Parse(string.Empty);
 
 #if __EMBY__
     [DisplayName("Enable actor substitution")]
@@ -245,7 +245,7 @@ public class PluginConfiguration : BasePluginConfiguration
 #endif
     public string ActorRawSubstitutionTable
     {
-        get => _actorSubstitutionTable?.ToString();
+        get => _actorSubstitutionTable.ToString();
         set => _actorSubstitutionTable = SubstitutionTable.Parse(value);
     }
 
@@ -254,7 +254,7 @@ public class PluginConfiguration : BasePluginConfiguration
         return _actorSubstitutionTable;
     }
 
-    private SubstitutionTable _actorSubstitutionTable;
+    private SubstitutionTable _actorSubstitutionTable = SubstitutionTable.Parse(string.Empty);
 
 #if __EMBY__
     [DisplayName("Enable genre substitution")]
@@ -269,7 +269,7 @@ public class PluginConfiguration : BasePluginConfiguration
 #endif
     public string GenreRawSubstitutionTable
     {
-        get => _genreSubstitutionTable?.ToString();
+        get => _genreSubstitutionTable.ToString();
         set => _genreSubstitutionTable = SubstitutionTable.Parse(value);
     }
 
@@ -278,5 +278,5 @@ public class PluginConfiguration : BasePluginConfiguration
         return _genreSubstitutionTable;
     }
 
-    private SubstitutionTable _genreSubstitutionTable;
+    private SubstitutionTable _genreSubstitutionTable = SubstitutionTable.Parse(string.Empty);
 }
