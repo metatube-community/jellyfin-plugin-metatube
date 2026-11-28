@@ -5,7 +5,7 @@ import os
 import subprocess
 import sys
 import xml.etree.ElementTree as ET
-from datetime import datetime
+from datetime import datetime, timezone
 from packaging.version import Version
 
 DIST_BRANCH = 'dist'
@@ -34,7 +34,7 @@ def generate(filename, version, csproj) -> dict:
         'targetAbi': f'{get_jellyfin_version(csproj)}.0',
         'sourceUrl': 'https://github.com/metatube-community/jellyfin-plugin-metatube/releases/download/'
                      f'v{version}/Jellyfin.MetaTube@v{version}.zip',
-        'timestamp': datetime.now().strftime('%Y-%m-%dT%H:%M:%SZ'),
+        'timestamp': datetime.now(timezone.utc).strftime('%Y-%m-%dT%H:%M:%SZ'),
         'version': version
     }
 
