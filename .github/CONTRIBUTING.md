@@ -1,7 +1,8 @@
 # Contributing
 
 Thanks for your interest in contributing to MetaTube! Please read the
-[Code of Conduct](https://github.com/metatube-community/jellyfin-plugin-metatube/blob/main/.github/CODE_OF_CONDUCT.md) before taking part.
+[Code of Conduct](https://github.com/metatube-community/jellyfin-plugin-metatube/blob/main/.github/CODE_OF_CONDUCT.md)
+before taking part.
 
 ## Questions and Bug Reports
 
@@ -40,4 +41,5 @@ for more details.
 ## Pull Requests
 
 Keep each pull request focused on a single change, and follow the commit and
-pull request conventions in [AGENTS.md](https://github.com/metatube-community/jellyfin-plugin-metatube/blob/main/AGENTS.md).
+pull request conventions in
+[AGENTS.md](https://github.com/metatube-community/jellyfin-plugin-metatube/blob/main/AGENTS.md).
