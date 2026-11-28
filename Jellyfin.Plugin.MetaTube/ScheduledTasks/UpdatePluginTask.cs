@@ -31,7 +31,7 @@ public class UpdatePluginTask : IScheduledTask
         _zipClient = zipClient;
     }
 
-    private static string CurrentVersion => Assembly.GetExecutingAssembly().GetName().Version?.ToString();
+    private static string? CurrentVersion => Assembly.GetExecutingAssembly().GetName().Version?.ToString();
 
     public string Key => $"{Plugin.ProviderName}UpdatePlugin";
 
@@ -79,9 +79,8 @@ public class UpdatePluginTask : IScheduledTask
             {
                 _logger.Info("Found new plugin version: {0}", remoteVersion);
 
-                var url = apiResult?.Assets
-                    .Where(asset => asset.Name.StartsWith("Emby") && asset.Name.EndsWith(".zip")).ToArray()
-                    .FirstOrDefault()
+                var url = apiResult?.Assets?
+                    .FirstOrDefault(asset => asset.Name?.StartsWith("Emby") == true && asset.Name.EndsWith(".zip"))
                     ?.BrowserDownloadUrl;
                 if (!Uri.IsWellFormedUriString(url, UriKind.Absolute))
                     throw new Exception("Invalid download url");
@@ -113,27 +112,28 @@ public class UpdatePluginTask : IScheduledTask
         progress?.Report(100);
     }
 
-    private static Version ParseVersion(string v)
+    private static Version ParseVersion(string? v)
     {
+        ArgumentException.ThrowIfNullOrWhiteSpace(v);
         return new Version(v.StartsWith("v") ? v[1..] : v);
     }
 
     private class ApiResponseInfo
     {
         [JsonPropertyName("tag_name")]
-        public string TagName { get; set; }
+        public string? TagName { get; set; }
 
         [JsonPropertyName("assets")]
-        public ApiAssetInfo[] Assets { get; set; }
+        public ApiAssetInfo[]? Assets { get; set; }
     }
 
     private class ApiAssetInfo
     {
         [JsonPropertyName("name")]
-        public string Name { get; set; }
+        public string? Name { get; set; }
 
         [JsonPropertyName("browser_download_url")]
-        public string BrowserDownloadUrl { get; set; }
+        public string? BrowserDownloadUrl { get; set; }
     }
 }
 

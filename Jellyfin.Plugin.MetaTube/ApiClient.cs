@@ -35,8 +35,8 @@ public static class ApiClient
         return uriBuilder.ToString();
     }
 
-    private static string ComposeImageApiUrl(string path, string provider, string id, string url = default,
-        double ratio = -1, double position = -1, bool auto = false, string badge = default)
+    private static string ComposeImageApiUrl(string path, string provider, string id, string? url = null,
+        double ratio = -1, double position = -1, bool auto = false, string? badge = null)
     {
         return ComposeUrl(Path.Combine(path, provider, id), new NameValueCollection
         {
@@ -68,7 +68,7 @@ public static class ApiClient
     }
 
     private static string ComposeTranslateApiUrl(string path, string q, string from, string to, string engine,
-        NameValueCollection nv = null)
+        NameValueCollection? nv = null)
     {
         return ComposeUrl(path, new NameValueCollection
         {
@@ -80,14 +80,14 @@ public static class ApiClient
         });
     }
 
-    public static string GetPrimaryImageApiUrl(string provider, string id, double position = -1, string badge = default)
+    public static string GetPrimaryImageApiUrl(string provider, string id, double position = -1, string? badge = null)
     {
         return ComposeImageApiUrl(PrimaryImageApi, provider, id,
             ratio: Plugin.Instance.Configuration.PrimaryImageRatio, position: position, badge: badge);
     }
 
-    public static string GetPrimaryImageApiUrl(string provider, string id, string url, double position = -1,
-        bool auto = false, string badge = default)
+    public static string GetPrimaryImageApiUrl(string provider, string id, string? url, double position = -1,
+        bool auto = false, string? badge = null)
     {
         return ComposeImageApiUrl(PrimaryImageApi, provider, id, url,
             Plugin.Instance.Configuration.PrimaryImageRatio, position, auto, badge);
@@ -98,7 +98,7 @@ public static class ApiClient
         return ComposeImageApiUrl(ThumbImageApi, provider, id);
     }
 
-    public static string GetThumbImageApiUrl(string provider, string id, string url, double position = -1,
+    public static string GetThumbImageApiUrl(string provider, string id, string? url, double position = -1,
         bool auto = false)
     {
         return ComposeImageApiUrl(ThumbImageApi, provider, id, url, position: position, auto: auto);
@@ -109,7 +109,7 @@ public static class ApiClient
         return ComposeImageApiUrl(BackdropImageApi, provider, id);
     }
 
-    public static string GetBackdropImageApiUrl(string provider, string id, string url, double position = -1,
+    public static string GetBackdropImageApiUrl(string provider, string id, string? url, double position = -1,
         bool auto = false)
     {
         return ComposeImageApiUrl(BackdropImageApi, provider, id, url, position: position, auto: auto);

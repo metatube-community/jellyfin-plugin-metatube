@@ -4,15 +4,15 @@ namespace Jellyfin.Plugin.MetaTube.Helpers;
 
 public class ProviderId
 {
-    public string Provider { get; set; }
+    public string Provider { get; set; } = string.Empty;
 
-    public string Id { get; set; }
+    public string Id { get; set; } = string.Empty;
 
     public double? Position { get; set; }
 
     public bool? Update { get; set; }
 
-    public static ProviderId Parse(string rawPid)
+    public static ProviderId Parse(string? rawPid)
     {
         var values = rawPid?.Split(':');
         return new ProviderId

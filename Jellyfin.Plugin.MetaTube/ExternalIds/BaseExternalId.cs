@@ -18,7 +18,9 @@ public abstract class BaseExternalId : IExternalId
 
     public virtual string Key => Plugin.ProviderId;
 
-    public virtual string UrlFormatString => Plugin.Instance.Configuration.Server + "?redirect={0}";
+    public static string RedirectUrlFormat => Plugin.Instance.Configuration.Server + "?redirect={0}";
+
+    public virtual string? UrlFormatString => RedirectUrlFormat;
 
     public abstract bool Supports(IHasProviderIds item);
 }

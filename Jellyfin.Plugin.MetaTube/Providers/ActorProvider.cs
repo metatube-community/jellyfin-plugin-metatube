@@ -107,7 +107,7 @@ public class ActorProvider : BaseProvider, IRemoteMetadataProvider<Person, Perso
         var aliases = a.Aliases?.Where(alias => !string.Equals(alias, a.Name, StringComparison.OrdinalIgnoreCase))
             .Distinct(StringComparer.OrdinalIgnoreCase);
 
-        var info = new List<(string, string)>
+        var info = new List<(string, string?)>
         {
             ("別名", string.Join(", ", aliases ?? Enumerable.Empty<string>())),
             ("3サイズ", a.Measurements),

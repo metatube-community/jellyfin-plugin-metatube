@@ -18,7 +18,7 @@ public class TrailerExternalId : BaseExternalId
 
     public override string Key => "TrailerUrl";
 
-    public override string UrlFormatString => null;
+    public override string? UrlFormatString => null;
 
     public override bool Supports(IHasProviderIds item)
     {

@@ -1,14 +1,15 @@
+using System.Diagnostics.CodeAnalysis;
 using System.Text;
 
 namespace Jellyfin.Plugin.MetaTube.Helpers;
 
-public class SubstitutionTable : Dictionary<string, string>
+public class SubstitutionTable : Dictionary<string, string?>
 {
     public SubstitutionTable() : base(StringComparer.OrdinalIgnoreCase)
     {
     }
 
-    public static SubstitutionTable Parse(string text)
+    public static SubstitutionTable Parse(string? text)
     {
         var dictionary = new SubstitutionTable();
 
@@ -39,7 +40,8 @@ public class SubstitutionTable : Dictionary<string, string>
                     .Select(kvp => $"{kvp.Key?.Trim()}={kvp.Value?.Trim()}"));
     }
 
-    public string Substitute(string source)
+    [return: NotNullIfNotNull(nameof(source))]
+    public string? Substitute(string? source)
     {
         var table = this;
 
@@ -48,12 +50,12 @@ public class SubstitutionTable : Dictionary<string, string>
             : table.Aggregate(new StringBuilder(source), (sb, kvp) => sb.Replace(kvp.Key, kvp.Value)).ToString();
     }
 
-    public IEnumerable<string> Substitute(IEnumerable<string> source)
+    public IEnumerable<string> Substitute(IEnumerable<string>? source)
     {
         var table = this;
 
         if (table.Any() != true)
-            return source;
+            return source ?? Enumerable.Empty<string>();
 
         var target = new List<string>();
 
