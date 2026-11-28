@@ -1,0 +1,9 @@
+<Solution>
+  <Configurations>
+    <BuildType Name="Debug" />
+    <BuildType Name="Debug.Emby" />
+    <BuildType Name="Release" />
+    <BuildType Name="Release.Emby" />
+  </Configurations>
+  <Project Path="Jellyfin.Plugin.MetaTube/Jellyfin.Plugin.MetaTube.csproj" />
+</Solution>
