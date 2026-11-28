@@ -2,17 +2,18 @@ using System.ComponentModel;
 
 namespace Jellyfin.Plugin.MetaTube.Translation;
 
+[Flags]
 public enum TranslationMode
 {
     [Description("Disabled")]
-    Disabled,
+    Disabled = 0,
 
     [Description("Title")]
-    Title,
+    Title = 1 << 0,
 
     [Description("Summary")]
-    Summary,
+    Summary = 1 << 1,
 
     [Description("Title and Summary")]
-    Both
+    Both = Title | Summary
 }
