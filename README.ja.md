@@ -7,22 +7,20 @@
 <br/>
 
 <a href="https://github.com/metatube-community/jellyfin-plugin-metatube/actions">
-<img alt="GitHub Workflow Status" src="https://img.shields.io/github/actions/workflow/status/metatube-community/jellyfin-plugin-metatube/dotnetcore.yml?branch=main&logo=github">
+<img alt="GitHub Workflow Status" src="https://img.shields.io/github/actions/workflow/status/metatube-community/jellyfin-plugin-metatube/dotnetcore.yml?branch=main&logo=githubactions">
 </a>
-<a href="https://github.com/metatube-community/jellyfin-plugin-metatube/search?l=c%23">
-<img alt="GitHub top language" src="https://img.shields.io/github/languages/top/metatube-community/jellyfin-plugin-metatube?color=%23239120&label=.NET&logo=csharp">
-</a>
+<img alt="GitHub top language" src="https://img.shields.io/github/languages/top/metatube-community/jellyfin-plugin-metatube?color=%23239120&label=.NET&logo=dotnet">
 <a href="https://github.com/metatube-community/jellyfin-plugin-metatube/blob/main/LICENSE">
-<img alt="License" src="https://img.shields.io/github/license/metatube-community/jellyfin-plugin-metatube">
+<img alt="License" src="https://img.shields.io/github/license/metatube-community/jellyfin-plugin-metatube?logo=opensourceinitiative">
 </a>
-<a href="https://github.com/metatube-community/jellyfin-plugin-metatube">
-<img alt="gitHub Stars" src="https://img.shields.io/github/stars/metatube-community/jellyfin-plugin-metatube?style=flat">
-</a>
-<a href="https://github.com/metatube-community/jellyfin-plugin-metatube">
-<img alt="Downloads" src="https://img.shields.io/github/downloads/metatube-community/jellyfin-plugin-metatube/total">
+<a href="https://star-history.com/#metatube-community/jellyfin-plugin-metatube&Date">
+<img alt="GitHub Stars" src="https://img.shields.io/github/stars/metatube-community/jellyfin-plugin-metatube?style=flat&logo=github">
 </a>
 <a href="https://github.com/metatube-community/jellyfin-plugin-metatube/releases">
-<img alt="Releases" src="https://img.shields.io/github/v/release/metatube-community/jellyfin-plugin-metatube?include_prereleases&logo=smartthings">
+<img alt="Downloads" src="https://img.shields.io/github/downloads/metatube-community/jellyfin-plugin-metatube/total?logo=github">
+</a>
+<a href="https://github.com/metatube-community/jellyfin-plugin-metatube/releases">
+<img alt="Releases" src="https://img.shields.io/github/v/release/metatube-community/jellyfin-plugin-metatube?include_prereleases&logo=git">
 </a>
 </p>
 
