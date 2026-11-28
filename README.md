@@ -42,7 +42,7 @@ MetaTube Plugin for Jellyfin/Emby.
 [![Jellyfin](https://img.shields.io/static/v1?color=%2300A4DC&style=for-the-badge&label=Jellyfin&logo=jellyfin&message=12.x)](https://jellyfin.org/)
 [![Emby](https://img.shields.io/static/v1?color=%2352B54B&style=for-the-badge&label=Emby&logo=emby&message=4.9.x)](https://emby.media/)
 
-_NOTE: Only stable releases are supported._
+_NOTE: This project only supports stable versions._
 
 ## Documentation
 
