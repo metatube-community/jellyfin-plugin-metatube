@@ -31,7 +31,7 @@ MetaTube Plugin for Jellyfin/Emby.
 ## Features
 
 - Full Metadata: Fetches title, overview, genres, director, actors, and studio.
-- Full Search: Searches for movies and actors across many metadata providers.
+- Full Search: Searches for movies and actors across various providers.
 - Trailer Video: Plays trailers online without downloading the full videos.
 - Scheduled Tasks: Organizes genres and updates the plugin automatically.
 - Face Detection: Crops the primary image to keep detected faces centered.
