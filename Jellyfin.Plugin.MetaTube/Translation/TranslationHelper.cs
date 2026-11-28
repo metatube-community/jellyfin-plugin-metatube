@@ -86,10 +86,10 @@ public static class TranslationHelper
         if (string.Equals(to, JapaneseLanguageCode, StringComparison.OrdinalIgnoreCase))
             throw new ArgumentException($"language not allowed: {to}");
 
-        if (Configuration.TranslationMode.HasFlag(TranslationMode.Title) && !string.IsNullOrWhiteSpace(m.Title))
+        if (Configuration.TranslationMode is TranslationMode.Title or TranslationMode.Both && !string.IsNullOrWhiteSpace(m.Title))
             m.Title = await TranslateAsync(m.Title, AutoLanguageCode, to, cancellationToken);
 
-        if (Configuration.TranslationMode.HasFlag(TranslationMode.Summary) && !string.IsNullOrWhiteSpace(m.Summary))
+        if (Configuration.TranslationMode is TranslationMode.Summary or TranslationMode.Both && !string.IsNullOrWhiteSpace(m.Summary))
             m.Summary = await TranslateAsync(m.Summary, AutoLanguageCode, to, cancellationToken);
     }
 
