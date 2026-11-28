@@ -8,12 +8,8 @@ indent_size = 4
 insert_final_newline = true
 trim_trailing_whitespace = true
 
-[*.{yml,yaml,json}]
+[*.{yml,yaml,json,slnx}]
 indent_size = 2
 
 [*.md]
 trim_trailing_whitespace = false
-
-[*.sln]
-charset = utf-8-bom
-indent_style = tab
