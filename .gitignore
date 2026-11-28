@@ -165,11 +165,31 @@ cython_debug/
 bin/
 obj/
 /packages/
+*.nupkg
 
 # ReSharper
 /_ReSharper.Caches/
 riderModule.iml
 
+# Visual Studio
+.vs/
+*.user
+*.suo
+
+# VS Code
+.vscode/
+
+# .NET test results
+TestResults/
+*.trx
+coverage*.xml
+coverage*.json
+
+# Claude Code
+.claude/worktrees/
+.claude/settings.local.json
+
 # Msic
 .DS_Store
+Thumbs.db
 *.zip
