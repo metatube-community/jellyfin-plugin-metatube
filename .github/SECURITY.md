@@ -7,7 +7,7 @@ the [latest release](https://github.com/metatube-community/jellyfin-plugin-metat
 before reporting an issue.
 
 The plugin supports stable versions of Jellyfin and Emby only, as listed in the
-[README](../README.md#platforms).
+[README](https://github.com/metatube-community/jellyfin-plugin-metatube/blob/main/README.md#platforms).
 
 ## Reporting a Vulnerability
 
