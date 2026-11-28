@@ -167,7 +167,7 @@ public class OrganizeMetadataTask : IScheduledTask
     private static bool HasExternalChineseSubtitle(string path)
     {
         return HasExternalChineseSubtitle(Path.GetFileNameWithoutExtension(path),
-            Directory.GetParent(path)?.GetFiles().Select(info => info.Name) ?? Enumerable.Empty<string>());
+            Directory.GetParent(path)?.GetFiles().Select(info => info.Name));
     }
 
     private static bool HasExternalChineseSubtitle(string basename, IEnumerable<string> files)

@@ -46,7 +46,7 @@ public static class EmbyExtensions
 
     private sealed class AlphanumComparator : IComparer<string>
     {
-        public int Compare(string? x, string? y)
+        public int Compare(string x, string y)
         {
             return CompareValues(x, y);
         }
@@ -60,7 +60,7 @@ public static class EmbyExtensions
                    (chunkType != ChunkType.Numeric || char.IsDigit(ch));
         }
 
-        private static int CompareValues(string? s1, string? s2)
+        private static int CompareValues(string s1, string s2)
         {
             if (s1 == null || s2 == null)
                 return 0;

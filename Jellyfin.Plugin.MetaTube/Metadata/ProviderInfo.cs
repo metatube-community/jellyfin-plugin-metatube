@@ -5,11 +5,11 @@ namespace Jellyfin.Plugin.MetaTube.Metadata;
 public class ProviderInfo
 {
     [JsonPropertyName("id")]
-    public string Id { get; set; } = string.Empty;
+    public string Id { get; set; }
 
     [JsonPropertyName("provider")]
-    public string Provider { get; set; } = string.Empty;
+    public string Provider { get; set; }
 
     [JsonPropertyName("homepage")]
-    public string? Homepage { get; set; }
+    public string Homepage { get; set; }
 }

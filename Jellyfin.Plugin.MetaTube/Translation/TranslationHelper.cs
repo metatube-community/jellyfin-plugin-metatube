@@ -13,7 +13,7 @@ public static class TranslationHelper
 
     private static PluginConfiguration Configuration => Plugin.Instance.Configuration;
 
-    private static async Task<string?> TranslateAsync(string q, string from, string to,
+    private static async Task<string> TranslateAsync(string q, string from, string to,
         CancellationToken cancellationToken)
     {
         int millisecondsDelay;
@@ -65,7 +65,7 @@ public static class TranslationHelper
 
         try
         {
-            async Task<string?> TranslateWithDelay()
+            async Task<string> TranslateWithDelay()
             {
                 await Task.Delay(millisecondsDelay, cancellationToken);
                 return (await ApiClient

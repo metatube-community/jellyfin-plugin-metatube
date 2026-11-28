@@ -24,7 +24,7 @@ public static class ProviderIdsExtensions
         instance.SetProviderId(name, pid.ToString());
     }
 
-    public static string? GetTrailerUrl(this IHasProviderIds instance)
+    public static string GetTrailerUrl(this IHasProviderIds instance)
     {
         return !instance.ProviderIds.Any()
             ? string.Empty

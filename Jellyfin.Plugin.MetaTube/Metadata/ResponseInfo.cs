@@ -5,8 +5,8 @@ namespace Jellyfin.Plugin.MetaTube.Metadata;
 public class ResponseInfo<T>
 {
     [JsonPropertyName("data")]
-    public T? Data { get; set; }
+    public T Data { get; set; }
 
     [JsonPropertyName("error")]
-    public ErrorInfo? Error { get; set; }
+    public ErrorInfo Error { get; set; }
 }

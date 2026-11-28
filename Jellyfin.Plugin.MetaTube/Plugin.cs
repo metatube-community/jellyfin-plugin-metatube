@@ -40,7 +40,7 @@ public class Plugin : BasePlugin<PluginConfiguration>, IHasWebPages
 
     public override Guid Id => Guid.Parse("01cc53ec-c415-4108-bbd4-a684a9801a32");
 
-    public static Plugin Instance { get; private set; } = null!;
+    public static Plugin Instance { get; private set; }
 
 #if !__EMBY__
     public IEnumerable<PluginPageInfo> GetPages()
@@ -61,8 +61,7 @@ public class Plugin : BasePlugin<PluginConfiguration>, IHasWebPages
 
     public Stream GetThumbImage()
     {
-        return GetType().Assembly.GetManifestResourceStream($"{GetType().Namespace}.thumb.png")
-               ?? throw new InvalidOperationException("Embedded thumb image not found");
+        return GetType().Assembly.GetManifestResourceStream($"{GetType().Namespace}.thumb.png");
     }
 
     public ImageFormat ThumbImageFormat => ImageFormat.Png;

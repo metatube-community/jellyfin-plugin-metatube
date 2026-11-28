@@ -5,16 +5,16 @@ namespace Jellyfin.Plugin.MetaTube.Metadata;
 public class ActorInfo : ActorSearchResult
 {
     [JsonPropertyName("aliases")]
-    public string[]? Aliases { get; set; }
+    public string[] Aliases { get; set; }
 
     [JsonPropertyName("birthday")]
     public DateTime Birthday { get; set; }
 
     [JsonPropertyName("blood_type")]
-    public string? BloodType { get; set; }
+    public string BloodType { get; set; }
 
     [JsonPropertyName("cup_size")]
-    public string? CupSize { get; set; }
+    public string CupSize { get; set; }
 
     [JsonPropertyName("debut_date")]
     public DateTime DebutDate { get; set; }
@@ -23,17 +23,17 @@ public class ActorInfo : ActorSearchResult
     public int Height { get; set; }
 
     [JsonPropertyName("hobby")]
-    public string? Hobby { get; set; }
+    public string Hobby { get; set; }
 
     [JsonPropertyName("skill")]
-    public string? Skill { get; set; }
+    public string Skill { get; set; }
 
     [JsonPropertyName("measurements")]
-    public string? Measurements { get; set; }
+    public string Measurements { get; set; }
 
     [JsonPropertyName("nationality")]
-    public string? Nationality { get; set; }
+    public string Nationality { get; set; }
 
     [JsonPropertyName("summary")]
-    public string? Summary { get; set; }
+    public string Summary { get; set; }
 }

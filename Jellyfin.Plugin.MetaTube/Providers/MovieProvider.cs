@@ -90,7 +90,7 @@ public class MovieProvider : BaseProvider, IRemoteMetadataProvider<Movie, MovieI
                           Array.Empty<string>();
 
         // Build parameters.
-        var parameters = new Dictionary<string, string?>
+        var parameters = new Dictionary<string, string>
         {
             { @"{provider}", m.Provider },
             { @"{id}", m.Id },
@@ -279,10 +279,10 @@ public class MovieProvider : BaseProvider, IRemoteMetadataProvider<Movie, MovieI
             }
 
             // Use the Gfriends to update the actor profile image, if any.
-            foreach (var result in results.Where(result => result.Provider == Gfriends))
+            foreach (var result in results.Where(result => result.Provider == Gfriends && result.Images?.Any() == true))
             {
-                if (result.Images?.FirstOrDefault() is { } image)
-                    actor.ImageUrl = ApiClient.GetPrimaryImageApiUrl(result.Provider, result.Id, image, 0.5, true);
+                actor.ImageUrl = ApiClient.GetPrimaryImageApiUrl(
+                    result.Provider, result.Id, result.Images.First(), 0.5, true);
             }
         }
         catch (Exception e)
@@ -365,7 +365,7 @@ public class MovieProvider : BaseProvider, IRemoteMetadataProvider<Movie, MovieI
         }
     }
 
-    private static string RenderTemplate(string template, Dictionary<string, string?> parameters)
+    private static string RenderTemplate(string template, Dictionary<string, string> parameters)
     {
         if (string.IsNullOrWhiteSpace(template))
             return string.Empty;

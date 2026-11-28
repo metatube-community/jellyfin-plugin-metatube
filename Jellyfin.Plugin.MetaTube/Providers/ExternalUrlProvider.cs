@@ -13,8 +13,18 @@ public class ExternalUrlProvider : IExternalUrlProvider
 
     public IEnumerable<string> GetExternalUrls(BaseItem item)
     {
-        if (item is Movie or Person && item.TryGetProviderId(Plugin.ProviderId, out var pid))
-            yield return string.Format(BaseExternalId.RedirectUrlFormat, pid);
+        if (item.TryGetProviderId(Plugin.ProviderId, out var pid))
+        {
+            switch (item)
+            {
+                case Movie:
+                    yield return string.Format(new MovieExternalId().UrlFormatString, pid);
+                    break;
+                case Person:
+                    yield return string.Format(new ActorExternalId().UrlFormatString, pid);
+                    break;
+            }
+        }
     }
 }
 #endif
