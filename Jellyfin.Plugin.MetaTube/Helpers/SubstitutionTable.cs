@@ -4,7 +4,7 @@ namespace Jellyfin.Plugin.MetaTube.Helpers;
 
 public class SubstitutionTable : Dictionary<string, string>
 {
-    private SubstitutionTable() : base(StringComparer.OrdinalIgnoreCase)
+    public SubstitutionTable() : base(StringComparer.OrdinalIgnoreCase)
     {
     }
 
