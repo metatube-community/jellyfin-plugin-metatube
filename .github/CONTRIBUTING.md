@@ -39,11 +39,5 @@ for more details.
 
 ## Pull Requests
 
-- Keep each pull request focused on a single change.
-- Title it in the [Conventional Commits](https://www.conventionalcommits.org/)
-  style, `type(scope): summary`, e.g., ``fix(translation): mark `TranslationMode` as flags``.
-  Types are `build`, `chore`, `ci`, `docs`, `feat`, `fix`, `perf`, `refactor`,
-  `revert`, `style`, and `test`.
-- Describe what the change does and why, and link any related issue.
-- Pull requests are squash-merged, so individual commit messages need no fixed
-  format.
+Keep each pull request focused on a single change, and follow the commit and
+pull request conventions in [AGENTS.md](../AGENTS.md).
