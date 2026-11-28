@@ -178,21 +178,19 @@ public class MovieProvider : BaseProvider, IRemoteMetadataProvider<Movie, MovieI
 #endif
             });
 
-        // Add actors.
-        foreach (var name in m.Actors ?? Enumerable.Empty<string>())
+        // Add actors, fetching their images concurrently.
+        var actors = (m.Actors ?? Enumerable.Empty<string>()).Select(name => new PersonInfo
         {
-            var actor = new PersonInfo
-            {
-                Name = name,
+            Name = name,
 #if __EMBY__
-                Type = PersonType.Actor,
+            Type = PersonType.Actor,
 #else
-                Type = PersonKind.Actor,
+            Type = PersonKind.Actor,
 #endif
-            };
-            await SetActorImageUrl(actor, cancellationToken);
+        }).ToList();
+        await Task.WhenAll(actors.Select(actor => SetActorImageUrl(actor, cancellationToken)));
+        foreach (var actor in actors)
             result.AddPerson(actor);
-        }
 
         return result;
     }

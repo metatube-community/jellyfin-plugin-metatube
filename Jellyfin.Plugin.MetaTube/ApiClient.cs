@@ -214,7 +214,7 @@ public static class ApiClient
     {
         cancellationToken.ThrowIfCancellationRequested();
 
-        var request = new HttpRequestMessage(HttpMethod.Get, url);
+        using var request = new HttpRequestMessage(HttpMethod.Get, url);
 
         // Add General Headers.
         request.Headers.Add("Accept", "application/json");
@@ -225,7 +225,7 @@ public static class ApiClient
             request.Headers.Authorization =
                 new AuthenticationHeaderValue("Bearer", Plugin.Instance.Configuration.Token);
 
-        var response = await HttpClient.SendAsync(request, cancellationToken).ConfigureAwait(false);
+        using var response = await HttpClient.SendAsync(request, cancellationToken).ConfigureAwait(false);
 
         // Nullable forgiving reason:
         // Response is unlikely to be null.
